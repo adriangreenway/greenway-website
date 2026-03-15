@@ -1,0 +1,60 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  darkHero?: boolean;
+  noIndex?: boolean;
+}
+
+const { title, description = '', ogImage = '/og-image.jpg', darkHero = false, noIndex = false } = Astro.props;
+
+import { siteConfig } from '../config/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const pageTitle = title === 'Home'
+  ? `${siteConfig.name} | ${siteConfig.descriptor}`
+  : `${title} | ${siteConfig.name}`;
+const canonicalURL = new URL(Astro.url.pathname, siteConfig.url);
+const ogImageURL = new URL(ogImage, siteConfig.url);
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>{pageTitle}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonicalURL}>
+  <meta property="og:title" content={pageTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={ogImageURL}>
+  <meta property="og:url" content={canonicalURL}>
+  <meta property="og:type" content="website">
+  {noIndex && <meta name="robots" content="noindex">}
+</head>
+<body>
+  <Header darkHero={darkHero} />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

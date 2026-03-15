@@ -1,0 +1,28 @@
+---
+import { pages, siteConfig } from '../config/site';
+import LogoMonument from './LogoMonument.astro';
+
+const publishedPages = pages.filter(p => p.published && p.title !== 'Home');
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__logo">
+      <LogoMonument variant="dark" />
+    </div>
+    <div class="footer__contact">
+      <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+      <a href="tel:+12814671226">{siteConfig.phone}</a>
+      <span>{siteConfig.location}</span>
+    </div>
+    <nav class="footer__nav">
+      {publishedPages.map(page => (
+        <a href={page.slug}>{page.title}</a>
+      ))}
+    </nav>
+    <div class="footer__rule"></div>
+    <div class="footer__copyright">
+      &copy; 2026 {siteConfig.name}
+    </div>
+  </div>
+</footer>

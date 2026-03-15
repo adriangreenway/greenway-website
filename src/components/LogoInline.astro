@@ -1,0 +1,17 @@
+---
+interface Props {
+  variant?: 'light' | 'dark';
+}
+
+const { variant = 'light' } = Astro.props;
+---
+
+{variant === 'light' ? (
+  <svg viewBox="0 0 560 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Greenway Band">
+    <text x="280" y="30" text-anchor="middle" font-family="'Bodoni Moda', serif" font-size="30" fill="#0A0A09" letter-spacing="5" font-weight="400">THE GREENWAY BAND</text>
+  </svg>
+) : (
+  <svg viewBox="0 0 560 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Greenway Band">
+    <text x="280" y="30" text-anchor="middle" font-family="'Bodoni Moda', serif" font-size="30" fill="#F5F2ED" letter-spacing="5" font-weight="400">THE GREENWAY BAND</text>
+  </svg>
+)}
