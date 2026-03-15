@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Logo from '../components/Logo.astro';
+---
+
+<BaseLayout title="Page Not Found" description="This page doesn't exist" noIndex={true}>
+  <div class="not-found">
+    <div class="not-found__logo">
+      <Logo variant="light" />
+    </div>
+    <p class="not-found__message">This page doesn't exist</p>
+    <a href="/" class="not-found__link">Back to home</a>
+  </div>
+</BaseLayout>

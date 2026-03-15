@@ -825,3 +825,46 @@ img, video {
     font-size: 32px;
   }
 }
+
+/* 404 */
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 72px);
+  text-align: center;
+  padding: var(--content-padding);
+}
+
+.not-found__logo {
+  max-width: 200px;
+  margin-bottom: var(--space-2xl);
+}
+
+.not-found__logo svg {
+  width: 100%;
+  height: auto;
+}
+
+.not-found__message {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--color-dim-cream);
+  margin-bottom: var(--space-lg);
+}
+
+.not-found__link {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-rich-black);
+  border-bottom: 1px solid rgba(10, 10, 9, 0.2);
+  padding-bottom: 2px;
+  transition: border-color var(--transition-default);
+}
+
+.not-found__link:hover {
+  border-color: var(--color-rich-black);
+}
