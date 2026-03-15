@@ -433,3 +433,235 @@ img, video {
   font-size: 10px;
   color: var(--color-dim-cream);
 }
+
+/* Hero */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background: var(--color-rich-black);
+}
+
+.hero__bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 9, 0.45);
+  z-index: var(--z-video-overlay);
+}
+
+.hero__content {
+  position: relative;
+  z-index: calc(var(--z-video-overlay) + 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero__logo {
+  max-width: 380px;
+  width: 80%;
+}
+
+.hero__logo svg {
+  width: 100%;
+  height: auto;
+}
+
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: calc(var(--z-video-overlay) + 1);
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 48px;
+  background: var(--color-dim-cream);
+  opacity: 0.3;
+  animation: scrollFloat 2s ease-in-out infinite;
+}
+
+@keyframes scrollFloat {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(-8px); opacity: 0.15; }
+}
+
+@media (max-width: 767px) {
+  .hero__logo {
+    max-width: 280px;
+  }
+}
+
+/* Social Proof Strip */
+.proof-strip {
+  padding: var(--space-2xl) var(--content-padding);
+  border-top: 1px solid rgba(10, 10, 9, 0.06);
+  border-bottom: 1px solid rgba(10, 10, 9, 0.06);
+}
+
+.proof-strip__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-dim-cream);
+  line-height: 2;
+}
+
+/* Why Greenway */
+.why-greenway {
+  padding: var(--space-5xl) var(--content-padding);
+}
+
+.why-greenway__block {
+  max-width: 960px;
+  margin: 0 auto;
+  margin-bottom: var(--space-4xl);
+}
+
+.why-greenway__block:last-child {
+  margin-bottom: 0;
+}
+
+.why-greenway__headline {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-rich-black);
+  margin-bottom: var(--space-lg);
+}
+
+.why-greenway__text {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-dim-cream);
+  max-width: 640px;
+  margin-bottom: var(--space-xl);
+}
+
+.why-greenway__image-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--color-rich-black);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.why-greenway__image-placeholder span {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-dim-cream);
+  letter-spacing: 1px;
+}
+
+.why-greenway__testimonial {
+  text-align: center;
+  padding: var(--space-4xl) 0;
+}
+
+.why-greenway__quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-rich-black);
+  max-width: 720px;
+  margin: 0 auto var(--space-lg);
+}
+
+.why-greenway__attribution {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-dim-cream);
+  font-style: normal;
+}
+
+@media (max-width: 767px) {
+  .why-greenway__headline {
+    font-size: 28px;
+  }
+  .why-greenway__quote {
+    font-size: 22px;
+  }
+}
+
+/* Home CTA */
+.home-cta {
+  padding: var(--space-4xl) var(--content-padding);
+}
+
+.home-cta__headline {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--color-warm-cream);
+  margin-bottom: var(--space-md);
+}
+
+.home-cta__text {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--color-muted-cream);
+  margin-bottom: var(--space-2xl);
+}
+
+.home-cta__button {
+  display: inline-block;
+  background: var(--color-warm-cream);
+  color: var(--color-rich-black);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 16px 48px;
+  border: none;
+  border-radius: 0;
+  transition: background-color var(--transition-default);
+}
+
+.home-cta__button:hover {
+  background: #ffffff;
+}
+
+.home-cta__button:focus-visible {
+  outline: 2px solid var(--color-warm-cream);
+  outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+  .home-cta__headline {
+    font-size: 28px;
+  }
+}

@@ -1,10 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import VideoHero from '../components/VideoHero.astro';
+import SocialProofStrip from '../components/SocialProofStrip.astro';
+import WhyGreenway from '../components/WhyGreenway.astro';
+import HomeCTA from '../components/HomeCTA.astro';
 ---
 
-<BaseLayout title="Home" description="The Greenway Band — Houston premium live wedding entertainment">
-  <div style="padding: 120px 24px; text-align: center;">
-    <h1 style="font-family: var(--font-display); font-size: 48px; margin-bottom: 16px;">Layout Verified</h1>
-    <p style="color: var(--color-dim-cream);">Header, footer, and design system working. Homepage content in Phase 3.</p>
-  </div>
+<BaseLayout title="Home" description="The Greenway Band — Houston premium live wedding entertainment" darkHero={true}>
+  <VideoHero />
+  <SocialProofStrip />
+  <WhyGreenway />
+  <HomeCTA />
 </BaseLayout>
