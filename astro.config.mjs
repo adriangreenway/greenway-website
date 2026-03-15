@@ -1,5 +1,14 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  site: 'https://greenway-website.netlify.app',
+  output: 'static',
+  build: {
+    inlineStylesheets: 'auto'
+  },
+  vite: {
+    build: {
+      cssMinify: true
+    }
+  }
+});
