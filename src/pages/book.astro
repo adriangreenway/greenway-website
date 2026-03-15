@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookForm from '../components/BookForm.astro';
+---
+
+<BaseLayout title="Book" description="Inquire about The Greenway Band for your event">
+  <section class="book-page section">
+    <div class="container" style="text-align: center;">
+      <h1 class="book-page__title">Book The Greenway Band</h1>
+      <p class="book-page__subtitle">Tell us about your event. We'll be in touch within 24 hours.</p>
+    </div>
+    <div style="margin-top: var(--space-2xl);">
+      <BookForm />
+    </div>
+    <div class="book-page__phone">
+      <p>Prefer to call?</p>
+      <a href="tel:+12814671226">(281) 467-1226</a>
+    </div>
+  </section>
+</BaseLayout>

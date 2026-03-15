@@ -1,0 +1,138 @@
+<div class="book-form" id="book-form">
+  <form class="book-form__form" id="inquiry-form" novalidate>
+    <!-- Partner 1 Name (required) -->
+    <div class="book-form__field">
+      <label for="partner1_name" class="book-form__label">Partner 1 Name *</label>
+      <input type="text" id="partner1_name" name="partner1_name" required placeholder="Full name" class="book-form__input">
+    </div>
+
+    <!-- Partner 2 Name -->
+    <div class="book-form__field">
+      <label for="partner2_name" class="book-form__label">Partner 2 Name</label>
+      <input type="text" id="partner2_name" name="partner2_name" placeholder="Full name" class="book-form__input">
+    </div>
+
+    <!-- Email (required) -->
+    <div class="book-form__field">
+      <label for="email" class="book-form__label">Email *</label>
+      <input type="email" id="email" name="email" required placeholder="Email address" class="book-form__input">
+    </div>
+
+    <!-- Phone -->
+    <div class="book-form__field">
+      <label for="phone" class="book-form__label">Phone</label>
+      <input type="tel" id="phone" name="phone" placeholder="Phone number" class="book-form__input">
+    </div>
+
+    <!-- Event Date (required) -->
+    <div class="book-form__field">
+      <label for="event_date" class="book-form__label">Event Date *</label>
+      <input type="date" id="event_date" name="event_date" required class="book-form__input">
+    </div>
+
+    <!-- Venue -->
+    <div class="book-form__field">
+      <label for="venue" class="book-form__label">Venue</label>
+      <input type="text" id="venue" name="venue" placeholder="Venue name (if known)" class="book-form__input">
+    </div>
+
+    <!-- Guest Count -->
+    <div class="book-form__field">
+      <label for="guest_count" class="book-form__label">Estimated Guest Count</label>
+      <select id="guest_count" name="guest_count" class="book-form__input book-form__select">
+        <option value="">Select</option>
+        <option value="Under 100">Under 100</option>
+        <option value="100 to 200">100 to 200</option>
+        <option value="200 to 300">200 to 300</option>
+        <option value="300+">300+</option>
+        <option value="Not sure yet">Not sure yet</option>
+      </select>
+    </div>
+
+    <!-- Referral -->
+    <div class="book-form__field">
+      <label for="referral" class="book-form__label">How did you hear about us?</label>
+      <select id="referral" name="referral" class="book-form__input book-form__select">
+        <option value="">Select</option>
+        <option value="Wedding planner">Wedding planner</option>
+        <option value="Venue recommendation">Venue recommendation</option>
+        <option value="Saw us at an event">Saw us at an event</option>
+        <option value="Instagram">Instagram</option>
+        <option value="Google search">Google search</option>
+        <option value="The Knot / WeddingWire">The Knot / WeddingWire</option>
+        <option value="Friend or family">Friend or family</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <!-- Honeypot -->
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none;">
+
+    <!-- Error message -->
+    <div class="book-form__error" id="form-error" style="display:none;"></div>
+
+    <!-- Submit -->
+    <button type="submit" class="book-form__submit" id="form-submit">Send Inquiry</button>
+  </form>
+
+  <!-- Confirmation (hidden by default) -->
+  <div class="book-form__confirmation" id="form-confirmation" style="display:none;">
+    <h2 class="book-form__confirmation-title">Thank you</h2>
+    <p class="book-form__confirmation-text">We received your inquiry and Adrian will be in touch within 24 hours.</p>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('inquiry-form') as HTMLFormElement | null;
+  const submitBtn = document.getElementById('form-submit') as HTMLButtonElement | null;
+  const errorDiv = document.getElementById('form-error') as HTMLElement | null;
+  const confirmDiv = document.getElementById('form-confirmation') as HTMLElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Disable button
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'SENDING...';
+    }
+    if (errorDiv) errorDiv.style.display = 'none';
+
+    // Collect form data
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch('https://command.greenwayband.com/.netlify/functions/lead-intake', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) throw new Error('Server error');
+
+      // Success: hide form, show confirmation
+      form.style.opacity = '0';
+      form.style.transition = 'opacity 200ms ease-out';
+      setTimeout(() => {
+        form.style.display = 'none';
+        if (confirmDiv) {
+          confirmDiv.style.display = 'block';
+          requestAnimationFrame(() => {
+            confirmDiv.style.opacity = '1';
+          });
+        }
+      }, 200);
+
+    } catch (err) {
+      if (errorDiv) {
+        errorDiv.textContent = 'Something went wrong. Please try again, or email us at adrian@greenwayband.com.';
+        errorDiv.style.display = 'block';
+      }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'SEND INQUIRY';
+      }
+    }
+  });
+</script>
