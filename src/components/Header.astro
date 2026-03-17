@@ -5,29 +5,28 @@ interface Props {
 
 const { darkHero = false } = Astro.props;
 
-import { pages } from '../config/site';
-import Logo from './Logo.astro';
-import LogoInline from './LogoInline.astro';
-
-const publishedPages = pages.filter(p => p.published && p.title !== 'Home');
+const navLinks = [
+  { title: 'Experience', slug: '/experience' },
+  { title: 'Book', slug: '/book' },
+];
 ---
 
 <header class={`header${darkHero ? ' header--dark-hero' : ''}`}>
-  <a href="/" class="header__logo header__logo--light">
-    <Logo variant="light" />
+  <!-- Desktop logo (inline text, not SVG) -->
+  <a href="/" class="header__logo header__logo--desktop" aria-label="The Greenway Band — Home">
+    <span class="header__logo-the">THE</span>
+    <span class="header__logo-greenway">GREENWAY</span>
+    <span class="header__logo-band">BAND</span>
   </a>
-  <a href="/" class="header__logo header__logo--dark">
-    <Logo variant="dark" />
-  </a>
-  <a href="/" class="header__logo-mobile header__logo-mobile--light">
-    <LogoInline variant="light" />
-  </a>
-  <a href="/" class="header__logo-mobile header__logo-mobile--dark">
-    <LogoInline variant="dark" />
+  <!-- Mobile compact logo -->
+  <a href="/" class="header__logo header__logo--mobile" aria-label="The Greenway Band — Home">
+    <span class="header__logo-the">THE</span>
+    <span class="header__logo-greenway">GREENWAY</span>
+    <span class="header__logo-band">BAND</span>
   </a>
   <nav class="header__nav">
-    {publishedPages.map(page => (
-      <a href={page.slug} data-cta={page.title === 'Book' ? '' : undefined}>{page.title}</a>
+    {navLinks.map(page => (
+      <a href={page.slug}>{page.title}</a>
     ))}
   </nav>
   <button class="hamburger" aria-label="Open menu" aria-expanded="false">
@@ -39,7 +38,7 @@ const publishedPages = pages.filter(p => p.published && p.title !== 'Home');
 
 <div class="mobile-menu">
   <button class="mobile-menu-close" aria-label="Close menu"></button>
-  {publishedPages.map(page => (
+  {navLinks.map(page => (
     <a href={page.slug}>{page.title}</a>
   ))}
 </div>
@@ -47,11 +46,15 @@ const publishedPages = pages.filter(p => p.published && p.title !== 'Home');
 <script>
   const header = document.querySelector('.header');
   const isDarkHero = header?.classList.contains('header--dark-hero');
+
   if (isDarkHero) {
+    // On hero pages, transition after scrolling past ~100vh
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY > window.innerHeight * 0.8;
       header.classList.toggle('header--scrolled', scrolled);
     }, { passive: true });
+  } else {
+    // On inner pages, immediately show solid background (already default via CSS)
   }
 
   const hamburger = document.querySelector('.hamburger');
