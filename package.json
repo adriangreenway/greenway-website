@@ -12,6 +12,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/bodoni-moda": "^5.2.7",
+    "@fontsource/plus-jakarta-sans": "^5.2.8",
     "astro": "^6.0.4"
   }
 }
