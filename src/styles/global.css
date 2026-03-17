@@ -11,7 +11,7 @@
   --color-faint: #4A4740;
 
   /* Typography */
-  --font-display: 'Bodoni Moda', serif;
+  --font-display: 'Bodoni Moda Variable', serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
 
   /* Typography Scale — Mobile first (< 768px) */
@@ -114,6 +114,7 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-weight: 400;
   line-height: var(--line-height-headline);
   letter-spacing: 0.02em;
@@ -243,6 +244,7 @@ img, video {
 
 .header__logo-greenway {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-weight: 400;
   font-size: 18px;
   color: var(--color-black);
@@ -386,6 +388,7 @@ img, video {
 
 .mobile-menu a {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-size: 24px;
   font-weight: 400;
   color: var(--color-black);
@@ -455,6 +458,7 @@ img, video {
 
 .footer__logo-greenway {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-weight: 400;
   font-size: 32px;
   color: var(--color-cream);
@@ -555,6 +559,7 @@ img, video {
 
 .hero__wordmark-greenway {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-weight: 400;
   font-size: var(--text-hero-wordmark);
   color: var(--color-cream);
@@ -653,6 +658,7 @@ img, video {
 
 .why-greenway__headline {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-size: var(--text-section-headline);
   font-weight: 400;
   line-height: var(--line-height-headline);
@@ -700,6 +706,7 @@ img, video {
 
 .home-cta__headline {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-size: var(--text-section-headline);
   font-weight: 400;
   color: var(--color-black);
@@ -828,6 +835,7 @@ img, video {
 
 .book-form__confirmation-title {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-size: 32px;
   font-weight: 400;
   color: var(--color-black);
@@ -850,6 +858,7 @@ img, video {
 
 .book-page__title {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-size: var(--text-page-headline);
   font-weight: 400;
   color: var(--color-black);
