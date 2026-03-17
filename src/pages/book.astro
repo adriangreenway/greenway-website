@@ -5,16 +5,43 @@ import BookForm from '../components/BookForm.astro';
 
 <BaseLayout title="Book" description="Inquire about The Greenway Band for your event">
   <section class="book-page section">
-    <div class="container" style="text-align: center;">
-      <h1 class="book-page__title">Book The Greenway Band</h1>
-      <p class="book-page__subtitle">Tell us about your event. We'll be in touch within 24 hours.</p>
-    </div>
-    <div style="margin-top: var(--space-2xl);">
+    <div class="book-page__container">
+      <h1 class="book-page__title" data-reveal>Check availability for your date</h1>
       <BookForm />
-    </div>
-    <div class="book-page__phone">
-      <p>Prefer to call?</p>
-      <a href="tel:+12814671226">(281) 467-1226</a>
     </div>
   </section>
 </BaseLayout>
+
+<style is:global>
+  .book-page {
+    padding-top: calc(72px + var(--section-padding));
+    padding-bottom: var(--space-2xl);
+    background: var(--color-cream);
+  }
+
+  .book-page__container {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .book-page__title {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 48px;
+    line-height: var(--line-height-headline);
+  }
+
+  @media (min-width: 1024px) {
+    .book-page__title {
+      font-size: 40px;
+    }
+  }
+
+  .book-page__subtitle,
+  .book-page__phone {
+    display: none;
+  }
+</style>
