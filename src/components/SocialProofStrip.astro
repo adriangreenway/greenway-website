@@ -1,5 +1,28 @@
-<section class="proof-strip">
+---
+const venues = [
+  'River Oaks Country Club',
+  'Houston Country Club',
+  'Post Oak Hotel',
+  'The Astorian',
+  'The Houstonian',
+  'The Grand Galvez',
+  'Iron Manor',
+  'Ashton Gardens',
+  'Lakeside Country Club',
+  'The Junior League',
+  'The Houston Grand Hotel',
+  'Windemere Farms',
+  "La Colombe d'Or",
+];
+---
+
+<section class="proof-strip" data-reveal>
   <div class="proof-strip__inner">
-    THE RIVER OAKS COUNTRY CLUB · THE ASTORIAN · HOTEL GRANDUCA · THE CORINTHIAN · CHATEAU COCOMAR
+    {venues.map((venue, i) => (
+      <Fragment>
+        <span class="proof-strip__venue">{venue}</span>
+        {i < venues.length - 1 && <span class="proof-strip__dot">·</span>}
+      </Fragment>
+    ))}
   </div>
 </section>
