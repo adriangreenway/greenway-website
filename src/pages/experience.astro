@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Experience" description="What a Greenway night looks and feels like">
+
+  <!-- Inner Page Hero -->
+  <section class="exp-hero">
+    <span class="exp-label" data-reveal>The Experience</span>
+    <h1 class="exp-hero__title" data-reveal data-reveal-delay="1">A night with The Greenway Band</h1>
+  </section>
+
+  <!-- Phase 1: Cocktail Hour — image LEFT, text RIGHT -->
+  <section class="exp-phase">
+    <div class="exp-phase__inner">
+      <div class="exp-phase__image" data-reveal>
+        <img
+          src="/images/experience/20230311Preview0069.webp"
+          alt="Band performing jazz during cocktail hour with warm ambient lighting"
+          width="660"
+          height="880"
+          loading="lazy"
+        />
+      </div>
+      <div class="exp-phase__text">
+        <span class="exp-label" data-reveal>Cocktail Hour</span>
+        <h2 class="exp-phase__headline" data-reveal data-reveal-delay="1">The opening act</h2>
+        <p class="exp-phase__body" data-reveal data-reveal-delay="2">Guests arrive to a live jazz trio or a full acoustic set pulled from the same ensemble that'll be on stage all night. The volume stays low enough for conversation. Real horns, real keys, real arrangements — not a playlist through a speaker. Your planner has the timeline. We have the set list. By the time dinner starts, your guests already know something's different about this wedding.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 2: Dinner — text LEFT, image RIGHT (reversed) -->
+  <section class="exp-phase exp-phase--reversed">
+    <div class="exp-phase__inner">
+      <div class="exp-phase__image" data-reveal>
+        <img
+          src="/images/experience/IMG_0668.webp"
+          alt="Band performing acoustically during dinner service in an elegant ballroom"
+          width="660"
+          height="880"
+          loading="lazy"
+        />
+      </div>
+      <div class="exp-phase__text">
+        <span class="exp-label" data-reveal>Dinner</span>
+        <h2 class="exp-phase__headline" data-reveal data-reveal-delay="1">The soundtrack</h2>
+        <p class="exp-phase__body" data-reveal data-reveal-delay="2">The maid of honor's giving her speech and the band's off stage, volume down, waiting for the cue. Adrian handles emcee for introductions, toasts, and every transition in between. We drop the arrangement to acoustic during dinner service so every table can still hear the stories being told. Your planner cues the timeline. We follow it to the minute.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 3: The Dance Floor — image LEFT, text RIGHT -->
+  <section class="exp-phase">
+    <div class="exp-phase__inner">
+      <div class="exp-phase__image" data-reveal>
+        <img
+          src="/images/experience/_JHZ1145.webp"
+          alt="Couple dancing with the band on stage in golden lighting"
+          width="660"
+          height="880"
+          loading="lazy"
+        />
+      </div>
+      <div class="exp-phase__text">
+        <span class="exp-label" data-reveal>The Dance Floor</span>
+        <h2 class="exp-phase__headline" data-reveal data-reveal-delay="1">Nobody wants to leave</h2>
+        <p class="exp-phase__body" data-reveal data-reveal-delay="2">The horn section stands up, the drummer counts in, and suddenly there are twelve musicians on stage playing Earth, Wind and Fire into Beyoncé into Marc Anthony without a gap. Three generations dancing to the same song. Your college roommate next to your grandmother. That's the part your guests will be talking about on Monday morning.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- For Planners -->
+  <section class="exp-planners">
+    <div class="exp-planners__inner">
+      <span class="exp-label" data-reveal>For Planners</span>
+      <h2 class="exp-planners__headline" data-reveal data-reveal-delay="1">How we do it</h2>
+      <!-- PLACEHOLDER: Expand with full technical details -->
+      <p class="exp-planners__body" data-reveal data-reveal-delay="2">Ableton-driven arrangements. MIDI-synced production. Stemmed tracks for every song. This section is for the planners who want to know what's under the hood.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="exp-cta section--dark">
+    <div class="exp-cta__inner">
+      <h2 class="exp-cta__headline" data-reveal>Check availability for your date</h2>
+      <a href="/book" class="exp-cta__button" data-reveal data-reveal-delay="1">Check Availability</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style is:global>
+  /* Hero */
+  .exp-hero {
+    padding: var(--section-padding) var(--content-padding) 80px;
+    padding-top: calc(72px + var(--section-padding));
+    text-align: center;
+  }
+
+  .exp-hero__title {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-size: var(--text-page-headline);
+    font-weight: 400;
+    line-height: var(--line-height-headline);
+    color: var(--color-black);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* Shared label style */
+  .exp-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-dim);
+    margin-bottom: var(--space-md);
+  }
+
+  /* Phase sections */
+  .exp-phase {
+    padding: var(--section-padding) var(--content-padding);
+  }
+
+  .exp-phase__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .exp-phase--reversed .exp-phase__inner {
+    direction: rtl;
+  }
+
+  .exp-phase--reversed .exp-phase__text {
+    direction: ltr;
+  }
+
+  .exp-phase--reversed .exp-phase__image {
+    direction: ltr;
+  }
+
+  .exp-phase__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  .exp-phase__headline {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-size: var(--text-section-headline);
+    font-weight: 400;
+    line-height: var(--line-height-headline);
+    color: var(--color-black);
+    margin-bottom: var(--space-lg);
+  }
+
+  .exp-phase__body {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--color-black);
+  }
+
+  /* For Planners */
+  .exp-planners {
+    padding: var(--section-padding) var(--content-padding);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .exp-planners__inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .exp-planners__headline {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-size: var(--text-section-headline);
+    font-weight: 400;
+    line-height: var(--line-height-headline);
+    color: var(--color-black);
+    margin-bottom: var(--space-lg);
+  }
+
+  .exp-planners__body {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--color-black);
+  }
+
+  /* CTA */
+  .exp-cta {
+    padding: var(--section-padding) var(--content-padding);
+  }
+
+  .exp-cta__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .exp-cta__headline {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-size: var(--text-section-headline);
+    font-weight: 400;
+    color: var(--color-cream);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .exp-cta__button {
+    display: inline-block;
+    background: var(--color-cream);
+    color: var(--color-black);
+    font-family: var(--font-body);
+    font-size: var(--text-button);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 0;
+    transition: background-color var(--transition-default);
+  }
+
+  .exp-cta__button:hover {
+    background: #ffffff;
+  }
+
+  .exp-cta__button:focus-visible {
+    outline: 2px solid var(--color-cream);
+    outline-offset: 4px;
+  }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .exp-hero {
+      padding-top: calc(72px + 80px);
+      padding-bottom: 60px;
+    }
+
+    .exp-phase__inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .exp-phase--reversed .exp-phase__inner {
+      direction: ltr;
+    }
+
+    .exp-phase__image img {
+      aspect-ratio: 4 / 3;
+      max-height: 300px;
+      height: auto;
+    }
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .exp-phase__inner {
+      grid-template-columns: 50% 50%;
+      gap: 40px;
+    }
+  }
+</style>

@@ -15,7 +15,7 @@ export const pages: PageConfig[] = [
   {
     title: 'Experience',
     slug: '/experience',
-    published: false,
+    published: true,
     description: 'What a Greenway night looks and feels like'
   },
   {
