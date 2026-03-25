@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Greenway Band — Hope Bostrom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A09;
+    --charcoal: #111110;
+    --charcoal-mid: #1A1A18;
+    --cream: #F5F2ED;
+    --cream-muted: #D4D0C8;
+    --cream-dim: #8A867E;
+    --cream-faint: #5A5750;
+    --border: rgba(245,242,237,0.08);
+    --border-light: rgba(245,242,237,0.12);
+    --border-med: rgba(245,242,237,0.18);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--black);
+    color: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+  .cover {
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 60px 32px; position: relative;
+  }
+  .logo-group { margin-bottom: 80px; }
+  .logo-rule { width: 48px; height: 0.5px; background: var(--cream-dim); margin: 0 auto; }
+  .logo-the { font-family: 'Bodoni Moda', serif; font-size: 11px; letter-spacing: 10px; text-transform: uppercase; color: var(--cream-dim); margin-top: 28px; text-indent: 10px; }
+  .logo-name { font-family: 'Bodoni Moda', serif; font-size: clamp(28px, 8vw, 42px); letter-spacing: 5px; text-transform: uppercase; color: var(--cream); font-weight: 400; margin: 4px 0; text-indent: 5px; }
+  .logo-band { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; letter-spacing: 14px; text-transform: uppercase; color: var(--cream-dim); font-weight: 400; text-indent: 14px; }
+  .logo-rule-bottom { margin-top: 16px; }
+  .cover-descriptor { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 13px; color: var(--cream-dim); margin-top: 20px; letter-spacing: 1.5px; }
+  .cover-couple { text-align: center; }
+  .cover-prepared { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--cream-faint); margin-bottom: 16px; }
+  .cover-couple-names { font-family: 'Bodoni Moda', serif; font-size: clamp(24px, 6vw, 32px); color: var(--cream); font-weight: 400; letter-spacing: 1px; }
+  .cover-details { margin-top: 20px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-dim); line-height: 2.2; }
+  .cover-footer { position: absolute; bottom: 36px; left: 0; right: 0; text-align: center; }
+  .cover-footer p { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-faint); opacity: 0.5; }
+  .section-divider { width: 100%; height: 1px; background: var(--border-light); }
+  .content { max-width: 640px; margin: 0 auto; padding: 0 32px; }
+  .intro { padding: 80px 0; }
+  .section-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--cream-faint); margin-bottom: 32px; }
+  .intro-greeting { font-family: 'Bodoni Moda', serif; font-size: clamp(24px, 5vw, 32px); color: var(--cream); font-weight: 400; line-height: 1.35; margin-bottom: 40px; }
+  .intro-body { font-size: 14px; line-height: 1.9; color: var(--cream-muted); font-weight: 300; }
+  .intro-body p { margin-bottom: 20px; }
+  .intro-body p:last-child { margin-bottom: 0; }
+  .intro-signature { margin-top: 48px; padding-top: 28px; border-top: 0.5px solid var(--border-light); }
+  .sig-name { font-family: 'Bodoni Moda', serif; font-size: 15px; color: var(--cream); margin-bottom: 4px; }
+  .sig-title { font-size: 10px; color: var(--cream-dim); letter-spacing: 2px; text-transform: uppercase; }
+  .package { padding: 80px 0; }
+  .package-title { font-family: 'Bodoni Moda', serif; font-size: clamp(24px, 5vw, 28px); color: var(--cream); font-weight: 400; margin-bottom: 6px; }
+  .package-subtitle { font-size: 11px; color: var(--cream-dim); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 48px; }
+  .package-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+  @media (max-width: 560px) { .package-columns { grid-template-columns: 1fr; gap: 40px; } }
+  .col-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--cream-faint); margin-bottom: 20px; }
+  .item-list { list-style: none; }
+  .item-list li { font-size: 14px; color: var(--cream-muted); padding: 10px 0; border-bottom: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-weight: 300; }
+  .item-list li:last-child { border-bottom: none; }
+  .item-list li .count { font-size: 11px; color: var(--cream-faint); letter-spacing: 1px; }
+  .services-list li { font-size: 13px; }
+  .price-row { display: flex; justify-content: space-between; align-items: baseline; padding: 28px 0; border-top: 0.5px solid var(--border-med); border-bottom: 0.5px solid var(--border-med); }
+  .price-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-dim); }
+  .price-amount { font-family: 'Bodoni Moda', serif; font-size: clamp(28px, 7vw, 36px); color: var(--cream); font-weight: 400; }
+  .package-note { font-size: 11px; color: var(--cream-faint); line-height: 1.8; margin-top: 20px; font-weight: 300; }
+  .details { padding: 80px 0; }
+  .details-title { font-family: 'Bodoni Moda', serif; font-size: clamp(24px, 5vw, 28px); color: var(--cream); font-weight: 400; margin-bottom: 40px; }
+  .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 0.5px solid var(--border-light); }
+  @media (max-width: 480px) { .details-grid { grid-template-columns: 1fr; } .detail-cell { border-right: none !important; } }
+  .detail-cell { padding: 24px 28px; border-bottom: 0.5px solid var(--border); border-right: 0.5px solid var(--border); }
+  .detail-cell:nth-child(even) { border-right: none; }
+  .detail-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-faint); margin-bottom: 8px; }
+  .detail-value { font-family: 'Bodoni Moda', serif; font-size: 15px; color: var(--cream); font-weight: 400; }
+  .testimonials { padding: 80px 0; }
+  .testimonial-block { margin-bottom: 48px; }
+  .testimonial-block:last-of-type { margin-bottom: 0; }
+  .t-quote-mark { font-family: 'Bodoni Moda', serif; font-size: 56px; color: var(--cream-faint); line-height: 0.5; margin-bottom: 16px; opacity: 0.35; }
+  .t-text { font-family: 'Bodoni Moda', serif; font-size: clamp(16px, 4vw, 18px); font-style: italic; color: var(--cream); line-height: 1.7; margin-bottom: 20px; }
+  .t-stars { color: var(--cream-dim); font-size: 11px; letter-spacing: 4px; margin-bottom: 4px; }
+  .t-attr { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-dim); }
+  .t-divider { width: 36px; height: 0.5px; background: var(--border-med); margin: 40px 0; }
+  .closing { padding: 100px 0 80px; text-align: center; }
+  .closing-phrase { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: clamp(22px, 5vw, 26px); color: var(--cream); line-height: 1.5; max-width: 360px; margin: 0 auto 48px; }
+  .closing-rule { width: 36px; height: 0.5px; background: var(--cream-dim); margin: 0 auto 36px; }
+  .closing-contact p { font-size: 12px; color: var(--cream-dim); letter-spacing: 1.5px; line-height: 2.4; }
+  .closing-contact a { color: var(--cream-muted); text-decoration: none; }
+  .closing-website { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-muted); margin-top: 20px; }
+  .closing-logo { margin-top: 64px; }
+  .closing-logo .logo-the { font-family: 'Bodoni Moda', serif; font-size: 9px; letter-spacing: 8px; text-transform: uppercase; color: var(--cream-faint); text-indent: 8px; }
+  .closing-logo .logo-name { font-family: 'Bodoni Moda', serif; font-size: 20px; letter-spacing: 4px; text-transform: uppercase; color: var(--cream); margin: 2px 0; font-weight: 400; text-indent: 4px; }
+  .closing-logo .logo-band { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 7px; letter-spacing: 12px; text-transform: uppercase; color: var(--cream-faint); font-weight: 400; text-indent: 12px; }
+  .closing-validity { margin-top: 48px; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-faint); opacity: 0.5; }
+  .scroll-hint { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; animation: scrollPulse 2.5s ease-in-out infinite; }
+  .scroll-hint span { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-faint); opacity: 0.4; }
+  .scroll-line { width: 0.5px; height: 24px; background: linear-gradient(to bottom, var(--cream-faint), transparent); opacity: 0.3; }
+  @keyframes scrollPulse { 0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); } 50% { opacity: 0.5; transform: translateX(-50%) translateY(4px); } }
+</style>
+</head>
+<body>
+<section class="cover">
+  <div class="logo-group reveal">
+    <div class="logo-rule"></div>
+    <div class="logo-the">THE</div>
+    <div class="logo-name">GREENWAY</div>
+    <div class="logo-band">BAND</div>
+    <div class="logo-rule logo-rule-bottom"></div>
+    <div class="cover-descriptor">The sound of a great night</div>
+  </div>
+  <div class="cover-couple reveal reveal-delay-2">
+    <div class="cover-prepared">Prepared for</div>
+    <div class="cover-couple-names">Hope Bostrom</div>
+    <div class="cover-details">
+      August 29, 2026<br>
+      Dallas Arboretum Rosine Hall
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+  <div class="cover-footer">
+    <p>greenwayband.com &nbsp;&middot;&nbsp; adrian@greenwayband.com</p>
+  </div>
+</section>
+<div class="section-divider"></div>
+<section class="intro">
+  <div class="content">
+    <div class="section-label reveal">A note for you</div>
+    <div class="intro-greeting reveal reveal-delay-1">Hope,<br>congratulations.</div>
+    <div class="intro-body reveal reveal-delay-2">
+      <p>We know how much thought goes into every detail of your wedding, from the venue to the flowers to the food. The band is no different. It sets the tone for the entire night, and we take that seriously.</p>
+      <p>Rosine Hall is a beautiful space to fill with live music. The high ceilings and the way the room opens up to the grounds give the whole evening a warmth that a 10 piece band with a full horn section really brings to life.</p>
+      <p>From your cocktail hour through the last song of the night, our job is simple: make it feel like yours. Every transition, every song choice, every moment on the mic is tailored to you and your guests. We read the room and respond in real time, and that is what separates a great band from a playlist.</p>
+      <p>We would love to be part of your night.</p>
+    </div>
+    <div class="intro-signature reveal reveal-delay-3">
+      <div class="sig-name">Adrian Michael</div>
+      <div class="sig-title">The Greenway Band</div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+<section class="package">
+  <div class="content">
+    <div class="section-label reveal">Your package</div>
+    <div class="package-title reveal reveal-delay-1">10 Piece Band</div>
+    <div class="package-subtitle reveal reveal-delay-1">Full reception entertainment + MC services</div>
+    <div class="package-columns">
+      <div class="reveal reveal-delay-2">
+        <div class="col-label">Musicians</div>
+        <ul class="item-list">
+          <li>Male Vocals <span class="count">1</span></li>
+          <li>Female Vocals <span class="count">2</span></li>
+          <li>Keys <span class="count">1</span></li>
+          <li>Guitar <span class="count">1</span></li>
+          <li>Bass <span class="count">1</span></li>
+          <li>Drums <span class="count">1</span></li>
+          <li>Horns <span class="count">3</span></li>
+        </ul>
+      </div>
+      <div class="reveal reveal-delay-3">
+        <div class="col-label">Included Services</div>
+        <ul class="item-list services-list">
+          <li>Sound Equipment and Engineer</li>
+          <li>Lighting Equipment and Engineer</li>
+          <li>Emcee Services</li>
+          <li>Personalized First Dances</li>
+          <li>Song Requests</li>
+        </ul>
+        <div style="margin-top: 28px;">
+          <div class="col-label">Performance Window</div>
+          <ul class="item-list services-list">
+            <li>Reception: 6:00 PM to 10:00 PM</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="price-row reveal reveal-delay-4">
+      <div class="price-label">Investment</div>
+      <div class="price-amount">$21,000</div>
+    </div>
+    <div class="package-note reveal reveal-delay-5">
+      Additional instrumentation available upon request.
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+<section class="details">
+  <div class="content">
+    <div class="section-label reveal">Event details</div>
+    <div class="details-title reveal reveal-delay-1">Your Evening</div>
+    <div class="details-grid reveal reveal-delay-2">
+      <div class="detail-cell">
+        <div class="detail-label">Couple</div>
+        <div class="detail-value">Hope Bostrom</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Date</div>
+        <div class="detail-value">August 29, 2026</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Venue</div>
+        <div class="detail-value">Dallas Arboretum Rosine Hall</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Event Type</div>
+        <div class="detail-value">Wedding Reception</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Reception</div>
+        <div class="detail-value">6:00 PM to 10:00 PM</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Configuration</div>
+        <div class="detail-value">10 Piece with Horn Section</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Services</div>
+        <div class="detail-value">Entertainment + MC</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+<section class="testimonials">
+  <div class="content">
+    <div class="section-label reveal">What couples say</div>
+    <div class="testimonial-block reveal reveal-delay-1">
+      <div class="t-quote-mark">&ldquo;</div>
+      <div class="t-text">
+        Our wedding guests danced the night away like I've never seen before.
+      </div>
+      <div class="t-stars">&starf; &starf; &starf; &starf; &starf;</div>
+      <div class="t-attr">Emma B. &nbsp;&middot;&nbsp; WeddingWire</div>
+    </div>
+    <div class="t-divider reveal"></div>
+    <div class="testimonial-block reveal">
+      <div class="t-quote-mark">&ldquo;</div>
+      <div class="t-text">
+        You and the Greenway Band were a hit at the wedding at the Grand Galvez. From start to finish, the songs, the sound, and the look of the band were all just amazing. You left our guests wanting more.
+      </div>
+      <div class="t-stars">&starf; &starf; &starf; &starf; &starf;</div>
+      <div class="t-attr">Allison &nbsp;&middot;&nbsp; WeddingWire</div>
+    </div>
+    <div class="t-divider reveal"></div>
+    <div class="testimonial-block reveal">
+      <div class="t-quote-mark">&ldquo;</div>
+      <div class="t-text">
+        Every guest was on their feet by the second song. We still have people texting us about the band three months later.
+      </div>
+      <div class="t-stars">&starf; &starf; &starf; &starf; &starf;</div>
+      <div class="t-attr">Sarah & James H. &nbsp;&middot;&nbsp; WeddingWire</div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+<section class="closing">
+  <div class="content">
+    <div class="closing-phrase reveal">Your guests won't stop talking about it.</div>
+    <div class="closing-rule reveal reveal-delay-1"></div>
+    <div class="closing-contact reveal reveal-delay-2">
+      <p>Adrian Michael</p>
+      <p><a href="mailto:adrian@greenwayband.com">adrian@greenwayband.com</a></p>
+      <p>(281) 467-1226</p>
+    </div>
+    <div class="closing-website reveal reveal-delay-3">greenwayband.com</div>
+    <div class="closing-logo reveal reveal-delay-4">
+      <div class="logo-rule" style="margin-bottom: 14px;"></div>
+      <div class="logo-the">THE</div>
+      <div class="logo-name">GREENWAY</div>
+      <div class="logo-band">BAND</div>
+      <div class="logo-rule" style="margin-top: 12px;"></div>
+    </div>
+    <div class="closing-validity reveal reveal-delay-5">
+      This proposal is valid for 30 days from the date of receipt
+    </div>
+  </div>
+</section>
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.cover .reveal').forEach(el => { setTimeout(() => el.classList.add('visible'), 200); });
+  let scrolled = false;
+  window.addEventListener('scroll', () => {
+    if (!scrolled) {
+      scrolled = true;
+      const hint = document.querySelector('.scroll-hint');
+      if (hint) { hint.style.transition = 'opacity 0.6s ease'; hint.style.opacity = '0'; setTimeout(() => hint.style.display = 'none', 600); }
+    }
+  }, { passive: true });
+</script>
+</body>
+</html>
