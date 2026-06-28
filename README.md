@@ -1,43 +1,51 @@
-# Astro Starter Kit: Minimal
+# The Greenway Band — Website
 
+The public marketing website for **The Greenway Band**, a premium Houston live wedding/event
+band. Built with [Astro](https://astro.build) as a static site, hosted on Netlify with DNS on
+Cloudflare.
+
+This repo is the **public site only**. It is intentionally separate from the band's CRM
+("Command Center") and other internal apps — see
+[docs/INTEGRATIONS.md](docs/INTEGRATIONS.md) and the boundary note in
+[CLAUDE.md](CLAUDE.md).
+
+## Requirements
+- **Node** `>=22.12.0` (see `package.json` `engines`)
+- **npm** (this repo uses `package-lock.json`)
+
+## Install
 ```sh
-npm create astro@latest -- --template minimal
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+## Run locally
+```sh
+npm run dev      # Astro dev server, default http://localhost:4321
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Build & preview
+```sh
+npm run build    # outputs static site to ./dist/
+npm run preview  # serves the built ./dist/ locally
+```
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+These four (`dev`, `build`, `preview`, `astro`) are the **only** scripts defined in
+`package.json`. There is no test suite and no configured `astro check`.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Deployment (overview)
+- Hosted on **Netlify** (site id `57df0a8e-c32d-4954-9507-f9f3b1f90e53`); build command
+  `npm run build`, publish directory `dist` (see `netlify.toml`).
+- **Production target** is `greenwayband.com`, which is **currently still a Squarespace site**.
+  Launch = flip the Cloudflare A record from Squarespace to Netlify (reversible in minutes).
+- `netlify.toml` currently 301-redirects `greenway-website.netlify.app/*` →
+  `greenwayband.com/:splat`. **Note:** because production is still Squarespace, this redirect
+  makes the staging URL bounce to the old Squarespace site. See
+  [docs/PROJECT_STATE.md](docs/PROJECT_STATE.md).
+- Do **not** deploy, push, or change DNS without explicit owner approval.
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Documentation
+Project docs live in [`/docs`](docs/). Start with:
+- [docs/PROJECT_STATE.md](docs/PROJECT_STATE.md) — verified current state (read this first)
+- [CLAUDE.md](CLAUDE.md) — operating manual, design tokens, conventions
+- [docs/CODE_WORKFLOW.md](docs/CODE_WORKFLOW.md) — how to work in this repo
+- [docs/TASKS.md](docs/TASKS.md) — what's next
