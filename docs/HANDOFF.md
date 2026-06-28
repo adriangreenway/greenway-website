@@ -5,6 +5,18 @@
 > bridge prompt. Keep this file current — update it at the end of any meaningful work.
 > **Last updated: 2026-06-27.**
 
+## ▶ Next action (Phase 1 — agreed with Adrian 2026-06-27)
+Goal: get the site to ONE clean, previewable, deployable state, then make it viewable.
+1. **Make `dev` canonical.** Commit the uncommitted April work on `dev` (publishes Reviews + FAQ —
+   see "Working tree" below); fold in anything on `main` not already present; retire/realign `main`.
+2. **Remove the `netlify.toml` self-redirect** so staging stops bouncing to the old Squarespace site,
+   and give Adrian a working preview (Netlify deploy preview or local `npm run dev`).
+3. **Plan mode first** → show Adrian the plan in plain language → then build. Commit per step.
+**Do NOT touch:** real Reviews content (Adrian supplies real testimonials) or DNS (Adrian flips at launch).
+After Phase 1: wire the real hero video (`~/Desktop/Greenway/website-content/greenway-hero.webm`) into
+the placeholder hero, then QA + an end-to-end Book-form lead test. Full roadmap below + in [TASKS.md](TASKS.md).
+Note: Adrian is non-technical — keep all updates brief and jargon-free.
+
 ## Workflow model (Code-exclusive)
 Adrian works **exclusively in Claude Code** now (no claude.ai chat). Plan in-tool (plan mode),
 build in-tool, verify in-tool. The repo + agent memory are the "project knowledge"; there are no
