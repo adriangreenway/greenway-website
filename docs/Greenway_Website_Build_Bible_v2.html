@@ -1,0 +1,2625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Greenway Band — Website Build Bible v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A09;
+    --charcoal: #111110;
+    --cream: #F5F2ED;
+    --cream-bg: #FAF8F5;
+    --cream-muted: #B8B4AC;
+    --cream-dim: #706D66;
+    --cream-faint: #4A4740;
+    --border: #E8E5E0;
+    --border-light: #F0EDE8;
+    --green: #2D6A4F;
+    --green-light: #D4E7DC;
+    --green-bg: #F0F7F2;
+    --amber: #D4850A;
+    --amber-light: #FEF3D6;
+    --red: #C1292E;
+    --red-light: #FDEAEA;
+    --blue: #1A5FB4;
+    --blue-light: #E8F0FE;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--cream-bg);
+    color: var(--black);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.7;
+  }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-bar-container { position: fixed; top: 0; left: 0; right: 0; height: 4px; background: var(--border); z-index: 1000; }
+  .progress-bar-fill { height: 100%; background: var(--green); transition: width 0.4s ease; width: 0%; }
+
+  /* ===== NAV SIDEBAR ===== */
+  .nav-toggle {
+    position: fixed; top: 16px; left: 16px; z-index: 1001;
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--black); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    transition: transform 0.2s;
+  }
+  .nav-toggle:hover { transform: scale(1.05); }
+  .nav-toggle svg { width: 20px; height: 20px; fill: var(--cream); }
+
+  .nav-sidebar {
+    position: fixed; top: 0; left: -320px; width: 300px; height: 100vh;
+    background: var(--black); z-index: 1000; overflow-y: auto;
+    transition: left 0.3s ease; padding: 72px 24px 40px;
+    box-shadow: 4px 0 32px rgba(0,0,0,0.2);
+  }
+  .nav-sidebar.open { left: 0; }
+  .nav-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+    z-index: 999; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .nav-overlay.open { opacity: 1; pointer-events: auto; }
+  .nav-part { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-faint); margin: 24px 0 8px; }
+  .nav-part:first-child { margin-top: 0; }
+  .nav-link {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px; margin: 2px -12px; border-radius: 6px;
+    font-size: 13px; color: var(--cream-muted); text-decoration: none;
+    transition: all 0.15s; cursor: pointer;
+  }
+  .nav-link:hover { background: rgba(245,242,237,0.06); color: var(--cream); }
+  .nav-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .nav-dot.confirmed { background: var(--green); }
+  .nav-dot.pending { background: var(--amber); }
+  .nav-dot.not-started { background: var(--cream-faint); }
+
+  /* ===== FLOATING TRACKER ===== */
+  .progress-tracker {
+    position: fixed; bottom: 32px; right: 32px;
+    background: var(--black); color: var(--cream);
+    border-radius: 12px; padding: 16px 24px;
+    font-size: 13px; z-index: 998;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    display: flex; align-items: center; gap: 16px;
+    cursor: pointer; transition: transform 0.2s;
+  }
+  .progress-tracker:hover { transform: translateY(-2px); }
+  .progress-number { font-family: 'Bodoni Moda', serif; font-size: 28px; font-weight: 400; letter-spacing: 1px; }
+  .progress-label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream-muted); }
+
+  /* ===== EXPORT BAR ===== */
+  .export-bar {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+    background: var(--green); color: white; border-radius: 12px;
+    padding: 14px 28px; font-size: 13px; font-weight: 600;
+    letter-spacing: 1px; cursor: pointer; z-index: 998;
+    box-shadow: 0 8px 32px rgba(45,106,79,0.3);
+    border: none; font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .export-bar:hover { transform: translateX(-50%) translateY(-2px); box-shadow: 0 12px 40px rgba(45,106,79,0.4); }
+
+  /* ===== COVER ===== */
+  .cover {
+    background: var(--black); color: var(--cream);
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 80px 40px; position: relative;
+  }
+  .cover-the { font-family: 'Bodoni Moda', serif; font-size: 12px; letter-spacing: 10px; color: var(--cream-dim); margin-bottom: 8px; }
+  .cover h1 { font-family: 'Bodoni Moda', serif; font-size: clamp(36px, 6vw, 56px); letter-spacing: 5px; font-weight: 400; margin: 4px 0; }
+  .cover-band { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; letter-spacing: 14px; color: var(--cream-dim); }
+  .cover-title { margin-top: 80px; }
+  .cover-title h2 { font-family: 'Bodoni Moda', serif; font-size: clamp(20px, 3vw, 28px); font-weight: 400; letter-spacing: 2px; color: var(--cream); margin-bottom: 8px; }
+  .cover-subtitle { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-faint); }
+  .cover-meta { position: absolute; bottom: 48px; font-size: 10px; letter-spacing: 3px; color: var(--cream-faint); }
+  .cover-badge { display: inline-block; margin-top: 24px; padding: 6px 16px; border: 1px solid var(--cream-faint); border-radius: 20px; font-size: 11px; letter-spacing: 2px; color: var(--cream-dim); }
+
+  /* ===== MAIN CONTENT ===== */
+  .content { max-width: 860px; margin: 0 auto; padding: 0 40px 160px; }
+
+  /* ===== SECTION ===== */
+  .section { margin-top: 80px; padding-top: 80px; border-top: 1px solid var(--border); }
+  .section:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+  .section-number { font-family: 'Bodoni Moda', serif; font-size: 11px; letter-spacing: 4px; color: var(--cream-dim); text-transform: uppercase; margin-bottom: 8px; }
+  .section-title { font-family: 'Bodoni Moda', serif; font-size: 32px; font-weight: 400; color: var(--black); margin-bottom: 12px; line-height: 1.2; }
+  .section-desc { font-size: 15px; color: var(--cream-dim); max-width: 600px; line-height: 1.8; margin-bottom: 40px; }
+
+  /* ===== PART DIVIDERS ===== */
+  .part-divider { background: var(--black); color: var(--cream); padding: 60px 40px; text-align: center; margin: 80px -40px 0; }
+  .part-divider .part-number { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--cream-dim); margin-bottom: 8px; }
+  .part-divider h2 { font-family: 'Bodoni Moda', serif; font-size: 28px; font-weight: 400; letter-spacing: 2px; margin-bottom: 8px; }
+  .part-divider p { font-size: 13px; color: var(--cream-dim); max-width: 500px; margin: 0 auto; line-height: 1.7; }
+
+  /* ===== CONFIRMED SECTION (locked decisions) ===== */
+  .confirmed-block {
+    background: var(--green-bg); border: 1px solid var(--green-light);
+    border-radius: 10px; padding: 24px 28px; margin-bottom: 20px;
+  }
+  .confirmed-label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--green); font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .confirmed-label svg { width: 14px; height: 14px; fill: var(--green); }
+  .confirmed-value { font-size: 14px; color: var(--black); line-height: 1.8; }
+  .confirmed-value code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; background: white; padding: 2px 6px; border-radius: 3px; }
+
+  /* ===== WHY BOX ===== */
+  .why-box { background: var(--cream); border: 1px solid var(--border); border-radius: 8px; padding: 24px 28px; margin-bottom: 24px; }
+  .why-box-label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--cream-dim); margin-bottom: 8px; font-weight: 600; }
+  .why-box p { font-size: 14px; color: var(--black); line-height: 1.8; }
+
+  /* ===== CALLOUT ===== */
+  .callout { background: var(--blue-light); border: 1px solid rgba(26,95,180,0.15); border-radius: 8px; padding: 20px 24px; margin: 24px 0; font-size: 13px; line-height: 1.7; }
+  .callout strong { color: var(--blue); }
+
+  /* ===== COPY SELECTOR ===== */
+  .copy-selector { margin: 24px 0 32px; }
+  .copy-selector-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-dim); font-weight: 600; margin-bottom: 12px; }
+  .copy-option {
+    position: relative; display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 20px; margin-bottom: 8px;
+    background: white; border: 2px solid var(--border);
+    border-radius: 10px; cursor: pointer; transition: all 0.2s;
+  }
+  .copy-option:hover { border-color: var(--cream-muted); }
+  .copy-option.selected { border-color: var(--green); background: var(--green-bg); }
+  .copy-option input[type="radio"] { display: none; }
+  .copy-radio {
+    width: 22px; height: 22px; min-width: 22px; border-radius: 50%;
+    border: 2px solid var(--cream-muted); margin-top: 2px;
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+  }
+  .copy-option.selected .copy-radio { border-color: var(--green); }
+  .copy-radio-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); opacity: 0; transition: opacity 0.2s; }
+  .copy-option.selected .copy-radio-dot { opacity: 1; }
+  .copy-option-content { flex: 1; }
+  .copy-option-text { font-size: 15px; color: var(--black); line-height: 1.6; font-weight: 400; }
+  .copy-option .rec-badge {
+    position: absolute; top: -1px; right: 16px;
+    background: var(--green); color: white;
+    font-size: 9px; letter-spacing: 2px; font-weight: 700;
+    padding: 4px 10px 3px; border-radius: 0 0 6px 6px;
+  }
+  .copy-option-note { font-size: 12px; color: var(--cream-dim); margin-top: 4px; line-height: 1.5; }
+
+  /* Custom write option */
+  .copy-option.custom-option .copy-option-text { font-size: 13px; color: var(--cream-dim); margin-bottom: 8px; }
+  .copy-custom-input {
+    width: 100%; padding: 12px 16px; border: 1px solid var(--border);
+    border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px; line-height: 1.6; resize: vertical; min-height: 48px;
+    background: var(--cream-bg); color: var(--black); transition: border-color 0.2s;
+  }
+  .copy-custom-input:focus { outline: none; border-color: var(--green); }
+
+  /* ===== VISUAL SELECTOR ===== */
+  .visual-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0 32px; }
+  .visual-option {
+    background: white; border: 2px solid var(--border); border-radius: 12px;
+    padding: 24px; cursor: pointer; transition: all 0.2s; text-align: center;
+  }
+  .visual-option:hover { border-color: var(--cream-muted); }
+  .visual-option.selected { border-color: var(--green); background: var(--green-bg); }
+  .visual-option-label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream-dim); margin-top: 12px; font-weight: 600; }
+  .visual-option.selected .visual-option-label { color: var(--green); }
+  .visual-option .rec-badge { display: inline-block; background: var(--green); color: white; font-size: 8px; letter-spacing: 1.5px; font-weight: 700; padding: 2px 8px; border-radius: 3px; margin-bottom: 12px; }
+
+  /* ===== CONTENT INVENTORY ===== */
+  .inventory { margin: 24px 0 32px; }
+  .inventory-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-dim); font-weight: 600; margin-bottom: 12px; }
+  .inventory-items { margin-bottom: 12px; }
+  .inventory-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; background: white; border: 1px solid var(--border);
+    border-radius: 8px; margin-bottom: 6px; transition: border-color 0.2s;
+  }
+  .inventory-item:hover { border-color: var(--cream-muted); }
+  .inventory-item-num { font-family: 'Bodoni Moda', serif; font-size: 18px; color: var(--cream-muted); min-width: 28px; }
+  .inventory-item input {
+    flex: 1; border: none; font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; color: var(--black); background: transparent; outline: none;
+  }
+  .inventory-item input::placeholder { color: var(--cream-muted); }
+  .inventory-remove {
+    width: 28px; height: 28px; border-radius: 6px; border: none;
+    background: transparent; cursor: pointer; color: var(--cream-muted);
+    font-size: 18px; display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .inventory-remove:hover { background: var(--red-light); color: var(--red); }
+  .inventory-add {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border: 1px dashed var(--border);
+    border-radius: 8px; background: transparent; cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px;
+    color: var(--cream-dim); transition: all 0.15s;
+  }
+  .inventory-add:hover { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+
+  /* ===== FAQ BUILDER ===== */
+  .faq-item {
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px 24px; margin-bottom: 12px; transition: border-color 0.2s;
+  }
+  .faq-item:hover { border-color: var(--cream-muted); }
+  .faq-q-input, .faq-a-input {
+    width: 100%; border: none; font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--black); background: transparent; outline: none; resize: none;
+  }
+  .faq-q-input { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .faq-q-input::placeholder { color: var(--cream-muted); font-weight: 600; }
+  .faq-a-input { font-size: 14px; line-height: 1.7; min-height: 60px; }
+  .faq-a-input::placeholder { color: var(--cream-muted); }
+  .faq-divider { height: 1px; background: var(--border-light); margin: 8px 0; }
+  .faq-remove { float: right; width: 28px; height: 28px; border-radius: 6px; border: none; background: transparent; cursor: pointer; color: var(--cream-muted); font-size: 16px; display: flex; align-items: center; justify-content: center; }
+  .faq-remove:hover { background: var(--red-light); color: var(--red); }
+
+  /* ===== REVIEW BUILDER ===== */
+  .review-item {
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    padding: 24px; margin-bottom: 12px;
+  }
+  .review-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .review-field label { display: block; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream-dim); font-weight: 600; margin-bottom: 4px; }
+  .review-field input, .review-field textarea {
+    width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--black);
+    background: var(--cream-bg); outline: none;
+  }
+  .review-field textarea { resize: vertical; min-height: 60px; line-height: 1.6; }
+  .review-field input:focus, .review-field textarea:focus { border-color: var(--green); }
+
+  /* ===== LIVE PREVIEW FRAMES ===== */
+  .preview-frame {
+    border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; margin: 24px 0 32px; background: white;
+  }
+  .preview-label {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--cream-dim); padding: 10px 20px;
+    background: var(--cream); border-bottom: 1px solid var(--border); font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .preview-label .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .preview-content { padding: 0; position: relative; }
+
+  /* ===== HERO PREVIEW ===== */
+  .hero-preview {
+    background: var(--black); min-height: 400px;
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: center; text-align: center; padding: 60px 40px;
+    position: relative; overflow: hidden;
+  }
+  .hero-preview::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(30,30,28,0.3) 0%, rgba(10,10,9,0.6) 100%);
+    z-index: 1;
+  }
+  .hero-preview .video-placeholder {
+    position: absolute; inset: 0; background: var(--charcoal);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; letter-spacing: 2px; color: var(--cream-faint);
+  }
+  .hero-preview-content { position: relative; z-index: 2; }
+  .hero-the { font-family: 'Bodoni Moda', serif; font-size: 10px; letter-spacing: 8px; color: var(--cream-dim); }
+  .hero-name { font-family: 'Bodoni Moda', serif; font-size: 40px; letter-spacing: 4px; color: var(--cream); font-weight: 400; margin: 4px 0; }
+  .hero-band { font-size: 10px; letter-spacing: 12px; color: var(--cream-dim); }
+  .hero-descriptor { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: var(--cream-muted); letter-spacing: 2px; margin-top: 40px; }
+  .hero-scroll { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 2; font-size: 10px; letter-spacing: 3px; color: var(--cream-faint); }
+
+  /* ===== BUTTON PREVIEWS ===== */
+  .btn-preview-row { display: flex; gap: 16px; align-items: center; justify-content: center; padding: 32px; flex-wrap: wrap; }
+  .btn-gw {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px;
+    letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600;
+    padding: 14px 32px; border-radius: 0; cursor: pointer;
+    transition: all 0.25s ease; border: none; display: inline-block;
+  }
+  .btn-gw.filled-dark { background: var(--black); color: var(--cream); }
+  .btn-gw.filled-dark:hover { background: var(--charcoal); }
+  .btn-gw.outline-dark { background: transparent; color: var(--black); border: 1.5px solid var(--black); }
+  .btn-gw.outline-dark:hover { background: var(--black); color: var(--cream); }
+  .btn-gw.filled-cream { background: var(--cream); color: var(--black); }
+  .btn-gw.filled-cream:hover { opacity: 0.9; }
+  .btn-gw.outline-cream { background: transparent; color: var(--cream); border: 1.5px solid var(--cream); }
+  .btn-gw.outline-cream:hover { background: var(--cream); color: var(--black); }
+  .btn-gw.pill { border-radius: 40px; }
+  .btn-gw.subtle-radius { border-radius: 4px; }
+
+  /* ===== FOOTER PREVIEW ===== */
+  .footer-preview { background: var(--black); padding: 60px 40px; color: var(--cream); }
+  .footer-preview-cream { background: var(--cream); padding: 60px 40px; color: var(--black); border-top: 1px solid var(--border); }
+  .footer-logo-the { font-family: 'Bodoni Moda', serif; font-size: 9px; letter-spacing: 6px; text-align: center; opacity: 0.5; }
+  .footer-logo-name { font-family: 'Bodoni Moda', serif; font-size: 24px; letter-spacing: 3px; text-align: center; font-weight: 400; margin: 2px 0; }
+  .footer-logo-sub { font-size: 9px; letter-spacing: 10px; text-align: center; opacity: 0.5; }
+  .footer-links { display: flex; gap: 24px; justify-content: center; margin-top: 32px; font-size: 12px; letter-spacing: 1.5px; opacity: 0.6; }
+  .footer-copyright { text-align: center; margin-top: 32px; font-size: 11px; opacity: 0.3; letter-spacing: 1px; }
+
+  /* ===== FORM PREVIEW ===== */
+  .form-preview { background: var(--cream-bg); padding: 40px; }
+  .form-preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 500px; margin: 0 auto; }
+  .form-preview-field label { display: block; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream-dim); font-weight: 600; margin-bottom: 6px; }
+  .form-preview-field input, .form-preview-field select {
+    width: 100%; padding: 12px 16px; border: 1px solid var(--border);
+    border-radius: 0; font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; color: var(--black); background: white;
+  }
+  .form-preview-field.full { grid-column: 1 / -1; }
+
+  /* ===== SOCIAL PROOF STRIP PREVIEW ===== */
+  .strip-preview {
+    background: var(--cream); padding: 20px 0; overflow: hidden; position: relative;
+  }
+  .strip-track {
+    display: flex; gap: 48px; animation: scroll-strip 20s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes scroll-strip {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .strip-name {
+    font-family: 'Bodoni Moda', serif; font-size: 13px; letter-spacing: 3px;
+    color: var(--cream-dim); text-transform: uppercase; flex-shrink: 0;
+  }
+  .strip-dot { color: var(--cream-muted); flex-shrink: 0; }
+
+  /* ===== REVIEW CARD PREVIEW ===== */
+  .review-card-preview {
+    background: var(--cream-bg); padding: 48px 40px;
+    text-align: center; max-width: 100%;
+  }
+  .review-card-quote {
+    font-family: 'Bodoni Moda', serif; font-size: 22px; font-weight: 400;
+    font-style: italic; color: var(--black); line-height: 1.6;
+    max-width: 480px; margin: 0 auto 24px;
+  }
+  .review-card-attr { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-dim); }
+
+  /* ===== NOTES ===== */
+  .notes-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--cream-dim); cursor: pointer;
+    padding: 6px 0; border: none; background: none;
+    font-family: 'Plus Jakarta Sans', sans-serif; margin-top: 16px;
+  }
+  .notes-toggle:hover { color: var(--black); }
+  .notes-area {
+    margin-top: 8px; display: none;
+  }
+  .notes-area.open { display: block; }
+  .notes-textarea {
+    width: 100%; padding: 12px 16px; border: 1px solid var(--border);
+    border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px; line-height: 1.6; resize: vertical; min-height: 80px;
+    background: white; color: var(--black); outline: none;
+  }
+  .notes-textarea:focus { border-color: var(--green); }
+  .notes-textarea::placeholder { color: var(--cream-muted); }
+
+  /* ===== PAGE MAP ===== */
+  .page-map { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0 32px; }
+  .page-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+  .page-card-number { font-family: 'Bodoni Moda', serif; font-size: 28px; color: var(--cream-muted); margin-bottom: 4px; }
+  .page-card-name { font-size: 16px; font-weight: 600; color: var(--black); margin-bottom: 6px; }
+  .page-card-job { font-size: 13px; color: var(--cream-dim); line-height: 1.6; }
+
+  /* ===== HOMEPAGE SECTION PREVIEW ===== */
+  .homepage-preview { background: var(--cream-bg); }
+  .hp-section {
+    padding: 32px 24px; border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .hp-section:last-child { border-bottom: none; }
+  .hp-section-num { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-muted); margin-bottom: 8px; }
+  .hp-section-dark { background: var(--black); color: var(--cream); }
+  .hp-section-dark .hp-section-num { color: var(--cream-faint); }
+
+  /* ===== EXPERIENCE PAGE PREVIEW ===== */
+  .exp-phase {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-phase:last-child { border-bottom: none; }
+  .exp-phase-visual { background: var(--charcoal); min-height: 160px; display: flex; align-items: center; justify-content: center; }
+  .exp-phase-visual span { font-size: 10px; letter-spacing: 2px; color: var(--cream-faint); }
+  .exp-phase-content { padding: 32px 24px; display: flex; flex-direction: column; justify-content: center; }
+  .exp-phase-label { font-family: 'Bodoni Moda', serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-dim); margin-bottom: 6px; }
+  .exp-phase-headline { font-family: 'Bodoni Moda', serif; font-size: 20px; font-weight: 400; color: var(--black); margin-bottom: 8px; }
+  .exp-phase-body { font-size: 13px; color: var(--cream-dim); line-height: 1.7; }
+
+  /* ===== SUB TITLE ===== */
+  .sub-title { font-family: 'Bodoni Moda', serif; font-size: 20px; font-weight: 400; color: var(--black); margin: 40px 0 12px; }
+  .sub-desc { font-size: 14px; color: var(--cream-dim); line-height: 1.7; margin-bottom: 20px; max-width: 600px; }
+
+  /* ===== SEPARATOR ===== */
+  .sep { height: 1px; background: var(--border); margin: 40px 0; }
+
+  /* ===== SPEC TABLE ===== */
+  .spec-table { width: 100%; border-collapse: collapse; margin: 24px 0 32px; font-size: 13px; }
+  .spec-table thead th { text-align: left; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-dim); padding: 12px 16px; background: var(--cream); border-bottom: 1px solid var(--border); font-weight: 600; }
+  .spec-table tbody td { padding: 12px 16px; border-bottom: 1px solid var(--border-light); vertical-align: top; line-height: 1.6; }
+  .spec-table code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; background: var(--cream); padding: 2px 6px; border-radius: 3px; }
+
+  /* ===== CHECKLIST (for technical/launch sections) ===== */
+  .checklist { margin: 24px 0 32px; }
+  .check-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border-light); }
+  .check-item:last-child { border-bottom: none; }
+  .check-item input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .check-label { display: flex; align-items: flex-start; gap: 14px; cursor: pointer; width: 100%; padding: 4px 8px; margin: -4px -8px; border-radius: 6px; transition: background 0.15s; }
+  .check-label:hover { background: var(--cream); }
+  .check-box { width: 24px; height: 24px; min-width: 24px; border: 2px solid #C0BDB8; border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-top: 1px; transition: all 0.2s; background: white; position: relative; }
+  .check-item input[type="checkbox"]:checked + .check-label .check-box { background: var(--green); border-color: var(--green); }
+  .check-box::after { content: ''; display: block; width: 6px; height: 11px; border: solid white; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg) translate(-1px, -1px); opacity: 0; transition: opacity 0.2s; }
+  .check-item input[type="checkbox"]:checked + .check-label .check-box::after { opacity: 1; }
+  .check-content { flex: 1; }
+  .check-title { font-size: 14px; font-weight: 500; color: var(--black); line-height: 1.4; }
+  .check-item input[type="checkbox"]:checked + .check-label .check-title { text-decoration: line-through; color: var(--cream-dim); }
+  .check-explain { font-size: 13px; color: var(--cream-dim); margin-top: 4px; line-height: 1.6; }
+
+  /* ===== SWATCH ===== */
+  .swatch-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0 24px; }
+  .swatch { display: flex; align-items: center; gap: 10px; padding: 8px 14px; background: white; border: 1px solid var(--border); border-radius: 6px; }
+  .swatch-dot { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border); }
+  .swatch-info { font-size: 12px; }
+  .swatch-name { font-weight: 600; color: var(--black); }
+  .swatch-hex { color: var(--cream-dim); font-family: 'SF Mono', monospace; font-size: 11px; }
+
+  /* ===== TYPE SPECIMENS ===== */
+  .type-specimen { padding: 32px; background: white; border: 1px solid var(--border); border-radius: 8px; margin: 12px 0; }
+  .type-specimen-dark { background: var(--black); color: var(--cream); }
+
+  /* ===== EXPORT MODAL ===== */
+  .export-modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+    z-index: 2000; display: none; align-items: center; justify-content: center;
+  }
+  .export-modal-overlay.open { display: flex; }
+  .export-modal {
+    background: white; border-radius: 16px; max-width: 700px; width: 90%;
+    max-height: 80vh; overflow-y: auto; padding: 40px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+  }
+  .export-modal h2 { font-family: 'Bodoni Moda', serif; font-size: 24px; font-weight: 400; margin-bottom: 8px; }
+  .export-modal-desc { font-size: 14px; color: var(--cream-dim); margin-bottom: 24px; line-height: 1.7; }
+  .export-output {
+    width: 100%; min-height: 300px; padding: 16px; border: 1px solid var(--border);
+    border-radius: 8px; font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px; line-height: 1.6; resize: vertical;
+    background: var(--cream-bg); color: var(--black);
+  }
+  .export-copy-btn {
+    margin-top: 16px; padding: 12px 24px;
+    background: var(--green); color: white; border: none; border-radius: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px;
+    font-weight: 600; letter-spacing: 1px; cursor: pointer; transition: all 0.2s;
+  }
+  .export-copy-btn:hover { background: #245A42; }
+  .export-close {
+    position: absolute; top: 16px; right: 16px; width: 36px; height: 36px;
+    border-radius: 50%; border: none; background: var(--cream); cursor: pointer;
+    font-size: 18px; display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .content { padding-left: 24px; padding-right: 24px; }
+    .page-map, .visual-selector, .review-row, .form-preview-grid, .exp-phase { grid-template-columns: 1fr; }
+    .part-divider { margin-left: -24px; margin-right: -24px; }
+    .progress-tracker { bottom: 16px; right: 16px; padding: 12px 16px; }
+    .export-bar { bottom: 80px; }
+    .hero-name { font-size: 28px; }
+    .swatch-row { gap: 8px; }
+  }
+
+  @media print {
+    .progress-bar-container, .progress-tracker, .nav-toggle, .nav-sidebar, .nav-overlay, .export-bar { display: none; }
+    .cover { min-height: auto; padding: 60px 40px; }
+    .section { page-break-inside: avoid; }
+  }
+  /* ===== FULL SITE PREVIEW SYSTEM ===== */
+  .preview-btn {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(calc(-50% - 100px));
+    background: var(--black); color: var(--cream); border-radius: 12px;
+    padding: 14px 28px; font-size: 13px; font-weight: 600;
+    letter-spacing: 1px; cursor: pointer; z-index: 998;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    border: none; font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: all 0.2s; display: flex; align-items: center; gap: 10px;
+  }
+  .preview-btn:hover { transform: translateX(calc(-50% - 100px)) translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  .preview-btn svg { width: 16px; height: 16px; fill: currentColor; }
+  .export-bar { transform: translateX(calc(-50% + 100px)); }
+  .export-bar:hover { transform: translateX(calc(-50% + 100px)) translateY(-2px); }
+
+  /* Preview overlay */
+  .site-preview-overlay {
+    position: fixed; inset: 0; z-index: 3000;
+    background: #E8E5E0;
+    display: none; flex-direction: column;
+  }
+  .site-preview-overlay.open { display: flex; }
+
+  /* Hide fixed buttons when preview is open */
+  body.preview-open .export-bar,
+  body.preview-open .preview-btn,
+  body.preview-open .progress-tracker {
+    display: none !important;
+  }
+
+  /* Preview toolbar */
+  .sp-toolbar {
+    background: var(--black); color: var(--cream);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; min-height: 56px; flex-shrink: 0;
+    border-bottom: 1px solid rgba(245,242,237,0.08);
+    flex-wrap: wrap; gap: 0;
+  }
+  .sp-toolbar-left { display: flex; align-items: center; gap: 8px; }
+  .sp-toolbar-center { display: flex; align-items: center; gap: 0; flex-shrink: 1; overflow-x: auto; }
+  .sp-toolbar-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .sp-logo {
+    font-family: 'Bodoni Moda', serif; font-size: 14px; letter-spacing: 3px;
+    color: var(--cream); margin-right: 24px;
+  }
+  .sp-tab {
+    padding: 16px 20px; font-size: 12px; letter-spacing: 1.5px;
+    color: var(--cream-dim); cursor: pointer; border: none; background: none;
+    font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.15s;
+    border-bottom: 2px solid transparent; text-transform: uppercase; font-weight: 500;
+  }
+  .sp-tab:hover { color: var(--cream); }
+  .sp-tab.active { color: var(--cream); border-bottom-color: var(--cream); }
+  .sp-device-toggle {
+    display: flex; background: rgba(245,242,237,0.08); border-radius: 8px; overflow: hidden;
+  }
+  .sp-device-btn {
+    padding: 6px 12px; border: none; background: none; cursor: pointer;
+    color: var(--cream-dim); font-size: 11px; letter-spacing: 1px;
+    font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.15s;
+  }
+  .sp-device-btn.active { background: rgba(245,242,237,0.12); color: var(--cream); }
+  .sp-device-label {
+    display: none; text-align: center; padding: 12px 0 0;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(0,0,0,0.25); font-weight: 600;
+  }
+  .sp-viewport.tablet-mode .sp-device-label,
+  .sp-viewport.mobile-mode .sp-device-label { display: block; }
+  .sp-close {
+    width: 36px; height: 36px; border-radius: 8px; border: none;
+    background: rgba(245,242,237,0.08); color: var(--cream);
+    font-size: 18px; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; transition: background 0.15s;
+  }
+  .sp-close:hover { background: rgba(245,242,237,0.15); }
+
+  /* Preview viewport */
+  .sp-viewport {
+    flex: 1; overflow-y: auto; display: flex; flex-direction: column;
+    align-items: center; padding: 0; background: #E8E5E0;
+  }
+  .sp-frame {
+    width: 100%; max-width: 100%; background: var(--cream-bg);
+    box-shadow: none; transition: max-width 0.4s ease, box-shadow 0.4s ease;
+    min-height: 100%; flex-shrink: 0;
+  }
+  .sp-frame.desktop { max-width: 100%; box-shadow: none; }
+  .sp-frame.tablet { max-width: 768px; box-shadow: 0 0 60px rgba(0,0,0,0.12); margin: 24px auto; border-radius: 12px; overflow: hidden; min-height: auto; }
+  .sp-frame.mobile { max-width: 390px; box-shadow: 0 0 60px rgba(0,0,0,0.12); margin: 24px auto; border-radius: 24px; overflow: hidden; min-height: auto; }
+
+  /* ===== RENDERED SITE STYLES ===== */
+  .gw-site { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--black); background: var(--cream-bg); -webkit-font-smoothing: antialiased; }
+  .gw-site * { box-sizing: border-box; }
+
+  /* Site Nav */
+  .gw-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 48px; position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+  }
+  .gw-nav-logo { font-family: 'Bodoni Moda', serif; font-size: 12px; letter-spacing: 4px; color: var(--cream); text-transform: uppercase; }
+  .gw-nav-links { display: flex; gap: 32px; }
+  .gw-nav-link { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,242,237,0.6); text-decoration: none; }
+  .gw-nav-cta {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+    padding: 10px 24px; border: 1px solid var(--cream); color: var(--cream);
+    text-decoration: none; background: none;
+  }
+  .gw-nav.cream .gw-nav-logo { color: var(--black); }
+  .gw-nav.cream .gw-nav-link { color: var(--cream-dim); }
+  .gw-nav.cream .gw-nav-cta { border-color: var(--black); color: var(--black); }
+
+  /* Hero */
+  .gw-hero {
+    background: var(--black); min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 120px 48px 80px; position: relative; overflow: hidden;
+  }
+  .gw-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,10,9,0.3) 0%, rgba(10,10,9,0.55) 50%, rgba(10,10,9,0.7) 100%);
+    z-index: 1;
+  }
+  .gw-hero-video-bg {
+    position: absolute; inset: 0; background: var(--charcoal);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; letter-spacing: 3px; color: var(--cream-faint); text-transform: uppercase;
+  }
+  .gw-hero-content { position: relative; z-index: 2; }
+  .gw-hero-the { font-family: 'Bodoni Moda', serif; font-size: 13px; letter-spacing: 10px; color: rgba(245,242,237,0.45); }
+  .gw-hero-name { font-family: 'Bodoni Moda', serif; font-size: clamp(40px, 7vw, 72px); letter-spacing: 6px; color: var(--cream); font-weight: 400; margin: 4px 0; }
+  .gw-hero-band { font-size: 11px; letter-spacing: 16px; color: rgba(245,242,237,0.4); }
+  .gw-hero-desc { font-size: 14px; color: rgba(245,242,237,0.6); letter-spacing: 3px; margin-top: 48px; }
+  .gw-hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2; font-size: 10px; letter-spacing: 4px; color: rgba(245,242,237,0.25); }
+  .gw-hero-cta-row { margin-top: 40px; position: relative; z-index: 2; }
+
+  /* Inner page hero */
+  .gw-inner-hero {
+    background: var(--cream-bg); padding: 160px 48px 80px; text-align: center;
+  }
+  .gw-inner-hero-label { font-family: 'Bodoni Moda', serif; font-size: 10px; letter-spacing: 4px; color: var(--cream-dim); text-transform: uppercase; margin-bottom: 12px; }
+  .gw-inner-hero-title { font-family: 'Bodoni Moda', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 400; color: var(--black); letter-spacing: 2px; line-height: 1.15; }
+
+  /* Social proof strip */
+  .gw-strip { background: var(--cream); padding: 20px 0; overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .gw-strip-track { display: flex; gap: 48px; animation: scroll-strip 25s linear infinite; white-space: nowrap; }
+  .gw-strip-name { font-family: 'Bodoni Moda', serif; font-size: 12px; letter-spacing: 4px; color: var(--cream-dim); text-transform: uppercase; flex-shrink: 0; }
+  .gw-strip-dot { color: var(--cream-muted); flex-shrink: 0; font-size: 10px; }
+
+  /* Content sections */
+  .gw-section { max-width: 1200px; margin: 0 auto; padding: 120px 48px; }
+  .gw-section-centered { text-align: center; }
+  .gw-section-label { font-family: 'Bodoni Moda', serif; font-size: 11px; letter-spacing: 4px; color: var(--cream-dim); text-transform: uppercase; margin-bottom: 16px; }
+  .gw-section-headline { font-family: 'Bodoni Moda', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 400; color: var(--black); line-height: 1.2; margin-bottom: 24px; }
+  .gw-section-body { font-size: 16px; line-height: 1.8; color: var(--cream-dim); max-width: 640px; }
+  .gw-section-centered .gw-section-body { margin: 0 auto; }
+
+  /* Pull quote */
+  .gw-pullquote { background: var(--cream); padding: 100px 48px; text-align: center; }
+  .gw-pullquote-text { font-family: 'Bodoni Moda', serif; font-size: clamp(22px, 3vw, 32px); font-weight: 400; font-style: italic; color: var(--black); line-height: 1.5; max-width: 700px; margin: 0 auto 24px; }
+  .gw-pullquote-attr { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--cream-dim); }
+
+  /* CTA section */
+  .gw-cta-section { text-align: center; padding: 100px 48px; }
+  .gw-cta-headline { font-family: 'Bodoni Moda', serif; font-size: clamp(24px, 3.5vw, 40px); font-weight: 400; color: var(--black); margin-bottom: 32px; }
+  .gw-btn {
+    display: inline-block; font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600;
+    padding: 16px 40px; text-decoration: none; transition: all 0.25s;
+  }
+  .gw-btn-dark { background: var(--black); color: var(--cream); }
+  .gw-btn-dark:hover { background: var(--charcoal); }
+  .gw-btn-cream { background: var(--cream); color: var(--black); }
+  .gw-btn-outline { background: none; border: 1.5px solid var(--cream); color: var(--cream); }
+
+  /* Experience phases */
+  .gw-phase { display: grid; grid-template-columns: 1fr 1fr; min-height: 400px; }
+  .gw-phase.reverse .gw-phase-visual { order: 2; }
+  .gw-phase.reverse .gw-phase-text { order: 1; }
+  .gw-phase-visual {
+    background: var(--charcoal); display: flex; align-items: center; justify-content: center;
+    font-size: 11px; letter-spacing: 3px; color: var(--cream-faint); text-transform: uppercase; min-height: 400px;
+  }
+  .gw-phase-text { padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; }
+  .gw-phase-label { font-family: 'Bodoni Moda', serif; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--cream-dim); margin-bottom: 16px; }
+  .gw-phase-headline { font-family: 'Bodoni Moda', serif; font-size: 28px; font-weight: 400; color: var(--black); margin-bottom: 16px; line-height: 1.2; }
+  .gw-phase-body { font-size: 15px; line-height: 1.8; color: var(--cream-dim); }
+
+  /* FAQ accordion */
+  .gw-faq-item { border-bottom: 1px solid var(--border); }
+  .gw-faq-q {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 0; cursor: pointer; font-size: 16px; font-weight: 500;
+    color: var(--black);
+  }
+  .gw-faq-q::after { content: '+'; font-size: 20px; color: var(--cream-dim); font-weight: 300; }
+  .gw-faq-q.open::after { content: '−'; }
+  .gw-faq-a { padding: 0 0 24px; font-size: 15px; line-height: 1.8; color: var(--cream-dim); display: none; }
+  .gw-faq-a.open { display: block; }
+
+  /* Form */
+  .gw-form { max-width: 560px; margin: 0 auto; }
+  .gw-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .gw-form-field { }
+  .gw-form-field.full { grid-column: 1 / -1; }
+  .gw-form-label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-dim); font-weight: 600; margin-bottom: 8px; }
+  .gw-form-input {
+    width: 100%; padding: 14px 0; border: none; border-bottom: 1.5px solid var(--border);
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; color: var(--black);
+    background: transparent; outline: none; transition: border-color 0.2s;
+  }
+  .gw-form-input:focus { border-bottom-color: var(--black); }
+  .gw-form-input::placeholder { color: var(--cream-muted); }
+  .gw-form-submit { text-align: center; margin-top: 48px; }
+
+  /* Footer */
+  .gw-footer {
+    background: var(--black); color: var(--cream); padding: 80px 48px 48px;
+    text-align: center;
+  }
+  .gw-footer.cream { background: var(--cream); color: var(--black); border-top: 1px solid var(--border); }
+  .gw-footer-the { font-family: 'Bodoni Moda', serif; font-size: 9px; letter-spacing: 7px; opacity: 0.4; }
+  .gw-footer-name { font-family: 'Bodoni Moda', serif; font-size: 24px; letter-spacing: 4px; font-weight: 400; margin: 4px 0; }
+  .gw-footer-band { font-size: 9px; letter-spacing: 12px; opacity: 0.4; }
+  .gw-footer-links { display: flex; gap: 28px; justify-content: center; margin-top: 40px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.5; }
+  .gw-footer-copy { margin-top: 40px; font-size: 11px; opacity: 0.25; letter-spacing: 1px; }
+
+  /* Image/video placeholder in preview */
+  .gw-media-placeholder {
+    background: var(--charcoal); color: var(--cream-faint);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .gw-media-placeholder svg { width: 16px; height: 16px; opacity: 0.4; }
+
+  @media (max-width: 768px) {
+    .sp-toolbar { padding: 0 12px; flex-wrap: wrap; min-height: auto; }
+    .sp-toolbar-left { order: 1; }
+    .sp-toolbar-center { order: 3; width: 100%; justify-content: center; border-top: 1px solid rgba(245,242,237,0.06); }
+    .sp-toolbar-right { order: 2; margin-left: auto; }
+    .sp-tab { padding: 12px 10px; font-size: 10px; }
+    .sp-logo { display: none; }
+    .gw-nav { padding: 20px 24px; }
+    .gw-nav-links { display: none; }
+    .gw-hero { padding: 80px 24px 60px; }
+    .gw-section { padding: 80px 24px; }
+    .gw-phase { grid-template-columns: 1fr; }
+    .gw-phase-visual { min-height: 240px; }
+    .gw-phase-text { padding: 48px 24px; }
+    .gw-phase.reverse .gw-phase-visual { order: 1; }
+    .gw-phase.reverse .gw-phase-text { order: 2; }
+    .gw-form-grid { grid-template-columns: 1fr; }
+    .gw-inner-hero { padding: 120px 24px 60px; }
+    .gw-pullquote { padding: 60px 24px; }
+    .gw-footer { padding: 60px 24px 40px; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar-container"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- NAV TOGGLE -->
+<button class="nav-toggle" id="navToggle" onclick="toggleNav()">
+  <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+</button>
+
+<!-- NAV SIDEBAR -->
+<div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+<div class="nav-sidebar" id="navSidebar">
+  <div class="nav-part">Part 1 · The Vision</div>
+  <a class="nav-link" onclick="goTo('s1')"><span class="nav-dot confirmed"></span> §1 What We're Building</a>
+  <a class="nav-link" onclick="goTo('s2')"><span class="nav-dot pending"></span> §2 Site Map</a>
+  <a class="nav-link" onclick="goTo('s3')"><span class="nav-dot confirmed"></span> §3 Design North Stars</a>
+
+  <div class="nav-part">Part 2 · Design Foundation</div>
+  <a class="nav-link" onclick="goTo('s4')"><span class="nav-dot confirmed"></span> §4 Color Palette</a>
+  <a class="nav-link" onclick="goTo('s5')"><span class="nav-dot confirmed"></span> §5 Typography</a>
+  <a class="nav-link" onclick="goTo('s6')"><span class="nav-dot confirmed"></span> §6 Spacing and Layout</a>
+
+  <div class="nav-part">Part 3 · Components</div>
+  <a class="nav-link" onclick="goTo('s7')"><span class="nav-dot confirmed"></span> §7 Header and Nav</a>
+  <a class="nav-link" onclick="goTo('s8')"><span class="nav-dot pending"></span> §8 Hero Sections</a>
+  <a class="nav-link" onclick="goTo('s9')"><span class="nav-dot pending"></span> §9 Buttons and CTAs</a>
+  <a class="nav-link" onclick="goTo('s10')"><span class="nav-dot pending"></span> §10 Cards and Strips</a>
+  <a class="nav-link" onclick="goTo('s11')"><span class="nav-dot pending"></span> §11 Forms</a>
+  <a class="nav-link" onclick="goTo('s12')"><span class="nav-dot pending"></span> §12 Footer</a>
+  <a class="nav-link" onclick="goTo('s13')"><span class="nav-dot confirmed"></span> §13 Animations</a>
+
+  <div class="nav-part">Part 4 · The Pages</div>
+  <a class="nav-link" onclick="goTo('s14')"><span class="nav-dot pending"></span> §14 Homepage</a>
+  <a class="nav-link" onclick="goTo('s15')"><span class="nav-dot pending"></span> §15 Experience</a>
+  <a class="nav-link" onclick="goTo('s16')"><span class="nav-dot pending"></span> §16 Vocalist Showcase</a>
+  <a class="nav-link" onclick="goTo('s17')"><span class="nav-dot pending"></span> §17 Reviews</a>
+  <a class="nav-link" onclick="goTo('s18')"><span class="nav-dot pending"></span> §18 FAQ</a>
+  <a class="nav-link" onclick="goTo('s19')"><span class="nav-dot pending"></span> §19 Book</a>
+
+  <div class="nav-part">Part 5 · Technical</div>
+  <a class="nav-link" onclick="goTo('s20')"><span class="nav-dot pending"></span> §20 Responsive</a>
+  <a class="nav-link" onclick="goTo('s21')"><span class="nav-dot pending"></span> §21 Tech Stack</a>
+  <a class="nav-link" onclick="goTo('s22')"><span class="nav-dot pending"></span> §22 Launch</a>
+</div>
+
+<!-- FLOATING TRACKER -->
+<div class="progress-tracker" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <div>
+    <div class="progress-number" id="progressPercent">0%</div>
+    <div class="progress-label">Complete</div>
+  </div>
+</div>
+
+<!-- EXPORT BUTTON -->
+<button class="export-bar" onclick="openExport()">Export Build Brief</button>
+
+<!-- PREVIEW BUTTON -->
+<button class="preview-btn" onclick="openSitePreview()">
+  <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+  Preview Site
+</button>
+
+<!-- FULL SITE PREVIEW -->
+<div class="site-preview-overlay" id="sitePreview">
+  <div class="sp-toolbar">
+    <div class="sp-toolbar-left">
+      <div class="sp-logo">GREENWAY</div>
+    </div>
+    <div class="sp-toolbar-center">
+      <button class="sp-tab active" data-page="homepage" onclick="switchPreviewPage('homepage')">Homepage</button>
+      <button class="sp-tab" data-page="experience" onclick="switchPreviewPage('experience')">Experience</button>
+      <button class="sp-tab" data-page="faq" onclick="switchPreviewPage('faq')">FAQ</button>
+      <button class="sp-tab" data-page="book" onclick="switchPreviewPage('book')">Book</button>
+    </div>
+    <div class="sp-toolbar-right">
+      <div class="sp-device-toggle">
+        <button class="sp-device-btn active" data-device="desktop" onclick="switchDevice('desktop')">Desktop</button>
+        <button class="sp-device-btn" data-device="tablet" onclick="switchDevice('tablet')">Tablet</button>
+        <button class="sp-device-btn" data-device="mobile" onclick="switchDevice('mobile')">Mobile</button>
+      </div>
+      <button class="sp-close" onclick="closeSitePreview()">×</button>
+    </div>
+  </div>
+  <div class="sp-viewport" id="spViewport">
+    <div class="sp-device-label" id="spDeviceLabel"></div>
+    <div class="sp-frame desktop" id="spFrame">
+      <!-- JS renders page content here -->
+    </div>
+  </div>
+</div>
+
+<!-- EXPORT MODAL -->
+<div class="export-modal-overlay" id="exportModal">
+  <div class="export-modal" style="position: relative;">
+    <button class="export-close" onclick="closeExport()">×</button>
+    <h2>Build Brief Export</h2>
+    <div class="export-modal-desc">Copy this entire block and paste it as the opening message of your next Claude Code build chat. It contains every decision you made in this Bible.</div>
+    <textarea class="export-output" id="exportOutput" readonly></textarea>
+    <button class="export-copy-btn" onclick="copyExport()">Copy to Clipboard</button>
+    <span id="copyConfirm" style="margin-left: 12px; font-size: 13px; color: var(--green); opacity: 0; transition: opacity 0.3s;">Copied</span>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- COVER -->
+<!-- ============================================ -->
+
+<div class="cover">
+  <div style="flex:1;"></div>
+  <div>
+    <div class="cover-the">THE</div>
+    <h1>GREENWAY</h1>
+    <div class="cover-band">BAND</div>
+    <div style="height: 80px;"></div>
+    <h2 style="font-family: 'Bodoni Moda', serif; font-size: clamp(20px, 3vw, 28px); font-weight: 400; letter-spacing: 2px; color: var(--cream); margin-bottom: 8px;">Website Build Bible</h2>
+    <div class="cover-subtitle">Interactive Builder</div>
+    <div class="cover-badge">Fill it out · Preview it · Export the brief</div>
+  </div>
+  <div style="flex:1;"></div>
+  <div class="cover-meta">Version 2.0 · March 2026 · Living Document</div>
+</div>
+
+<!-- ============================================ -->
+<!-- HOW TO USE -->
+<!-- ============================================ -->
+<div style="max-width: 860px; margin: 0 auto; padding: 80px 40px 0;">
+  <div style="font-family: 'Bodoni Moda', serif; font-size: 11px; letter-spacing: 4px; color: var(--cream-dim); text-transform: uppercase; margin-bottom: 8px;">Before You Start</div>
+  <div style="font-family: 'Bodoni Moda', serif; font-size: 36px; font-weight: 400; margin-bottom: 48px;">How This Works</div>
+
+  <div class="why-box">
+    <div class="why-box-label">What changed from v1</div>
+    <p>The v1 Bible was a reference document with checklists. This v2 is a builder. Every pending decision is now an input you can fill out. Locked decisions show as green confirmed badges. As you make choices, live previews update to show what the site will look like. When you're done, hit "Export Build Brief" to generate the complete spec for Claude Code.</p>
+  </div>
+
+  <div class="why-box">
+    <div class="why-box-label">How to fill it out</div>
+    <p>Go section by section. Green sections are already locked and just show what was decided. Amber sections need your input. For copy, you'll see 2 to 3 pre-written options (the top pick is marked "Recommended") plus a field to write your own. For design decisions, click the visual option you prefer. For content like FAQ questions or review quotes, add items to the list. Everything saves to your browser automatically.</p>
+  </div>
+
+  <div class="why-box">
+    <div class="why-box-label">Navigation</div>
+    <p>Click the menu icon in the top left to jump to any section. The green/amber/gray dots show each section's status. The floating percentage in the bottom right tracks overall progress. Use the "Export Build Brief" button at the bottom center whenever you want to generate the output.</p>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MAIN CONTENT -->
+<!-- ============================================ -->
+
+<div class="content">
+
+<!-- ======================================================== -->
+<!-- PART 1: THE VISION -->
+<!-- ======================================================== -->
+
+<div class="part-divider">
+  <div class="part-number">Part 1</div>
+  <h2>The Vision</h2>
+  <p>What we're building, what pages it has, and the quality standard everything gets measured against</p>
+</div>
+
+<!-- §1: WHAT WE'RE BUILDING (CONFIRMED) -->
+<div class="section" id="s1">
+  <div class="section-number">§1 · Confirmed</div>
+  <div class="section-title">What We're Building and Why</div>
+  <div class="section-desc">These decisions are locked. The foundation is set.</div>
+
+  <div class="confirmed-block">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Squarespace replacement</div>
+    <div class="confirmed-value">New site on Netlify. DNS flip in Cloudflare on launch day. Reversible in under 2 minutes.</div>
+  </div>
+
+  <div class="confirmed-block">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Lead intake</div>
+    <div class="confirmed-value">Book page POSTs to existing <code>lead-intake.mts</code> on Command Center. Zero new backend work.</div>
+  </div>
+
+  <div class="confirmed-block">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Visual standard</div>
+    <div class="confirmed-value">$400M, not $4M. Apple, Aman Resorts, Aesop. If it would feel at home on a DJ's Facebook page, delete it.</div>
+  </div>
+</div>
+
+<!-- §2: SITE MAP -->
+<div class="section" id="s2">
+  <div class="section-number">§2</div>
+  <div class="section-title">Site Map: The Six Pages</div>
+  <div class="section-desc">Every page has one job. Here's what each page is responsible for.</div>
+
+  <div class="page-map">
+    <div class="page-card"><div class="page-card-number">01</div><div class="page-card-name">Homepage</div><div class="page-card-job">First impression. Video hero. Social proof. One clear path to "Book."</div></div>
+    <div class="page-card"><div class="page-card-number">02</div><div class="page-card-name">Experience</div><div class="page-card-job">Show what a Greenway night feels like. Replaces "About." Walks through the phases of an evening.</div></div>
+    <div class="page-card"><div class="page-card-number">03</div><div class="page-card-name">Vocalist Showcase</div><div class="page-card-job">Individual vocalist cards with video clips. Launches unpublished (content pending).</div></div>
+    <div class="page-card"><div class="page-card-number">04</div><div class="page-card-name">Reviews</div><div class="page-card-job">Editorial social proof. Couple name, venue, pull quote, photo. Not a wall of text.</div></div>
+    <div class="page-card"><div class="page-card-number">05</div><div class="page-card-name">FAQ</div><div class="page-card-job">Answers questions before they ask. Stage requirements, pricing philosophy, what "10 piece" means.</div></div>
+    <div class="page-card"><div class="page-card-number">06</div><div class="page-card-name">Book</div><div class="page-card-job">Clean, short, premium inquiry form. Submits directly to the Command Center.</div></div>
+  </div>
+</div>
+
+<!-- §3: DESIGN NORTH STARS (CONFIRMED) -->
+<div class="section" id="s3">
+  <div class="section-number">§3 · Confirmed</div>
+  <div class="section-title">Design North Stars</div>
+
+  <div class="confirmed-block">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Reference brands</div>
+    <div class="confirmed-value"><strong>Apple</strong> — Minimal. Declarative. Trusts the product. <strong>Aman Resorts</strong> — Says almost nothing. Implies everything. <strong>Aesop</strong> — Quiet luxury. Typography does the heavy lifting. DJ Facebook test: if it would feel at home on a DJ's page, delete it.</div>
+  </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- PART 2: DESIGN FOUNDATION -->
+<!-- ======================================================== -->
+
+<div class="part-divider">
+  <div class="part-number">Part 2</div>
+  <h2>Design Foundation</h2>
+  <p>Colors, type, and spacing. The visual DNA of every page.</p>
+</div>
+
+<!-- §4: COLOR PALETTE (CONFIRMED) -->
+<div class="section" id="s4">
+  <div class="section-number">§4 · Confirmed</div>
+  <div class="section-title">Color Palette</div>
+
+  <div class="swatch-row">
+    <div class="swatch"><div class="swatch-dot" style="background:#0A0A09;"></div><div class="swatch-info"><div class="swatch-name">Rich Black</div><div class="swatch-hex">#0A0A09</div></div></div>
+    <div class="swatch"><div class="swatch-dot" style="background:#111110;"></div><div class="swatch-info"><div class="swatch-name">Charcoal</div><div class="swatch-hex">#111110</div></div></div>
+    <div class="swatch"><div class="swatch-dot" style="background:#F5F2ED;"></div><div class="swatch-info"><div class="swatch-name">Warm Cream</div><div class="swatch-hex">#F5F2ED</div></div></div>
+  </div>
+  <div class="swatch-row">
+    <div class="swatch"><div class="swatch-dot" style="background:#B8B4AC;"></div><div class="swatch-info"><div class="swatch-name">Muted</div><div class="swatch-hex">#B8B4AC</div></div></div>
+    <div class="swatch"><div class="swatch-dot" style="background:#706D66;"></div><div class="swatch-info"><div class="swatch-name">Dim</div><div class="swatch-hex">#706D66</div></div></div>
+    <div class="swatch"><div class="swatch-dot" style="background:#4A4740;"></div><div class="swatch-info"><div class="swatch-name">Faint</div><div class="swatch-hex">#4A4740</div></div></div>
+    <div class="swatch"><div class="swatch-dot" style="background:#E8E5E0;"></div><div class="swatch-info"><div class="swatch-name">Border</div><div class="swatch-hex">#E8E5E0</div></div></div>
+  </div>
+
+  <div class="confirmed-block" style="margin-top: 20px;">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Rules</div>
+    <div class="confirmed-value">No teal on Greenway (KC only). No gold (Danny Ray territory). No pure white anywhere. Warm cream foundation with cinematic dark moments for hero/proposals only.</div>
+  </div>
+</div>
+
+<!-- §5: TYPOGRAPHY (CONFIRMED) -->
+<div class="section" id="s5">
+  <div class="section-number">§5 · Confirmed</div>
+  <div class="section-title">Typography System</div>
+
+  <div class="type-specimen">
+    <div style="font-family: 'Bodoni Moda', serif; font-size: 28px; color: var(--black); margin-bottom: 4px;">Bodoni Moda</div>
+    <div style="font-size: 12px; color: var(--cream-dim); letter-spacing: 1px;">Display · Headlines · Logo · Pull Quotes</div>
+  </div>
+  <div class="type-specimen">
+    <div style="font-size: 16px; color: var(--black); margin-bottom: 4px; line-height: 1.8;">Plus Jakarta Sans</div>
+    <div style="font-size: 12px; color: var(--cream-dim); letter-spacing: 1px;">Body · Navigation · Buttons · Forms · Everything else</div>
+  </div>
+
+  <div class="confirmed-block" style="margin-top: 20px;">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Locked sizes</div>
+    <div class="confirmed-value">Body: 16px / line-height 1.8 (15px mobile). Section labels: 11px / 4px spacing / uppercase (10px mobile). Captions: 12px / 2px spacing / uppercase (11px mobile).</div>
+  </div>
+
+  <div class="confirmed-block" style="margin-top: 12px;">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Headline sizes (locked WEB-04)</div>
+    <div class="confirmed-value">Hero wordmark "Greenway": <code>64px</code> desktop, <code>44px</code> mobile · Bodoni Moda 400 · letter-spacing 6px. Section headlines: <code>36px</code> desktop, <code>28px</code> mobile · Bodoni Moda 400 · letter-spacing 1px. Inner page hero headlines: <code>40px</code> desktop, <code>32px</code> mobile · Bodoni Moda 400 · letter-spacing 2px. Nav links: <code>12px</code> · Plus Jakarta Sans · letter-spacing 2px · uppercase. Button text: <code>11px</code> · Plus Jakarta Sans 600 · letter-spacing 2.5px · uppercase.</div>
+  </div>
+</div>
+
+<!-- §6: SPACING (CONFIRMED) -->
+<div class="section" id="s6">
+  <div class="section-number">§6 · Confirmed</div>
+  <div class="section-title">Spacing and Layout</div>
+
+  <div class="confirmed-block">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Spacing (locked WEB-04)</div>
+    <div class="confirmed-value">Max content width: <code>1200px</code> (Aesop editorial approach). Section spacing: <code>120px</code> vertical gap between major sections (Aman energy — each section is its own moment).</div>
+  </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- PART 3: COMPONENTS -->
+<!-- ======================================================== -->
+
+<div class="part-divider">
+  <div class="part-number">Part 3</div>
+  <h2>Components</h2>
+  <p>The building blocks that appear across multiple pages</p>
+</div>
+
+<!-- §7: HEADER AND NAV (CONFIRMED) -->
+<div class="section" id="s7">
+  <div class="section-number">§7 · Confirmed</div>
+  <div class="section-title">Header and Navigation</div>
+
+  <div class="confirmed-block">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Logo formats per context</div>
+    <div class="confirmed-value">Page load: Standard Format (stacked, no hairlines). On scroll: Inline Format (single line). Mobile: Inline at all times. No hairline rules in any coded/digital logo output.</div>
+  </div>
+</div>
+
+<!-- §8: HERO SECTIONS -->
+<div class="section" id="s8">
+  <div class="section-number">§8 · Needs Input</div>
+  <div class="section-title">Hero Sections</div>
+  <div class="section-desc">The homepage hero is a full screen video with the logo over it. Inner page heroes are simpler. Both need design decisions locked.</div>
+
+  <div class="sub-title">Homepage Hero Descriptor</div>
+  <div class="sub-desc">The line of text that sits below the logo in the video hero. This is the first thing a visitor reads.</div>
+
+  <div class="copy-selector">
+    <div class="copy-option" data-group="hero-descriptor" data-value="The sound of a great night">
+      <span class="rec-badge">Recommended</span>
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">The sound of a great night</div>
+        <div class="copy-option-note">Already locked as the brand descriptor. Consistent across all touchpoints.</div>
+      </div>
+    </div>
+    <div class="copy-option" data-group="hero-descriptor" data-value="Houston's 10 to 20 piece live wedding band">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Houston's 10 to 20 piece live wedding band</div>
+        <div class="copy-option-note">Leads with a specific proof point instead of a mood. The number does the talking.</div>
+      </div>
+    </div>
+    <div class="copy-option custom-option" data-group="hero-descriptor" data-value="custom">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Write your own</div>
+        <textarea class="copy-custom-input" data-custom="hero-descriptor" placeholder="Your descriptor..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO PREVIEW -->
+  <div class="preview-frame">
+    <div class="preview-label"><span class="live-dot"></span> Live Preview · Homepage Hero</div>
+    <div class="preview-content">
+      <div class="hero-preview">
+        <div class="video-placeholder">VIDEO BACKGROUND</div>
+        <div class="hero-preview-content">
+          <div class="hero-the">THE</div>
+          <div class="hero-name">GREENWAY</div>
+          <div class="hero-band">BAND</div>
+          <div class="hero-descriptor" id="heroDescriptorPreview">The sound of a great night</div>
+        </div>
+        <div class="hero-scroll">SCROLL</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-title">Homepage Hero Overlay Darkness</div>
+  <div class="sub-desc">How dark the overlay is on top of the video. Darker = text is more readable. Lighter = video is more visible.</div>
+
+  <div class="visual-selector">
+    <div class="visual-option" data-group="hero-overlay" data-value="40">
+      <div style="height: 80px; background: rgba(10,10,9,0.4); border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
+        <span style="color: var(--cream); font-family: 'Bodoni Moda', serif; font-size: 16px;">GREENWAY</span>
+      </div>
+      <div class="visual-option-label">40% overlay</div>
+    </div>
+    <div class="visual-option" data-group="hero-overlay" data-value="55">
+      <div class="rec-badge">Recommended</div>
+      <div style="height: 80px; background: rgba(10,10,9,0.55); border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
+        <span style="color: var(--cream); font-family: 'Bodoni Moda', serif; font-size: 16px;">GREENWAY</span>
+      </div>
+      <div class="visual-option-label">55% overlay</div>
+    </div>
+  </div>
+
+  <div class="sub-title">Scroll Indicator Style</div>
+  <div class="visual-selector">
+    <div class="visual-option" data-group="hero-scroll" data-value="text">
+      <span class="rec-badge">Recommended</span>
+      <div style="height: 60px; display: flex; align-items: center; justify-content: center; font-size: 10px; letter-spacing: 3px; color: var(--cream-dim);">SCROLL</div>
+      <div class="visual-option-label">Text label</div>
+    </div>
+    <div class="visual-option" data-group="hero-scroll" data-value="arrow">
+      <div style="height: 60px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--cream-dim);">↓</div>
+      <div class="visual-option-label">Arrow</div>
+    </div>
+  </div>
+
+  <button class="notes-toggle" onclick="toggleNotes(this)">+ Add notes on hero</button>
+  <div class="notes-area"><textarea class="notes-textarea" data-notes="s8" placeholder="Any thoughts on the hero sections..."></textarea></div>
+</div>
+
+<!-- §9: BUTTONS AND CTAs -->
+<div class="section" id="s9">
+  <div class="section-number">§9 · Needs Input</div>
+  <div class="section-title">Buttons and CTAs</div>
+  <div class="section-desc">The primary CTA button appears on nearly every page. What does it look like?</div>
+
+  <div class="sub-title">Primary Button Style (on cream background)</div>
+  <div class="visual-selector">
+    <div class="visual-option" data-group="btn-primary" data-value="filled-sharp">
+      <span class="rec-badge">Recommended</span>
+      <div style="padding: 16px; display: flex; justify-content: center;">
+        <button class="btn-gw filled-dark" style="pointer-events:none;">Check Availability</button>
+      </div>
+      <div class="visual-option-label">Filled, Sharp Corners</div>
+    </div>
+    <div class="visual-option" data-group="btn-primary" data-value="filled-subtle">
+      <div style="padding: 16px; display: flex; justify-content: center;">
+        <button class="btn-gw filled-dark subtle-radius" style="pointer-events:none;">Check Availability</button>
+      </div>
+      <div class="visual-option-label">Filled, Subtle Radius</div>
+    </div>
+    <div class="visual-option" data-group="btn-primary" data-value="outline-sharp">
+      <div style="padding: 16px; display: flex; justify-content: center;">
+        <button class="btn-gw outline-dark" style="pointer-events:none;">Check Availability</button>
+      </div>
+      <div class="visual-option-label">Outline, Sharp</div>
+    </div>
+    <div class="visual-option" data-group="btn-primary" data-value="filled-pill">
+      <div style="padding: 16px; display: flex; justify-content: center;">
+        <button class="btn-gw filled-dark pill" style="pointer-events:none;">Check Availability</button>
+      </div>
+      <div class="visual-option-label">Filled, Pill</div>
+    </div>
+  </div>
+
+  <div class="sub-title">Button on Dark Background (hero section)</div>
+  <div class="preview-frame">
+    <div class="preview-label"><span class="live-dot"></span> Live Preview · Hero Button</div>
+    <div class="preview-content">
+      <div style="background: var(--black); padding: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <button class="btn-gw filled-cream" style="pointer-events:none;" id="btnDarkPreview">Check Availability</button>
+        <button class="btn-gw outline-cream" style="pointer-events:none;">Check Availability</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-title">CTA Button Label</div>
+  <div class="copy-selector">
+    <div class="copy-option" data-group="cta-label" data-value="Check Availability">
+      <span class="rec-badge">Recommended</span>
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Check Availability</div>
+        <div class="copy-option-note">Implies scarcity without saying it. The visitor's thinking about their date, not a sales process.</div>
+      </div>
+    </div>
+    <div class="copy-option" data-group="cta-label" data-value="Book">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Book</div>
+        <div class="copy-option-note">One word. Clean. But skips the availability framing.</div>
+      </div>
+    </div>
+    <div class="copy-option" data-group="cta-label" data-value="Inquire">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Inquire</div>
+        <div class="copy-option-note">Softer. Signals a conversation, not a transaction.</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="notes-toggle" onclick="toggleNotes(this)">+ Add notes on buttons</button>
+  <div class="notes-area"><textarea class="notes-textarea" data-notes="s9" placeholder="Any thoughts on button design..."></textarea></div>
+</div>
+
+<!-- §10: CARDS, STRIPS, BLOCKS -->
+<div class="section" id="s10">
+  <div class="section-number">§10 · Needs Input</div>
+  <div class="section-title">Cards, Strips, and Blocks</div>
+  <div class="section-desc">The content containers used across multiple pages.</div>
+
+  <div class="sub-title">Social Proof Strip Content</div>
+  <div class="sub-desc">The venue or planner names that scroll horizontally near the top of the homepage. Add your real venue names here.</div>
+
+  <div class="inventory" data-inventory="venues">
+    <div class="inventory-label">Venue / Planner Names</div>
+    <div class="inventory-items" id="venueItems">
+      <!-- JS populates these -->
+    </div>
+    <button class="inventory-add" onclick="addInventoryItem('venues')">+ Add venue or planner name</button>
+  </div>
+
+  <!-- STRIP PREVIEW -->
+  <div class="preview-frame">
+    <div class="preview-label"><span class="live-dot"></span> Live Preview · Social Proof Strip</div>
+    <div class="preview-content">
+      <div class="strip-preview">
+        <div class="strip-track" id="stripTrack">
+          <!-- JS populates -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-title">Review Card Layout</div>
+  <div class="visual-selector">
+    <div class="visual-option" data-group="review-layout" data-value="editorial">
+      <span class="rec-badge">Recommended</span>
+      <div style="padding: 16px; text-align: center;">
+        <div style="font-family: 'Bodoni Moda', serif; font-size: 16px; font-style: italic; color: var(--black); line-height: 1.5; margin-bottom: 8px;">"They had the whole room on their feet"</div>
+        <div style="font-size: 10px; letter-spacing: 2px; color: var(--cream-dim); text-transform: uppercase;">Sarah and James · The Corinthian</div>
+      </div>
+      <div class="visual-option-label">Editorial (centered, big quote)</div>
+    </div>
+    <div class="visual-option" data-group="review-layout" data-value="card">
+      <div style="padding: 16px; text-align: left;">
+        <div style="width: 100%; height: 60px; background: var(--cream); border-radius: 6px; margin-bottom: 8px;"></div>
+        <div style="font-size: 13px; font-style: italic; color: var(--black); line-height: 1.4; margin-bottom: 6px;">"They had the whole room on their feet"</div>
+        <div style="font-size: 9px; letter-spacing: 1.5px; color: var(--cream-dim); text-transform: uppercase;">Sarah and James · The Corinthian</div>
+      </div>
+      <div class="visual-option-label">Card (photo + quote)</div>
+    </div>
+  </div>
+
+  <button class="notes-toggle" onclick="toggleNotes(this)">+ Add notes on cards/strips</button>
+  <div class="notes-area"><textarea class="notes-textarea" data-notes="s10" placeholder="Any thoughts on cards, strips, or content blocks..."></textarea></div>
+</div>
+
+<!-- §11: FORMS -->
+<div class="section" id="s11">
+  <div class="section-number">§11 · Needs Input</div>
+  <div class="section-title">Forms</div>
+  <div class="section-desc">The inquiry form on the Book page. How form fields look and feel.</div>
+
+  <div class="sub-title">Form Field Style</div>
+  <div class="visual-selector">
+    <div class="visual-option" data-group="form-style" data-value="underline">
+      <span class="rec-badge">Recommended</span>
+      <div style="padding: 16px;">
+        <div style="font-size: 10px; letter-spacing: 1.5px; color: var(--cream-dim); text-transform: uppercase; margin-bottom: 4px;">Your Name</div>
+        <div style="border-bottom: 1.5px solid var(--black); padding-bottom: 8px; font-size: 14px; color: var(--cream-muted);">Jane Smith</div>
+      </div>
+      <div class="visual-option-label">Underline (Apple style)</div>
+    </div>
+    <div class="visual-option" data-group="form-style" data-value="boxed">
+      <div style="padding: 16px;">
+        <div style="font-size: 10px; letter-spacing: 1.5px; color: var(--cream-dim); text-transform: uppercase; margin-bottom: 4px;">Your Name</div>
+        <div style="border: 1px solid var(--border); padding: 10px 12px; border-radius: 0; font-size: 14px; color: var(--cream-muted); background: white;">Jane Smith</div>
+      </div>
+      <div class="visual-option-label">Boxed (traditional)</div>
+    </div>
+  </div>
+
+  <button class="notes-toggle" onclick="toggleNotes(this)">+ Add notes on forms</button>
+  <div class="notes-area"><textarea class="notes-textarea" data-notes="s11" placeholder="Any thoughts on form design..."></textarea></div>
+</div>
+
+<!-- §12: FOOTER -->
+<div class="section" id="s12">
+  <div class="section-number">§12 · Needs Input</div>
+  <div class="section-title">Footer</div>
+  <div class="section-desc">The quiet signature at the bottom of every page.</div>
+
+  <div class="sub-title">Footer Color Treatment</div>
+  <div class="visual-selector">
+    <div class="visual-option" data-group="footer-color" data-value="dark">
+      <span class="rec-badge">Recommended</span>
+      <div style="background: var(--black); border-radius: 6px; padding: 20px; text-align: center;">
+        <div style="font-family: 'Bodoni Moda', serif; font-size: 16px; color: var(--cream); letter-spacing: 2px;">GREENWAY</div>
+        <div style="font-size: 9px; color: var(--cream-faint); margin-top: 8px; letter-spacing: 1px;">Experience · Reviews · FAQ · Book</div>
+      </div>
+      <div class="visual-option-label">Dark footer (closing moment)</div>
+    </div>
+    <div class="visual-option" data-group="footer-color" data-value="cream">
+      <div style="background: var(--cream); border: 1px solid var(--border); border-radius: 6px; padding: 20px; text-align: center;">
+        <div style="font-family: 'Bodoni Moda', serif; font-size: 16px; color: var(--black); letter-spacing: 2px;">GREENWAY</div>
+        <div style="font-size: 9px; color: var(--cream-dim); margin-top: 8px; letter-spacing: 1px;">Experience · Reviews · FAQ · Book</div>
+      </div>
+      <div class="visual-option-label">Cream footer (continuous)</div>
+    </div>
+  </div>
+
+  <!-- FOOTER PREVIEW -->
+  <div class="preview-frame">
+    <div class="preview-label"><span class="live-dot"></span> Live Preview · Footer</div>
+    <div class="preview-content" id="footerPreviewContainer">
+      <div class="footer-preview" id="footerPreview">
+        <div class="footer-logo-the">THE</div>
+        <div class="footer-logo-name">GREENWAY</div>
+        <div class="footer-logo-sub">BAND</div>
+        <div class="footer-links">
+          <span>Experience</span><span>Reviews</span><span>FAQ</span><span>Book</span>
+        </div>
+        <div class="footer-copyright">© 2026 The Greenway Band · Houston, TX</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="notes-toggle" onclick="toggleNotes(this)">+ Add notes on footer</button>
+  <div class="notes-area"><textarea class="notes-textarea" data-notes="s12" placeholder="Any thoughts on the footer..."></textarea></div>
+</div>
+
+<!-- §13: ANIMATIONS (CONFIRMED) -->
+<div class="section" id="s13">
+  <div class="section-number">§13 · Confirmed</div>
+  <div class="section-title">Animations and Motion</div>
+
+  <div class="confirmed-block">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Animation rules</div>
+    <div class="confirmed-value">No parallax. No bouncing. CSS only where possible. Intersection Observer for scroll triggers. Every animation passes the Apple test. 200ms ease-out default transition.</div>
+  </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- PART 4: THE PAGES -->
+<!-- ======================================================== -->
+
+<div class="part-divider">
+  <div class="part-number">Part 4</div>
+  <h2>The Pages</h2>
+  <p>Section by section content decisions for each page, with live previews</p>
+</div>
+
+<!-- §14: HOMEPAGE -->
+<div class="section" id="s14">
+  <div class="section-number">§14 · Needs Input</div>
+  <div class="section-title">Homepage</div>
+  <div class="section-desc">The first impression. Five sections, each with one job.</div>
+
+  <!-- Section 1: Hero -->
+  <div class="sub-title">Section 1: Video Hero</div>
+  <div class="confirmed-block">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Structure</div>
+    <div class="confirmed-value">Full viewport height. Autoplay muted video. Dark overlay. Monument Format logo centered. Descriptor below logo. Scroll indicator at bottom.</div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- Section 2: Social Proof Strip -->
+  <div class="sub-title">Section 2: Social Proof Strip</div>
+  <div class="sub-desc">Venue or planner names scrolling horizontally. You already added these in §10 above. They'll appear here automatically.</div>
+
+  <div class="sep"></div>
+
+  <!-- Section 3: Why Greenway -->
+  <div class="sub-title">Section 3: "Why Greenway" Proof Section</div>
+  <div class="sub-desc">Show what makes this band different. Photo/video forward, minimal text. What's the headline?</div>
+
+  <div class="copy-selector">
+    <div class="copy-option" data-group="hp-why-headline" data-value="The band that reads the room">
+      <span class="rec-badge">Recommended</span>
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">The band that reads the room</div>
+        <div class="copy-option-note">Locked brand phrase from Round 1. Passes the bride test.</div>
+      </div>
+    </div>
+    <div class="copy-option" data-group="hp-why-headline" data-value="10 to 20 musicians. A full horn section. Three generations on the floor at once.">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">10 to 20 musicians. A full horn section. Three generations on the floor at once.</div>
+        <div class="copy-option-note">Leads with the number. Lets the scale speak for itself.</div>
+      </div>
+    </div>
+    <div class="copy-option custom-option" data-group="hp-why-headline" data-value="custom">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Write your own</div>
+        <textarea class="copy-custom-input" data-custom="hp-why-headline" placeholder="Your headline..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-title">Section 3: Supporting Body Copy</div>
+  <div class="copy-selector">
+    <div class="copy-option" data-group="hp-why-body" data-value="opt-a">
+      <span class="rec-badge">Recommended</span>
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">We're a Houston based live band built around a horn section, a full rhythm section, and vocalists who move between Motown, Top 40, Latin, and jazz standards in the same set. Our music director arranges every song for the specific lineup on your stage. We coordinate directly with your planner on timing, handle the emcee work, and manage the flow from cocktails through the last song. By the end of the night, your grandmother and your college roommate are on the same dance floor.</div>
+      </div>
+    </div>
+    <div class="copy-option" data-group="hp-why-body" data-value="opt-b">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Every set is arranged for live instruments by our music director. No backing tracks filling in for missing players. Drums, bass, guitar, keys, horns, and vocalists who've rehearsed together for years. We run sound check before your guests arrive and coordinate every transition with your planner. Cocktail hour is a jazz trio. Dinner is acoustic. And by reception, the full band is on stage and nobody's sitting down.</div>
+      </div>
+    </div>
+    <div class="copy-option custom-option" data-group="hp-why-body" data-value="custom">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Write your own</div>
+        <textarea class="copy-custom-input" data-custom="hp-why-body" placeholder="Your body copy..." style="min-height: 80px;"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- Section 4: Pull Quote -->
+  <div class="sub-title">Section 4: Testimonial Pull Quote</div>
+  <div class="sub-desc">One strong quote designed as an editorial moment. Enter the real quote, couple name, and venue.</div>
+
+  <div class="review-item" style="margin-bottom: 24px;">
+    <div class="review-field" style="margin-bottom: 12px;">
+      <label>Pull Quote</label>
+      <textarea data-field="hp-pullquote-text" placeholder="The actual quote from the couple..." style="min-height: 60px;"></textarea>
+    </div>
+    <div class="review-row">
+      <div class="review-field"><label>Couple Name</label><input data-field="hp-pullquote-couple" placeholder="e.g. Sarah and James"></div>
+      <div class="review-field"><label>Venue</label><input data-field="hp-pullquote-venue" placeholder="e.g. The Corinthian"></div>
+    </div>
+  </div>
+
+  <!-- PULL QUOTE PREVIEW -->
+  <div class="preview-frame">
+    <div class="preview-label"><span class="live-dot"></span> Live Preview · Pull Quote</div>
+    <div class="preview-content">
+      <div class="review-card-preview">
+        <div class="review-card-quote" id="pullQuotePreview">"Your guests won't stop talking about it"</div>
+        <div class="review-card-attr" id="pullQuoteAttr">Couple Name · Venue</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- Section 5: CTA -->
+  <div class="sub-title">Section 5: Closing CTA</div>
+  <div class="sub-desc">A clean closing section that drives the visitor to the inquiry form.</div>
+
+  <div class="copy-selector">
+    <div class="copy-option" data-group="hp-cta-headline" data-value="Check availability for your date">
+      <span class="rec-badge">Recommended</span>
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Check availability for your date</div>
+        <div class="copy-option-note">Specific. Action oriented. Implies the band books up without saying it.</div>
+      </div>
+    </div>
+    <div class="copy-option" data-group="hp-cta-headline" data-value="Let's talk about your night">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Let's talk about your night</div>
+        <div class="copy-option-note">Warmer. Conversational. Less transactional.</div>
+      </div>
+    </div>
+    <div class="copy-option custom-option" data-group="hp-cta-headline" data-value="custom">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Write your own</div>
+        <textarea class="copy-custom-input" data-custom="hp-cta-headline" placeholder="Your CTA headline..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <button class="notes-toggle" onclick="toggleNotes(this)">+ Add notes on homepage</button>
+  <div class="notes-area"><textarea class="notes-textarea" data-notes="s14" placeholder="Any thoughts on the homepage layout or content..."></textarea></div>
+</div>
+
+<!-- §15: EXPERIENCE -->
+<div class="section" id="s15">
+  <div class="section-number">§15 · Needs Input</div>
+  <div class="section-title">Experience</div>
+  <div class="section-desc">Replaces "About." Walks through the phases of an evening with video clips and short copy per phase.</div>
+
+  <div class="sub-title">Page Headline</div>
+  <div class="copy-selector">
+    <div class="copy-option" data-group="exp-headline" data-value="A night with The Greenway Band">
+      <span class="rec-badge">Recommended</span>
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">A night with The Greenway Band</div></div>
+    </div>
+    <div class="copy-option" data-group="exp-headline" data-value="Five hours. Four phases. One band.">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">Five hours. Four phases. One band.</div></div>
+    </div>
+    <div class="copy-option custom-option" data-group="exp-headline" data-value="custom">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Write your own</div>
+        <textarea class="copy-custom-input" data-custom="exp-headline" placeholder="Your headline..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase copy selectors -->
+  <div class="sub-title">Cocktail Hour Copy</div>
+  <div class="copy-selector">
+    <div class="copy-option" data-group="exp-cocktail" data-value="opt-a">
+      <span class="rec-badge">Recommended</span>
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">Guests arrive to a live jazz trio or a full acoustic set pulled from the same ensemble that'll be on stage all night. The volume stays low enough for conversation. Real horns, real keys, real arrangements — not a playlist through a speaker. Your planner has the timeline. We have the set list. By the time dinner starts, your guests already know something's different about this wedding.</div></div>
+    </div>
+    <div class="copy-option" data-group="exp-cocktail" data-value="opt-b">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">A stripped back group from the full ensemble plays standards, soul, or whatever fits your crowd while guests find their seats and catch up over drinks. No pre-recorded tracks. No DJ filling time. Live musicians playing live arrangements. The bartender's pouring champagne and the trumpet player is twenty feet away doing the same thing he'll do at full volume in three hours.</div></div>
+    </div>
+    <div class="copy-option custom-option" data-group="exp-cocktail" data-value="custom">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">Write your own</div><textarea class="copy-custom-input" data-custom="exp-cocktail" placeholder="Your cocktail hour copy..." style="min-height: 60px;"></textarea></div>
+    </div>
+  </div>
+
+  <div class="sub-title">Dinner Copy</div>
+  <div class="copy-selector">
+    <div class="copy-option" data-group="exp-dinner" data-value="opt-a">
+      <span class="rec-badge">Recommended</span>
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">The maid of honor's giving her speech and the band's off stage, volume down, waiting for the cue. Adrian handles emcee for introductions, toasts, and every transition in between. We drop the arrangement to acoustic during dinner service so every table can still hear the stories being told. Your planner cues the timeline. We follow it to the minute.</div></div>
+    </div>
+    <div class="copy-option custom-option" data-group="exp-dinner" data-value="custom">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">Write your own</div><textarea class="copy-custom-input" data-custom="exp-dinner" placeholder="Your dinner copy..." style="min-height: 60px;"></textarea></div>
+    </div>
+  </div>
+
+  <div class="sub-title">Dance Floor Copy</div>
+  <div class="copy-selector">
+    <div class="copy-option" data-group="exp-dance" data-value="opt-a">
+      <span class="rec-badge">Recommended</span>
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">The horn section stands up, the drummer counts in, and suddenly there are twelve musicians on stage playing Earth, Wind and Fire into Beyoncé into Marc Anthony without a gap. Three generations dancing to the same song. Your college roommate next to your grandmother. That's the part your guests will be talking about on Monday morning.</div></div>
+    </div>
+    <div class="copy-option" data-group="exp-dance" data-value="opt-b">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">We don't follow a set list blindly. We read the room and adjust on the fly. Motown into Top 40 into Latin into classic rock, whatever your crowd is moving to. When the floor is packed and nobody's checking the time, that's not an accident. That's a music director watching the room and calling the next song before the last one ends.</div></div>
+    </div>
+    <div class="copy-option custom-option" data-group="exp-dance" data-value="custom">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">Write your own</div><textarea class="copy-custom-input" data-custom="exp-dance" placeholder="Your dance floor copy..." style="min-height: 60px;"></textarea></div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE PAGE PREVIEW -->
+  <div class="preview-frame">
+    <div class="preview-label"><span class="live-dot"></span> Live Preview · Experience Page Flow</div>
+    <div class="preview-content">
+      <div class="homepage-preview">
+        <div class="exp-phase">
+          <div class="exp-phase-visual"><span>VIDEO / PHOTO</span></div>
+          <div class="exp-phase-content">
+            <div class="exp-phase-label">Cocktail Hour</div>
+            <div class="exp-phase-headline" id="expCocktailPreview">The opening act</div>
+            <div class="exp-phase-body" id="expCocktailBody">Select or write copy above...</div>
+          </div>
+        </div>
+        <div class="exp-phase">
+          <div class="exp-phase-content">
+            <div class="exp-phase-label">Dinner</div>
+            <div class="exp-phase-headline">The soundtrack</div>
+            <div class="exp-phase-body" id="expDinnerBody">Select or write copy above...</div>
+          </div>
+          <div class="exp-phase-visual"><span>VIDEO / PHOTO</span></div>
+        </div>
+        <div class="exp-phase">
+          <div class="exp-phase-visual"><span>VIDEO / PHOTO</span></div>
+          <div class="exp-phase-content">
+            <div class="exp-phase-label">The Dance Floor</div>
+            <div class="exp-phase-headline">Nobody wants to leave</div>
+            <div class="exp-phase-body" id="expDanceBody">Select or write copy above...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="notes-toggle" onclick="toggleNotes(this)">+ Add notes on Experience page</button>
+  <div class="notes-area"><textarea class="notes-textarea" data-notes="s15" placeholder="Any thoughts on the Experience page..."></textarea></div>
+</div>
+
+<!-- §16: VOCALIST SHOWCASE -->
+<div class="section" id="s16">
+  <div class="section-number">§16 · Needs Input</div>
+  <div class="section-title">Vocalist Showcase</div>
+  <div class="section-desc">Launches unpublished. Shell built, content populated later. Just need layout decisions.</div>
+
+  <div class="sub-title">Grid Layout</div>
+  <div class="visual-selector">
+    <div class="visual-option" data-group="vocalist-grid" data-value="2col">
+      <span class="rec-badge">Recommended</span>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px;">
+        <div style="background: var(--cream); border-radius: 6px; height: 80px;"></div>
+        <div style="background: var(--cream); border-radius: 6px; height: 80px;"></div>
+        <div style="background: var(--cream); border-radius: 6px; height: 80px;"></div>
+        <div style="background: var(--cream); border-radius: 6px; height: 80px;"></div>
+      </div>
+      <div class="visual-option-label">2 per row</div>
+    </div>
+    <div class="visual-option" data-group="vocalist-grid" data-value="3col">
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; padding: 12px;">
+        <div style="background: var(--cream); border-radius: 4px; height: 60px;"></div>
+        <div style="background: var(--cream); border-radius: 4px; height: 60px;"></div>
+        <div style="background: var(--cream); border-radius: 4px; height: 60px;"></div>
+      </div>
+      <div class="visual-option-label">3 per row</div>
+    </div>
+  </div>
+
+  <div class="sub-title">Video Playback</div>
+  <div class="copy-selector">
+    <div class="copy-option" data-group="vocalist-playback" data-value="inline">
+      <span class="rec-badge">Recommended</span>
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Inline playback (video plays inside the card)</div>
+        <div class="copy-option-note">Keeps the visitor on the page. Feels smooth and modern.</div>
+      </div>
+    </div>
+    <div class="copy-option" data-group="vocalist-playback" data-value="lightbox">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content">
+        <div class="copy-option-text">Lightbox (video opens in a centered overlay)</div>
+        <div class="copy-option-note">Bigger viewing experience. More cinematic. Extra click to close.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- §17: REVIEWS -->
+<div class="section" id="s17">
+  <div class="section-number">§17 · Needs Input</div>
+  <div class="section-title">Reviews</div>
+  <div class="section-desc">Add the real reviews you want on the site. Aim for 6 to 8 strong ones.</div>
+
+  <div class="inventory-label">Review Content</div>
+  <div id="reviewItems">
+    <!-- JS populates -->
+  </div>
+  <button class="inventory-add" onclick="addReview()" style="margin-top: 12px;">+ Add review</button>
+
+  <button class="notes-toggle" onclick="toggleNotes(this)" style="display: block;">+ Add notes on reviews</button>
+  <div class="notes-area"><textarea class="notes-textarea" data-notes="s17" placeholder="Any thoughts on the reviews page layout or content..."></textarea></div>
+</div>
+
+<!-- §18: FAQ -->
+<div class="section" id="s18">
+  <div class="section-number">§18 · Needs Input</div>
+  <div class="section-title">FAQ</div>
+  <div class="section-desc">Draft 10 to 15 questions and their answers. These should cover everything a couple or planner would want to know before reaching out.</div>
+
+  <div class="callout">
+    <strong>Pre-written answers included.</strong> Every question below has a draft answer written in Greenway brand voice with specific operational details. Edit them, rewrite them, or use them as is. Add your own questions with the button at the bottom. No banned words, no exclamation points, no adjective stacking.
+  </div>
+
+  <div id="faqItems">
+    <!-- JS populates -->
+  </div>
+  <button class="inventory-add" onclick="addFaq()" style="margin-top: 12px;">+ Add question</button>
+
+  <button class="notes-toggle" onclick="toggleNotes(this)" style="display: block; margin-top: 16px;">+ Add notes on FAQ</button>
+  <div class="notes-area"><textarea class="notes-textarea" data-notes="s18" placeholder="Any thoughts on the FAQ page..."></textarea></div>
+</div>
+
+<!-- §19: BOOK (INQUIRY FORM) -->
+<div class="section" id="s19">
+  <div class="section-number">§19 · Needs Input</div>
+  <div class="section-title">Book (Inquiry Form)</div>
+  <div class="section-desc">The conversion page. Everything leads here.</div>
+
+  <div class="sub-title">Page Headline</div>
+  <div class="copy-selector">
+    <div class="copy-option" data-group="book-headline" data-value="Check availability for your date">
+      <span class="rec-badge">Recommended</span>
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">Check availability for your date</div></div>
+    </div>
+    <div class="copy-option" data-group="book-headline" data-value="Let's talk about your night">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">Let's talk about your night</div></div>
+    </div>
+    <div class="copy-option custom-option" data-group="book-headline" data-value="custom">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">Write your own</div><textarea class="copy-custom-input" data-custom="book-headline" placeholder="Your headline..."></textarea></div>
+    </div>
+  </div>
+
+  <div class="sub-title">Confirmation Message (after form submit)</div>
+  <div class="copy-selector">
+    <div class="copy-option" data-group="book-confirm" data-value="opt-a">
+      <span class="rec-badge">Recommended</span>
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">We got your inquiry. Adrian will reach out within 24 hours to learn more about your event and confirm availability for your date.</div></div>
+    </div>
+    <div class="copy-option" data-group="book-confirm" data-value="opt-b">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">Thank you. Expect a personal response from Adrian within 24 hours. He'll want to hear about your venue, your guest count, and the night you're planning.</div></div>
+    </div>
+    <div class="copy-option custom-option" data-group="book-confirm" data-value="custom">
+      <div class="copy-radio"><div class="copy-radio-dot"></div></div>
+      <div class="copy-option-content"><div class="copy-option-text">Write your own</div><textarea class="copy-custom-input" data-custom="book-confirm" placeholder="Your confirmation message..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- FORM PREVIEW -->
+  <div class="preview-frame">
+    <div class="preview-label"><span class="live-dot"></span> Live Preview · Book Page Form</div>
+    <div class="preview-content">
+      <div class="form-preview">
+        <div style="text-align: center; margin-bottom: 32px;">
+          <div style="font-family: 'Bodoni Moda', serif; font-size: 24px; font-weight: 400; color: var(--black);" id="bookHeadlinePreview">Check availability for your date</div>
+        </div>
+        <div class="form-preview-grid">
+          <div class="form-preview-field"><label>Partner 1 Name</label><input placeholder="First name" disabled></div>
+          <div class="form-preview-field"><label>Partner 2 Name</label><input placeholder="First name" disabled></div>
+          <div class="form-preview-field"><label>Event Date</label><input type="date" disabled></div>
+          <div class="form-preview-field"><label>Venue (if known)</label><input placeholder="Venue name" disabled></div>
+          <div class="form-preview-field"><label>Email</label><input placeholder="your@email.com" disabled></div>
+          <div class="form-preview-field"><label>Phone</label><input placeholder="(555) 000-0000" disabled></div>
+          <div class="form-preview-field"><label>Estimated Guest Count</label><input placeholder="e.g. 200" disabled></div>
+          <div class="form-preview-field"><label>How Did You Hear About Us</label><select disabled><option>Select one</option></select></div>
+          <div class="form-preview-field full" style="text-align: center; padding-top: 16px;">
+            <button class="btn-gw filled-dark" style="pointer-events:none;" id="formBtnPreview">Check Availability</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="notes-toggle" onclick="toggleNotes(this)">+ Add notes on Book page</button>
+  <div class="notes-area"><textarea class="notes-textarea" data-notes="s19" placeholder="Any thoughts on the form or Book page..."></textarea></div>
+</div>
+
+<!-- ======================================================== -->
+<!-- PART 5: TECHNICAL AND LAUNCH -->
+<!-- ======================================================== -->
+
+<div class="part-divider">
+  <div class="part-number">Part 5</div>
+  <h2>Technical and Launch</h2>
+  <p>These are mostly checklists for the build and launch process</p>
+</div>
+
+<!-- §20-22 as compact checklists -->
+<div class="section" id="s20">
+  <div class="section-number">§20</div>
+  <div class="section-title">Responsive Design</div>
+  <div class="confirmed-block">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Approach</div>
+    <div class="confirmed-value">Mobile first. Phone 375px, Tablet 768px, Laptop 1024px, Desktop 1440px. Safari mobile is the most common source of rendering bugs.</div>
+  </div>
+</div>
+
+<div class="section" id="s21">
+  <div class="section-number">§21</div>
+  <div class="section-title">Technical Stack</div>
+  <div class="confirmed-block">
+    <div class="confirmed-label"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.78 5.22a.75.75 0 00-1.06 0L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25a.75.75 0 000-1.06z"/></svg> Stack</div>
+    <div class="confirmed-value">Astro (framework) · Netlify (hosting) · Cloudflare (DNS) · GitHub repo: <code>greenway-website</code> · Google Fonts · Staging: <code>greenway-website.netlify.app</code></div>
+  </div>
+</div>
+
+<div class="section" id="s22">
+  <div class="section-number">§22</div>
+  <div class="section-title">Launch Checklist</div>
+  <div class="section-desc">These get checked off during the actual build, not now. Included for completeness.</div>
+  <div class="checklist" data-section="s22">
+    <div class="check-item"><input type="checkbox" id="s22-1" data-id="s22-1"><label class="check-label" for="s22-1"><div class="check-box"></div><div class="check-content"><div class="check-title">All published pages approved</div></div></label></div>
+    <div class="check-item"><input type="checkbox" id="s22-2" data-id="s22-2"><label class="check-label" for="s22-2"><div class="check-box"></div><div class="check-content"><div class="check-title">Mobile QA complete</div></div></label></div>
+    <div class="check-item"><input type="checkbox" id="s22-3" data-id="s22-3"><label class="check-label" for="s22-3"><div class="check-box"></div><div class="check-content"><div class="check-title">Inquiry form tested end to end</div></div></label></div>
+    <div class="check-item"><input type="checkbox" id="s22-4" data-id="s22-4"><label class="check-label" for="s22-4"><div class="check-box"></div><div class="check-content"><div class="check-title">SEO metadata and Open Graph images set</div></div></label></div>
+    <div class="check-item"><input type="checkbox" id="s22-5" data-id="s22-5"><label class="check-label" for="s22-5"><div class="check-box"></div><div class="check-content"><div class="check-title">Favicon set</div></div></label></div>
+    <div class="check-item"><input type="checkbox" id="s22-6" data-id="s22-6"><label class="check-label" for="s22-6"><div class="check-box"></div><div class="check-content"><div class="check-title">Cloudflare DNS updated</div></div></label></div>
+    <div class="check-item"><input type="checkbox" id="s22-7" data-id="s22-7"><label class="check-label" for="s22-7"><div class="check-box"></div><div class="check-content"><div class="check-title">Live site verified at greenwayband.com</div></div></label></div>
+    <div class="check-item"><input type="checkbox" id="s22-8" data-id="s22-8"><label class="check-label" for="s22-8"><div class="check-box"></div><div class="check-content"><div class="check-title">Squarespace subscription cancelled</div></div></label></div>
+  </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- END -->
+<!-- ======================================================== -->
+
+<div style="margin-top: 80px; padding: 60px 0; border-top: 1px solid var(--border); text-align: center;">
+  <div style="font-family: 'Bodoni Moda', serif; font-size: 11px; letter-spacing: 4px; color: var(--cream-dim); text-transform: uppercase; margin-bottom: 8px;">End of Document</div>
+  <div style="font-family: 'Bodoni Moda', serif; font-size: 24px; color: var(--black); margin-bottom: 24px;">Website Build Bible v2.0</div>
+  <div style="font-size: 13px; color: var(--cream-dim); max-width: 500px; margin: 0 auto; line-height: 1.7;">Fill out every section, review the live previews, then hit "Export Build Brief" to generate the complete spec. Everything saves to your browser automatically.</div>
+  <div style="margin-top: 32px;">
+    <button onclick="if(confirm('This will clear ALL your selections, text entries, and progress. Are you sure?')){localStorage.removeItem('gwBible2');location.reload();}" style="background: none; border: 1px solid var(--border); color: var(--cream-dim); font-size: 12px; letter-spacing: 1.5px; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif;">Reset everything</button>
+  </div>
+</div>
+
+</div><!-- end .content -->
+
+<!-- ============================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================ -->
+<script>
+(function() {
+  const STORAGE_KEY = 'gwBible2';
+
+  // ===== STATE MANAGEMENT =====
+  function loadState() {
+    try { const s = localStorage.getItem(STORAGE_KEY); return s ? JSON.parse(s) : {}; } catch(e) { return {}; }
+  }
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+  }
+
+  let state = loadState();
+  if (!state.selections) state.selections = {};
+  if (!state.customText) state.customText = {};
+  if (!state.notes) state.notes = {};
+  if (!state.checks) state.checks = {};
+  if (!state.venues) state.venues = [];
+  if (!state.reviews) state.reviews = [];
+  if (!state.faqs) state.faqs = [];
+  if (!state.fields) state.fields = {};
+
+  // ===== COPY SELECTORS =====
+  document.querySelectorAll('.copy-option[data-group]').forEach(opt => {
+    const group = opt.dataset.group;
+    const value = opt.dataset.value;
+
+    // Restore
+    if (state.selections[group] === value) opt.classList.add('selected');
+
+    opt.addEventListener('click', function(e) {
+      if (e.target.classList.contains('copy-custom-input')) return;
+      document.querySelectorAll(`.copy-option[data-group="${group}"]`).forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      state.selections[group] = value;
+      saveState();
+      updatePreviews();
+      updateProgress();
+    });
+  });
+
+  // Custom text inputs
+  document.querySelectorAll('.copy-custom-input').forEach(input => {
+    const key = input.dataset.custom;
+    if (state.customText[key]) input.value = state.customText[key];
+    input.addEventListener('input', function() {
+      state.customText[key] = input.value;
+      saveState();
+      updatePreviews();
+    });
+    input.addEventListener('focus', function() {
+      const opt = input.closest('.copy-option');
+      const group = opt.dataset.group;
+      document.querySelectorAll(`.copy-option[data-group="${group}"]`).forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      state.selections[group] = 'custom';
+      saveState();
+      updateProgress();
+    });
+  });
+
+  // ===== VISUAL SELECTORS =====
+  document.querySelectorAll('.visual-option[data-group]').forEach(opt => {
+    const group = opt.dataset.group;
+    const value = opt.dataset.value;
+    if (state.selections[group] === value) opt.classList.add('selected');
+
+    opt.addEventListener('click', function() {
+      document.querySelectorAll(`.visual-option[data-group="${group}"]`).forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      state.selections[group] = value;
+      saveState();
+      updatePreviews();
+      updateProgress();
+    });
+  });
+
+  // ===== NOTES =====
+  document.querySelectorAll('.notes-textarea').forEach(ta => {
+    const key = ta.dataset.notes;
+    if (state.notes[key]) ta.value = state.notes[key];
+    ta.addEventListener('input', function() {
+      state.notes[key] = ta.value;
+      saveState();
+    });
+  });
+
+  // ===== FIELDS (review inputs, pull quote, etc) =====
+  document.querySelectorAll('[data-field]').forEach(el => {
+    const key = el.dataset.field;
+    if (state.fields[key]) el.value = state.fields[key];
+    el.addEventListener('input', function() {
+      state.fields[key] = el.value;
+      saveState();
+      updatePreviews();
+    });
+  });
+
+  // ===== CHECKBOXES =====
+  document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+    const id = cb.dataset.id;
+    if (state.checks[id]) cb.checked = true;
+    cb.addEventListener('change', () => {
+      state.checks[id] = cb.checked;
+      saveState();
+      updateProgress();
+    });
+  });
+
+  // ===== VENUE INVENTORY =====
+  window.addInventoryItem = function(type) {
+    if (type === 'venues') {
+      state.venues.push('');
+      saveState();
+      renderVenues();
+    }
+  };
+
+  function renderVenues() {
+    const container = document.getElementById('venueItems');
+    if (!container) return;
+    container.innerHTML = '';
+    state.venues.forEach((v, i) => {
+      const item = document.createElement('div');
+      item.className = 'inventory-item';
+      item.innerHTML = `
+        <div class="inventory-item-num">${String(i + 1).padStart(2, '0')}</div>
+        <input value="${escHtml(v)}" placeholder="e.g. The Corinthian" data-venue-idx="${i}">
+        <button class="inventory-remove" onclick="removeVenue(${i})">×</button>
+      `;
+      container.appendChild(item);
+    });
+    container.querySelectorAll('input[data-venue-idx]').forEach(input => {
+      input.addEventListener('input', function() {
+        state.venues[parseInt(input.dataset.venueIdx)] = input.value;
+        saveState();
+        updateStripPreview();
+      });
+    });
+    updateStripPreview();
+    updateProgress();
+  }
+
+  window.removeVenue = function(i) {
+    state.venues.splice(i, 1);
+    saveState();
+    renderVenues();
+  };
+
+  function updateStripPreview() {
+    const track = document.getElementById('stripTrack');
+    if (!track) return;
+    const names = state.venues.filter(v => v.trim());
+    if (names.length === 0) {
+      track.innerHTML = '<span class="strip-name" style="opacity: 0.4;">Add venue names above to see the preview</span>';
+      return;
+    }
+    const doubled = [...names, ...names, ...names, ...names];
+    track.innerHTML = doubled.map(n => `<span class="strip-name">${escHtml(n)}</span><span class="strip-dot">·</span>`).join('');
+  }
+
+  // ===== REVIEWS INVENTORY =====
+  window.addReview = function() {
+    state.reviews.push({ couple: '', venue: '', quote: '' });
+    saveState();
+    renderReviews();
+  };
+
+  window.removeReview = function(i) {
+    state.reviews.splice(i, 1);
+    saveState();
+    renderReviews();
+  };
+
+  function renderReviews() {
+    const container = document.getElementById('reviewItems');
+    if (!container) return;
+    container.innerHTML = '';
+    state.reviews.forEach((r, i) => {
+      const item = document.createElement('div');
+      item.className = 'review-item';
+      item.innerHTML = `
+        <button class="faq-remove" onclick="removeReview(${i})">×</button>
+        <div class="review-row">
+          <div class="review-field"><label>Couple Name</label><input value="${escHtml(r.couple)}" placeholder="e.g. Sarah and James" data-review="${i}" data-rfield="couple"></div>
+          <div class="review-field"><label>Venue</label><input value="${escHtml(r.venue)}" placeholder="e.g. The Corinthian" data-review="${i}" data-rfield="venue"></div>
+        </div>
+        <div class="review-field"><label>Pull Quote</label><textarea placeholder="The quote from the couple..." data-review="${i}" data-rfield="quote">${escHtml(r.quote)}</textarea></div>
+      `;
+      container.appendChild(item);
+    });
+    container.querySelectorAll('[data-review]').forEach(el => {
+      el.addEventListener('input', function() {
+        const idx = parseInt(el.dataset.review);
+        const field = el.dataset.rfield;
+        state.reviews[idx][field] = el.value;
+        saveState();
+        updateProgress();
+      });
+    });
+    updateProgress();
+  }
+
+  // ===== FAQ BUILDER =====
+  const defaultFaqs = [
+    { q: 'How many musicians are in the band?', a: 'The Greenway Band performs as a 10 to 20 piece ensemble depending on your venue, your guest count, and the energy you\'re going for. Every configuration includes a full rhythm section, vocalists, and a horn line. Adrian walks through the options on your first call and recommends a setup based on your room and your crowd.' },
+    { q: 'What does "10 piece" actually mean?', a: 'A 10 piece lineup typically includes drums, bass, guitar, keys, two to three vocalists, and a horn section. As we scale up, we add more horns, more vocalists, and more depth to the arrangements. At 10 pieces, you\'ve got a full band. At 20, you\'ve got a show.' },
+    { q: 'How much space does the band need on stage?', a: 'A 10 piece needs roughly 16 by 12 feet minimum. A full 20 piece needs closer to 24 by 16 feet. We send a detailed stage plot to your venue and planner well before the event, and we\'ll work around the space you have.' },
+    { q: 'How does pricing work?', a: 'We price by configuration and performance length, and every event has different logistics. Adrian walks through the numbers on your first call. No PDF price list, but no guesswork either. You\'ll know exactly what you\'re paying for and why.' },
+    { q: 'Do you travel outside of Houston?', a: 'Yes. We\'re based in Houston and perform across Texas and beyond. Adrian covers travel logistics and any associated costs on your first call.' },
+    { q: 'Can we request specific songs?', a: 'Yes. After you book, you\'ll get a song request process where you can share must plays, do not plays, and general direction for the set. Our music director arranges everything for live performance, so if a song isn\'t already in our book, we\'ll learn it and rehearse it before your event.' },
+    { q: 'What time does the band arrive?', a: 'Sound check happens during the venue\'s quiet time, typically an hour before cocktail hour. Load in starts before that. Your planner gets a detailed schedule with exact arrival and setup times for the day.' },
+    { q: 'Do you provide your own sound equipment?', a: 'Yes. We bring a professional sound system sized to your venue and guest count, plus our own stage lighting rig. If your venue has in house production, we coordinate with their team in advance so everything\'s dialed in before doors open.' },
+    { q: 'Who handles emcee duties?', a: 'Adrian handles emcee for every event. That means introductions, toasts, special dances, and every transition between moments. We coordinate the flow directly with your planner so every moment hits its mark without the night feeling rehearsed.' },
+    { q: 'What happens if our event date changes?', a: 'Date changes happen. Reach out as early as possible and we\'ll look at what\'s open. Rescheduling terms are spelled out in your contract before you sign, so you know exactly where you stand.' },
+    { q: 'How do you coordinate with our wedding planner?', a: 'Your planner is our main point of contact leading up to the event. We send them a detailed timeline, stage plot, and load in schedule. On the day of, we check in with them directly and follow their lead on transitions and timing.' },
+    { q: 'What genres does the band play?', a: 'Motown, Top 40, R&B, Latin, classic rock, country, jazz standards, and more. Our music director arranges every song for live performance. We don\'t hand out a fixed song list and ask you to pick from it. You tell us what your crowd loves, and we build the set around that.' },
+  ];
+
+  if (state.faqs.length === 0) {
+    state.faqs = defaultFaqs;
+    saveState();
+  }
+
+  window.addFaq = function() {
+    state.faqs.push({ q: '', a: '' });
+    saveState();
+    renderFaqs();
+  };
+
+  window.removeFaq = function(i) {
+    state.faqs.splice(i, 1);
+    saveState();
+    renderFaqs();
+  };
+
+  function renderFaqs() {
+    const container = document.getElementById('faqItems');
+    if (!container) return;
+    container.innerHTML = '';
+    state.faqs.forEach((f, i) => {
+      const item = document.createElement('div');
+      item.className = 'faq-item';
+      item.innerHTML = `
+        <button class="faq-remove" onclick="removeFaq(${i})">×</button>
+        <input class="faq-q-input" value="${escHtml(f.q)}" placeholder="Question..." data-faq="${i}" data-ffield="q">
+        <div class="faq-divider"></div>
+        <textarea class="faq-a-input" placeholder="Answer in Greenway brand voice..." data-faq="${i}" data-ffield="a">${escHtml(f.a)}</textarea>
+      `;
+      container.appendChild(item);
+    });
+    container.querySelectorAll('[data-faq]').forEach(el => {
+      el.addEventListener('input', function() {
+        const idx = parseInt(el.dataset.faq);
+        const field = el.dataset.ffield;
+        state.faqs[idx][field] = el.value;
+        saveState();
+        updateProgress();
+      });
+    });
+    updateProgress();
+  }
+
+  // ===== PREVIEWS =====
+  function getSelectedValue(group) {
+    const sel = state.selections[group];
+    if (!sel) return null;
+    if (sel === 'custom') return state.customText[group] || '';
+    return sel;
+  }
+
+  function getSelectedText(group) {
+    const sel = state.selections[group];
+    if (!sel) return null;
+    if (sel === 'custom') return state.customText[group] || '';
+    // Find the option element and get its text
+    const opt = document.querySelector(`.copy-option[data-group="${group}"][data-value="${sel}"] .copy-option-text`);
+    if (opt) return opt.textContent;
+    return sel;
+  }
+
+  function updatePreviews() {
+    // Hero descriptor
+    const desc = getSelectedValue('hero-descriptor');
+    const heroEl = document.getElementById('heroDescriptorPreview');
+    if (heroEl && desc) heroEl.textContent = desc;
+
+    // Pull quote
+    const quoteText = state.fields['hp-pullquote-text'];
+    const quoteCpl = state.fields['hp-pullquote-couple'];
+    const quoteVen = state.fields['hp-pullquote-venue'];
+    const qEl = document.getElementById('pullQuotePreview');
+    const aEl = document.getElementById('pullQuoteAttr');
+    if (qEl && quoteText) qEl.textContent = '"' + quoteText + '"';
+    if (aEl) aEl.textContent = (quoteCpl || 'Couple Name') + ' · ' + (quoteVen || 'Venue');
+
+    // Book headline
+    const bookHL = getSelectedValue('book-headline');
+    const bookEl = document.getElementById('bookHeadlinePreview');
+    if (bookEl && bookHL) bookEl.textContent = bookHL;
+
+    // Experience copy
+    const cocktail = getSelectedText('exp-cocktail');
+    const dinner = getSelectedText('exp-dinner');
+    const dance = getSelectedText('exp-dance');
+    if (cocktail) { const el = document.getElementById('expCocktailBody'); if (el) el.textContent = cocktail.substring(0, 120) + (cocktail.length > 120 ? '...' : ''); }
+    if (dinner) { const el = document.getElementById('expDinnerBody'); if (el) el.textContent = dinner.substring(0, 120) + (dinner.length > 120 ? '...' : ''); }
+    if (dance) { const el = document.getElementById('expDanceBody'); if (el) el.textContent = dance.substring(0, 120) + (dance.length > 120 ? '...' : ''); }
+
+    // Footer preview
+    const footerColor = state.selections['footer-color'];
+    const fp = document.getElementById('footerPreview');
+    if (fp) {
+      if (footerColor === 'cream') {
+        fp.className = 'footer-preview-cream';
+        fp.querySelector('.footer-copyright').style.color = 'var(--cream-dim)';
+      } else {
+        fp.className = 'footer-preview';
+        fp.querySelector('.footer-copyright').style.color = '';
+      }
+    }
+
+    // CTA label on buttons
+    const ctaLabel = getSelectedValue('cta-label');
+    if (ctaLabel) {
+      const formBtn = document.getElementById('formBtnPreview');
+      if (formBtn) formBtn.textContent = ctaLabel;
+    }
+  }
+
+  // ===== PROGRESS =====
+  function updateProgress() {
+    // Count all decision groups
+    const allGroups = new Set();
+    document.querySelectorAll('[data-group]').forEach(el => allGroups.add(el.dataset.group));
+    const totalDecisions = allGroups.size;
+    let madeDecisions = 0;
+    allGroups.forEach(g => { if (state.selections[g]) madeDecisions++; });
+
+    // Count inventories
+    const venuesFilled = state.venues.filter(v => v.trim()).length > 0 ? 1 : 0;
+    const reviewsFilled = state.reviews.filter(r => r.quote.trim()).length > 0 ? 1 : 0;
+    const faqsFilled = state.faqs.filter(f => f.a.trim()).length >= 3 ? 1 : 0;
+    const fieldsFilled = Object.values(state.fields).filter(v => v && v.trim()).length > 0 ? 1 : 0;
+
+    // Count checkboxes
+    const totalChecks = document.querySelectorAll('.check-item input[type="checkbox"]').length;
+    const checkedChecks = Object.values(state.checks).filter(v => v).length;
+
+    const totalItems = totalDecisions + 4 + totalChecks; // 4 for inventories/fields
+    const doneItems = madeDecisions + venuesFilled + reviewsFilled + faqsFilled + fieldsFilled + checkedChecks;
+    const pct = totalItems > 0 ? Math.round((doneItems / totalItems) * 100) : 0;
+
+    document.getElementById('progressPercent').textContent = pct + '%';
+    document.getElementById('progressFill').style.width = pct + '%';
+  }
+
+  // ===== NAV =====
+  window.toggleNav = function() {
+    document.getElementById('navSidebar').classList.toggle('open');
+    document.getElementById('navOverlay').classList.toggle('open');
+  };
+  window.goTo = function(id) {
+    toggleNav();
+    setTimeout(() => {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  };
+
+  // ===== NOTES TOGGLE =====
+  window.toggleNotes = function(btn) {
+    const area = btn.nextElementSibling;
+    area.classList.toggle('open');
+    btn.textContent = area.classList.contains('open') ? '− Hide notes' : '+ Add notes';
+  };
+
+  // ===== EXPORT =====
+  window.openExport = function() {
+    generateExport();
+    document.getElementById('exportModal').classList.add('open');
+  };
+  window.closeExport = function() {
+    document.getElementById('exportModal').classList.remove('open');
+  };
+  window.copyExport = function() {
+    const output = document.getElementById('exportOutput');
+    output.select();
+    document.execCommand('copy');
+    const confirm = document.getElementById('copyConfirm');
+    confirm.style.opacity = '1';
+    setTimeout(() => confirm.style.opacity = '0', 2000);
+  };
+
+  function generateExport() {
+    let lines = [];
+    lines.push('# GREENWAY WEBSITE BUILD BRIEF');
+    lines.push('# Exported from Build Bible v2.0 — ' + new Date().toLocaleDateString());
+    lines.push('# This is the complete spec. Every decision below was made by Adrian.');
+    lines.push('');
+
+    // Design decisions
+    lines.push('## DESIGN DECISIONS');
+    lines.push('');
+
+    const groups = {};
+    document.querySelectorAll('[data-group]').forEach(el => {
+      if (!groups[el.dataset.group]) groups[el.dataset.group] = [];
+    });
+
+    Object.keys(groups).forEach(g => {
+      const val = getSelectedValue(g) || getSelectedText(g);
+      if (val) {
+        const label = g.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        lines.push(`${label}: ${val}`);
+      }
+    });
+
+    lines.push('');
+    lines.push('## HOMEPAGE COPY');
+    lines.push('');
+
+    const hpWhy = getSelectedText('hp-why-headline');
+    if (hpWhy) lines.push(`Why Greenway Headline: ${hpWhy}`);
+    const hpWhyBody = getSelectedText('hp-why-body');
+    if (hpWhyBody) lines.push(`Why Greenway Body: ${hpWhyBody}`);
+    const hpCta = getSelectedText('hp-cta-headline');
+    if (hpCta) lines.push(`CTA Headline: ${hpCta}`);
+
+    if (state.fields['hp-pullquote-text']) {
+      lines.push(`Pull Quote: "${state.fields['hp-pullquote-text']}"`);
+      lines.push(`Pull Quote Attribution: ${state.fields['hp-pullquote-couple'] || 'TBD'} at ${state.fields['hp-pullquote-venue'] || 'TBD'}`);
+    }
+
+    lines.push('');
+    lines.push('## EXPERIENCE PAGE COPY');
+    lines.push('');
+    const expHL = getSelectedText('exp-headline');
+    if (expHL) lines.push(`Page Headline: ${expHL}`);
+    const cocktail = getSelectedText('exp-cocktail');
+    if (cocktail) lines.push(`Cocktail Hour: ${cocktail}`);
+    const dinner = getSelectedText('exp-dinner');
+    if (dinner) lines.push(`Dinner: ${dinner}`);
+    const dance = getSelectedText('exp-dance');
+    if (dance) lines.push(`Dance Floor: ${dance}`);
+
+    lines.push('');
+    lines.push('## BOOK PAGE');
+    lines.push('');
+    const bookHL = getSelectedText('book-headline');
+    if (bookHL) lines.push(`Headline: ${bookHL}`);
+    const bookConf = getSelectedText('book-confirm');
+    if (bookConf) lines.push(`Confirmation: ${bookConf}`);
+
+    lines.push('');
+    lines.push('## SOCIAL PROOF STRIP — VENUE NAMES');
+    lines.push('');
+    state.venues.filter(v => v.trim()).forEach(v => lines.push(`- ${v}`));
+    if (state.venues.filter(v => v.trim()).length === 0) lines.push('(none added yet)');
+
+    lines.push('');
+    lines.push('## REVIEWS');
+    lines.push('');
+    state.reviews.filter(r => r.quote.trim()).forEach((r, i) => {
+      lines.push(`Review ${i + 1}:`);
+      lines.push(`  Couple: ${r.couple || 'TBD'}`);
+      lines.push(`  Venue: ${r.venue || 'TBD'}`);
+      lines.push(`  Quote: "${r.quote}"`);
+      lines.push('');
+    });
+    if (state.reviews.filter(r => r.quote.trim()).length === 0) lines.push('(none added yet)');
+
+    lines.push('');
+    lines.push('## FAQ');
+    lines.push('');
+    state.faqs.filter(f => f.q.trim()).forEach((f, i) => {
+      lines.push(`Q${i + 1}: ${f.q}`);
+      lines.push(`A${i + 1}: ${f.a || '(answer needed)'}`);
+      lines.push('');
+    });
+
+    lines.push('');
+    lines.push('## NOTES');
+    lines.push('');
+    Object.entries(state.notes).forEach(([key, val]) => {
+      if (val && val.trim()) {
+        lines.push(`${key}: ${val}`);
+        lines.push('');
+      }
+    });
+
+    document.getElementById('exportOutput').value = lines.join('\n');
+  }
+
+  // ===== HELPERS =====
+  function escHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // ===== FULL SITE PREVIEW =====
+  let currentPreviewPage = 'homepage';
+  let currentDevice = 'desktop';
+
+  window.openSitePreview = function() {
+    document.getElementById('sitePreview').classList.add('open');
+    document.body.classList.add('preview-open');
+    document.body.style.overflow = 'hidden';
+    renderSitePage(currentPreviewPage);
+  };
+  window.closeSitePreview = function() {
+    document.getElementById('sitePreview').classList.remove('open');
+    document.body.classList.remove('preview-open');
+    document.body.style.overflow = '';
+  };
+  window.switchPreviewPage = function(page) {
+    currentPreviewPage = page;
+    document.querySelectorAll('.sp-tab').forEach(t => t.classList.toggle('active', t.dataset.page === page));
+    renderSitePage(page);
+    document.getElementById('spViewport').scrollTop = 0;
+  };
+  window.switchDevice = function(device) {
+    currentDevice = device;
+    document.querySelectorAll('.sp-device-btn').forEach(b => b.classList.toggle('active', b.dataset.device === device));
+    const frame = document.getElementById('spFrame');
+    frame.className = 'sp-frame ' + device;
+    const vp = document.getElementById('spViewport');
+    vp.className = 'sp-viewport';
+    if (device !== 'desktop') vp.classList.add(device + '-mode');
+    var lbl = document.getElementById('spDeviceLabel');
+    if (lbl) {
+      if (device === 'tablet') lbl.textContent = '768px — Tablet';
+      else if (device === 'mobile') lbl.textContent = '390px — Mobile';
+      else lbl.textContent = '';
+    }
+  };
+
+  // Escape key to close
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('sitePreview').classList.contains('open')) {
+      closeSitePreview();
+    }
+  });
+
+  function pv(group) {
+    const sel = state.selections[group];
+    if (!sel) return null;
+    if (sel === 'custom') return state.customText[group] || '';
+    const opt = document.querySelector('.copy-option[data-group="' + group + '"][data-value="' + sel + '"] .copy-option-text');
+    if (opt) return opt.textContent;
+    return sel;
+  }
+
+  function getCtaLabel() { return pv('cta-label') || 'Check Availability'; }
+
+  function renderNav(dark) {
+    const cls = dark ? '' : ' cream';
+    return `<nav class="gw-nav${cls}">
+      <div class="gw-nav-logo">THE GREENWAY BAND</div>
+      <div class="gw-nav-links">
+        <a class="gw-nav-link">Experience</a>
+        <a class="gw-nav-link">Reviews</a>
+        <a class="gw-nav-link">FAQ</a>
+        <a class="gw-nav-cta">${escHtml(getCtaLabel())}</a>
+      </div>
+    </nav>`;
+  }
+
+  function renderFooter() {
+    const footerDark = (state.selections['footer-color'] || 'dark') === 'dark';
+    return `<footer class="gw-footer${footerDark ? '' : ' cream'}">
+      <div class="gw-footer-the">THE</div>
+      <div class="gw-footer-name">GREENWAY</div>
+      <div class="gw-footer-band">BAND</div>
+      <div class="gw-footer-links"><span>Experience</span><span>Reviews</span><span>FAQ</span><span>${escHtml(getCtaLabel())}</span></div>
+      <div class="gw-footer-copy">&copy; 2026 The Greenway Band &middot; Houston, TX</div>
+    </footer>`;
+  }
+
+  function renderStrip() {
+    const names = state.venues.filter(v => v.trim());
+    if (names.length === 0) return `<div class="gw-strip"><div class="gw-strip-track" style="justify-content:center;animation:none;"><span class="gw-strip-name" style="opacity:0.4;">Venue names appear here</span></div></div>`;
+    const items = [...names, ...names, ...names, ...names].map(n => `<span class="gw-strip-name">${escHtml(n)}</span><span class="gw-strip-dot">&middot;</span>`).join('');
+    return `<div class="gw-strip"><div class="gw-strip-track">${items}</div></div>`;
+  }
+
+  function renderHomepage() {
+    const desc = pv('hero-descriptor') || 'The sound of a great night';
+    const whyHL = pv('hp-why-headline') || 'The band that reads the room';
+    const whyBody = pv('hp-why-body') || '';
+    const quoteText = state.fields['hp-pullquote-text'] || 'Your guests won\'t stop talking about it';
+    const quoteCouple = state.fields['hp-pullquote-couple'] || '';
+    const quoteVenue = state.fields['hp-pullquote-venue'] || '';
+    const quoteAttr = [quoteCouple, quoteVenue].filter(Boolean).join(' · ') || 'Couple Name · Venue';
+    const ctaHL = pv('hp-cta-headline') || 'Check availability for your date';
+
+    return `<div class="gw-site">
+      ${renderNav(true)}
+      <section class="gw-hero">
+        <div class="gw-hero-video-bg">Autoplay video</div>
+        <div class="gw-hero-overlay"></div>
+        <div class="gw-hero-content">
+          <div class="gw-hero-the">THE</div>
+          <div class="gw-hero-name">GREENWAY</div>
+          <div class="gw-hero-band">BAND</div>
+          <div class="gw-hero-desc">${escHtml(desc)}</div>
+          <div class="gw-hero-cta-row"><a class="gw-btn gw-btn-outline">${escHtml(getCtaLabel())}</a></div>
+        </div>
+        <div class="gw-hero-scroll">SCROLL</div>
+      </section>
+      ${renderStrip()}
+      <section class="gw-section">
+        <div class="gw-section-label">Why Greenway</div>
+        <div class="gw-section-headline">${escHtml(whyHL)}</div>
+        <div class="gw-section-body">${escHtml(whyBody) || '<span style="opacity:0.4;">Select body copy in §14 of the Bible</span>'}</div>
+      </section>
+      <section class="gw-pullquote">
+        <div class="gw-pullquote-text">&ldquo;${escHtml(quoteText)}&rdquo;</div>
+        <div class="gw-pullquote-attr">${escHtml(quoteAttr)}</div>
+      </section>
+      <section class="gw-cta-section">
+        <div class="gw-cta-headline">${escHtml(ctaHL)}</div>
+        <a class="gw-btn gw-btn-dark">${escHtml(getCtaLabel())}</a>
+      </section>
+      ${renderFooter()}
+    </div>`;
+  }
+
+  function renderExperience() {
+    const expHL = pv('exp-headline') || 'A night with The Greenway Band';
+    const cocktail = pv('exp-cocktail') || '';
+    const dinner = pv('exp-dinner') || '';
+    const dance = pv('exp-dance') || '';
+    const placeholder = '<span style="opacity:0.4;">Select copy in §15 of the Bible</span>';
+
+    return `<div class="gw-site">
+      ${renderNav(false)}
+      <section class="gw-inner-hero">
+        <div class="gw-inner-hero-label">The Experience</div>
+        <div class="gw-inner-hero-title">${escHtml(expHL)}</div>
+      </section>
+      <div class="gw-phase">
+        <div class="gw-phase-visual">Video / Photo</div>
+        <div class="gw-phase-text">
+          <div class="gw-phase-label">Cocktail Hour</div>
+          <div class="gw-phase-headline">The opening act</div>
+          <div class="gw-phase-body">${escHtml(cocktail) || placeholder}</div>
+        </div>
+      </div>
+      <div class="gw-phase reverse">
+        <div class="gw-phase-visual">Video / Photo</div>
+        <div class="gw-phase-text">
+          <div class="gw-phase-label">Dinner</div>
+          <div class="gw-phase-headline">The soundtrack</div>
+          <div class="gw-phase-body">${escHtml(dinner) || placeholder}</div>
+        </div>
+      </div>
+      <div class="gw-phase">
+        <div class="gw-phase-visual">Video / Photo</div>
+        <div class="gw-phase-text">
+          <div class="gw-phase-label">The Dance Floor</div>
+          <div class="gw-phase-headline">Nobody wants to leave</div>
+          <div class="gw-phase-body">${escHtml(dance) || placeholder}</div>
+        </div>
+      </div>
+      <section class="gw-section gw-section-centered" style="background: var(--cream); border-top: 1px solid var(--border);">
+        <div class="gw-section-label">For Planners</div>
+        <div class="gw-section-headline">How we do it</div>
+        <div class="gw-section-body">Ableton-driven arrangements. MIDI-synced production. Stemmed tracks for every song. This section is for the planners who want to know what's under the hood.</div>
+      </section>
+      <section class="gw-cta-section">
+        <div class="gw-cta-headline">${escHtml(pv('hp-cta-headline') || 'Check availability for your date')}</div>
+        <a class="gw-btn gw-btn-dark">${escHtml(getCtaLabel())}</a>
+      </section>
+      ${renderFooter()}
+    </div>`;
+  }
+
+  function renderFaqPage() {
+    const faqs = state.faqs.filter(f => f.q.trim());
+    let faqHtml = '';
+    faqs.forEach(f => {
+      faqHtml += `<div class="gw-faq-item">
+        <div class="gw-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open');">${escHtml(f.q)}</div>
+        <div class="gw-faq-a">${escHtml(f.a) || '<span style="opacity:0.4;">Answer needed</span>'}</div>
+      </div>`;
+    });
+    if (faqs.length === 0) faqHtml = '<div style="text-align:center;padding:40px;color:var(--cream-dim);font-size:14px;">Add FAQ questions in §18 of the Bible</div>';
+
+    return `<div class="gw-site">
+      ${renderNav(false)}
+      <section class="gw-inner-hero">
+        <div class="gw-inner-hero-label">FAQ</div>
+        <div class="gw-inner-hero-title">Common Questions</div>
+      </section>
+      <section class="gw-section" style="padding-top: 60px;">
+        <div style="max-width: 700px; margin: 0 auto;">
+          ${faqHtml}
+        </div>
+      </section>
+      <section class="gw-cta-section" style="border-top: 1px solid var(--border);">
+        <div class="gw-section-label">Still have questions?</div>
+        <div class="gw-cta-headline" style="margin-top: 12px;">${escHtml(pv('hp-cta-headline') || 'Check availability for your date')}</div>
+        <a class="gw-btn gw-btn-dark">${escHtml(getCtaLabel())}</a>
+      </section>
+      ${renderFooter()}
+    </div>`;
+  }
+
+  function renderBookPage() {
+    const bookHL = pv('book-headline') || 'Check availability for your date';
+    const formStyle = state.selections['form-style'] || 'underline';
+
+    return `<div class="gw-site">
+      ${renderNav(false)}
+      <section class="gw-inner-hero">
+        <div class="gw-inner-hero-label">Book</div>
+        <div class="gw-inner-hero-title">${escHtml(bookHL)}</div>
+      </section>
+      <section class="gw-section" style="padding-top: 40px;">
+        <div class="gw-form">
+          <div class="gw-form-grid">
+            <div class="gw-form-field"><label class="gw-form-label">Partner 1 Name</label><input class="gw-form-input" placeholder="First name"></div>
+            <div class="gw-form-field"><label class="gw-form-label">Partner 2 Name</label><input class="gw-form-input" placeholder="First name"></div>
+            <div class="gw-form-field"><label class="gw-form-label">Event Date</label><input class="gw-form-input" type="date"></div>
+            <div class="gw-form-field"><label class="gw-form-label">Venue (if known)</label><input class="gw-form-input" placeholder="Venue name"></div>
+            <div class="gw-form-field"><label class="gw-form-label">Email</label><input class="gw-form-input" placeholder="your@email.com"></div>
+            <div class="gw-form-field"><label class="gw-form-label">Phone</label><input class="gw-form-input" placeholder="(555) 000-0000"></div>
+            <div class="gw-form-field"><label class="gw-form-label">Estimated Guest Count</label><input class="gw-form-input" placeholder="e.g. 200"></div>
+            <div class="gw-form-field"><label class="gw-form-label">How Did You Hear About Us</label><input class="gw-form-input" placeholder="Planner, venue, Instagram..."></div>
+          </div>
+          <div class="gw-form-submit"><a class="gw-btn gw-btn-dark">${escHtml(getCtaLabel())}</a></div>
+        </div>
+      </section>
+      ${renderFooter()}
+    </div>`;
+  }
+
+  function renderSitePage(page) {
+    const frame = document.getElementById('spFrame');
+    switch(page) {
+      case 'homepage': frame.innerHTML = renderHomepage(); break;
+      case 'experience': frame.innerHTML = renderExperience(); break;
+      case 'faq': frame.innerHTML = renderFaqPage(); break;
+      case 'book': frame.innerHTML = renderBookPage(); break;
+    }
+  }
+
+  // ===== INIT =====
+  renderVenues();
+  renderReviews();
+  renderFaqs();
+  updatePreviews();
+  updateProgress();
+
+  // Seed 3 empty venue slots if none exist
+  if (state.venues.length === 0) {
+    state.venues = ['', '', '', '', ''];
+    saveState();
+    renderVenues();
+  }
+
+})();
+</script>
+
+</body>
+</html>
