@@ -38,6 +38,19 @@ is bespoke. Non-Houston → flag travel and ask Adrian.
 Contract standard seen in email: **3 hours of live music across a 4-hour reception**.
 Longer receptions price the extra hour.
 
+Presentation (2026-07-13): client **chose** an add-on → single priced row inside each
+package's investment total (garcia). Client **undecided** but Adrian wants options
+shown → "Cocktail Hour" addon-section: three bordered cards (Solo, Duo, Trio),
+excluded from all totals, style locked from Adrian's Blick/Courtois reference doc
+(giulia-costantini; optional block + CSS in TEMPLATE.html). Approved desc line:
+*Live music during cocktails sets the tone before the reception begins. We offer
+acoustic arrangements tailored to the mood you want.*
+Package with **no add-ons** → one single "Investment" line with the price. Never a
+band-only itemized row plus a "Total Investment" row (Adrian, 2026-07-13; matches
+hergenrether/bielitz).
+Package note (standard): *Additional instrumentation available upon request. Travel
+fee may apply for events over 50 miles from Houston.*
+
 ## Locked lineups (never invent an instrumentation)
 
 | Config | Rows exactly as shipped |
@@ -70,7 +83,14 @@ not — a new testimonial requires Adrian supplying the real review.
 - Travel note: *Travel fee may apply for events over 50 miles from Houston.*
 - Contact block: Adrian Michael · adrian@greenwayband.com · (281) 467-1226 ·
   greenwayband.com
-- Wedding intro paragraphs 1 and 4 (see TEMPLATE.html).
+- Wedding intro paragraph 1 (reworked 2026-07-13, Adrian-approved): *Thank you for
+  reaching out to us. A wedding is a thousand decisions, and the band is the one your
+  guests will still be talking about on the drive home. We take that part personally.*
+- Wedding intro paragraph 4: *We'd love to be part of your night.*
+- Greeting format (2026-07-13): "Congratulations,&lt;br&gt;&lt;first name(s)&gt;" — warm,
+  NO terminal period. The old "&lt;names&gt;, congratulations." style is retired.
+- Package subtitle style: "Full horn section + reception entertainment + MC" (garcia).
+- The 10-Piece leads with the Recommended badge by default (Adrian, 2026-07-13).
 
 ## Copy-integrity rules for proposals (same spirit as CLAUDE.md, applied here)
 
@@ -83,3 +103,6 @@ not — a new testimonial requires Adrian supplying the real review.
    Placeholders and `{{TOKENS}}` never deploy.
 4. Prices, lineups, and totals must match this file or Adrian's instruction; totals
    must equal the sum of their rows.
+5. Never mention another client, couple, or their wedding by name anywhere in a
+   proposal, including grid cells and intro copy (Adrian, 2026-07-13). Referral
+   history informs the offer, never the page.

@@ -16,6 +16,9 @@
      website's design tokens.
   4. Copy integrity: prices/lineups only from docs/proposals/PRICING_AND_CONTENT.md
      or Adrian. Testimonials are verbatim-locked. No invented venue experience.
+  5. Voice (Adrian, 2026-07-13): warm and personal, plain sentences, less is more.
+     Greeting carries NO terminal period. Never mention another client, couple,
+     or their wedding by name anywhere in a proposal.
 
   TOKENS
   {{COUPLE_SHORT}}          e.g. Victoria & Will          (title tag)
@@ -31,7 +34,8 @@
   {{INTRO_VENUE_PARAGRAPH}} 2-3 sentences about their venue/options. FACTS ONLY.
   {{INTRO_EVENING_PARAGRAPH}} 1-2 sentences framing the evening/timeline.
   {{T1..T5_TIME/HEADING/DESC}} timeline blocks (section optional, see below)
-  {{PKG1_*}} / {{PKG2_*}}   package cards (titles, subtitles, price rows, totals)
+  {{PKG1_*}} / {{PKG2_*}}   package cards (titles, subtitles, price rows, totals);
+                            subtitle style: "Full horn section + reception entertainment + MC"
   ============================================================
 -->
 <meta charset="UTF-8">
@@ -563,6 +567,62 @@
     font-weight: 300;
   }
 
+  /* ===== COCKTAIL HOUR ADD-ON (style source: Adrian's Blick/Courtois doc) ===== */
+  .addon-section {
+    margin-top: 8px;
+    padding-top: 40px;
+    border-top: 0.5px solid var(--border-light);
+  }
+
+  .addon-title {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 20px;
+    color: var(--cream);
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .addon-desc {
+    font-size: 13px;
+    color: var(--cream-dim);
+    line-height: 1.7;
+    margin-bottom: 28px;
+    max-width: 480px;
+  }
+
+  .addon-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 560px) {
+    .addon-options {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .addon-card {
+    padding: 24px;
+    border: 0.5px solid var(--border-light);
+    border-radius: 2px;
+    text-align: center;
+  }
+
+  .addon-card .addon-type {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    margin-bottom: 12px;
+  }
+
+  .addon-card .addon-price {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 22px;
+    color: var(--cream);
+  }
+
   /* ===== CARD SEPARATOR ===== */
   .card-divider {
     width: 40px;
@@ -742,6 +802,9 @@
     50% { opacity: 0.5; transform: translateX(-50%) translateY(4px); }
   }
 </style>
+<!-- No-JS fallback: the scroll reveals need JavaScript; without it the page must
+     still be readable (some previews and readers never run scripts). -->
+<noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
 </head>
 <body>
 
@@ -786,14 +849,15 @@
 <section class="intro">
   <div class="content">
     <div class="section-label reveal">A note for you</div>
-    <div class="intro-greeting reveal reveal-delay-1">{{GREETING_NAMES}},<br>congratulations.</div>
+    <div class="intro-greeting reveal reveal-delay-1">Congratulations,<br>{{GREETING_NAMES}}</div>
 
     <div class="intro-body reveal reveal-delay-2">
-      <!-- Paragraph 1: standard approved copy. Keep verbatim for weddings. -->
-      <p>We know how much goes into planning a wedding, and the band is one of those decisions that shapes the entire night. We don't take that lightly.</p>
+      <!-- Paragraph 1: standard approved copy (reworked 2026-07-13). Keep verbatim for weddings. -->
+      <p>Thank you for reaching out to us. A wedding is a thousand decisions, and the band is the one your guests will still be talking about on the drive home. We take that part personally.</p>
 
       <!-- Paragraph 2: THEIR venue + the options offered. Facts from the inquiry only.
            No claims of having played a venue unless Adrian confirms it's true.
+           Never mention another client, couple, or wedding by name.
            Shipped example (garcia): "Hotel ZaZa is the kind of room that comes alive
            with a full band. We've put together two options below..." -->
       <p>{{INTRO_VENUE_PARAGRAPH}}</p>
@@ -823,7 +887,8 @@
     <div class="evening-title reveal reveal-delay-1">Your Evening</div>
 
     <!-- Keep 6 cells for a balanced grid. If a value is unknown, swap the cell for
-         one you do know (Location, Referral, Cocktail Hour, Reception) — never guess. -->
+         one you do know (Prepared for, Location, Cocktail Hour, Reception) — never
+         guess, and never reference another client's wedding. -->
     <div class="details-grid reveal reveal-delay-2">
       <div class="detail-cell">
         <div class="detail-label">Couple</div>
@@ -912,9 +977,11 @@
     <div class="packages-heading reveal reveal-delay-1">Two Ways to Fill the Room</div>
 
     <!-- ===== CARD 1 (RECOMMENDED) =====
+         The 10-Piece leads with the Recommended badge by default (Adrian, 2026-07-13).
          Lineup rows below are the standard 10-Piece. If offering a different size,
          swap rows to the exact config in docs/proposals/PRICING_AND_CONTENT.md.
-         Never invent an instrumentation. -->
+         Never invent an instrumentation.
+         Subtitle style: "Full horn section + reception entertainment + MC". -->
     <div class="package-card reveal reveal-delay-2">
       <div class="package-badge">Recommended</div>
       <div class="package-title">{{PKG1_TITLE}}</div>
@@ -945,7 +1012,15 @@
         </div>
       </div>
 
-      <!-- Delete unused add-on rows. Total must equal the sum of the rows kept. -->
+      <!-- Delete unused add-on rows. Total must equal the sum of the rows kept.
+           NO add-ons in this package at all? Then this whole itemized block is
+           WRONG (Adrian, 2026-07-13): replace everything from <div class="investment">
+           through its closing </div> with the single-line form, and nothing else:
+             <div class="investment-total">
+               <div class="investment-total-label">Investment</div>
+               <div class="investment-total-price">{{PKG1_TOTAL}}</div>
+             </div>
+           One label, one price. Never show a band-only row plus a Total row. -->
       <div class="investment">
         <div class="investment-label">Investment</div>
         <div class="investment-row">
@@ -1023,10 +1098,41 @@
       </div>
     </div>
 
+    <!-- ===== COCKTAIL HOUR ADD-ON (optional block; style locked 2026-07-13 from
+         Adrian's Blick/Courtois reference doc) =====
+         Use when the client has NOT chosen a cocktail add-on but Adrian wants the
+         options shown: three bordered cards, NO totals math (first used:
+         giulia-costantini). The desc line below is approved copy; if the cocktail
+         hour TIME is known, prepend "Your cocktail hour runs from X to Y PM."
+         If the client HAS chosen one add-on, delete this block and put that single
+         add-on as a priced row inside each package's investment breakdown instead
+         (garcia pattern). Prices: PRICING_AND_CONTENT.md.
+    <div class="addon-section reveal">
+      <div class="addon-title">Cocktail Hour</div>
+      <div class="addon-desc">
+        Live music during cocktails sets the tone before the reception begins. We offer acoustic arrangements tailored to the mood you want.
+      </div>
+      <div class="addon-options">
+        <div class="addon-card">
+          <div class="addon-type">Solo</div>
+          <div class="addon-price">$1,250</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-type">Duo</div>
+          <div class="addon-price">$1,875</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-type">Trio</div>
+          <div class="addon-price">$2,500</div>
+        </div>
+      </div>
+    </div>
+    ===== END COCKTAIL HOUR ADD-ON ===== -->
+
     <!-- Standard approved copy. Keep unless the event is 50+ miles out and travel
          is already priced in — then Adrian decides the wording. -->
     <div class="package-note reveal">
-      Travel fee may apply for events over 50 miles from Houston.
+      Additional instrumentation available upon request. Travel fee may apply for events over 50 miles from Houston.
     </div>
   </div>
 </section>
