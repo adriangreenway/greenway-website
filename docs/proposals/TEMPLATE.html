@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  ============================================================
+  GREENWAY BAND — PROPOSAL TEMPLATE (wedding)
+  Source design: garcia proposal as shipped 2026-06 (newest generation:
+  itemized investment + optional timeline). For corporate events, base on
+  the live the-united-way page instead of this template.
+
+  HOW TO USE (full workflow: .claude/skills/create-proposal/SKILL.md)
+  1. Copy this file to ~/Desktop/greenway-proposals/<slug>/index.html
+  2. Replace every {{TOKEN}}. Before deploy: grep '{{' must return NOTHING.
+  3. CSS below is the locked proposal brand (Bodoni Moda + Plus Jakarta Sans,
+     near-black/cream). Never restyle. This palette is separate from the
+     website's design tokens.
+  4. Copy integrity: prices/lineups only from docs/proposals/PRICING_AND_CONTENT.md
+     or Adrian. Testimonials are verbatim-locked. No invented venue experience.
+
+  TOKENS
+  {{COUPLE_SHORT}}          e.g. Victoria & Will          (title tag)
+  {{COVER_NAMES_HTML}}      e.g. Victoria <em>&</em> Will (cover, HTML allowed)
+  {{GREETING_NAMES}}        e.g. Victoria and Will        (intro greeting)
+  {{EVENT_DATE_LONG}}       e.g. February 13, 2027
+  {{VENUE_SHORT}}           e.g. Hotel ZaZa               (cover)
+  {{VENUE_FULL}}            e.g. Hotel ZaZa               (details grid; add city if not Houston)
+  {{CLIENT_FULL_NAMES}}     e.g. Victoria Garcia & Will Rosell
+  {{COORDINATOR}}           e.g. Stephanie Ton, Peachy Events
+  {{EVENT_TYPE}}            e.g. Wedding Reception
+  {{SERVICES_SUMMARY}}      e.g. Entertainment + MC + DJ
+  {{INTRO_VENUE_PARAGRAPH}} 2-3 sentences about their venue/options. FACTS ONLY.
+  {{INTRO_EVENING_PARAGRAPH}} 1-2 sentences framing the evening/timeline.
+  {{T1..T5_TIME/HEADING/DESC}} timeline blocks (section optional, see below)
+  {{PKG1_*}} / {{PKG2_*}}   package cards (titles, subtitles, price rows, totals)
+  ============================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The Greenway Band — Proposal for {{COUPLE_SHORT}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A09;
+    --charcoal: #111110;
+    --charcoal-mid: #1A1A18;
+    --cream: #F5F2ED;
+    --cream-muted: #D4D0C8;
+    --cream-dim: #8A867E;
+    --cream-faint: #5A5750;
+    --border: rgba(245,242,237,0.08);
+    --border-light: rgba(245,242,237,0.12);
+    --border-med: rgba(245,242,237,0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--black);
+    color: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* ===== FADE-IN SYSTEM ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ===== COVER SECTION ===== */
+  .cover {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 32px;
+    position: relative;
+  }
+
+  .logo-group {
+    margin-bottom: 80px;
+  }
+
+  .logo-rule {
+    width: 48px;
+    height: 0.5px;
+    background: var(--cream-dim);
+    margin: 0 auto;
+  }
+
+  .logo-the {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 11px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    margin-top: 28px;
+    text-indent: 10px;
+  }
+
+  .logo-name {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(28px, 8vw, 42px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--cream);
+    font-weight: 400;
+    margin: 4px 0;
+    text-indent: 5px;
+  }
+
+  .logo-band {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 14px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    font-weight: 400;
+    text-indent: 14px;
+  }
+
+  .logo-rule-bottom {
+    margin-top: 16px;
+  }
+
+  .cover-descriptor {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--cream-dim);
+    margin-top: 20px;
+    letter-spacing: 1.5px;
+  }
+
+  .cover-couple {
+    text-align: center;
+  }
+
+  .cover-prepared {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    margin-bottom: 16px;
+  }
+
+  .cover-couple-names {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(24px, 6vw, 32px);
+    color: var(--cream);
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+
+  .cover-couple-names em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--cream-muted);
+    font-size: 0.75em;
+  }
+
+  .cover-details {
+    margin-top: 20px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    line-height: 2.2;
+  }
+
+  .cover-footer {
+    position: absolute;
+    bottom: 36px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  .cover-footer p {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    opacity: 0.5;
+  }
+
+  /* ===== SECTION DIVIDERS ===== */
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border-light);
+  }
+
+  /* ===== CONTENT CONTAINER ===== */
+  .content {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ===== INTRO SECTION ===== */
+  .intro {
+    padding: 80px 0;
+  }
+
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    margin-bottom: 32px;
+  }
+
+  .intro-greeting {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(24px, 5vw, 32px);
+    color: var(--cream);
+    font-weight: 400;
+    line-height: 1.35;
+    margin-bottom: 40px;
+  }
+
+  .intro-body {
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--cream-muted);
+    font-weight: 300;
+  }
+
+  .intro-body p {
+    margin-bottom: 20px;
+  }
+
+  .intro-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .intro-signature {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 0.5px solid var(--border-light);
+  }
+
+  .sig-name {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 15px;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .sig-title {
+    font-size: 10px;
+    color: var(--cream-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ===== YOUR EVENING SECTION ===== */
+  .evening {
+    padding: 80px 0;
+  }
+
+  .evening-title {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(24px, 5vw, 28px);
+    color: var(--cream);
+    font-weight: 400;
+    margin-bottom: 40px;
+  }
+
+  .details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 0.5px solid var(--border-light);
+    margin-bottom: 56px;
+  }
+
+  @media (max-width: 480px) {
+    .details-grid {
+      grid-template-columns: 1fr;
+    }
+    .detail-cell {
+      border-right: none !important;
+    }
+  }
+
+  .detail-cell {
+    padding: 24px 28px;
+    border-bottom: 0.5px solid var(--border);
+    border-right: 0.5px solid var(--border);
+  }
+
+  .detail-cell:nth-child(even) {
+    border-right: none;
+  }
+
+  .detail-cell:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  .detail-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    margin-bottom: 8px;
+  }
+
+  .detail-value {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 15px;
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    margin-bottom: 24px;
+  }
+
+  .timeline-block {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .timeline-block:last-child {
+    border-bottom: none;
+  }
+
+  @media (max-width: 480px) {
+    .timeline-block {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+
+  .timeline-time {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 14px;
+    color: var(--cream);
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .timeline-content {}
+
+  .timeline-heading {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    margin-bottom: 6px;
+  }
+
+  .timeline-desc {
+    font-size: 13px;
+    color: var(--cream-muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ===== PACKAGE SECTION ===== */
+  .packages {
+    padding: 80px 0;
+  }
+
+  .packages-heading {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(24px, 5vw, 28px);
+    color: var(--cream);
+    font-weight: 400;
+    margin-bottom: 48px;
+  }
+
+  .package-card {
+    margin-bottom: 64px;
+  }
+
+  .package-card:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .package-badge {
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--cream);
+    display: inline-block;
+    padding: 5px 12px 4px;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .package-title {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(22px, 5vw, 26px);
+    color: var(--cream);
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+
+  .package-subtitle {
+    font-size: 11px;
+    color: var(--cream-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  .package-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 560px) {
+    .package-columns {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  .col-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    margin-bottom: 20px;
+  }
+
+  .item-list {
+    list-style: none;
+  }
+
+  .item-list li {
+    font-size: 14px;
+    color: var(--cream-muted);
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 300;
+  }
+
+  .item-list li:last-child {
+    border-bottom: none;
+  }
+
+  .item-list li .count {
+    font-size: 11px;
+    color: var(--cream-faint);
+    letter-spacing: 1px;
+  }
+
+  .services-list li {
+    font-size: 13px;
+  }
+
+  /* ===== INVESTMENT BREAKDOWN ===== */
+  .investment {
+    padding-top: 8px;
+    border-top: 0.5px solid var(--border-light);
+  }
+
+  .investment-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    margin-bottom: 24px;
+  }
+
+  .investment-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .investment-row:last-of-type {
+    border-bottom: none;
+  }
+
+  .investment-item {
+    font-size: 14px;
+    color: var(--cream-muted);
+    font-weight: 300;
+  }
+
+  .investment-price {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 16px;
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .investment-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 28px 0;
+    margin-top: 8px;
+    border-top: 0.5px solid var(--border-med);
+    border-bottom: 0.5px solid var(--border-med);
+  }
+
+  .investment-total-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+  }
+
+  .investment-total-price {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(28px, 7vw, 36px);
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .package-note {
+    font-size: 11px;
+    color: var(--cream-faint);
+    line-height: 1.8;
+    margin-top: 20px;
+    font-weight: 300;
+  }
+
+  /* ===== CARD SEPARATOR ===== */
+  .card-divider {
+    width: 40px;
+    height: 0.5px;
+    background: var(--border-med);
+    margin: 56px 0;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials {
+    padding: 80px 0;
+  }
+
+  .testimonial-block {
+    margin-bottom: 48px;
+  }
+
+  .testimonial-block:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .t-quote-mark {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 56px;
+    color: var(--cream-faint);
+    line-height: 0.5;
+    margin-bottom: 16px;
+    opacity: 0.35;
+  }
+
+  .t-text {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(16px, 4vw, 18px);
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .t-stars {
+    color: var(--cream-dim);
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 4px;
+  }
+
+  .t-attr {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+  }
+
+  .t-divider {
+    width: 36px;
+    height: 0.5px;
+    background: var(--border-med);
+    margin: 40px 0;
+  }
+
+  /* ===== CLOSING ===== */
+  .closing {
+    padding: 100px 0 80px;
+    text-align: center;
+  }
+
+  .closing-phrase {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-size: clamp(22px, 5vw, 26px);
+    color: var(--cream);
+    line-height: 1.5;
+    max-width: 360px;
+    margin: 0 auto 48px;
+  }
+
+  .closing-rule {
+    width: 36px;
+    height: 0.5px;
+    background: var(--cream-dim);
+    margin: 0 auto 36px;
+  }
+
+  .closing-contact p {
+    font-size: 12px;
+    color: var(--cream-dim);
+    letter-spacing: 1.5px;
+    line-height: 2.4;
+  }
+
+  .closing-contact a {
+    color: var(--cream-muted);
+    text-decoration: none;
+  }
+
+  .closing-website {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-muted);
+    margin-top: 20px;
+  }
+
+  .closing-logo {
+    margin-top: 64px;
+  }
+
+  .closing-logo .logo-the {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 9px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    text-indent: 8px;
+  }
+
+  .closing-logo .logo-name {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 20px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin: 2px 0;
+    font-weight: 400;
+    text-indent: 4px;
+  }
+
+  .closing-logo .logo-band {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 7px;
+    letter-spacing: 12px;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    font-weight: 400;
+    text-indent: 12px;
+  }
+
+  .closing-validity {
+    margin-top: 48px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    opacity: 0.5;
+  }
+
+  /* ===== SCROLL INDICATOR ===== */
+  .scroll-hint {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: scrollPulse 2.5s ease-in-out infinite;
+  }
+
+  .scroll-hint span {
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    opacity: 0.4;
+  }
+
+  .scroll-line {
+    width: 0.5px;
+    height: 24px;
+    background: linear-gradient(to bottom, var(--cream-faint), transparent);
+    opacity: 0.3;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0.5; transform: translateX(-50%) translateY(4px); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================ -->
+<!-- COVER -->
+<!-- ============================================ -->
+<section class="cover">
+  <div class="logo-group reveal">
+    <div class="logo-rule"></div>
+    <div class="logo-the">THE</div>
+    <div class="logo-name">GREENWAY</div>
+    <div class="logo-band">BAND</div>
+    <div class="logo-rule logo-rule-bottom"></div>
+    <div class="cover-descriptor">The sound of a great night.</div>
+  </div>
+
+  <div class="cover-couple reveal reveal-delay-2">
+    <div class="cover-prepared">Prepared for</div>
+    <!-- e.g. Victoria <em>&</em> Will — the <em>&</em> is the house style for couples -->
+    <div class="cover-couple-names">{{COVER_NAMES_HTML}}</div>
+    <div class="cover-details">
+      {{EVENT_DATE_LONG}}<br>
+      {{VENUE_SHORT}}
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+
+  <div class="cover-footer">
+    <p>greenwayband.com &nbsp;&middot;&nbsp; adrian@greenwayband.com</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============================================ -->
+<!-- INTRO -->
+<!-- ============================================ -->
+<section class="intro">
+  <div class="content">
+    <div class="section-label reveal">A note for you</div>
+    <div class="intro-greeting reveal reveal-delay-1">{{GREETING_NAMES}},<br>congratulations.</div>
+
+    <div class="intro-body reveal reveal-delay-2">
+      <!-- Paragraph 1: standard approved copy. Keep verbatim for weddings. -->
+      <p>We know how much goes into planning a wedding, and the band is one of those decisions that shapes the entire night. We don't take that lightly.</p>
+
+      <!-- Paragraph 2: THEIR venue + the options offered. Facts from the inquiry only.
+           No claims of having played a venue unless Adrian confirms it's true.
+           Shipped example (garcia): "Hotel ZaZa is the kind of room that comes alive
+           with a full band. We've put together two options below..." -->
+      <p>{{INTRO_VENUE_PARAGRAPH}}</p>
+
+      <!-- Paragraph 3: frame their evening/timeline in one or two sentences. -->
+      <p>{{INTRO_EVENING_PARAGRAPH}}</p>
+
+      <!-- Paragraph 4: standard approved copy. Keep verbatim. -->
+      <p>We'd love to be part of your night.</p>
+    </div>
+
+    <div class="intro-signature reveal reveal-delay-3">
+      <div class="sig-name">Adrian Michael</div>
+      <div class="sig-title">The Greenway Band</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============================================ -->
+<!-- YOUR EVENING -->
+<!-- ============================================ -->
+<section class="evening">
+  <div class="content">
+    <div class="section-label reveal">Event details</div>
+    <div class="evening-title reveal reveal-delay-1">Your Evening</div>
+
+    <!-- Keep 6 cells for a balanced grid. If a value is unknown, swap the cell for
+         one you do know (Location, Referral, Cocktail Hour, Reception) — never guess. -->
+    <div class="details-grid reveal reveal-delay-2">
+      <div class="detail-cell">
+        <div class="detail-label">Couple</div>
+        <div class="detail-value">{{CLIENT_FULL_NAMES}}</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Date</div>
+        <div class="detail-value">{{EVENT_DATE_LONG}}</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Venue</div>
+        <div class="detail-value">{{VENUE_FULL}}</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Event Coordinator</div>
+        <div class="detail-value">{{COORDINATOR}}</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Event Type</div>
+        <div class="detail-value">{{EVENT_TYPE}}</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Services</div>
+        <div class="detail-value">{{SERVICES_SUMMARY}}</div>
+      </div>
+    </div>
+
+    <!-- ===== TIMELINE (OPTIONAL) =====
+         Include ONLY when the schedule is actually known from the inquiry or Adrian.
+         If unknown, DELETE from "timeline-label" through the closing div of the
+         blocks wrapper below. Duplicate or remove blocks to fit; renumber tokens. -->
+    <div class="timeline-label reveal">Timeline</div>
+
+    <div class="reveal reveal-delay-1">
+      <div class="timeline-block">
+        <div class="timeline-time">{{T1_TIME}}</div>
+        <div class="timeline-content">
+          <div class="timeline-heading">{{T1_HEADING}}</div>
+          <div class="timeline-desc">{{T1_DESC}}</div>
+        </div>
+      </div>
+
+      <div class="timeline-block">
+        <div class="timeline-time">{{T2_TIME}}</div>
+        <div class="timeline-content">
+          <div class="timeline-heading">{{T2_HEADING}}</div>
+          <div class="timeline-desc">{{T2_DESC}}</div>
+        </div>
+      </div>
+
+      <div class="timeline-block">
+        <div class="timeline-time">{{T3_TIME}}</div>
+        <div class="timeline-content">
+          <div class="timeline-heading">{{T3_HEADING}}</div>
+          <div class="timeline-desc">{{T3_DESC}}</div>
+        </div>
+      </div>
+
+      <div class="timeline-block">
+        <div class="timeline-time">{{T4_TIME}}</div>
+        <div class="timeline-content">
+          <div class="timeline-heading">{{T4_HEADING}}</div>
+          <div class="timeline-desc">{{T4_DESC}}</div>
+        </div>
+      </div>
+
+      <div class="timeline-block">
+        <div class="timeline-time">{{T5_TIME}}</div>
+        <div class="timeline-content">
+          <div class="timeline-heading">{{T5_HEADING}}</div>
+          <div class="timeline-desc">{{T5_DESC}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============================================ -->
+<!-- PACKAGES + INVESTMENT -->
+<!-- ============================================ -->
+<section class="packages">
+  <div class="content">
+    <div class="section-label reveal">Your options</div>
+    <div class="packages-heading reveal reveal-delay-1">Two Ways to Fill the Room</div>
+
+    <!-- ===== CARD 1 (RECOMMENDED) =====
+         Lineup rows below are the standard 10-Piece. If offering a different size,
+         swap rows to the exact config in docs/proposals/PRICING_AND_CONTENT.md.
+         Never invent an instrumentation. -->
+    <div class="package-card reveal reveal-delay-2">
+      <div class="package-badge">Recommended</div>
+      <div class="package-title">{{PKG1_TITLE}}</div>
+      <div class="package-subtitle">{{PKG1_SUBTITLE}}</div>
+
+      <div class="package-columns">
+        <div>
+          <div class="col-label">Musicians</div>
+          <ul class="item-list">
+            <li>Male Vocals <span class="count">1</span></li>
+            <li>Female Vocals <span class="count">2</span></li>
+            <li>Keys <span class="count">1</span></li>
+            <li>Guitar <span class="count">1</span></li>
+            <li>Bass <span class="count">1</span></li>
+            <li>Drums <span class="count">1</span></li>
+            <li>Horns <span class="count">3</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="col-label">Included Services</div>
+          <ul class="item-list services-list">
+            <li>Sound Equipment and Engineer</li>
+            <li>Lighting Equipment and Engineer</li>
+            <li>Emcee Services</li>
+            <li>Personalized First Dances</li>
+            <li>Song Requests</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Delete unused add-on rows. Total must equal the sum of the rows kept. -->
+      <div class="investment">
+        <div class="investment-label">Investment</div>
+        <div class="investment-row">
+          <div class="investment-item">{{PKG1_TITLE}}</div>
+          <div class="investment-price">{{PKG1_BAND_PRICE}}</div>
+        </div>
+        <div class="investment-row">
+          <div class="investment-item">{{PKG1_ADDON1_ITEM}}</div>
+          <div class="investment-price">{{PKG1_ADDON1_PRICE}}</div>
+        </div>
+        <div class="investment-row">
+          <div class="investment-item">{{PKG1_ADDON2_ITEM}}</div>
+          <div class="investment-price">{{PKG1_ADDON2_PRICE}}</div>
+        </div>
+        <div class="investment-total">
+          <div class="investment-total-label">Total Investment</div>
+          <div class="investment-total-price">{{PKG1_TOTAL}}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CARD SEPARATOR ===== -->
+    <div class="card-divider reveal"></div>
+
+    <!-- ===== CARD 2 (alternative) =====
+         Lineup rows below are the 7-Piece with sax. For the 6-Piece, delete the
+         Saxophone row and set Female Vocals to 1 (see PRICING_AND_CONTENT.md). -->
+    <div class="package-card reveal">
+      <div class="package-title">{{PKG2_TITLE}}</div>
+      <div class="package-subtitle">{{PKG2_SUBTITLE}}</div>
+
+      <div class="package-columns">
+        <div>
+          <div class="col-label">Musicians</div>
+          <ul class="item-list">
+            <li>Male Vocals <span class="count">1</span></li>
+            <li>Female Vocals <span class="count">1</span></li>
+            <li>Keys <span class="count">1</span></li>
+            <li>Guitar <span class="count">1</span></li>
+            <li>Bass <span class="count">1</span></li>
+            <li>Drums <span class="count">1</span></li>
+            <li>Saxophone <span class="count">1</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="col-label">Included Services</div>
+          <ul class="item-list services-list">
+            <li>Sound Equipment and Engineer</li>
+            <li>Lighting Equipment and Engineer</li>
+            <li>Emcee Services</li>
+            <li>Personalized First Dances</li>
+            <li>Song Requests</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="investment">
+        <div class="investment-label">Investment</div>
+        <div class="investment-row">
+          <div class="investment-item">{{PKG2_TITLE}}</div>
+          <div class="investment-price">{{PKG2_BAND_PRICE}}</div>
+        </div>
+        <div class="investment-row">
+          <div class="investment-item">{{PKG2_ADDON1_ITEM}}</div>
+          <div class="investment-price">{{PKG2_ADDON1_PRICE}}</div>
+        </div>
+        <div class="investment-row">
+          <div class="investment-item">{{PKG2_ADDON2_ITEM}}</div>
+          <div class="investment-price">{{PKG2_ADDON2_PRICE}}</div>
+        </div>
+        <div class="investment-total">
+          <div class="investment-total-label">Total Investment</div>
+          <div class="investment-total-price">{{PKG2_TOTAL}}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Standard approved copy. Keep unless the event is 50+ miles out and travel
+         is already priced in — then Adrian decides the wording. -->
+    <div class="package-note reveal">
+      Travel fee may apply for events over 50 miles from Houston.
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============================================ -->
+<!-- TESTIMONIALS — APPROVED POOL, VERBATIM ONLY -->
+<!-- These three are the only approved testimonials. Never edit, reorder is fine,
+     never add new ones without Adrian providing the real review. -->
+<!-- ============================================ -->
+<section class="testimonials">
+  <div class="content">
+    <div class="section-label reveal">What couples say</div>
+
+    <div class="testimonial-block reveal reveal-delay-1">
+      <div class="t-quote-mark">&ldquo;</div>
+      <div class="t-text">
+        From start to finish, the songs, the sound, and the look of the band were all just amazing. You left our guests wanting more.
+      </div>
+      <div class="t-stars">&starf; &starf; &starf; &starf; &starf;</div>
+      <div class="t-attr">Allison &nbsp;&middot;&nbsp; WeddingWire</div>
+    </div>
+
+    <div class="t-divider reveal"></div>
+
+    <div class="testimonial-block reveal">
+      <div class="t-quote-mark">&ldquo;</div>
+      <div class="t-text">
+        Every guest was on their feet by the second song. We still have people texting us about the band three months later.
+      </div>
+      <div class="t-stars">&starf; &starf; &starf; &starf; &starf;</div>
+      <div class="t-attr">Sarah & James H. &nbsp;&middot;&nbsp; WeddingWire</div>
+    </div>
+
+    <div class="t-divider reveal"></div>
+
+    <div class="testimonial-block reveal">
+      <div class="t-quote-mark">&ldquo;</div>
+      <div class="t-text">
+        Our wedding guests danced the night away like I've never seen before.
+      </div>
+      <div class="t-stars">&starf; &starf; &starf; &starf; &starf;</div>
+      <div class="t-attr">Emma B. &nbsp;&middot;&nbsp; WeddingWire</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============================================ -->
+<!-- CLOSING — standard approved copy, keep verbatim -->
+<!-- ============================================ -->
+<section class="closing">
+  <div class="content">
+    <div class="closing-phrase reveal">Your guests won't stop talking about it.</div>
+    <div class="closing-rule reveal reveal-delay-1"></div>
+    <div class="closing-contact reveal reveal-delay-2">
+      <p>Adrian Michael</p>
+      <p><a href="mailto:adrian@greenwayband.com">adrian@greenwayband.com</a></p>
+      <p>(281) 467-1226</p>
+    </div>
+    <div class="closing-website reveal reveal-delay-3">greenwayband.com</div>
+
+    <div class="closing-logo reveal reveal-delay-4">
+      <div class="logo-rule" style="margin-bottom: 14px;"></div>
+      <div class="logo-the">THE</div>
+      <div class="logo-name">GREENWAY</div>
+      <div class="logo-band">BAND</div>
+      <div class="logo-rule" style="margin-top: 12px;"></div>
+    </div>
+
+    <div class="closing-validity reveal reveal-delay-5">
+      This proposal is valid for 30 days from date of receipt.
+    </div>
+  </div>
+</section>
+
+<script>
+  // Intersection Observer for scroll reveals
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Cover elements visible immediately
+  document.querySelectorAll('.cover .reveal').forEach(el => {
+    setTimeout(() => el.classList.add('visible'), 200);
+  });
+
+  // Hide scroll hint after first scroll
+  let scrolled = false;
+  window.addEventListener('scroll', () => {
+    if (!scrolled) {
+      scrolled = true;
+      const hint = document.querySelector('.scroll-hint');
+      if (hint) {
+        hint.style.transition = 'opacity 0.6s ease';
+        hint.style.opacity = '0';
+        setTimeout(() => hint.style.display = 'none', 600);
+      }
+    }
+  }, { passive: true });
+</script>
+
+</body>
+</html>
