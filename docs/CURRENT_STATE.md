@@ -1,6 +1,6 @@
 # CURRENT STATE: The Greenway Band Website
 
-**Last updated:** 2026-07-13
+**Last updated:** 2026-07-14
 **Last verified build:** PASS on 2026-07-03 (`npm run build`, 6 pages, clean; no test/typecheck scripts exist in this repo to run).
 
 Rules for this file (Claude Code, obey these):
@@ -49,4 +49,7 @@ Reconciliation debt on the Astro rebuild, open whenever Adrian wants it tackled 
 - `PROJECT_STATE.md`, `ARCHITECTURE.md`, and `INTEGRATIONS.md` hold the deep, evidence-backed detail behind every line above; this file is the quick truth only.
 
 ## Next recommended action
-Nothing to build right now on either track. Gates 0-2 are fully closed and phone-tested on the Squarespace embed, but Gate 3 (going live) is deliberately on hold until Adrian confirms both this website's build and the Growth Hour app are entirely done (see D13). The Astro rebuild stays paused behind Growth Hour's M3. Do not propose go-live steps for either track until Adrian raises it himself.
+Proposals track: giulia-costantini is live; open one-word offers awaiting Adrian:
+Gmail draft reply to Giulia, shortening the proposals site's 1-hour cache, moving
+the GitHub token out of the proposals repo's remote URL into the keychain.
+Nothing to build right now on either site track. Gates 0-2 are fully closed and phone-tested on the Squarespace embed, but Gate 3 (going live) is deliberately on hold until Adrian confirms both this website's build and the Growth Hour app are entirely done (see D13). The Astro rebuild stays paused behind Growth Hour's M3. Do not propose go-live steps for either track until Adrian raises it himself.
