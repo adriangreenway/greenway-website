@@ -44,10 +44,11 @@ Model: Sonnet 5 is fine for this workflow.
 
 5. **Build the page.** Copy `docs/proposals/TEMPLATE.html` to
    `~/Desktop/greenway-proposals/<slug>/index.html` (slug rules in
-   PROPOSAL_SYSTEM.md). Fill every `{{TOKEN}}`; write the two intro paragraphs from
-   the fact sheet; timeline section only if the schedule is known — else delete it;
-   lineups exactly per PRICING_AND_CONTENT.md. Corporate event → base on the live
-   `the-united-way` page instead of the wedding template.
+   PROPOSAL_SYSTEM.md). Fill every `{{TOKEN}}`; NO intro section — the Template 4.1
+   email carries the greeting (Adrian, 2026-07-14; see PRICING_AND_CONTENT.md);
+   timeline section only if the schedule is known — else delete it; lineups exactly
+   per PRICING_AND_CONTENT.md. Corporate event → base on the live `the-united-way`
+   page instead of the wedding template.
 
 6. **Verify locally.**
    - `grep -c '{{' index.html` must output 0
@@ -65,7 +66,9 @@ Model: Sonnet 5 is fine for this workflow.
 
 9. **After.** Commit in `~/Desktop/greenway-proposals` ("Add proposal: <slug>").
    If Adrian asks, create a Gmail **draft** to the client with the link — never send;
-   sending is his.
+   sending is his. Use Template 4.1 in `docs/proposals/EMAIL_TEMPLATES.md` (raw URLs
+   only in hrefs; tell Adrian to click-test both links in the draft — see the Google
+   "Redirect Notice" gotcha noted there).
 
 ## Revisions
 

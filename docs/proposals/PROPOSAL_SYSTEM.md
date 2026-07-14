@@ -16,6 +16,7 @@ Last verified: 2026-07-13.
 | Stale trap — never use | this repo's `public/proposals/` | Legacy remnant (one old copy of ally-byrne). Proposals do NOT ship with the Astro site. |
 | Template | `docs/proposals/TEMPLATE.html` (this repo) | Wedding template, garcia-generation design. |
 | Pricing + approved content | `docs/proposals/PRICING_AND_CONTENT.md` | Real observed prices, testimonial pool, copy rules. |
+| Email templates | `docs/proposals/EMAIL_TEMPLATES.md` | Template 4.1 new-inquiry email, Gmail draft gotchas. |
 | Workflow skill | `.claude/skills/create-proposal/SKILL.md` | The end-to-end runbook. |
 
 The deploy folder also holds non-proposal pages (`brand-guide`, `brand-guide-v2`,

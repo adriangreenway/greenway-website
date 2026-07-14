@@ -83,12 +83,24 @@ not — a new testimonial requires Adrian supplying the real review.
 - Travel note: *Travel fee may apply for events over 50 miles from Houston.*
 - Contact block: Adrian Michael · adrian@greenwayband.com · (281) 467-1226 ·
   greenwayband.com
-- Wedding intro paragraph 1 (reworked 2026-07-13, Adrian-approved): *Thank you for
-  reaching out to us. A wedding is a thousand decisions, and the band is the one your
-  guests will still be talking about on the drive home. We take that part personally.*
-- Wedding intro paragraph 4: *We'd love to be part of your night.*
-- Greeting format (2026-07-13): "Congratulations,&lt;br&gt;&lt;first name(s)&gt;" — warm,
-  NO terminal period. The old "&lt;names&gt;, congratulations." style is retired.
+- **NO-INTRO IS THE STANDARD (Adrian, 2026-07-14, locked on the turner build):** the
+  Template 4.1 email (EMAIL_TEMPLATES.md) carries greeting/thanks/congrats; the page
+  repeats none of it and runs cover → details → options → testimonials → closing.
+  TEMPLATE.html has the section removed. Adrian may later refine page copy via a
+  ChatGPT-interview spec; until he says so, build proposals with no intro. The
+  intro-wording entries below are history only.
+- Wedding intro paragraph 1 (reworked 2026-07-14, Adrian-approved, turner build):
+  *Thank you for reaching out to us. We would love to be a part of your big day.*
+  The 2026-07-13 "thousand decisions / drive home" opener is RETIRED (Adrian: corny).
+- Wedding intro closing paragraph (2026-07-14): *Below are some options. If you have
+  any questions, just reach out.* Replaces the retired "We'd love to be part of your
+  night." — that sentiment now lives in paragraph 1.
+- Intro tone (Adrian, 2026-07-14): plain sentences, ONE warm sentence max, nothing
+  corny, no metaphors ("the drive home" is the banned example). Optional middle
+  paragraph only for a real, plain fact about their event; most proposals skip it.
+- Greeting format (2026-07-14): "Congratulations,&lt;br&gt;&lt;first name(s)&gt;!" — ends
+  with an exclamation point, never a period. The old "&lt;names&gt;, congratulations."
+  style is retired.
 - Package subtitle style: "Full horn section + reception entertainment + MC" (garcia).
 - The 10-Piece leads with the Recommended badge by default (Adrian, 2026-07-13).
 

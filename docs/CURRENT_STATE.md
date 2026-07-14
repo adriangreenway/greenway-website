@@ -21,11 +21,11 @@ Working tree on branch `docs/build-context`, up to date with `origin`. The site 
 Reconciliation debt on the Astro rebuild, open whenever Adrian wants it tackled (not urgent, unaffected by the Squarespace track): `dev` vs `main` branch split, the uncommitted "April work" on `dev`'s working tree (publishes Reviews + FAQ), and the staging self-redirect. Full detail in `PROJECT_STATE.md`.
 
 ## Recently completed (last 5 max, then archive)
+- 2026-07-14 Proposal live: `proposals.greenwayband.com/turner` (Garrett Turner wedding 2027-10-23, Le Tesserae, Houston; 6-Piece $10,350 recommended + 10-Piece $14,375 + cocktail add-on cards). Intro section REMOVED same day (repetitive with the Template 4.1 email, now in `docs/proposals/EMAIL_TEMPLATES.md`); **no-intro is the locked standard** for new proposals (see PRICING_AND_CONTENT.md). Template 4.1 email SENT to Garrett 2026-07-14 with clean direct links (17hats `#`-URL trips a Google Redirect Notice inside Gmail — gotcha noted in EMAIL_TEMPLATES.md). Page client-visible, 30-day validity running. Proposals repo commits `4d6f93a` + `706cef4`; this repo's doc edits uncommitted.
 - 2026-07-13 Proposal live: `proposals.greenwayband.com/giulia-costantini` (wedding 2027-05-29, The Houstonian Hotel; 10-Piece $14,375 recommended + 6-Piece $10,350 + cocktail add-on cards). Adrian's proposal style rules locked into `docs/proposals/` (commit `09f5b3a` on this branch, not pushed). Third track, unaffected by any hold.
 - 2026-07-03 Squarespace lead-form embed v3: premium dark redesign ported from the Chat 1.3 "CSS Branded Forms" session (Bodoni Moda, charcoal shadowed fields, cream button, phone auto-format, staggered reveal); wrapper carries its own background so section color can't cause invisible text again. Same 8-field payload, schema-matched. Adrian's phone test from `/inquiry-test` succeeded earlier the same day (browser-side confirmed; Growth Hour record check still pending — Claude has no dashboard login). Awaiting re-paste of v3 + one re-test. Gate 3 still needs Adrian's "go". Extra old-form fields (event type, budget, cocktail hour, planner) deferred — need a Growth Hour schema change first.
 - 2026-07-03 Foreman workflow installed: `CLAUDE.md` rewritten, `.claude/skills/` added, `START_HERE.md` + this file + `PROJECT_BRIEF.md` + `ROADMAP.md` + `DECISIONS.md` + `CHANGELOG.md` created.
 - 2026-06-27 Recovery + documentation pass: `CLAUDE.md`, `README.md`, and the full `/docs` verified-state set added (`PROJECT_STATE.md`, `ARCHITECTURE.md`, `INTEGRATIONS.md`, etc). No source code changed.
-- 2026-04-13 `dev` branch tip: netlify.app→greenwayband.com redirect added (`4198c83`).
 
 ## Known issues
 | Issue | Severity | Notes |
@@ -49,8 +49,9 @@ Reconciliation debt on the Astro rebuild, open whenever Adrian wants it tackled 
 - `PROJECT_STATE.md`, `ARCHITECTURE.md`, and `INTEGRATIONS.md` hold the deep, evidence-backed detail behind every line above; this file is the quick truth only.
 
 ## Next recommended action
-Proposals track: giulia-costantini is live and Adrian emailed her the link
-(2026-07-14, so the page is client-visible; 30-day validity running). Open
-one-word offers: shortening the proposals site's 1-hour cache, and moving the
-GitHub token out of the proposals repo's remote URL into the keychain.
+Proposals track: turner and giulia-costantini both live and emailed (30-day
+validity running); awaiting client replies, nothing queued. If Adrian brings a
+ChatGPT-locked page-copy spec, fold it into TEMPLATE.html. Open one-word offers:
+shortening the proposals site's 1-hour cache, and moving the GitHub token out of
+the proposals repo's remote URL into the keychain.
 Nothing to build right now on either site track. Gates 0-2 are fully closed and phone-tested on the Squarespace embed, but Gate 3 (going live) is deliberately on hold until Adrian confirms both this website's build and the Growth Hour app are entirely done (see D13). The Astro rebuild stays paused behind Growth Hour's M3. Do not propose go-live steps for either track until Adrian raises it himself.

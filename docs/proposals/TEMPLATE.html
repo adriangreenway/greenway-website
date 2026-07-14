@@ -16,14 +16,15 @@
      website's design tokens.
   4. Copy integrity: prices/lineups only from docs/proposals/PRICING_AND_CONTENT.md
      or Adrian. Testimonials are verbatim-locked. No invented venue experience.
-  5. Voice (Adrian, 2026-07-13): warm and personal, plain sentences, less is more.
-     Greeting carries NO terminal period. Never mention another client, couple,
-     or their wedding by name anywhere in a proposal.
+  5. Voice (Adrian, 2026-07-14): plain sentences, less is more, nothing corny,
+     no metaphors. NO intro section at all — the Template 4.1 email
+     (docs/proposals/EMAIL_TEMPLATES.md) carries the greeting and thanks; the
+     page is a pure document: cover → details → options. Never mention another
+     client, couple, or their wedding by name anywhere in a proposal.
 
   TOKENS
   {{COUPLE_SHORT}}          e.g. Victoria & Will          (title tag)
   {{COVER_NAMES_HTML}}      e.g. Victoria <em>&</em> Will (cover, HTML allowed)
-  {{GREETING_NAMES}}        e.g. Victoria and Will        (intro greeting)
   {{EVENT_DATE_LONG}}       e.g. February 13, 2027
   {{VENUE_SHORT}}           e.g. Hotel ZaZa               (cover)
   {{VENUE_FULL}}            e.g. Hotel ZaZa               (details grid; add city if not Houston)
@@ -31,8 +32,6 @@
   {{COORDINATOR}}           e.g. Stephanie Ton, Peachy Events
   {{EVENT_TYPE}}            e.g. Wedding Reception
   {{SERVICES_SUMMARY}}      e.g. Entertainment + MC + DJ
-  {{INTRO_VENUE_PARAGRAPH}} 2-3 sentences about their venue/options. FACTS ONLY.
-  {{INTRO_EVENING_PARAGRAPH}} 1-2 sentences framing the evening/timeline.
   {{T1..T5_TIME/HEADING/DESC}} timeline blocks (section optional, see below)
   {{PKG1_*}} / {{PKG2_*}}   package cards (titles, subtitles, price rows, totals);
                             subtitle style: "Full horn section + reception entertainment + MC"
@@ -841,40 +840,12 @@
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- ============================================ -->
-<!-- INTRO -->
-<!-- ============================================ -->
-<section class="intro">
-  <div class="content">
-    <div class="section-label reveal">A note for you</div>
-    <div class="intro-greeting reveal reveal-delay-1">Congratulations,<br>{{GREETING_NAMES}}</div>
-
-    <div class="intro-body reveal reveal-delay-2">
-      <!-- Paragraph 1: standard approved copy (reworked 2026-07-13). Keep verbatim for weddings. -->
-      <p>Thank you for reaching out to us. A wedding is a thousand decisions, and the band is the one your guests will still be talking about on the drive home. We take that part personally.</p>
-
-      <!-- Paragraph 2: THEIR venue + the options offered. Facts from the inquiry only.
-           No claims of having played a venue unless Adrian confirms it's true.
-           Never mention another client, couple, or wedding by name.
-           Shipped example (garcia): "Hotel ZaZa is the kind of room that comes alive
-           with a full band. We've put together two options below..." -->
-      <p>{{INTRO_VENUE_PARAGRAPH}}</p>
-
-      <!-- Paragraph 3: frame their evening/timeline in one or two sentences. -->
-      <p>{{INTRO_EVENING_PARAGRAPH}}</p>
-
-      <!-- Paragraph 4: standard approved copy. Keep verbatim. -->
-      <p>We'd love to be part of your night.</p>
-    </div>
-
-    <div class="intro-signature reveal reveal-delay-3">
-      <div class="sig-name">Adrian Michael</div>
-      <div class="sig-title">The Greenway Band</div>
-    </div>
-  </div>
-</section>
+<!-- NO INTRO SECTION (Adrian, 2026-07-14, decided on the turner build): the
+     Template 4.1 email already greets, thanks, and congratulates, so the page
+     repeats none of it. Page order: cover → event details → options →
+     testimonials → closing. Reinstate an intro only on Adrian's explicit word;
+     retired wording history lives in PRICING_AND_CONTENT.md. The .intro CSS
+     above is intentionally kept in case a future spec brings one back. -->
 
 <div class="section-divider"></div>
 
