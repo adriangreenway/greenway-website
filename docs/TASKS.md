@@ -1,5 +1,9 @@
 # TASKS
 
+> **Superseded 2026-07-03 by [docs/ROADMAP.md](ROADMAP.md)**, which carries this same list forward
+> in the Foreman workflow's format (with statuses) and adds the 2026-07-03 cross-project pause
+> note. Kept here for its original evidence trail; update ROADMAP.md going forward, not this file.
+
 Derived from the 2026-06-27 reconciliation (see docs/PROJECT_STATE.md). Owner: Adrian.
 Status legend: **Now** (do next) · **Next** · **Later** · **Blocked**.
 

@@ -43,12 +43,14 @@ To unpublish, remove it from `navLinks` and remove/guard the page file.
 
 ## Branches & git
 - Branches: `dev` (deployed — strong inference) and `main` (has committed Reviews/FAQ; not deployed).
-  They have **diverged**; reconcile before relying on either (see docs/TASKS.md).
+  They have **diverged**; reconcile before relying on either (see docs/ROADMAP.md).
 - The working tree currently carries **uncommitted April work** on `dev` — don't blow it away;
   decide what to do with it first.
-- **Hard stops (owner approval required):** `git commit`, `git push`, deploys, Cloudflare DNS
-  changes, installing global packages, editing `.env`. Don't modify the live site beyond read-only
-  checks.
+- **Updated 2026-07-03:** the authoritative git-safety rules now live in `CLAUDE.md` (Foreman
+  workflow, matching `~/greenway-growth-hour`). Summary: commits are a normal part of finishing a
+  stage and don't each need a separate yes; **`git push`, deploys, Cloudflare DNS changes, force
+  push, history rewrites, and branch deletion still require Adrian's explicit approval.** Don't
+  modify the live site beyond read-only checks.
 
 ## Deploy (context, not a self-serve action)
 - Netlify builds `npm run build` and publishes `dist`. Deploy branch ≈ `dev` (confirm in UI).

@@ -6,6 +6,26 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 4321
+    },
+    {
+      "name": "nbb",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 5173,
+      "cwd": "/Users/adrianjoseph/Desktop/natural-bodybuilding-app"
+    },
+    {
+      "name": "growth-hour",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-lc", "cd /Users/adrianjoseph/greenway-growth-hour && exec npm run dev"],
+      "port": 3000,
+      "autoPort": true
+    },
+    {
+      "name": "proposals",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8899", "--directory", "/Users/adrianjoseph/Desktop/greenway-proposals"],
+      "port": 8899
     }
   ]
 }

@@ -1,0 +1,482 @@
+<!--
+  Greenway lead-capture form — Squarespace Code Block embed. v3 (premium dark).
+  Built per WEBSITE_PLAN_2026-07-03.md (Gates 0-3), Bridge Prompt B.
+
+  DESIGN SOURCE (2026-07-03): ported from the Chat 1.3 "CSS Branded Forms"
+  session (export: ~/Library/Mobile Documents/com~apple~CloudDocs/
+  Chat-1.3-CSS-Branded-Forms.md) and the original standalone form
+  (~/Desktop/Project Knowledge/greenway-inquiry-form.html). Key treatments:
+  Bodoni Moda headline, charcoal (#111110) boxed fields with inset shadows
+  on Rich Black (#0A0A09), cream glow focus ring, inverted cream submit
+  button with hover lift, phone auto-format, staggered fade-up reveal,
+  muted #9B5555 error red, "About You / Event Details / One More Thing"
+  section labels. This supersedes the earlier cream/underline version —
+  the wrapper now carries its OWN #0A0A09 background, so the Squarespace
+  section background no longer matters and text can never go invisible.
+
+  FONT NOTE: fonts load via Google Fonts @import. The Astro repo's
+  "Fontsource, not Google Fonts" rule is a build-pipeline rule; a
+  Squarespace code block has no build step, so the CDN import is the
+  only practical option here.
+
+  FIELD SET NOTE (2026-07-03): Growth Hour's /api/lead-intake now also
+  accepts event_type, cocktail_hour_interest, budget_range, planner_name,
+  and message — deployed and live-verified the same day. All five are
+  included below, all optional, matching the original form's fields.
+
+  STATUS: dark build. Not linked from nav or the real Book page. Gate 3
+  (going live) needs Adrian's explicit "go". See docs/squarespace/README.md.
+
+  Posts to Growth Hour's public intake endpoint (~/greenway-growth-hour,
+  Railway). CORS locked to greenwayband.com origins — works only on a page
+  served from that domain (verified live 2026-07-03; Adrian's phone test
+  submitted successfully from /inquiry-test the same day).
+-->
+<div id="greenway-lead-form">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap');
+
+  #greenway-lead-form {
+    background: #0A0A09;
+    padding: 64px 24px 80px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  #greenway-lead-form *, #greenway-lead-form *::before, #greenway-lead-form *::after { box-sizing: border-box; }
+  #greenway-lead-form .gw-inner { max-width: 640px; margin: 0 auto; }
+
+  /* ===== Header ===== */
+  #greenway-lead-form .gw-header { text-align: center; margin-bottom: 56px; transition: opacity .25s ease; }
+  #greenway-lead-form .gw-rule { width: 60px; height: 1px; background: rgba(245,242,237,0.18); margin: 0 auto; }
+  #greenway-lead-form .gw-headline {
+    font-family: 'Bodoni Moda', serif; font-weight: 400;
+    font-size: clamp(24px, 5vw, 30px); letter-spacing: 0.5px; line-height: 1.25;
+    color: #F5F2ED; margin: 24px 0 0;
+  }
+  #greenway-lead-form .gw-subline {
+    font-size: 14px; font-weight: 300; line-height: 1.8;
+    color: rgba(245,242,237,0.4); max-width: 480px; margin: 14px auto 0;
+  }
+
+  /* ===== Sections & layout ===== */
+  #greenway-lead-form form { transition: opacity .25s ease; }
+  #greenway-lead-form .gw-section { margin-bottom: 44px; }
+  #greenway-lead-form .gw-section-label {
+    font-size: 9px; font-weight: 500; letter-spacing: 3.5px; text-transform: uppercase;
+    color: rgba(245,242,237,0.25);
+    padding-bottom: 12px; border-bottom: 1px solid rgba(245,242,237,0.06);
+    margin-bottom: 24px;
+  }
+  #greenway-lead-form .gw-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  #greenway-lead-form .gw-row--single { grid-template-columns: 1fr; }
+  @media (max-width: 560px) { #greenway-lead-form .gw-row { grid-template-columns: 1fr; } }
+
+  #greenway-lead-form label {
+    display: block; font-size: 12px; font-weight: 500; letter-spacing: 0.5px;
+    color: rgba(245,242,237,0.5); margin-bottom: 8px;
+  }
+  #greenway-lead-form .gw-optional { font-size: 10px; font-weight: 300; font-style: italic; color: rgba(245,242,237,0.22); letter-spacing: 0; text-transform: none; margin-left: 6px; }
+
+  /* ===== Fields: charcoal boxes, inset shadows, glow focus ===== */
+  #greenway-lead-form input, #greenway-lead-form select, #greenway-lead-form textarea {
+    width: 100%;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px; /* 16px minimum prevents iOS zoom-on-focus */
+    font-weight: 400; color: #F5F2ED;
+    background-color: #111110;
+    border: 1px solid rgba(245,242,237,0.08);
+    border-radius: 6px;
+    padding: 14px 18px;
+    outline: none;
+    transition: border-color .25s ease, box-shadow .25s ease;
+    -webkit-appearance: none; appearance: none;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 1px 0 rgba(245,242,237,0.02);
+  }
+  #greenway-lead-form input:hover, #greenway-lead-form select:hover, #greenway-lead-form textarea:hover {
+    border-color: rgba(245,242,237,0.15);
+  }
+  #greenway-lead-form input:focus, #greenway-lead-form select:focus, #greenway-lead-form textarea:focus {
+    border-color: rgba(245,242,237,0.35);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 0 0 3px rgba(245,242,237,0.04), 0 1px 0 rgba(245,242,237,0.02);
+  }
+  #greenway-lead-form input::placeholder, #greenway-lead-form textarea::placeholder { color: rgba(245,242,237,0.18); font-weight: 300; }
+  #greenway-lead-form textarea { resize: vertical; min-height: 100px; line-height: 1.7; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+  #greenway-lead-form input[type="date"] { color-scheme: dark; cursor: pointer; min-height: 51px; }
+  #greenway-lead-form input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); cursor: pointer; }
+
+  #greenway-lead-form select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8680' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center;
+    padding-right: 44px; cursor: pointer;
+  }
+  #greenway-lead-form select option { background: #111110; color: #F5F2ED; }
+  #greenway-lead-form select.gw-unselected { color: rgba(245,242,237,0.18); font-weight: 300; }
+
+  /* ===== Errors (muted red, no alarm bells) ===== */
+  #greenway-lead-form .gw-input-error {
+    border-color: #9B5555 !important;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 0 0 2px rgba(155,85,85,0.12) !important;
+  }
+  #greenway-lead-form .gw-field-error { font-size: 11px; color: #9B5555; min-height: 16px; margin-top: 6px; }
+  #greenway-lead-form .gw-form-error { font-size: 13px; color: #9B5555; text-align: center; margin-top: 20px; line-height: 1.7; }
+
+  /* ===== Submit: inverted cream button, soft light bleed ===== */
+  #greenway-lead-form .gw-submit-row { margin-top: 8px; text-align: center; }
+  #greenway-lead-form .gw-submit {
+    display: inline-block;
+    background: #F5F2ED; color: #0A0A09;
+    border: none; border-radius: 4px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    padding: 17px 56px; cursor: pointer;
+    transition: transform .3s ease, box-shadow .3s ease, opacity .3s ease;
+    box-shadow: 0 2px 8px rgba(245,242,237,0.06), 0 8px 24px rgba(245,242,237,0.03);
+  }
+  #greenway-lead-form .gw-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 12px rgba(245,242,237,0.1), 0 12px 36px rgba(245,242,237,0.05);
+  }
+  #greenway-lead-form .gw-submit:active { transform: translateY(0); box-shadow: 0 1px 4px rgba(245,242,237,0.05); }
+  #greenway-lead-form .gw-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  @media (max-width: 560px) { #greenway-lead-form .gw-submit { width: 100%; padding: 17px 24px; } }
+  #greenway-lead-form .gw-submit-note { font-size: 11px; color: rgba(245,242,237,0.25); margin-top: 16px; line-height: 1.7; }
+
+  /* ===== Confirmation ===== */
+  #greenway-lead-form .gw-confirmation { display: none; text-align: center; padding: 64px 0; opacity: 0; transition: opacity .5s ease; }
+  #greenway-lead-form .gw-confirmation h3 {
+    font-family: 'Bodoni Moda', serif; font-weight: 400;
+    font-size: 28px; color: #F5F2ED; margin: 32px 0 16px;
+  }
+  #greenway-lead-form .gw-confirmation p {
+    font-size: 13px; font-weight: 300; color: rgba(245,242,237,0.4);
+    line-height: 1.8; max-width: 400px; margin: 0 auto 32px;
+  }
+
+  /* ===== Staggered reveal ===== */
+  @keyframes gwFadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  #greenway-lead-form .gw-reveal { opacity: 0; animation: gwFadeUp .6s ease forwards; }
+  #greenway-lead-form .gw-reveal-1 { animation-delay: .05s; }
+  #greenway-lead-form .gw-reveal-2 { animation-delay: .2s; }
+  #greenway-lead-form .gw-reveal-3 { animation-delay: .35s; }
+  #greenway-lead-form .gw-reveal-4 { animation-delay: .5s; }
+  #greenway-lead-form .gw-reveal-5 { animation-delay: .65s; }
+  @media (prefers-reduced-motion: reduce) { #greenway-lead-form .gw-reveal { animation: none; opacity: 1; } }
+</style>
+
+<div class="gw-inner">
+
+  <div class="gw-header gw-reveal gw-reveal-1" id="gw-form-header">
+    <div class="gw-rule"></div>
+    <h2 class="gw-headline">Tell us about your evening.</h2>
+    <p class="gw-subline">We would love to learn more about your event. Share a few details below and Adrian will be in touch within 24 hours.</p>
+  </div>
+
+  <form id="greenway-lead-inquiry-form" novalidate>
+
+    <div class="gw-section gw-reveal gw-reveal-2">
+      <div class="gw-section-label">About You</div>
+      <div class="gw-row">
+        <div>
+          <label for="gw_partner1_name">Partner One</label>
+          <input type="text" id="gw_partner1_name" name="partner1_name" placeholder="First and last name" autocomplete="name" required>
+          <div class="gw-field-error" data-gw-error="partner1_name"></div>
+        </div>
+        <div>
+          <label for="gw_partner2_name">Partner Two <span class="gw-optional">optional</span></label>
+          <input type="text" id="gw_partner2_name" name="partner2_name" placeholder="First and last name">
+        </div>
+      </div>
+      <div class="gw-row">
+        <div>
+          <label for="gw_email">Email</label>
+          <input type="email" id="gw_email" name="email" placeholder="your@email.com" autocomplete="email" required>
+          <div class="gw-field-error" data-gw-error="email"></div>
+        </div>
+        <div>
+          <label for="gw_phone">Phone <span class="gw-optional">optional</span></label>
+          <input type="tel" id="gw_phone" name="phone" placeholder="(281) 555-0000" autocomplete="tel" maxlength="14">
+        </div>
+      </div>
+    </div>
+
+    <div class="gw-section gw-reveal gw-reveal-3">
+      <div class="gw-section-label">Event Details</div>
+      <div class="gw-row">
+        <div>
+          <label for="gw_event_date">Event Date</label>
+          <input type="date" id="gw_event_date" name="event_date" required>
+          <div class="gw-field-error" data-gw-error="event_date"></div>
+        </div>
+        <div>
+          <label for="gw_venue">Venue <span class="gw-optional">optional</span></label>
+          <input type="text" id="gw_venue" name="venue" placeholder="Venue name or TBD">
+        </div>
+      </div>
+      <div class="gw-row">
+        <div>
+          <label for="gw_guest_count">Estimated Guest Count <span class="gw-optional">optional</span></label>
+          <select id="gw_guest_count" name="guest_count" class="gw-unselected">
+            <option value="">Select a range</option>
+            <option value="Under 100">Under 100</option>
+            <option value="100-150">100-150</option>
+            <option value="150-200">150-200</option>
+            <option value="200-300">200-300</option>
+            <option value="300+">300+</option>
+          </select>
+        </div>
+        <div>
+          <label for="gw_event_type">Event Type <span class="gw-optional">optional</span></label>
+          <select id="gw_event_type" name="event_type" class="gw-unselected">
+            <option value="">Select type</option>
+            <option value="Wedding Reception">Wedding Reception</option>
+            <option value="Corporate Event">Corporate Event</option>
+            <option value="Private Party">Private Party</option>
+            <option value="Gala / Fundraiser">Gala / Fundraiser</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="gw-row">
+        <div>
+          <label for="gw_cocktail_hour_interest">Cocktail Hour <span class="gw-optional">optional</span></label>
+          <select id="gw_cocktail_hour_interest" name="cocktail_hour_interest" class="gw-unselected">
+            <option value="">Interested in cocktail hour?</option>
+            <option value="Yes">Yes, I would like live music for cocktail hour</option>
+            <option value="Maybe">Maybe, tell me more</option>
+            <option value="No">No, reception only</option>
+          </select>
+        </div>
+        <div>
+          <label for="gw_budget_range">Budget Range <span class="gw-optional">optional</span></label>
+          <input type="text" id="gw_budget_range" name="budget_range" placeholder="$10,000" inputmode="numeric" maxlength="100">
+        </div>
+      </div>
+    </div>
+
+    <div class="gw-section gw-reveal gw-reveal-4">
+      <div class="gw-section-label">One More Thing</div>
+      <div class="gw-row gw-row--single">
+        <div>
+          <label for="gw_referral_source">How Did You Hear About Us? <span class="gw-optional">optional</span></label>
+          <select id="gw_referral_source" name="referral_source" class="gw-unselected">
+            <option value="">Select one</option>
+            <option value="My wedding planner recommended you">My wedding planner recommended you</option>
+            <option value="Venue recommendation">Venue recommendation</option>
+            <option value="I saw you perform at an event">I saw you perform at an event</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Google search">Google search</option>
+            <option value="The Knot / WeddingWire">The Knot / WeddingWire</option>
+            <option value="Friend or family member">Friend or family member</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="gw-row gw-row--single">
+        <div>
+          <label for="gw_planner_name">Planner or Coordinator Name <span class="gw-optional">optional</span></label>
+          <input type="text" id="gw_planner_name" name="planner_name" placeholder="If applicable" maxlength="200">
+        </div>
+      </div>
+      <div class="gw-row gw-row--single">
+        <div>
+          <label for="gw_message">Anything Else We Should Know? <span class="gw-optional">optional</span></label>
+          <textarea id="gw_message" name="message" placeholder="Tell us about the vibe you are envisioning, any must have songs, or anything else on your mind." maxlength="2000"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Honeypot: real visitors never see or fill this. Any value in it means bot. -->
+    <div style="position:absolute;left:-9999px;" aria-hidden="true">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="gw-submit-row gw-reveal gw-reveal-5">
+      <button type="submit" class="gw-submit" id="gw-form-submit">Check Availability</button>
+      <p class="gw-submit-note">We respond to every inquiry personally within 24 hours.</p>
+    </div>
+
+  </form>
+
+  <div class="gw-confirmation" id="gw-form-confirmation">
+    <div class="gw-rule"></div>
+    <h3>We received your inquiry.</h3>
+    <p>Thank you for reaching out. Adrian will personally review your details and be in touch within 24 hours.</p>
+    <div class="gw-rule"></div>
+  </div>
+
+</div>
+</div>
+
+<script>
+(function () {
+  // Growth Hour's public lead-intake endpoint (~/greenway-growth-hour, Railway).
+  // CORS there only allows greenwayband.com origins — see the header comment.
+  var ENDPOINT = 'https://app-production-a334.up.railway.app/api/lead-intake';
+  var FALLBACK_CONTACT = 'you can also email adrian@greenwayband.com or call (281) 467-1226';
+
+  var form = document.getElementById('greenway-lead-inquiry-form');
+  var submitBtn = document.getElementById('gw-form-submit');
+  var confirmDiv = document.getElementById('gw-form-confirmation');
+  var headerDiv = document.getElementById('gw-form-header');
+  var wrapper = document.getElementById('greenway-lead-form');
+  if (!form) return;
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function fieldEl(name) {
+    return form.querySelector('[name="' + name + '"]');
+  }
+
+  // Phone auto-format: (281) 467-1226 as you type (ported from the original form).
+  var phoneInput = fieldEl('phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function () {
+      var val = this.value.replace(/\D/g, '');
+      if (val.length > 10) val = val.slice(0, 10);
+      var f = '';
+      if (val.length > 0) f += '(' + val.slice(0, 3);
+      if (val.length >= 3) f += ') ';
+      if (val.length > 3) f += val.slice(3, 6);
+      if (val.length >= 6) f += '-' + val.slice(6, 10);
+      this.value = f;
+    });
+  }
+
+  // Selects show placeholder-dim until a real choice is made.
+  ['guest_count', 'referral_source', 'event_type', 'cocktail_hour_interest'].forEach(function (name) {
+    var sel = fieldEl(name);
+    if (sel) {
+      sel.addEventListener('change', function () {
+        this.classList.toggle('gw-unselected', this.value === '');
+      });
+    }
+  });
+
+  // Budget auto-format: $10,000 as you type.
+  var budgetInput = fieldEl('budget_range');
+  if (budgetInput) {
+    budgetInput.addEventListener('input', function () {
+      var val = this.value.replace(/\D/g, '');
+      if (val.length > 7) val = val.slice(0, 7);
+      this.value = val.length ? '$' + parseInt(val, 10).toLocaleString('en-US') : '';
+    });
+  }
+
+  function showFieldError(name, message) {
+    var input = fieldEl(name);
+    var errorEl = form.querySelector('[data-gw-error="' + name + '"]');
+    if (input) input.classList.add('gw-input-error');
+    if (errorEl) errorEl.textContent = message;
+  }
+
+  function clearFieldErrors() {
+    ['partner1_name', 'email', 'event_date'].forEach(function (name) {
+      var input = fieldEl(name);
+      var errorEl = form.querySelector('[data-gw-error="' + name + '"]');
+      if (input) input.classList.remove('gw-input-error');
+      if (errorEl) errorEl.textContent = '';
+    });
+  }
+
+  function removeFormError() {
+    var existing = wrapper.querySelector('.gw-form-error');
+    if (existing) existing.remove();
+  }
+
+  function showFormError(message) {
+    removeFormError();
+    var el = document.createElement('div');
+    el.className = 'gw-form-error';
+    el.textContent = message;
+    form.appendChild(el);
+  }
+
+  function showSuccess() {
+    form.style.opacity = '0';
+    if (headerDiv) {
+      headerDiv.style.animation = 'none';
+      headerDiv.style.opacity = '0';
+    }
+    setTimeout(function () {
+      form.style.display = 'none';
+      if (headerDiv) headerDiv.style.display = 'none';
+      if (confirmDiv) {
+        confirmDiv.style.display = 'block';
+        requestAnimationFrame(function () { confirmDiv.style.opacity = '1'; });
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 250);
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearFieldErrors();
+    removeFormError();
+
+    var partner1 = fieldEl('partner1_name').value.trim();
+    var email = fieldEl('email').value.trim();
+    var eventDate = fieldEl('event_date').value;
+
+    var hasError = false;
+    if (!partner1) { showFieldError('partner1_name', 'This field is required'); hasError = true; }
+    if (!email) {
+      showFieldError('email', 'This field is required'); hasError = true;
+    } else if (!validateEmail(email)) {
+      showFieldError('email', 'Please enter a valid email'); hasError = true;
+    }
+    if (!eventDate) { showFieldError('event_date', 'This field is required'); hasError = true; }
+    if (hasError) return;
+
+    // Honeypot check: fake success, never call the endpoint.
+    var honeypot = fieldEl('_gotcha').value;
+    if (honeypot) { showSuccess(); return; }
+
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+
+    var payload = {
+      partner1_name: partner1,
+      partner2_name: fieldEl('partner2_name').value.trim(),
+      email: email,
+      phone: fieldEl('phone').value.trim(),
+      event_date: eventDate,
+      venue: fieldEl('venue').value.trim(),
+      guest_count: fieldEl('guest_count').value,
+      event_type: fieldEl('event_type').value,
+      cocktail_hour_interest: fieldEl('cocktail_hour_interest').value,
+      budget_range: fieldEl('budget_range').value.trim(),
+      referral_source: fieldEl('referral_source').value,
+      planner_name: fieldEl('planner_name').value.trim(),
+      message: fieldEl('message').value.trim(),
+      _gotcha: ''
+    };
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (response) {
+        return response.json().catch(function () { return {}; }).then(function (json) {
+          if (response.ok && json && json.ok) {
+            showSuccess();
+            return;
+          }
+          if (response.status === 429) {
+            showFormError('Too many submissions right now. Please wait a few minutes and try again, or ' + FALLBACK_CONTACT + '.');
+          } else {
+            showFormError('Something went wrong sending your inquiry. Please try again, or ' + FALLBACK_CONTACT + '.');
+          }
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Check Availability'; }
+        });
+      })
+      .catch(function () {
+        showFormError('Something went wrong sending your inquiry. Please try again, or ' + FALLBACK_CONTACT + '.');
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Check Availability'; }
+      });
+  });
+})();
+</script>
