@@ -49,7 +49,8 @@ Reconciliation debt on the Astro rebuild, open whenever Adrian wants it tackled 
 - `PROJECT_STATE.md`, `ARCHITECTURE.md`, and `INTEGRATIONS.md` hold the deep, evidence-backed detail behind every line above; this file is the quick truth only.
 
 ## Next recommended action
-Proposals track: giulia-costantini is live; open one-word offers awaiting Adrian:
-Gmail draft reply to Giulia, shortening the proposals site's 1-hour cache, moving
-the GitHub token out of the proposals repo's remote URL into the keychain.
+Proposals track: giulia-costantini is live and Adrian emailed her the link
+(2026-07-14, so the page is client-visible; 30-day validity running). Open
+one-word offers: shortening the proposals site's 1-hour cache, and moving the
+GitHub token out of the proposals repo's remote URL into the keychain.
 Nothing to build right now on either site track. Gates 0-2 are fully closed and phone-tested on the Squarespace embed, but Gate 3 (going live) is deliberately on hold until Adrian confirms both this website's build and the Growth Hour app are entirely done (see D13). The Astro rebuild stays paused behind Growth Hour's M3. Do not propose go-live steps for either track until Adrian raises it himself.
