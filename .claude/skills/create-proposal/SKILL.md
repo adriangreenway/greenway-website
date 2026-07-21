@@ -25,8 +25,12 @@ Model: Sonnet 5 is fine for this workflow.
      Type of Event, How did you hear about us, Anything else.
    - `"<last name>"` broadly, and the venue name — clients and planners often send
      richer follow-ups (e.g. a fiancé's requirements email, a planner negotiating).
-   Read every related thread. **The newest message wins** — requirements evolve
-   (band size, add-ons, budget) after the first form.
+   Read every related thread IN FULL. `search_threads` returns truncated
+   snippets — NEVER build facts from a snippet. Call `get_thread`
+   (FULL_CONTENT, the default) on every related thread and read every message
+   in it, including quoted reply trails, before writing the fact sheet.
+   **The newest message wins** — requirements evolve (band size, add-ons,
+   budget) after the first form.
 
 2. **Build a fact sheet** from the emails only: couple/client full names, date,
    venue + city, event type, planner/coordinator, referral, band size requested,
