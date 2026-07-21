@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>MC Cue Sheet — Ditta / Johnson</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230A0A09' width='100' height='100'/><text x='50' y='65' text-anchor='middle' fill='%23C4A35A' font-size='40' font-weight='bold'>MC</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    background: #0A0A09;
+    color: #F5F2ED;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    height: 100%;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* ─── HEADER BAR ─── */
+  .header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: #0A0A09;
+    border-bottom: 1px solid rgba(196,163,90,0.3);
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .header-brand {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #C4A35A;
+    text-transform: uppercase;
+  }
+  .header-event {
+    font-size: 16px;
+    font-weight: 700;
+    color: #F5F2ED;
+  }
+  .header-right {
+    text-align: right;
+  }
+  .header-date {
+    font-size: 11px;
+    color: #706D66;
+    font-weight: 500;
+  }
+  .header-progress {
+    font-size: 13px;
+    font-weight: 700;
+    color: #C4A35A;
+    margin-top: 2px;
+  }
+
+  /* ─── PRP BANNER ─── */
+  .prp-banner {
+    position: fixed;
+    top: 65px; left: 0; right: 0;
+    z-index: 99;
+    background: rgba(196,163,90,0.12);
+    border-bottom: 1px solid rgba(196,163,90,0.3);
+    padding: 8px 24px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #C4A35A;
+    text-align: center;
+  }
+
+  /* ─── CUE CONTAINER ─── */
+  .cue-container {
+    position: fixed;
+    top: 100px;
+    bottom: 70px;
+    left: 0; right: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* ─── INDIVIDUAL CUE ─── */
+  .cue {
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(245,242,237,0.06);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .cue.dimmed {
+    opacity: 0.2;
+  }
+  .cue.active {
+    background: rgba(196,163,90,0.08);
+    border-left: 4px solid #C4A35A;
+    padding-left: 20px;
+    opacity: 1;
+  }
+  .cue.upcoming {
+    opacity: 0.55;
+  }
+
+  .cue-time {
+    font-size: 13px;
+    font-weight: 700;
+    color: #C4A35A;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .cue.dimmed .cue-time { color: #706D66; }
+
+  .cue-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #706D66;
+    margin-bottom: 8px;
+  }
+  .cue.active .cue-label { color: #C4A35A; }
+
+  .cue-say {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #F5F2ED;
+    margin-bottom: 8px;
+  }
+  .cue.active .cue-say { font-size: 30px; }
+
+  .cue-note {
+    font-size: 14px;
+    font-weight: 500;
+    color: #706D66;
+    line-height: 1.5;
+    margin-top: 6px;
+  }
+  .cue.active .cue-note { color: #8a8578; }
+
+  .cue-song {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .cue-song.live {
+    background: rgba(196,163,90,0.15);
+    color: #C4A35A;
+    border: 1px solid rgba(196,163,90,0.3);
+  }
+  .cue-song.track {
+    background: rgba(112,109,102,0.15);
+    color: #8a8578;
+    border: 1px solid rgba(112,109,102,0.3);
+  }
+
+  .name-highlight {
+    color: #C4A35A;
+  }
+
+  /* ─── FOOTER NAV ─── */
+  .footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 100;
+    background: #0A0A09;
+    border-top: 1px solid rgba(196,163,90,0.3);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+  }
+  .btn-prev {
+    background: rgba(245,242,237,0.08);
+    color: #706D66;
+  }
+  .btn-next {
+    background: #C4A35A;
+    color: #0A0A09;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-brand">MC Cue Sheet</div>
+    <div class="header-event">Ditta / Johnson Wedding</div>
+  </div>
+  <div class="header-right">
+    <div class="header-date">Saturday, July 11, 2026</div>
+    <div class="header-progress" id="progress">1 / 11</div>
+  </div>
+</div>
+
+<div class="prp-banner">PRP (Phil &amp; Damon) MC this wedding &mdash; Greenway reference / backup only</div>
+
+<div class="cue-container" id="cueContainer">
+
+  <!-- CUE 1: GRAND ENTRANCE -->
+  <div class="cue active" data-index="0">
+    <div class="cue-time">7:00 PM</div>
+    <div class="cue-label">Grand Entrance &mdash; PRP announces</div>
+    <div class="cue-say">
+      Wedding party enters in pairs, coming from Storie Hall.
+    </div>
+    <div class="cue-note">
+      1. <span class="name-highlight">Katie</span> &amp; <span class="name-highlight">Walker</span><br>
+      2. <span class="name-highlight">Quinn</span> &amp; <span class="name-highlight">Michael</span><br>
+      3. <span class="name-highlight">Taylor</span> &amp; <span class="name-highlight">Luke</span><br>
+      4. <span class="name-highlight">Ainslee</span>, <span class="name-highlight">Blake</span> &amp; <span class="name-highlight">Dana</span><br>
+      5. <span class="name-highlight">Sophia</span> &amp; <span class="name-highlight">Vishal</span><br>
+      6. <span class="name-highlight">Kayla</span> &amp; <span class="name-highlight">Colton</span><br>
+      7. <span class="name-highlight">Kelsi</span> &amp; <span class="name-highlight">Zach</span><br>
+      8. <span class="name-highlight">Madison</span> &amp; <span class="name-highlight">Andrew</span><br>
+      9. <span class="name-highlight">Mackenzie</span> &amp; <span class="name-highlight">Nick</span><br>
+      10. <span class="name-highlight">Lauren</span> &amp; <span class="name-highlight">Ben</span>
+    </div>
+    <div class="cue-say" style="margin-top: 16px;">
+      And for the first time&hellip;
+      <span class="name-highlight">Mr. and Mrs. Jake Johnson!</span>
+    </div>
+    <div class="cue-song track">TRACK &mdash; "Don't Stop Me Now" &bull; Queen</div>
+  </div>
+
+  <!-- CUE 2: FIRST DANCE -->
+  <div class="cue upcoming" data-index="1">
+    <div class="cue-time">7:05 PM</div>
+    <div class="cue-label">First Dance &mdash; PRP announces</div>
+    <div class="cue-say">
+      <span class="name-highlight">Macey</span> and <span class="name-highlight">Jake</span> share their first dance.
+    </div>
+    <div class="cue-song track">TRACK &mdash; "Heaven Passing Through" &bull; Turnpike Troubadours (custom cut)</div>
+    <div class="cue-note">Cut version emailed to Adrian 7/7 — we hold it as backup. All dances shortened.</div>
+  </div>
+
+  <!-- CUE 3: FATHER / DAUGHTER -->
+  <div class="cue upcoming" data-index="2">
+    <div class="cue-time">7:07 PM</div>
+    <div class="cue-label">Father / Daughter Dance &mdash; PRP announces</div>
+    <div class="cue-say">
+      <span class="name-highlight">Macey</span> and her father <span class="name-highlight">Louie</span>.
+    </div>
+    <div class="cue-song track">TRACK &mdash; "Lullaby" &bull; Billy Joel</div>
+  </div>
+
+  <!-- CUE 4: MOTHER / SON -->
+  <div class="cue upcoming" data-index="3">
+    <div class="cue-time">7:09 PM</div>
+    <div class="cue-label">Mother / Son Dance &mdash; PRP announces</div>
+    <div class="cue-say">
+      <span class="name-highlight">Jake</span> and his mother <span class="name-highlight">Debbie</span>.
+    </div>
+    <div class="cue-song track">TRACK &mdash; "Don't Blink" &bull; Kenny Chesney</div>
+  </div>
+
+  <!-- CUE 5: WELCOME & BLESSING -->
+  <div class="cue upcoming" data-index="4">
+    <div class="cue-time">7:10 PM</div>
+    <div class="cue-label">Welcome &amp; Blessing &mdash; PRP announces</div>
+    <div class="cue-say">
+      Father of the bride, <span class="name-highlight">Louie</span>, gives a short welcome and blessing before dinner.
+    </div>
+  </div>
+
+  <!-- CUE 6: DINNER -->
+  <div class="cue upcoming" data-index="5">
+    <div class="cue-time">7:15 PM</div>
+    <div class="cue-label">Dinner</div>
+    <div class="cue-say">
+      Dinner service begins. Plated, 2 courses.
+    </div>
+    <div class="cue-note">Band Set 1 continues through dinner until 8:00 PM. Couple pulled for sunset photos ~7:50.</div>
+  </div>
+
+  <!-- CUE 7: CAKE CUTTING -->
+  <div class="cue upcoming" data-index="6">
+    <div class="cue-time">8:15 PM</div>
+    <div class="cue-label">Cake Cutting &mdash; PRP announces (during Break 1)</div>
+    <div class="cue-say">
+      <span class="name-highlight">Macey</span> and <span class="name-highlight">Jake</span> cut the cake.
+    </div>
+    <div class="cue-note">Formal, announced. Cutting the bride's cake only — not saving the top tier.</div>
+  </div>
+
+  <!-- CUE 8: TOASTS -->
+  <div class="cue upcoming" data-index="7">
+    <div class="cue-time">8:20 PM</div>
+    <div class="cue-label">Toasts (3) &mdash; PRP announces</div>
+    <div class="cue-say">
+      1. Father of the bride, <span class="name-highlight">Louie</span><br>
+      2. Maid of Honor, <span class="name-highlight">Lauren</span><br>
+      3. Best Man, <span class="name-highlight">Ben</span>
+    </div>
+    <div class="cue-note">Drink of choice — no champagne pour to wait on.</div>
+  </div>
+
+  <!-- CUE 9: SET 2 / OPEN FLOOR -->
+  <div class="cue upcoming" data-index="8">
+    <div class="cue-time">8:30 PM</div>
+    <div class="cue-label">Band Set 2 &mdash; Open Dance Floor</div>
+    <div class="cue-say">
+      Dance floor opens. Let's get this party started!
+    </div>
+    <div class="cue-note">Slushies available 8:30&ndash;10:30. Sunset at 8:36. Break 2 at 9:30 (PRP DJs).</div>
+  </div>
+
+  <!-- CUE 10: BOUQUET TOSS -->
+  <div class="cue upcoming" data-index="9">
+    <div class="cue-time">10:00 PM</div>
+    <div class="cue-label">Bouquet Toss &mdash; kicks off Set 3</div>
+    <div class="cue-say">
+      All the single ladies to the dance floor! <span class="name-highlight">Macey</span> is about to toss the bouquet!
+    </div>
+    <div class="cue-note">Whataburger late-night snack is set out on the cake tables. Bar closes 10:30.</div>
+  </div>
+
+  <!-- CUE 11: LAST DANCE + SEND OFF -->
+  <div class="cue upcoming" data-index="10">
+    <div class="cue-time">10:45 PM</div>
+    <div class="cue-label">Last Dance + Send Off</div>
+    <div class="cue-say">
+      10:45 last dance song with all guests. 10:50 guests head outside. 10:55 private last dance. 11:00 send off.
+    </div>
+    <div class="cue-song live">LIVE &mdash; "Closing Time" &bull; Semisonic (final song, all guests)</div>
+    <div class="cue-song track">TRACK &mdash; "Front Porch Looking In" &bull; Lonestar (private last dance)</div>
+    <div class="cue-note">Send off is cold sparks down the stairs. Buses load after send off.</div>
+  </div>
+
+  <!-- Spacer so last cue can scroll to center -->
+  <div style="height: 300px;"></div>
+</div>
+
+<div class="footer">
+  <button class="btn btn-prev" id="btnPrev" onclick="prev()">&larr; Back</button>
+  <button class="btn btn-next" id="btnNext" onclick="next()">Next &rarr;</button>
+</div>
+
+<script>
+  let current = 0;
+  const cues = document.querySelectorAll('.cue');
+  const total = cues.length;
+  const progress = document.getElementById('progress');
+  const container = document.getElementById('cueContainer');
+
+  function update() {
+    cues.forEach((cue, i) => {
+      cue.classList.remove('active', 'dimmed', 'upcoming');
+      if (i < current) cue.classList.add('dimmed');
+      else if (i === current) cue.classList.add('active');
+      else cue.classList.add('upcoming');
+    });
+    progress.textContent = (current + 1) + ' / ' + total;
+
+    const activeCue = cues[current];
+    if (activeCue) {
+      activeCue.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function next() {
+    if (current < total - 1) { current++; update(); }
+  }
+
+  function prev() {
+    if (current > 0) { current--; update(); }
+  }
+
+  cues.forEach((cue, i) => {
+    cue.addEventListener('click', () => {
+      current = i;
+      update();
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prev();
+  });
+
+  update();
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  }
+</script>
+</body>
+</html>

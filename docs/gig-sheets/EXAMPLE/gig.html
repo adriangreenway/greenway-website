@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Gig Sheet — Ditta / Johnson</title>
+<link rel="manifest" href="/manifest.json">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: #F5F2ED;
+    color: #0A0A09;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    background: #0A0A09;
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .header-left .the {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #C4A35A;
+    text-transform: uppercase;
+  }
+  .header-left .brand {
+    font-size: 22px;
+    font-weight: 800;
+    color: #F5F2ED;
+    letter-spacing: 2px;
+  }
+  .header-right {
+    text-align: right;
+  }
+  .header-right .label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #C4A35A;
+    text-transform: uppercase;
+  }
+  .header-right .event {
+    font-size: 15px;
+    font-weight: 700;
+    color: #F5F2ED;
+  }
+  .header-right .date {
+    font-size: 11px;
+    color: #706D66;
+    margin-top: 2px;
+  }
+
+  /* ─── BODY ─── */
+  .body {
+    padding: 24px 28px 40px;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    margin-bottom: 24px;
+  }
+  .section-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #C4A35A;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section-value {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0A0A09;
+  }
+  .section-sub {
+    font-size: 13px;
+    color: #706D66;
+    margin-top: 2px;
+  }
+
+  a {
+    color: #1A5276;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(26,82,118,0.3);
+  }
+  a:active { opacity: 0.7; }
+
+  /* ─── TWO COLUMN ─── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1px;
+    background: #D4D0C8;
+    margin: 24px 0;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline-row {
+    display: flex;
+    align-items: baseline;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(212,208,200,0.5);
+  }
+  .timeline-row:last-child { border-bottom: none; }
+  .timeline-time {
+    width: 85px;
+    min-width: 85px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0A0A09;
+  }
+  .timeline-event {
+    font-size: 14px;
+    font-weight: 500;
+    color: #0A0A09;
+    flex: 1;
+  }
+  .timeline-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+  .tag-live {
+    background: rgba(196,163,90,0.15);
+    color: #C4A35A;
+  }
+  .tag-track {
+    background: rgba(112,109,102,0.15);
+    color: #706D66;
+  }
+  .tag-break {
+    background: rgba(112,109,102,0.1);
+    color: #706D66;
+    font-style: italic;
+  }
+
+  /* ─── SPECIALS TABLE ─── */
+  .special-row {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr auto;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(212,208,200,0.5);
+    gap: 12px;
+  }
+  .special-row:last-child { border-bottom: none; }
+  .special-moment {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0A0A09;
+  }
+  .special-song {
+    font-size: 13px;
+    color: #706D66;
+  }
+
+  /* ─── LIST COLUMNS ─── */
+  .song-list {
+    columns: 2;
+    column-gap: 24px;
+    font-size: 13px;
+    color: #706D66;
+    list-style-position: inside;
+  }
+  @media (max-width: 600px) {
+    .song-list { columns: 1; }
+  }
+  .song-list li { padding: 2px 0; break-inside: avoid; }
+
+  /* ─── CONTACTS ─── */
+  .contact-card {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(212,208,200,0.4);
+  }
+  .contact-card:last-child { border-bottom: none; }
+  .contact-role {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #C4A35A;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .contact-name {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .contact-info {
+    font-size: 12px;
+    color: #706D66;
+    margin-top: 2px;
+  }
+  .contact-info a { font-size: 12px; }
+
+  /* ─── NOTES ─── */
+  .note-box {
+    background: rgba(196,163,90,0.06);
+    border: 1px solid rgba(196,163,90,0.15);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #706D66;
+    line-height: 1.7;
+  }
+  .note-box strong { color: #0A0A09; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    border-top: 1px solid #C4A35A;
+    padding: 12px 28px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #706D66;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="header-left">
+    <div class="the">The</div>
+    <div class="brand">GREENWAY BAND</div>
+  </div>
+  <div class="header-right">
+    <div class="label">Gig Sheet</div>
+    <div class="event">Ditta / Johnson Wedding</div>
+    <div class="date">Saturday, July 11, 2026</div>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- ═══ CORE INFO ═══ -->
+  <div class="two-col">
+    <div>
+      <div class="section">
+        <div class="section-label">Location</div>
+        <div class="section-value">The Arlo</div>
+        <div class="section-sub">
+          <a href="https://www.google.com/maps/search/?api=1&query=10700+Signal+Hill+Rd+Austin+TX+78737">10700 Signal Hill Rd, Austin, TX 78737</a>
+        </div>
+        <div class="section-sub">Between Austin &amp; Dripping Springs. Ceremony in Storie Hall, cocktail hour on the back lawn.</div>
+      </div>
+      <div class="section">
+        <div class="section-label">Guests</div>
+        <div class="section-value">~226</div>
+        <div class="section-sub">Black tie preferred (guests)</div>
+      </div>
+      <div class="section">
+        <div class="section-label">Attire</div>
+        <div class="section-value">Wedding Attire</div>
+      </div>
+    </div>
+    <div>
+      <div class="section">
+        <div class="section-label">Band Arrival / Load In</div>
+        <div class="section-value">12:00 PM</div>
+        <div class="section-sub">Out of town — traveling from Houston. Leave margin for traffic.</div>
+      </div>
+      <div class="section">
+        <div class="section-label">Soundcheck</div>
+        <div class="section-value">3:30 &ndash; 4:30 PM</div>
+      </div>
+      <div class="section">
+        <div class="section-label">Meals</div>
+        <div class="section-value">12 meals at 6:00 PM</div>
+        <div class="section-sub">Served during cocktail hour. No dietary restrictions. Confirmed with Jordyn.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ SOUND PACKAGE ═══ -->
+  <div class="section">
+    <div class="section-label">Ceremony + Cocktail Hour Sound</div>
+    <div class="note-box">
+      <strong>Greenway provides the sound package only — no instrumentation.</strong> All ceremony and cocktail hour music is recorded tracks through our PA. Ceremony at 5:30 PM in Storie Hall, cocktail hour at 6:00 PM on the back lawn.
+    </div>
+  </div>
+
+  <!-- ═══ CEREMONY MUSIC ═══ -->
+  <div class="section">
+    <div class="section-label">Ceremony Music (all tracks)</div>
+    <div class="special-row">
+      <div class="special-moment">Family Processional</div>
+      <div class="special-song">"Iris" &mdash; UNSECRET (String Quartet) &bull; 4 pairs</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+    <div class="special-row">
+      <div class="special-moment">Wedding Party</div>
+      <div class="special-song">"Birds of a Feather" &mdash; Gemini Strings &bull; 10 pairs + flower girl</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+    <div class="special-row">
+      <div class="special-moment">Bride's Entrance</div>
+      <div class="special-song">"I Will Always Love You" &mdash; Vitamin String Quartet &bull; Macey walks at the chorus</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+    <div class="special-row">
+      <div class="special-moment">Recessional</div>
+      <div class="special-song">"You're My Best Friend" &mdash; Queen</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ TIMELINE ═══ -->
+  <div class="section">
+    <div class="section-label">Timeline</div>
+
+    <div class="timeline-row">
+      <div class="timeline-time">11:00 AM</div>
+      <div class="timeline-event">Vendor access begins (stage set first)</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">12:00 PM</div>
+      <div class="timeline-event">Band arrives for load in</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">3:30 PM</div>
+      <div class="timeline-event">Soundcheck (until 4:30 PM)</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">5:00 PM</div>
+      <div class="timeline-event">Guests begin arriving</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">5:30 PM</div>
+      <div class="timeline-event">Ceremony — Storie Hall (Greenway sound, tracks)</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">6:00 PM</div>
+      <div class="timeline-event">Cocktail hour — back lawn (Greenway sound) / Band meals served</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">6:45 PM</div>
+      <div class="timeline-event">Guests seated for dinner</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-time">7:00 PM</div>
+      <div class="timeline-event">Band Set 1 begins / Grand entrance (PRP announces)</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">7:05 PM</div>
+      <div class="timeline-event">First dance, then father/daughter, then mother/son (all shortened)</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">7:10 PM</div>
+      <div class="timeline-event">Welcome &amp; blessing (father of the bride, Louie)</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">7:15 PM</div>
+      <div class="timeline-event">Dinner service (plated, 2 courses)</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">8:00 PM</div>
+      <div class="timeline-event">Band Break 1 — PRP DJs / Photobooth opens (8&ndash;11)</div>
+      <span class="timeline-tag tag-break">BREAK</span>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">8:15 PM</div>
+      <div class="timeline-event">Cake cutting (formal, announced)</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">8:20 PM</div>
+      <div class="timeline-event">Toasts (3): Louie, Maid of Honor Lauren, Best Man Ben</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-time">8:30 PM</div>
+      <div class="timeline-event">Band Set 2 — dance floor opens / Slushies (8:30&ndash;10:30)</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">9:30 PM</div>
+      <div class="timeline-event">Band Break 2 — PRP DJs</div>
+      <span class="timeline-tag tag-break">BREAK</span>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-time">10:00 PM</div>
+      <div class="timeline-event">Band Set 3 — kicks off with bouquet toss / Whataburger late-night snack out</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">10:30 PM</div>
+      <div class="timeline-event">Bar closes</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">10:45 PM</div>
+      <div class="timeline-event">Last dance song (all guests) — "Closing Time" by Semisonic</div>
+      <span class="timeline-tag tag-live">LIVE</span>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">10:50 PM</div>
+      <div class="timeline-event">Guests sent outside for send off</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">10:55 PM</div>
+      <div class="timeline-event">Private last dance</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">11:00 PM</div>
+      <div class="timeline-event">Send off — cold sparks down the stairs</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">12:30 AM</div>
+      <div class="timeline-event">All breakdown complete, vendors off property</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ SPECIALS ═══ -->
+  <div class="section">
+    <div class="section-label">Specials (all tracks, all dances shortened)</div>
+
+    <div class="special-row">
+      <div class="special-moment">Grand Entrance</div>
+      <div class="special-song">"Don't Stop Me Now" &mdash; Queen</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+    <div class="special-row">
+      <div class="special-moment">First Dance</div>
+      <div class="special-song">"Heaven Passing Through" &mdash; Turnpike Troubadours (custom cut)</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+    <div class="special-row">
+      <div class="special-moment">Father / Daughter</div>
+      <div class="special-song">"Lullaby" &mdash; Billy Joel &bull; Macey &amp; Louie</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+    <div class="special-row">
+      <div class="special-moment">Mother / Son</div>
+      <div class="special-song">"Don't Blink" &mdash; Kenny Chesney &bull; Jake &amp; Debbie</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+    <div class="special-row">
+      <div class="special-moment">Final Song (all guests)</div>
+      <div class="special-song">"Closing Time" &mdash; Semisonic</div>
+      <span class="timeline-tag tag-live">LIVE</span>
+    </div>
+    <div class="special-row">
+      <div class="special-moment">Private Last Dance</div>
+      <div class="special-song">"Front Porch Looking In" &mdash; Lonestar</div>
+      <span class="timeline-tag tag-track">TRACK</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ EMCEE ═══ -->
+  <div class="section">
+    <div class="section-label">Emcee</div>
+    <div class="section-value">Phil &amp; Damon Pampolina (PRP Entertainment)</div>
+    <div class="section-sub">PRP handles all announcements and transitions, runs the special-dance tracks on their own sound system, and DJs during band breaks. Greenway does not MC this one. Couple is introduced as <strong>"Mr. and Mrs. Jake Johnson."</strong></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ REQUESTS ═══ -->
+  <div class="section">
+    <div class="section-label">Couple's Song Requests (not all-inclusive — top requests)</div>
+    <ul class="song-list">
+      <li>"Closing Time" — Semisonic (final song)</li>
+      <li>"Can't Hold Us" — Macklemore</li>
+      <li>Queen</li>
+      <li>Journey</li>
+      <li>Hall &amp; Oates</li>
+      <li>Prince</li>
+      <li>Foreigner</li>
+      <li>"Mr. Brightside"</li>
+      <li>"Doses and Mimosas"</li>
+      <li>"Dancing Queen"</li>
+      <li>"No Hands"</li>
+      <li>"Cheap Thrills" — Sia</li>
+      <li>"Heads Will Roll"</li>
+      <li>"Take On Me"</li>
+      <li>"Uptown Girl"</li>
+      <li>"Kids" — MGMT</li>
+      <li>"Accidentally in Love"</li>
+      <li>"September"</li>
+      <li>"The Middle" — Jimmy Eat World</li>
+      <li>Macklemore</li>
+      <li>Michael Jackson</li>
+      <li>"A Sky Full of Stars" — Coldplay</li>
+      <li>ABBA</li>
+      <li>"All the Small Things" — Blink-182</li>
+      <li>"Jessie's Girl"</li>
+      <li>"Hey Ya"</li>
+      <li>"The Days" (Notion remix)</li>
+      <li>"Fireball"</li>
+      <li>"Hotel Room Service"</li>
+      <li>"Temperature" — Sean Paul</li>
+      <li>"Time of Our Lives" — Pitbull</li>
+    </ul>
+    <div class="section-sub" style="margin-top:8px;">"If there are songs that y'all love to sing and are usually hits, we are open to suggestions!"</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ DO NOT PLAY ═══ -->
+  <div class="section">
+    <div class="section-label">Do Not Play</div>
+    <ul class="song-list">
+      <li>Cupid Shuffle</li>
+      <li>Katy Perry</li>
+      <li>Single Ladies</li>
+      <li>Wobble</li>
+      <li>Party in the USA</li>
+      <li>WOP</li>
+      <li>Hips Don't Lie</li>
+      <li>Happy — Pharrell</li>
+      <li>Taylor Swift</li>
+      <li>Cotton Eyed Joe</li>
+      <li>Meghan Trainor</li>
+      <li>Cha Cha Slide</li>
+      <li>Gangnam Style</li>
+      <li>Barbie Girl</li>
+      <li>Macarena</li>
+      <li>Dance Monkey</li>
+      <li>One Direction</li>
+      <li>Gasolina</li>
+      <li>Who Let the Dogs Out</li>
+      <li>Electric Slide</li>
+      <li>Despacito</li>
+      <li>Call Me Maybe</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ KEY CONTACTS ═══ -->
+  <div class="section">
+    <div class="section-label">Key Contacts</div>
+    <div class="two-col">
+      <div>
+        <div class="contact-card">
+          <div class="contact-role">Planner / Day-Of POC</div>
+          <div class="contact-name">Jordyn Zanin</div>
+          <div class="contact-info">Simply XO Events</div>
+          <div class="contact-info"><a href="tel:+18585681516">(858) 568-1516</a></div>
+          <div class="contact-info"><a href="mailto:hello@simplyxoevents.com">hello@simplyxoevents.com</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-role">MC / DJ</div>
+          <div class="contact-name">Phil &amp; Damon Pampolina</div>
+          <div class="contact-info">PRP Entertainment</div>
+          <div class="contact-info"><a href="mailto:prpentertainment@yahoo.com">prpentertainment@yahoo.com</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-role">Venue</div>
+          <div class="contact-name">The Arlo</div>
+          <div class="contact-info"><a href="tel:+15129104606">(512) 910-4606</a></div>
+          <div class="contact-info"><a href="mailto:info@thearloevents.com">info@thearloevents.com</a></div>
+        </div>
+      </div>
+      <div>
+        <div class="contact-card">
+          <div class="contact-role">Bride</div>
+          <div class="contact-name">Macey Ditta</div>
+          <div class="contact-info"><a href="tel:+12819040407">(281) 904-0407</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-role">Groom</div>
+          <div class="contact-name">Jake Johnson</div>
+          <div class="contact-info"><a href="tel:+17138550275">(713) 855-0275</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-role">Photographer</div>
+          <div class="contact-name">Paige Vaughn Photo</div>
+          <div class="contact-info"><a href="mailto:hello@paigevaughnphoto.com">hello@paigevaughnphoto.com</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-role">Videographer</div>
+          <div class="contact-name">EP Films</div>
+          <div class="contact-info"><a href="mailto:info@epfilmsweddings.com">info@epfilmsweddings.com</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ NOTES ═══ -->
+  <div class="section">
+    <div class="section-label">Notes</div>
+    <div class="note-box">
+      <strong>Sound package only for ceremony + cocktail hour.</strong> No live players — recorded tracks through our PA. Ceremony 5:30 in Storie Hall, cocktail hour 6:00 on the back lawn.<br><br>
+      <strong>PRP runs the reception moments.</strong> Phil &amp; Damon announce everything, play the special-dance tracks on their own system, and DJ our breaks. We play our three sets as usual.<br><br>
+      <strong>First dance custom cut:</strong> Macey emailed the cut version of "Heaven Passing Through" (cut by their dance instructor) on 7/7. Have it loaded and ready as backup.<br><br>
+      <strong>Bouquet toss</strong> kicks off Set 3 at 10:00 PM.<br><br>
+      <strong>Send off flow:</strong> 10:45 last dance song with guests, 10:50 guests outside, 10:55 private last dance (track), 11:00 cold sparks send off down the stairs.<br><br>
+      <strong>Guests</strong> arrive by bus (2 Around Austin buses) from the AC Hotel Hill Country.
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <span>The Greenway Band</span>
+  <span>CONFIDENTIAL</span>
+</div>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>

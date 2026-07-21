@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="manifest" href="/manifest.json">
+<title>Greenway — Gig Day</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0A0A09;
+    color: #F5F2ED;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+  }
+  .brand { font-size: 10px; font-weight: 700; letter-spacing: 4px; color: #C4A35A; text-transform: uppercase; }
+  .title { font-size: 24px; font-weight: 800; margin-bottom: 30px; }
+  a {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+  }
+  .mc-link {
+    background: #C4A35A;
+    color: #0A0A09;
+  }
+  .gig-link {
+    background: rgba(245,242,237,0.08);
+    color: #F5F2ED;
+    border: 1px solid rgba(245,242,237,0.15);
+  }
+  .mc-link-alt {
+    background: rgba(196,163,90,0.2);
+    color: #C4A35A;
+    border: 1px solid rgba(196,163,90,0.4);
+  }
+  .status {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #706D66;
+  }
+  .status.ready { color: #4a9; }
+</style>
+</head>
+<body>
+  <div class="brand">The Greenway Band</div>
+  <div class="title">Ditta / Johnson Wedding</div>
+  <a class='gig-link' href='/gig'>Full Gig Sheet</a>
+  <a class='gig-link' href='/band'>Band Sheet</a>
+  <a class='mc-link' href='/mc'>MC Cue Sheet (PRP Reference)</a>
+  <a class='mc-link-alt' href='/listen'>Listening Room</a>
+  <div class="status" id="status">Checking offline status...</div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').then(reg => {
+        document.getElementById('status').textContent = '✓ Saved for offline use';
+        document.getElementById('status').classList.add('ready');
+      }).catch(err => {
+        document.getElementById('status').textContent = 'Offline save failed — reload and try again';
+      });
+    }
+  </script>
+</body>
+</html>
