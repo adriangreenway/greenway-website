@@ -65,10 +65,14 @@ Model: Sonnet 5 is fine for this workflow.
    URL + spot-check two existing ones). Report the live URL.
 
 9. **After.** Commit in `~/Desktop/greenway-proposals` ("Add proposal: <slug>").
-   If Adrian asks, create a Gmail **draft** to the client with the link — never send;
-   sending is his. Use Template 4.1 in `docs/proposals/EMAIL_TEMPLATES.md` (raw URLs
-   only in hrefs; tell Adrian to click-test both links in the draft — see the Google
-   "Redirect Notice" gotcha noted there).
+   Then ALWAYS create the Gmail **draft** to the client automatically (Adrian,
+   2026-07-14) — never send; sending is his. Follow Template 4.1 in
+   `docs/proposals/EMAIL_TEMPLATES.md` exactly: the proposal link embedded on the
+   word "proposal" (`https://proposals.greenwayband.com/<slug>/`, trailing slash),
+   the 17hats scheduling link on the word "here", raw URLs only in hrefs, no other
+   links. The draft sitting in Gmail is the source of truth for what gets sent.
+   Report that it's in Drafts and tell Adrian to click-test both links before
+   sending (see the Google "Redirect Notice" gotcha noted there).
 
 ## Revisions
 
