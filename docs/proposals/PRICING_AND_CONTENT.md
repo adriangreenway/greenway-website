@@ -38,11 +38,12 @@ is bespoke. Non-Houston → flag travel and ask Adrian.
 Contract standard seen in email: **3 hours of live music across a 4-hour reception**.
 Longer receptions price the extra hour.
 
-Presentation (2026-07-13): client **chose** an add-on → single priced row inside each
-package's investment total (garcia). Client **undecided** but Adrian wants options
-shown → "Cocktail Hour" addon-section: three bordered cards (Solo, Duo, Trio),
-excluded from all totals, style locked from Adrian's Blick/Courtois reference doc
-(giulia-costantini; optional block + CSS in TEMPLATE.html). Approved desc line:
+Presentation (2026-07-13, updated 2026-07-23): client **chose** an add-on → single
+priced row inside each package's investment total (garcia). Otherwise the "Cocktail
+Hour" addon-section is the **DEFAULT on every wedding proposal** (Adrian, 2026-07-23,
+campbell build — no longer opt-in): three bordered cards (Solo, Duo, Trio), excluded
+from all totals, style locked from Adrian's Blick/Courtois reference doc
+(giulia-costantini; block + CSS in TEMPLATE.html). Approved desc line:
 *Live music during cocktails sets the tone before the reception begins. We offer
 acoustic arrangements tailored to the mood you want.*
 Package with **no add-ons** → one single "Investment" line with the price. Never a

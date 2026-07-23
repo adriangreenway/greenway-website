@@ -27,9 +27,9 @@ Two separate things. Only one is paused.
 
 **The Squarespace lead-form embed: built, tested, and holding before the last step.** The form is live and dark at `greenwayband.com/inquiry-test` and your phone test landed correctly in Growth Hour. The only remaining step is making it public (Gate 3), and you decided that waits until BOTH this website and the Growth Hour app are entirely finished (docs/DECISIONS.md D13). Nobody should raise it until you do.
 
-**Client proposals: the third track, never paused.** Garrett Turner's proposal shipped 2026-07-14, live at `proposals.greenwayband.com/turner` (6-piece $10,350 recommended, 10-piece $14,375, cocktail hour cards), and your reply email went out the same day. New rules locked in from this build: proposal pages have no intro at all (your email does the greeting, the page goes cover, details, options), and your Template 4.1 inquiry email now lives in `docs/proposals/EMAIL_TEMPLATES.md` with the Gmail link gotcha noted.
+**Client proposals: the third track, never paused.** Kate Campbell's proposal shipped 2026-07-23, live at `proposals.greenwayband.com/campbell` (10-piece $14,375 recommended, 6-piece $10,350, cocktail hour cards), and her reply email went out the same day, links verified clean. Two defaults changed on this build: the 10-piece now leads Recommended by default on every new proposal (previously it depended on what the client asked for), and the cocktail hour option cards now show by default on every wedding proposal (previously only when you asked for them).
 
-**What happened last session (2026-07-14):** Garrett Turner's inquiry became a live proposal, you rewrote the opener in your own words, then cut the intro entirely after spotting it repeated your email. The reply email went out with clean links. Every doc that guides the next proposal was updated to match, and both repos were committed and pushed.
+**What happened last session (2026-07-23):** Kate Campbell's inquiry became a live proposal. You changed two standing defaults (10-piece always leads, cocktail hour cards always show), both now locked into the docs and the proposal skill for every future proposal. The reply email went out with clean links, verified in Sent. Marli Hinojosa's draft from 2026-07-21 is still waiting in Gmail Drafts for you to send.
 
 **Reconciliation debt, whenever you want it tackled (not urgent, part of the Astro track only):**
 - Two branches disagree about which pages exist: `dev` (the one that's live) is missing the Reviews and FAQ pages that `main` already has.
@@ -41,7 +41,7 @@ None of these affect your live site today, because your live site is still Squar
 ---
 
 ## Your next step
-**Right now:** nothing is required from you. Garrett and Giulia both have their links and live pages. If you run the ChatGPT copy interview, paste the finished spec into a session and it gets folded into the proposal template. Two small offers stay open, either starts with one word in a new session: the fix that stops proposal pages showing you hour-old copies after a revision, and moving the GitHub access key on this Mac into the keychain.
+**Right now:** one thing needs you. Marli Hinojosa's reply email is sitting in Gmail Drafts from 2026-07-21, waiting on you to click-test both links and send. Everyone else (Garrett, Giulia, Kate) has their links and live pages, nothing else queued. If you run the ChatGPT copy interview, paste the finished spec into a session and it gets folded into the proposal template. Two small offers stay open, either starts with one word in a new session: the fix that stops proposal pages showing you hour-old copies after a revision, and moving the GitHub access key on this Mac into the keychain.
 
 **Separately, whenever:** the Astro rebuild waits for Growth Hour's M3. When that ships, start a session here on **Sonnet 5** and say:
 

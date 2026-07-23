@@ -37,10 +37,15 @@ Model: Sonnet 5 is fine for this workflow.
    add-ons mentioned (cocktail hour, DJ, ceremony), timeline hints, budget signals,
    special notes. Mark every unknown as UNKNOWN — never fill a gap by invention.
 
-3. **Draft the offer.** Default: the size they asked for as the Recommended card,
-   plus one sensible alternative (the other size they mentioned, else the 6-piece).
+3. **Draft the offer.** Default: the 10-Piece leads with the Recommended badge
+   regardless of the size they asked for (Adrian, 2026-07-23, campbell build);
+   the size they requested rides as the second card (else the 6-piece).
    Prices from PRICING_AND_CONTENT.md (Houston baseline; outside Houston expect
-   higher and flag travel). Add-ons only if they asked or Adrian says so.
+   higher and flag travel). The Cocktail Hour options block (Solo/Duo/Trio cards,
+   no totals) is included by DEFAULT on every wedding proposal (Adrian,
+   2026-07-23); if the client already chose a cocktail add-on, show it as a
+   priced row inside each package instead. Other add-ons (DJ, extra hour) only
+   if they asked or Adrian says so.
 
 4. **Ask Adrian at most 3 questions** — see/pay/risk only, each with a recommended
    default. Typically: (a) packages + prices, (b) add-ons, (c) anything odd in the
