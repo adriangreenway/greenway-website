@@ -122,27 +122,28 @@
   }
 
   .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 28px;
     flex: 1;
     min-width: 0;
+    line-height: 2.4;
   }
   .chips::-webkit-scrollbar { display: none; }
 
   .chip {
-    flex: none;
     font-size: 10px;
     font-weight: 400;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--cream-dim);
     text-decoration: none;
-    padding: 4px 0;
     white-space: nowrap;
     transition: color 0.3s ease;
   }
   .chip:hover { color: var(--cream); }
+
+  .dot {
+    color: var(--cream-faint);
+    margin: 0 12px;
+  }
 
   .search {
     flex: 0 0 200px;
@@ -252,11 +253,6 @@
   }
   footer .contact a:hover { color: var(--cream); }
 
-  footer .dot {
-    color: var(--cream-faint);
-    margin: 0 12px;
-  }
-
   /* ---------- Mobile ---------- */
   @media (max-width: 640px) {
     .hero { padding: 72px 24px 64px; }
@@ -265,8 +261,8 @@
     .search { display: block; width: 100%; }
     .chips {
       margin-top: 14px;
-      flex-wrap: nowrap;
-      gap: 24px;
+      display: block;
+      white-space: nowrap;
       overflow-x: auto;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
@@ -320,17 +316,29 @@
   <div class="bar-inner">
     <div class="chips">
       <a class="chip" href="#pop">Pop</a>
+      <span class="dot">&middot;</span>
       <a class="chip" href="#r-b-soul">R&amp;B / Soul</a>
+      <span class="dot">&middot;</span>
       <a class="chip" href="#rock-alternative">Rock / Alternative</a>
+      <span class="dot">&middot;</span>
       <a class="chip" href="#country">Country</a>
+      <span class="dot">&middot;</span>
       <a class="chip" href="#funk-disco">Funk / Disco</a>
+      <span class="dot">&middot;</span>
       <a class="chip" href="#jazz-standards">Jazz / Standards</a>
+      <span class="dot">&middot;</span>
       <a class="chip" href="#latin">Latin</a>
+      <span class="dot">&middot;</span>
       <a class="chip" href="#hip-hop">Hip-Hop</a>
+      <span class="dot">&middot;</span>
       <a class="chip" href="#dance-pop">Dance / Pop</a>
+      <span class="dot">&middot;</span>
       <a class="chip" href="#folk-indie">Folk / Indie</a>
+      <span class="dot">&middot;</span>
       <a class="chip" href="#reggae-caribbean">Reggae / Caribbean</a>
+      <span class="dot">&middot;</span>
       <a class="chip" href="#classics">Classics</a>
+      <span class="dot">&middot;</span>
       <a class="chip" href="#holiday">Holiday</a>
     </div>
     <input class="search" id="q" type="search" placeholder="Search songs or artists" aria-label="Search songs or artists">

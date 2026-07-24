@@ -106,21 +106,17 @@
     gap: 32px;
   }
   #greenway-songlist .gw-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 28px;
     flex: 1;
     min-width: 0;
+    line-height: 2.4;
   }
   #greenway-songlist .gw-chip {
-    flex: none;
     font-size: 10px;
     font-weight: 400;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #706D66;
     text-decoration: none;
-    padding: 4px 0;
     white-space: nowrap;
     transition: color 0.3s ease;
     cursor: pointer;
@@ -230,8 +226,8 @@
     #greenway-songlist .gw-search-input { display: block; width: 100%; }
     #greenway-songlist .gw-chips {
       margin-top: 14px;
-      flex-wrap: nowrap;
-      gap: 24px;
+      display: block;
+      white-space: nowrap;
       overflow-x: auto;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
@@ -281,17 +277,29 @@
   <div class="gw-bar-inner">
     <div class="gw-chips">
       <a class="gw-chip" href="#gw-pop">Pop</a>
+      <span class="gw-dot">&middot;</span>
       <a class="gw-chip" href="#gw-r-b-soul">R&amp;B / Soul</a>
+      <span class="gw-dot">&middot;</span>
       <a class="gw-chip" href="#gw-rock-alternative">Rock / Alternative</a>
+      <span class="gw-dot">&middot;</span>
       <a class="gw-chip" href="#gw-country">Country</a>
+      <span class="gw-dot">&middot;</span>
       <a class="gw-chip" href="#gw-funk-disco">Funk / Disco</a>
+      <span class="gw-dot">&middot;</span>
       <a class="gw-chip" href="#gw-jazz-standards">Jazz / Standards</a>
+      <span class="gw-dot">&middot;</span>
       <a class="gw-chip" href="#gw-latin">Latin</a>
+      <span class="gw-dot">&middot;</span>
       <a class="gw-chip" href="#gw-hip-hop">Hip-Hop</a>
+      <span class="gw-dot">&middot;</span>
       <a class="gw-chip" href="#gw-dance-pop">Dance / Pop</a>
+      <span class="gw-dot">&middot;</span>
       <a class="gw-chip" href="#gw-folk-indie">Folk / Indie</a>
+      <span class="gw-dot">&middot;</span>
       <a class="gw-chip" href="#gw-reggae-caribbean">Reggae / Caribbean</a>
+      <span class="gw-dot">&middot;</span>
       <a class="gw-chip" href="#gw-classics">Classics</a>
+      <span class="gw-dot">&middot;</span>
       <a class="gw-chip" href="#gw-holiday">Holiday</a>
     </div>
     <input class="gw-search-input" id="gw-search-input" type="search" placeholder="Search songs or artists" aria-label="Search songs or artists">

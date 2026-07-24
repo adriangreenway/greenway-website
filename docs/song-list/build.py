@@ -113,7 +113,8 @@ total = len(songs)
 # The number on the page is always the computed total, never a typed claim.
 subtitle = re.sub(r"^\d+", str(total), doc_subtitle) if re.match(r"^\d+", doc_subtitle) else doc_subtitle
 
-nav_html = "\n".join(
+DOT = '      <span class="dot">&middot;</span>'
+nav_html = f"\n{DOT}\n".join(
     f'      <a class="chip" href="#{slug(g)}">{escape(display(g))}</a>'
     for g in order
 )
@@ -147,7 +148,8 @@ page = (
 (HERE / "index.html").write_text(page, encoding="utf-8")
 
 # --- Squarespace embed: same content, prefixed markup, no <html>/<head>/<body> ---
-nav_html_embed = "\n".join(
+DOT_EMBED = '      <span class="gw-dot">&middot;</span>'
+nav_html_embed = f"\n{DOT_EMBED}\n".join(
     f'      <a class="gw-chip" href="#gw-{slug(g)}">{escape(display(g))}</a>'
     for g in order
 )
