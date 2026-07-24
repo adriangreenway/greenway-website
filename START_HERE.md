@@ -41,7 +41,7 @@ None of these affect your live site today, because your live site is still Squar
 ---
 
 ## Your next step
-**Right now:** the template work is approved and committed. Three optional follow-ups, any order: send your real deposit/retainer terms in plain English and the proposal page gets one clean line answering "how do we reserve the date"; say the word if you want Marli's live page updated to the new version (her July 21 original stays up until you do); say **push** if you want today's work backed up to GitHub.
+**Right now:** the proposal template is settled and committed. Final copy ruling: the deposit line is the only thing removed (payment details live in your 17hats contract and invoice flow, never on the page), everything else stays exactly as you approved, "Two Ways to Fill the Room" included. Say **push** to back the last commit up to GitHub. Separate call: whether Marli's live page gets the new version (her July 21 original stays up until you say so). The "next steps" reply email is parked until you ask for it.
 
 Everyone with a live proposal today (Garrett, Giulia, Marli, Kate) still has their original links working no matter what you decide, nothing is live-broken. Two small offers stay open, either starts with one word: the fix that stops proposal pages showing you hour-old copies after a revision, and moving the GitHub access key on this Mac into the keychain.
 

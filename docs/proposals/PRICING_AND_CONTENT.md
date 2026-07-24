@@ -38,6 +38,21 @@ is bespoke. Non-Houston → flag travel and ask Adrian.
 Contract standard seen in email: **3 hours of live music across a 4-hour reception**.
 Longer receptions price the extra hour.
 
+## Reservation + payment flow (Adrian, 2026-07-24 — reference only, NEVER page copy)
+
+- **On the proposal page: NOTHING.** A *50% deposit secures your date* line was
+  added and cut the same day (Adrian: "superfluous… too much noise"). Deposit
+  terms enter at the next-steps conversation, never on the page.
+- **The real workflow:** client asks "what are the next steps?" → Adrian sends
+  the official quote/contract through 17hats → the contract triggers an invoice.
+- **The invoice accepts:** Zelle to (281) 467-1226, or a check payable to
+  **CBJ Productions LLC**, 324 Cage Street, Houston, TX 77020. Credit card is
+  possible with a **4% processing fee**.
+- **Why this stays off the page:** proposal URLs are public. Payment
+  instructions on a public page are a fraud surface and would invite deposits
+  before a contract exists, skipping Adrian's own 17hats flow. Payment details
+  belong in the invoice and 1:1 email only.
+
 Presentation (2026-07-13, updated 2026-07-23): client **chose** an add-on → single
 priced row inside each package's investment total (garcia). Otherwise the "Cocktail
 Hour" addon-section is the **DEFAULT on every wedding proposal** (Adrian, 2026-07-23,
@@ -99,13 +114,21 @@ not — a new testimonial requires Adrian supplying the real review.
 - Duration line (2026-07-23, body copy directly above Cocktail Hour, never fine
   print): *Each reception package includes three hours of live performance across
   a four-hour reception.*
+- Page copy boundary (Adrian, 2026-07-24, standing rule): NO payment/terms
+  copy on the page — the *A 50% deposit secures your date.* line was cut the
+  day it was added ("superfluous… too much noise"). The established helper
+  lines STAY — he vetoed a broader sweep of them ("that one was fine"): the
+  inline CTA, the closing call-note, and "Ready now?". Don't invent NEW
+  filler lines; his spin, not AI-generic copy ("that screams AI").
 - Travel note, CONDITIONAL (only when the venue is 50+ miles from Houston):
   *Travel fee may apply for events over 50 miles from Houston.*
-- Closing CTA (2026-07-24, Adrian's correction spec — Schedule a Call is primary
-  again): note *On the call we'll walk through the options and how to hold your
-  date.* → primary solid button **Schedule a Call** (static 17hats scheduler URL)
-  → quiet secondary line *Ready now? Move forward by email.*
-  ({{MOVE_FORWARD_MAILTO}}, prefilled email, no preselected package).
+- Closing CTA (settled 2026-07-24 after two same-day reversals): note *On the
+  call we'll walk through the options and how to hold your date.* → primary
+  solid button **Schedule a Call** (static 17hats scheduler URL) → quiet
+  secondary line *Ready now? Move forward by email.* ({{MOVE_FORWARD_MAILTO}},
+  prefilled email, no preselected package). Mid-page inline CTA: *Want to talk
+  through your options? Schedule a call.* Adrian kept all of these ("that one
+  was fine"); only payment/terms copy is banned.
 - Contact block: Adrian Michael · adrian@greenwayband.com · (281) 467-1226 ·
   greenwayband.com
 - **NO-INTRO IS THE STANDARD (Adrian, 2026-07-14, locked on the turner build):** the

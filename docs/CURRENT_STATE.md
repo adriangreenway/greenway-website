@@ -45,14 +45,14 @@ Working tree on branch `docs/build-context`, up to date with `origin`. The site 
 - `PROJECT_STATE.md`, `ARCHITECTURE.md`, and `INTEGRATIONS.md` hold the deep, evidence-backed detail behind every line above; this file is the quick truth only.
 
 ## Next recommended action
-v5–v8 approved by Adrian ("this is great") and committed 2026-07-24 on
-`docs/build-context` (branch ahead 2, unpushed — pushing needs his OK).
-Verified draft: `6a635cb4a77bc929e716cdd5--greenway-proposals.netlify.app
-/hinojosa/`. Open calls for Adrian, in value order: (1) send real
-reservation/retainer terms in plain English → one clean line gets added
-(v5 flag 2, the last buyer question the page can't answer); (2) decide if
-Marli's live page gets the reworked version (prod = her 2026-07-21 original
-with 6pc Recommended; the redo flips to 10pc per the no-exceptions default) —
-needs his explicit ask, then a prod deploy; (3) "push" to back the branch up
-to GitHub. Proposals repo still uncommitted (normal — commits happen after a
-verified prod deploy). Gate 3 frozen (D13).
+Template SETTLED through v9 and committed 2026-07-24 (D14 v9): the 50%
+deposit line is the ONLY copy cut (policy lives in PRICING_AND_CONTENT
+"Reservation + payment flow", contract/invoice use only, never on a page);
+Adrian restored the helper lines a broader sweep had cut ("that one was
+fine") and locked "Two Ways to Fill the Room" ("i love that one"). Final
+draft, verified: `6a63654a839ef42d67904902--greenway-proposals.netlify.app
+/hinojosa/`. Branch ahead 1 after the v9 commit — his "push" backs it up.
+Open: does Marli's live page get the reworked version? (prod = her
+2026-07-21 original; his explicit ask + prod deploy.) Deferred at his word:
+"next steps" reply email for EMAIL_TEMPLATES.md. Proposals repo still
+uncommitted (normal). Gate 3 frozen (D13).
