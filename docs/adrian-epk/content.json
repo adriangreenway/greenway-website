@@ -117,13 +117,13 @@
     "categories": [
       {
         "name": "Current Pop & Top 40",
-        "genres": ["Pop", "Dance / Pop"],
-        "prefer": ["As It Was", "Espresso", "Levitating", "Can't Stop the Feeling", "Blinding Lights", "Die With a Smile", "About Damn Time"]
+        "genres": ["Pop", "Dance / Pop", "R&B / Soul"],
+        "prefer": ["As It Was", "Espresso", "Uptown Funk", "Levitating", "Can't Stop the Feeling", "Blinding Lights", "Die With a Smile", "About Damn Time"]
       },
       {
         "name": "Motown & Soul",
         "genres": ["R&B / Soul", "Funk / Disco"],
-        "prefer": ["September", "Uptown Funk", "Ain't No Mountain High Enough", "My Girl", "Let's Stay Together", "Ain't Too Proud to Beg", "(Your Love Keeps Lifting Me) Higher and Higher"]
+        "prefer": ["September", "Ain't No Mountain High Enough", "My Girl", "Let's Stay Together", "Ain't Too Proud to Beg", "(Your Love Keeps Lifting Me) Higher and Higher"]
       },
       {
         "name": "Classic Rock & Sing-Alongs",
@@ -141,7 +141,7 @@
         "prefer": ["Yeah!", "Crazy in Love", "Play That Funky Music", "Suavemente", "24K Magic", "Apache (Jump On It)", "Dancing Queen", "Get Lucky"]
       },
       {
-        "name": "Cocktail & Laid-Back",
+        "name": "Cocktail & Dinner",
         "genres": ["Jazz / Standards", "Classics", "R&B / Soul", "Folk / Indie"],
         "prefer": ["Fly Me to the Moon", "The Way You Look Tonight", "Can't Help Falling in Love", "Feeling Good", "L-O-V-E", "The Best Is Yet to Come", "Isn't She Lovely", "Stand by Me"]
       }
