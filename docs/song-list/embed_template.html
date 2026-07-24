@@ -1,0 +1,344 @@
+<!--
+  Greenway song list — Squarespace Code Block embed.
+  Same design as the hosted page (docs/song-list/template.html), reworked to
+  be pasted safely into any Squarespace page: one wrapper div, every
+  selector/id/class scoped or prefixed "gw-", literal colors (no CSS custom
+  properties), fonts loaded via @import — matching the house convention
+  already proven live in docs/squarespace/lead-form-embed.html.
+
+  Maintenance note: if template.html's colors, spacing, or type scale
+  change, update the matching values here by hand — this file is not
+  auto-derived from template.html's CSS, only from the same song data via
+  build.py. Read both files before changing either.
+
+  Setup (Adrian, in Squarespace): Insert Block → Code, paste the whole
+  generated embed.html here. See docs/song-list/README.md.
+-->
+<div id="greenway-songlist">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+
+  #greenway-songlist {
+    background: #F5F2ED;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #2A2A27;
+    -webkit-text-stroke: 0.35px #0A0A09;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  #greenway-songlist *,
+  #greenway-songlist *::before,
+  #greenway-songlist *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ---------- Cover ---------- */
+  #greenway-songlist .gw-hero {
+    background: #0A0A09;
+    text-align: center;
+    padding: 96px 32px 88px;
+    -webkit-text-stroke: 0;
+  }
+  #greenway-songlist .gw-logo-group { margin-bottom: 80px; }
+  #greenway-songlist .gw-logo-rule {
+    width: 48px;
+    height: 0.5px;
+    background: #8A867E;
+    margin: 0 auto;
+  }
+  #greenway-songlist .gw-logo-the {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 11px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    color: #8A867E;
+    margin-top: 28px;
+    text-indent: 10px;
+  }
+  #greenway-songlist .gw-logo-name {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(28px, 8vw, 42px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #F5F2ED;
+    font-weight: 400;
+    margin: 4px 0;
+    text-indent: 5px;
+  }
+  #greenway-songlist .gw-logo-band {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 14px;
+    text-transform: uppercase;
+    color: #8A867E;
+    font-weight: 400;
+    text-indent: 14px;
+  }
+  #greenway-songlist .gw-logo-rule-bottom { margin-top: 16px; }
+  #greenway-songlist .gw-hero h1 {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(24px, 6vw, 32px);
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1.3;
+    color: #F5F2ED;
+  }
+
+  /* ---------- Sticky genre bar ---------- */
+  #greenway-songlist .gw-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #F5F2ED;
+    border-bottom: 0.5px solid rgba(10,10,9,0.16);
+  }
+  #greenway-songlist .gw-bar-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  #greenway-songlist .gw-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    flex: 1;
+    min-width: 0;
+  }
+  #greenway-songlist .gw-chip {
+    flex: none;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #706D66;
+    text-decoration: none;
+    padding: 4px 0;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+    cursor: pointer;
+  }
+  #greenway-songlist .gw-chip:hover { color: #0A0A09; }
+  #greenway-songlist .gw-search-input {
+    flex: 0 0 200px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    color: #0A0A09;
+    background: transparent;
+    border: none;
+    border-bottom: 0.5px solid rgba(10,10,9,0.16);
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 6px 2px 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  #greenway-songlist .gw-search-input::placeholder { color: #706D66; opacity: 1; }
+  #greenway-songlist .gw-search-input:focus { border-color: #706D66; }
+
+  /* ---------- Sections ---------- */
+  #greenway-songlist .gw-main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 8px 32px 96px;
+  }
+  #greenway-songlist .gw-genre {
+    padding-top: 72px;
+    scroll-margin-top: 176px;
+  }
+  #greenway-songlist .gw-genre-head {
+    border-bottom: 0.5px solid rgba(10,10,9,0.16);
+    padding-bottom: 14px;
+  }
+  #greenway-songlist .gw-genre-head h2 {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(24px, 5vw, 28px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: #0A0A09;
+  }
+  #greenway-songlist .gw-songs {
+    list-style: none;
+    margin-top: 6px;
+  }
+  @media (min-width: 760px) {
+    #greenway-songlist .gw-songs { columns: 2; column-gap: 72px; }
+  }
+  #greenway-songlist .gw-song {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding: 11px 0;
+    border-bottom: 0.5px solid rgba(10,10,9,0.12);
+    break-inside: avoid;
+  }
+  #greenway-songlist .gw-songs li:last-child { border-bottom: none; }
+  #greenway-songlist .gw-title {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #2A2A27;
+  }
+  #greenway-songlist .gw-artist {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #706D66;
+    text-align: right;
+    max-width: 46%;
+  }
+  #greenway-songlist .gw-no-results {
+    display: none;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: #706D66;
+    padding: 96px 0 48px;
+  }
+
+  /* ---------- Footer ---------- */
+  #greenway-songlist .gw-footer {
+    border-top: 0.5px solid rgba(10,10,9,0.16);
+    text-align: center;
+    padding: 56px 32px 72px;
+  }
+  #greenway-songlist .gw-contact { font-size: 12px; letter-spacing: 0.5px; }
+  #greenway-songlist .gw-contact a {
+    color: #2A2A27;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  #greenway-songlist .gw-contact a:hover { color: #0A0A09; }
+  #greenway-songlist .gw-dot { color: #4A4740; margin: 0 12px; }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 640px) {
+    #greenway-songlist .gw-hero { padding: 72px 24px 64px; }
+    #greenway-songlist .gw-logo-group { margin-bottom: 64px; }
+    #greenway-songlist .gw-bar-inner { display: block; padding: 14px 24px; }
+    #greenway-songlist .gw-search-input { display: block; width: 100%; }
+    #greenway-songlist .gw-chips {
+      margin-top: 14px;
+      flex-wrap: nowrap;
+      gap: 24px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    #greenway-songlist .gw-main { padding: 0 24px 80px; }
+    #greenway-songlist .gw-genre { scroll-margin-top: 124px; }
+    #greenway-songlist .gw-song { gap: 16px; }
+  }
+
+  /* ---------- Print ---------- */
+  @media print {
+    #greenway-songlist .gw-bar,
+    #greenway-songlist .gw-no-results { display: none; }
+    #greenway-songlist { -webkit-text-stroke: 0; }
+    #greenway-songlist .gw-hero { background: none; padding: 0 0 40px; }
+    #greenway-songlist .gw-hero .gw-logo-the,
+    #greenway-songlist .gw-hero .gw-logo-band { color: #706D66; }
+    #greenway-songlist .gw-hero .gw-logo-name,
+    #greenway-songlist .gw-hero h1 { color: #0A0A09; }
+    #greenway-songlist .gw-logo-group { margin-bottom: 48px; }
+    #greenway-songlist .gw-hero h1 { font-size: 26px; }
+    #greenway-songlist .gw-main { max-width: none; padding: 0; }
+    #greenway-songlist .gw-genre { padding-top: 28px; }
+    #greenway-songlist .gw-genre-head { break-after: avoid; padding-bottom: 8px; }
+    #greenway-songlist .gw-songs { columns: 2; column-gap: 48px; }
+    #greenway-songlist .gw-song { padding: 5px 0; border-bottom: none; }
+    #greenway-songlist .gw-footer {
+      border-top: 0.5px solid #0A0A09;
+      margin-top: 40px;
+      padding: 24px 0 0;
+    }
+  }
+</style>
+
+<div class="gw-hero">
+  <div class="gw-logo-group">
+    <div class="gw-logo-rule"></div>
+    <div class="gw-logo-the">THE</div>
+    <div class="gw-logo-name">GREENWAY</div>
+    <div class="gw-logo-band">BAND</div>
+    <div class="gw-logo-rule gw-logo-rule-bottom"></div>
+  </div>
+  <h1>Song List</h1>
+</div>
+
+<div class="gw-bar">
+  <div class="gw-bar-inner">
+    <div class="gw-chips">
+@@NAV@@
+    </div>
+    <input class="gw-search-input" id="gw-search-input" type="search" placeholder="Search songs or artists" aria-label="Search songs or artists">
+  </div>
+</div>
+
+<div class="gw-main">
+@@SECTIONS@@
+  <div class="gw-no-results" id="gw-no-results">No matches.</div>
+</div>
+
+<div class="gw-footer">
+  <p class="gw-contact">
+    <a href="https://greenwayband.com">greenwayband.com</a><span class="gw-dot">&middot;</span><a href="mailto:adrian@greenwayband.com">adrian@greenwayband.com</a>
+  </p>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('greenway-songlist');
+  if (!root) return;
+  var q = root.querySelector('#gw-search-input');
+  var none = root.querySelector('#gw-no-results');
+  var bar = root.querySelector('.gw-bar');
+  var songs = [].slice.call(root.querySelectorAll('.gw-song'));
+  var sections = [].slice.call(root.querySelectorAll('.gw-genre'));
+  var chips = [].slice.call(root.querySelectorAll('.gw-chip'));
+
+  function fold(s) {
+    return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\u2019/g, "'");
+  }
+
+  q.addEventListener('input', function () {
+    var needle = fold(q.value.trim());
+    var any = false;
+    songs.forEach(function (li) {
+      var hit = !needle || li.getAttribute('data-q').indexOf(needle) !== -1;
+      li.style.display = hit ? '' : 'none';
+      if (hit) any = true;
+    });
+    sections.forEach(function (sec) {
+      var visible = sec.querySelectorAll('.gw-song:not([style*="none"])').length > 0;
+      sec.style.display = visible ? '' : 'none';
+    });
+    none.style.display = any ? 'none' : 'block';
+  });
+
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function (e) {
+      var href = chip.getAttribute('href') || '';
+      if (href.charAt(0) !== '#') return;
+      var target = root.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      var offset = bar ? bar.offsetHeight + 24 : 24;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+</div>

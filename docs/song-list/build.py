@@ -4,13 +4,15 @@
 Usage:
     python3 build.py [path/to/Greenway_Client_Song_List_vN.xlsx]
 
-Reads the xlsx (default: the copy in this folder), writes:
-    index.html   the client-facing page (white + green, Greenway design system)
-    songs.json   machine-readable list for other tools (proposals, Growth Hour)
+Reads the xlsx (default: the copy in this folder) and fills two shells with
+the same song data:
+    template.html       -> index.html    standalone hosted page
+    embed_template.html -> embed.html    Squarespace Code Block embed
+    songs.json                           machine-readable list for other tools
 
-Content policy: every song, artist, genre, and line of copy on the page comes
-from the xlsx. Nothing is invented here. The total count is computed from the
-actual rows so the number on the page can never drift from the list.
+Content policy: every song, artist, and genre comes from the xlsx. Page copy
+beyond that (wordmark, "Song List", search placeholder, footer links) is
+fixed in the templates, not generated, and nothing else is added here.
 """
 import json
 import re
@@ -143,6 +145,39 @@ page = (
 )
 
 (HERE / "index.html").write_text(page, encoding="utf-8")
+
+# --- Squarespace embed: same content, prefixed markup, no <html>/<head>/<body> ---
+nav_html_embed = "\n".join(
+    f'      <a class="gw-chip" href="#gw-{slug(g)}">{escape(display(g))}</a>'
+    for g in order
+)
+
+sections_embed = []
+for g in order:
+    items = "\n".join(
+        f'        <li class="gw-song" data-q="{escape(search_key(s["song"], s["artist"]))}">'
+        f'<span class="gw-title">{escape(display(s["song"]))}</span>'
+        f'<span class="gw-artist">{escape(display(s["artist"]))}</span></li>'
+        for s in buckets[g]
+    )
+    sections_embed.append(
+        f'    <div class="gw-genre" id="gw-{slug(g)}">\n'
+        f'      <div class="gw-genre-head">\n'
+        f'        <h2>{escape(display(g))}</h2>\n'
+        f'      </div>\n'
+        f'      <ol class="gw-songs">\n{items}\n      </ol>\n'
+        f'    </div>'
+    )
+sections_html_embed = "\n\n".join(sections_embed)
+
+EMBED_TEMPLATE = (HERE / "embed_template.html").read_text(encoding="utf-8")
+embed = (
+    EMBED_TEMPLATE
+    .replace("@@NAV@@", nav_html_embed)
+    .replace("@@SECTIONS@@", sections_html_embed)
+)
+(HERE / "embed.html").write_text(embed, encoding="utf-8")
+
 (HERE / "songs.json").write_text(
     json.dumps(
         {
@@ -170,4 +205,4 @@ if no_genre:
     print(f"WARNING:  {len(no_genre)} songs had no genre, filed under 'More Favorites'")
 if skipped:
     print(f"WARNING:  {len(skipped)} partial rows skipped: {skipped}")
-print("wrote:    index.html, songs.json")
+print("wrote:    index.html, embed.html, songs.json")
