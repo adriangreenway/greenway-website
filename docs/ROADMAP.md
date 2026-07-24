@@ -24,6 +24,14 @@ Statuses: PLANNED, APPROVED (plan exists), IN PROGRESS, SHIPPED, DEFERRED, PAUSE
 | Template v11: crowd photo paired with the greenhouse walk-in | S | BUILT, pending Adrian's review | Adrian's pairing idea | The greenhouse photo returns, side by side with the existing crowd photo (Adrian's own idea), screen-only — print keeps the original single crowd band via a hidden twin. See D14 v11. |
 
 
+## Song list track (independent of all holds)
+| Item | Size | Status | Depends on | Done means |
+|---|---|---|---|---|
+| Song list page: build + design | M | SHIPPED 2026-07-24 | — | `docs/song-list/` (xlsx → `build.py` → `template.html`/`index.html` + `songs.json`), 434 songs. v1's invented green rejected same day; rebuilt on the proposal motif (charcoal cover, cream body) via a 16-agent workflow, judged against the live hinojosa proposal, adversarially audited. Chip nav switched to middot dividers matching `SocialProofStrip.astro`'s venue strip. See D15 v1-v5. |
+| Song list: live deploy | S | SHIPPED 2026-07-24 | — | Live at `proposals.greenwayband.com/song-list`. Deploy `6a63bad71958589cd9312bc4`, rollback `6a6380672aa2910b840c6fb5`. Repertoire-update convention documented in `docs/song-list/README.md` (Adrian just says what changed; single A→Z list tagged by genre). |
+| Song list: Squarespace embed | S | BUILT then PULLED 2026-07-24 | Adrian's call | `docs/song-list/embed_template.html`/`embed.html` built, scoped/prefixed per the lead-form-embed convention, ASCII-safe against Squarespace's paste re-encoding (real bug hit and fixed). Adrian pasted it, hit an unrelated pre-existing Squarespace footer-theme bug (fixed, not ours), then decided to drop the Squarespace route entirely and keep only the proposals copy. `greenwayband.com/song-list` still shows the old unstyled list. |
+| Song list: linked from proposal template | S | SHIPPED 2026-07-24 | — | A "See the full song list" link sits under the video caption in `docs/proposals/TEMPLATE.html`, new tab, hidden in print. Template-only; existing live proposals are separate generated copies, untouched. EPK already had its own link from build 01. See D15 v6. |
+
 ## Adrian Michael EPK track (Boston outreach; independent of all holds)
 | Item | Size | Status | Depends on | Done means |
 |---|---|---|---|---|

@@ -9,7 +9,7 @@ Rules for this file (Claude Code, obey these):
 - Never delete a Known Issue without fixing it or moving it to ROADMAP.md as deferred.
 
 ## Working version
-Working tree on branch `docs/build-context`, ahead of `origin` (latest: `8762b1d` Adrian EPK build 01; push pending Adrian's word). The site itself lives on two diverged branches: `dev` (deployed — strong inference from the netlify.app redirect existing only there) and `main` (has Reviews + FAQ committed, not deployed). Neither is checked out right now; this branch carries documentation only.
+Working tree on branch `docs/build-context`, ahead of `origin` by 4 (latest `11b6e16`; the 2 newest, `758b029` + `11b6e16`, are unpushed pending Adrian's word). The site itself lives on two diverged branches: `dev` (deployed) and `main` (has Reviews + FAQ committed, not deployed) — neither checked out now. This branch's own `src/` edits are documentation-only, but its working tree currently also carries pre-existing uncommitted `src/` changes not made this session; see Technical warnings.
 ## Active task
 **Three separate tracks. Only one is paused.**
 
@@ -29,7 +29,7 @@ Working tree on branch `docs/build-context`, ahead of `origin` (latest: `8762b1d
 | Issue | Severity | Notes |
 |---|---|---|
 | Staging URL self-redirects to Squarespace | Medium | `netlify.toml` 301s `greenway-website.netlify.app/*` → `greenwayband.com`, which is still Squarespace. The new build isn't viewable at its own staging URL. Use `npm run dev` or a Netlify deploy-preview link. Fix is a one-line redirect removal, owner-approved only. |
-| `dev`/`main` branch split | Medium | `dev` (deployed) lacks committed Reviews/FAQ; `main` has them committed but isn't deployed. Working tree currently has them uncommitted on `dev`. See `PROJECT_STATE.md` for full evidence. |
+| `dev`/`main` branch split | Medium | `dev` (deployed) lacks committed Reviews/FAQ; `main` has them committed but isn't deployed. Uncommitted on both `dev` and `docs/build-context`'s working tree (confirmed 2026-07-24) — see Technical warnings. |
 | `published` flag in `site.ts` is dead metadata | Low | Nothing reads `pages[].published`; nav is a hardcoded array in `Header.astro`. Publishing a page needs a nav edit + a page file, not just a flag flip. |
 | FAQ AI assistant never built | Low | FAQ shipped as a static 12-question accordion instead. Revisit only if Adrian still wants it. |
 | Reviews page has no real content | Low | Three "Review coming soon" placeholders; copy-integrity compliant, just incomplete. Blocked on Adrian supplying real, attributed testimonials. |
@@ -43,18 +43,9 @@ Working tree on branch `docs/build-context`, ahead of `origin` (latest: `8762b1d
 ## Technical warnings
 - No test script and no `astro check` configured. Verification = `npm run build` clean + manual browser check.
 - Do not commit, push, deploy, or touch Cloudflare DNS without Adrian's explicit approval (hard stop, see `docs/CODE_WORKFLOW.md`).
-- Do not discard the uncommitted working-tree changes on `dev` (Reviews/FAQ publish edits) without checking `PROJECT_STATE.md` first — it may be unfinished, unpushed work.
+- Do not discard the uncommitted working-tree changes (Reviews/FAQ publish edits: `Header.astro`, `site.ts` modified; `faq.astro`, `reviews.astro`, `public/proposals/` untracked) without checking `PROJECT_STATE.md` first — it may be unfinished, unpushed work. Present on both `dev` and `docs/build-context` as of 2026-07-24.
 - `PROJECT_STATE.md`, `ARCHITECTURE.md`, and `INTEGRATIONS.md` hold the deep, evidence-backed detail behind every line above; this file is the quick truth only.
 
 ## Next recommended action
-**Adrian EPK "build 02"** — he ended build 01 saying there are things he wants
-to reconsider, and deliberately saved them for a fresh session. Start by asking
-what they are. He also took `~/Desktop/adrian-epk-audit-2026-07-24.zip` to
-ChatGPT for an outside audit, so expect a second list of findings; treat both as
-input to scope build 02 before touching anything. Already known candidates: reel
-length (2:21), more photos he has on hand (a wide horizontal hero, a
-restaurant/lounge shot for the solo lane), the testimonial pull quote. Nothing
-about the EPK is deployed, so all of this is safely reversible.
-Also open, unchanged: proposal-template arc closed and live; push to origin
-pending Adrian's word; a canned "next steps" reply email deferred at his word.
-Gate 3 frozen (D13); Astro rebuild still paused on Growth Hour M3.
+**Adrian EPK "build 02"** — he ended build 01 saying there are things he wants to reconsider, deliberately saved for a fresh session; start by asking what they are. He also took `~/Desktop/adrian-epk-audit-2026-07-24.zip` to ChatGPT for an outside audit, so expect a second list too; treat both as input to scope build 02 before touching anything. Known candidates already: reel length (2:21), more photos on hand (a wide horizontal hero, a restaurant/lounge shot for the solo lane), the testimonial pull quote. Nothing deployed, so all reversible.
+Also open: **song-list arc fully closed** (live, chip dividers, repertoire convention documented, Squarespace route pulled by Adrian's choice, proposal template links to it) — nothing left on that thread. `758b029` + `11b6e16` need a push decision. A canned "next steps" reply email deferred at his word. Gate 3 frozen (D13); Astro rebuild still paused on Growth Hour M3.
