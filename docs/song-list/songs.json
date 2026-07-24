@@ -1,0 +1,1819 @@
+{
+ "title": "GREENWAY BAND SONG LIST",
+ "subtitle": "433 recognizable favorites across generations and genres",
+ "note": "Set lists are tailored to each event. Special requests are always welcome.",
+ "total": 433,
+ "source": "Greenway_Client_Song_List_v4.xlsx",
+ "genres": [
+  {
+   "name": "Pop",
+   "count": 133,
+   "songs": [
+    {
+     "song": "About Damn Time",
+     "artist": "Lizzo"
+    },
+    {
+     "song": "Accidentally In Love",
+     "artist": "Counting Crows"
+    },
+    {
+     "song": "All About That Bass",
+     "artist": "Meghan Trainor"
+    },
+    {
+     "song": "American Girls",
+     "artist": "Harry Styles"
+    },
+    {
+     "song": "APT.",
+     "artist": "ROSÉ & Bruno Mars"
+    },
+    {
+     "song": "As It Was",
+     "artist": "Harry Styles"
+    },
+    {
+     "song": "As Long As You Love Me",
+     "artist": "Backstreet Boys"
+    },
+    {
+     "song": "Bad Habits",
+     "artist": "Ed Sheeran"
+    },
+    {
+     "song": "Beautiful Things",
+     "artist": "Benson Boone"
+    },
+    {
+     "song": "Believe",
+     "artist": "Cher"
+    },
+    {
+     "song": "Bigger Than My Body",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "Birds of a Feather",
+     "artist": "Billie Eilish"
+    },
+    {
+     "song": "Blinding Lights",
+     "artist": "The Weeknd"
+    },
+    {
+     "song": "Boogie Shoes",
+     "artist": "KC and The Sunshine Band"
+    },
+    {
+     "song": "Butter",
+     "artist": "BTS"
+    },
+    {
+     "song": "Bye Bye Bye",
+     "artist": "*NSYNC"
+    },
+    {
+     "song": "Cake By The Ocean",
+     "artist": "DNCE"
+    },
+    {
+     "song": "Can’t Feel My Face",
+     "artist": "The Weeknd"
+    },
+    {
+     "song": "Can't Stop The Feeling",
+     "artist": "Justin Timberlake"
+    },
+    {
+     "song": "Candyman",
+     "artist": "Christina Aguilera"
+    },
+    {
+     "song": "Castle On The Hill",
+     "artist": "Ed Sheeran"
+    },
+    {
+     "song": "Chapel of Love",
+     "artist": "The Dixie Cups"
+    },
+    {
+     "song": "Circles",
+     "artist": "Post Malone"
+    },
+    {
+     "song": "Cold Heart",
+     "artist": "Elton John & Dua Lipa"
+    },
+    {
+     "song": "Complicated",
+     "artist": "Avril Lavigne"
+    },
+    {
+     "song": "Dance The Night",
+     "artist": "Dua Lipa"
+    },
+    {
+     "song": "Daughters",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "Die for You",
+     "artist": "The Weeknd"
+    },
+    {
+     "song": "Die With a Smile",
+     "artist": "Lady Gaga & Bruno Mars"
+    },
+    {
+     "song": "Dog Days Are Over",
+     "artist": "Florence + The Machine"
+    },
+    {
+     "song": "Don't Start Now",
+     "artist": "Dua Lipa"
+    },
+    {
+     "song": "Don't Stop the Music",
+     "artist": "Rihanna"
+    },
+    {
+     "song": "Escape (The Piña Colada Song)",
+     "artist": "Rupert Holmes"
+    },
+    {
+     "song": "Espresso",
+     "artist": "Sabrina Carpenter"
+    },
+    {
+     "song": "Everybody (Backstreet's Back)",
+     "artist": "Backstreet Boys"
+    },
+    {
+     "song": "Faith",
+     "artist": "George Michael"
+    },
+    {
+     "song": "Fireball",
+     "artist": "Pitbull (ft. John Ryan)"
+    },
+    {
+     "song": "Flowers",
+     "artist": "Miley Cyrus"
+    },
+    {
+     "song": "Footloose",
+     "artist": "Kenny Loggins"
+    },
+    {
+     "song": "Forever Now",
+     "artist": "Michael Bublé"
+    },
+    {
+     "song": "Girls Just Want To Have Fun",
+     "artist": "Cyndi Lauper"
+    },
+    {
+     "song": "Give Me Everything",
+     "artist": "Pitbull feat. Ne-Yo, Afrojack & Nayer"
+    },
+    {
+     "song": "Good as Hell",
+     "artist": "Lizzo"
+    },
+    {
+     "song": "Good Luck, Babe!",
+     "artist": "Chappell Roan"
+    },
+    {
+     "song": "Gravity",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "Half Of My Heart",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "Halo",
+     "artist": "Beyoncé"
+    },
+    {
+     "song": "Happy",
+     "artist": "Pharrell Williams"
+    },
+    {
+     "song": "Havana",
+     "artist": "Camila Cabello"
+    },
+    {
+     "song": "Heaven",
+     "artist": "Los Lonely Boys"
+    },
+    {
+     "song": "Hold On",
+     "artist": "Wilson Phillips"
+    },
+    {
+     "song": "HOT TO GO!",
+     "artist": "Chappell Roan"
+    },
+    {
+     "song": "I Don’t Care",
+     "artist": "Ed Sheeran"
+    },
+    {
+     "song": "I Don’t Trust Myself (With Loving You)",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "I Feel It Coming",
+     "artist": "The Weeknd"
+    },
+    {
+     "song": "I Love It",
+     "artist": "Icona Pop feat. Charli XCX"
+    },
+    {
+     "song": "I'm A Believer",
+     "artist": "Smash Mouth"
+    },
+    {
+     "song": "I'm Gonna Find Another You",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "I’m Yours",
+     "artist": "Jason Mraz"
+    },
+    {
+     "song": "(I've Had) The Time Of My Life",
+     "artist": "Bill Medley & Jennifer Warnes"
+    },
+    {
+     "song": "If I Can’t Have You",
+     "artist": "Shawn Mendes"
+    },
+    {
+     "song": "Juice",
+     "artist": "Lizzo"
+    },
+    {
+     "song": "Kiss Me More",
+     "artist": "Doja Cat feat. SZA"
+    },
+    {
+     "song": "Last Train Home",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "Let's Get It Started",
+     "artist": "Black Eyed Peas"
+    },
+    {
+     "song": "Levitating",
+     "artist": "Dua Lipa"
+    },
+    {
+     "song": "Like Me Better",
+     "artist": "Lauv"
+    },
+    {
+     "song": "Lose Control",
+     "artist": "Teddy Swims"
+    },
+    {
+     "song": "Love Me Like You Do",
+     "artist": "Ellie Goulding"
+    },
+    {
+     "song": "Lovefool",
+     "artist": "The Cardigans"
+    },
+    {
+     "song": "Lover",
+     "artist": "Taylor Swift"
+    },
+    {
+     "song": "Make You Feel My Love",
+     "artist": "Adele"
+    },
+    {
+     "song": "Man I Need",
+     "artist": "Olivia Dean"
+    },
+    {
+     "song": "Moves Like Jagger",
+     "artist": "Maroon 5"
+    },
+    {
+     "song": "Moving On and Getting Over",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "Murder on the Dancefloor",
+     "artist": "Sophie Ellis-Bextor"
+    },
+    {
+     "song": "New Light",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "No Such Thing",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "On the Floor",
+     "artist": "Jennifer Lopez feat. Pitbull"
+    },
+    {
+     "song": "Only Girl (In the World)",
+     "artist": "Rihanna"
+    },
+    {
+     "song": "Ordinary",
+     "artist": "Alex Warren"
+    },
+    {
+     "song": "Party In The USA",
+     "artist": "Miley Cyrus"
+    },
+    {
+     "song": "Peaches",
+     "artist": "Justin Bieber"
+    },
+    {
+     "song": "Perfect",
+     "artist": "Ed Sheeran"
+    },
+    {
+     "song": "Pink Pony Club",
+     "artist": "Chappell Roan"
+    },
+    {
+     "song": "Raise Your Glass",
+     "artist": "P!nk"
+    },
+    {
+     "song": "Rich Girl",
+     "artist": "Hall & Oates"
+    },
+    {
+     "song": "Sailing",
+     "artist": "Christopher Cross"
+    },
+    {
+     "song": "Save Your Tears",
+     "artist": "The Weeknd"
+    },
+    {
+     "song": "Shake It Off",
+     "artist": "Taylor Swift"
+    },
+    {
+     "song": "Shallow",
+     "artist": "Lady Gaga & Bradley Cooper"
+    },
+    {
+     "song": "Shape of You",
+     "artist": "Ed Sheeran"
+    },
+    {
+     "song": "She Will Be Loved",
+     "artist": "Maroon 5"
+    },
+    {
+     "song": "Since U Been Gone",
+     "artist": "Kelly Clarkson"
+    },
+    {
+     "song": "Slow Dancing in a Burning Room",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "Slow Hands",
+     "artist": "Niall Horan"
+    },
+    {
+     "song": "So Easy (To Fall in Love)",
+     "artist": "Olivia Dean"
+    },
+    {
+     "song": "Sorry",
+     "artist": "Justin Bieber"
+    },
+    {
+     "song": "Starboy",
+     "artist": "The Weeknd"
+    },
+    {
+     "song": "Stay",
+     "artist": "The Kid LAROI & Justin Bieber"
+    },
+    {
+     "song": "Stay",
+     "artist": "Zedd & Alessia Cara"
+    },
+    {
+     "song": "Still Feel Like Your Man",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "Sugar",
+     "artist": "Maroon 5"
+    },
+    {
+     "song": "Suit & Tie",
+     "artist": "Justin Timberlake"
+    },
+    {
+     "song": "Summer Breeze",
+     "artist": "Seals & Crofts"
+    },
+    {
+     "song": "Sunday Morning",
+     "artist": "Maroon 5"
+    },
+    {
+     "song": "Sweet Caroline",
+     "artist": "Neil Diamond"
+    },
+    {
+     "song": "Thank You",
+     "artist": "Dido"
+    },
+    {
+     "song": "There's Nothing Holdin' Me Back",
+     "artist": "Shawn Mendes"
+    },
+    {
+     "song": "Thinking Out Loud",
+     "artist": "Ed Sheeran"
+    },
+    {
+     "song": "This Love",
+     "artist": "Maroon 5"
+    },
+    {
+     "song": "A Thousand Years",
+     "artist": "Christina Perri"
+    },
+    {
+     "song": "Tik Tok",
+     "artist": "Ke$ha"
+    },
+    {
+     "song": "Timber",
+     "artist": "Pitbull feat. Kesha"
+    },
+    {
+     "song": "Time of Our Lives",
+     "artist": "Pitbull & Ne-Yo"
+    },
+    {
+     "song": "Treat You Better",
+     "artist": "Shawn Mendes"
+    },
+    {
+     "song": "Truth Hurts",
+     "artist": "Lizzo"
+    },
+    {
+     "song": "Unchained Melody",
+     "artist": "The Righteous Brothers"
+    },
+    {
+     "song": "Unwritten",
+     "artist": "Natasha Bedingfield"
+    },
+    {
+     "song": "Valerie",
+     "artist": "Amy Winehouse"
+    },
+    {
+     "song": "Wait",
+     "artist": "Maroon 5"
+    },
+    {
+     "song": "Waiting on the World to Change",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "Wannabe",
+     "artist": "Spice Girls"
+    },
+    {
+     "song": "Water",
+     "artist": "Tyla"
+    },
+    {
+     "song": "Watermelon Sugar",
+     "artist": "Harry Styles"
+    },
+    {
+     "song": "The Way You Make Me Feel",
+     "artist": "Michael Jackson"
+    },
+    {
+     "song": "We Found Love",
+     "artist": "Rihanna feat. Calvin Harris"
+    },
+    {
+     "song": "Where Is My Husband!",
+     "artist": "Raye"
+    },
+    {
+     "song": "Why Georgia",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "You and I Both",
+     "artist": "Jason Mraz"
+    },
+    {
+     "song": "You Belong With Me",
+     "artist": "Taylor Swift"
+    },
+    {
+     "song": "Your Body Is A Wonderland",
+     "artist": "John Mayer"
+    },
+    {
+     "song": "Your Song",
+     "artist": "Elton John"
+    }
+   ]
+  },
+  {
+   "name": "R&B / Soul",
+   "count": 93,
+   "songs": [
+    {
+     "song": "1999",
+     "artist": "Prince"
+    },
+    {
+     "song": "24K Magic",
+     "artist": "Bruno Mars"
+    },
+    {
+     "song": "Ain’t No Mountain High Enough",
+     "artist": "Marvin Gaye & Tammi Terrell"
+    },
+    {
+     "song": "Ain't Nobody",
+     "artist": "Chaka Khan"
+    },
+    {
+     "song": "Ain't Too Proud to Beg",
+     "artist": "The Temptations"
+    },
+    {
+     "song": "All My Life",
+     "artist": "K-Ci & JoJo"
+    },
+    {
+     "song": "All of Me",
+     "artist": "John Legend"
+    },
+    {
+     "song": "Are You That Somebody",
+     "artist": "Aaliyah"
+    },
+    {
+     "song": "As",
+     "artist": "Stevie Wonder"
+    },
+    {
+     "song": "At Last",
+     "artist": "Etta James"
+    },
+    {
+     "song": "The Best",
+     "artist": "Tina Turner"
+    },
+    {
+     "song": "Best Of My Love",
+     "artist": "The Emotions"
+    },
+    {
+     "song": "Beyond",
+     "artist": "Leon Bridges"
+    },
+    {
+     "song": "Billie Jean",
+     "artist": "Michael Jackson"
+    },
+    {
+     "song": "Blurred Lines",
+     "artist": "Robin Thicke"
+    },
+    {
+     "song": "Boogie On Reggae Woman",
+     "artist": "Stevie Wonder"
+    },
+    {
+     "song": "Brick House",
+     "artist": "The Commodores"
+    },
+    {
+     "song": "Can’t Take My Eyes Off of You",
+     "artist": "Lauryn Hill"
+    },
+    {
+     "song": "Celebration",
+     "artist": "Kool & The Gang"
+    },
+    {
+     "song": "Colors",
+     "artist": "Black Pumas"
+    },
+    {
+     "song": "Coming Home",
+     "artist": "Leon Bridges"
+    },
+    {
+     "song": "Crazy",
+     "artist": "Gnarls Barkley"
+    },
+    {
+     "song": "Crazy in Love",
+     "artist": "Beyoncé"
+    },
+    {
+     "song": "CUFF IT",
+     "artist": "Beyoncé"
+    },
+    {
+     "song": "Dancing in the Street",
+     "artist": "Martha Reeves & The Vandellas"
+    },
+    {
+     "song": "Deja Vu",
+     "artist": "Beyoncé"
+    },
+    {
+     "song": "Don't Let Go (Love)",
+     "artist": "En Vogue"
+    },
+    {
+     "song": "Family Affair",
+     "artist": "Mary J. Blige"
+    },
+    {
+     "song": "Finesse",
+     "artist": "Bruno Mars"
+    },
+    {
+     "song": "Forever",
+     "artist": "Chris Brown"
+    },
+    {
+     "song": "Forget You",
+     "artist": "CeeLo Green"
+    },
+    {
+     "song": "Get Down On It",
+     "artist": "Kool & The Gang"
+    },
+    {
+     "song": "Higher Ground",
+     "artist": "Stevie Wonder"
+    },
+    {
+     "song": "Higher Love",
+     "artist": "Whitney Houston"
+    },
+    {
+     "song": "How Will I Know",
+     "artist": "Whitney Houston"
+    },
+    {
+     "song": "I Can't Help Myself (Sugar Pie, Honey Bunch)",
+     "artist": "Four Tops"
+    },
+    {
+     "song": "I Got You (I Feel Good)",
+     "artist": "James Brown"
+    },
+    {
+     "song": "I Just Called To Say I Love You",
+     "artist": "Stevie Wonder"
+    },
+    {
+     "song": "I Just Might",
+     "artist": "Bruno Mars"
+    },
+    {
+     "song": "I Keep Forgettin' (Every Time You're Near)",
+     "artist": "Michael McDonald"
+    },
+    {
+     "song": "I Wanna Dance With Somebody",
+     "artist": "Whitney Houston"
+    },
+    {
+     "song": "I Want You Back",
+     "artist": "The Jackson 5"
+    },
+    {
+     "song": "I Will Always Love You",
+     "artist": "Whitney Houston"
+    },
+    {
+     "song": "I Wish",
+     "artist": "Stevie Wonder"
+    },
+    {
+     "song": "Isn’t She Lovely",
+     "artist": "Stevie Wonder"
+    },
+    {
+     "song": "Just The Way You Are",
+     "artist": "Bruno Mars"
+    },
+    {
+     "song": "Killing Me Softly",
+     "artist": "The Fugees"
+    },
+    {
+     "song": "Kiss",
+     "artist": "Prince"
+    },
+    {
+     "song": "Kiss From A Rose",
+     "artist": "Seal"
+    },
+    {
+     "song": "Let’s Get It On",
+     "artist": "Marvin Gaye"
+    },
+    {
+     "song": "Let’s Stay Together",
+     "artist": "Al Green"
+    },
+    {
+     "song": "Locked Out of Heaven",
+     "artist": "Bruno Mars"
+    },
+    {
+     "song": "Love On Top",
+     "artist": "Beyoncé"
+    },
+    {
+     "song": "Lovely Day",
+     "artist": "Bill Withers"
+    },
+    {
+     "song": "The Man",
+     "artist": "Aloe Blacc"
+    },
+    {
+     "song": "Marry You",
+     "artist": "Bruno Mars"
+    },
+    {
+     "song": "My Girl",
+     "artist": "The Temptations"
+    },
+    {
+     "song": "Never Too Much",
+     "artist": "Luther Vandross"
+    },
+    {
+     "song": "No Diggity",
+     "artist": "Blackstreet"
+    },
+    {
+     "song": "P.Y.T. (Pretty Young Thing)",
+     "artist": "Michael Jackson"
+    },
+    {
+     "song": "Poison",
+     "artist": "Bell Biv DeVoe"
+    },
+    {
+     "song": "Pony",
+     "artist": "Ginuwine"
+    },
+    {
+     "song": "Proud Mary",
+     "artist": "Tina Turner"
+    },
+    {
+     "song": "Real Love",
+     "artist": "Mary J. Blige"
+    },
+    {
+     "song": "Respect",
+     "artist": "Aretha Franklin"
+    },
+    {
+     "song": "Return of The Mack",
+     "artist": "Mark Morrison"
+    },
+    {
+     "song": "Rock With You",
+     "artist": "Michael Jackson"
+    },
+    {
+     "song": "The Rubberband Man",
+     "artist": "The Spinners"
+    },
+    {
+     "song": "September",
+     "artist": "Earth, Wind & Fire"
+    },
+    {
+     "song": "She’s A Bad Mama Jama",
+     "artist": "Carl Carlton"
+    },
+    {
+     "song": "Shout!",
+     "artist": "The Isley Brothers"
+    },
+    {
+     "song": "Signed, Sealed, Delivered (I'm Yours)",
+     "artist": "Stevie Wonder"
+    },
+    {
+     "song": "Single Ladies (Put A Ring On It)",
+     "artist": "Beyoncé"
+    },
+    {
+     "song": "Sir Duke",
+     "artist": "Stevie Wonder"
+    },
+    {
+     "song": "Sitting On The Dock of The Bay",
+     "artist": "Otis Redding"
+    },
+    {
+     "song": "Smooth Operator",
+     "artist": "Sade"
+    },
+    {
+     "song": "Stand By Me",
+     "artist": "Ben E. King"
+    },
+    {
+     "song": "Super Freak",
+     "artist": "Rick James"
+    },
+    {
+     "song": "Superstition / Crazy in Love",
+     "artist": "Stevie Wonder / Beyoncé"
+    },
+    {
+     "song": "This Is How We Do It",
+     "artist": "Montell Jordan"
+    },
+    {
+     "song": "This Will Be (An Everlasting Love)",
+     "artist": "Natalie Cole"
+    },
+    {
+     "song": "Thriller",
+     "artist": "Michael Jackson"
+    },
+    {
+     "song": "Treasure",
+     "artist": "Bruno Mars"
+    },
+    {
+     "song": "Unforgettable",
+     "artist": "Natalie Cole & Nat King Cole"
+    },
+    {
+     "song": "Uptown Funk",
+     "artist": "Bruno Mars"
+    },
+    {
+     "song": "Use Me",
+     "artist": "Bill Withers"
+    },
+    {
+     "song": "What You Won't Do for Love",
+     "artist": "Bobby Caldwell"
+    },
+    {
+     "song": "Yeah",
+     "artist": "Usher feat. Lil Jon & Ludacris"
+    },
+    {
+     "song": "You Are The Best Thing",
+     "artist": "Ray LaMontagne"
+    },
+    {
+     "song": "You Are The Sunshine of My Life",
+     "artist": "Stevie Wonder"
+    },
+    {
+     "song": "You Dropped A Bomb On Me",
+     "artist": "The Gap Band"
+    },
+    {
+     "song": "You Make Me Wanna",
+     "artist": "Usher"
+    },
+    {
+     "song": "(Your Love Keeps Lifting Me) Higher and Higher",
+     "artist": "Jackie Wilson"
+    }
+   ]
+  },
+  {
+   "name": "Rock / Alternative",
+   "count": 76,
+   "songs": [
+    {
+     "song": "Africa",
+     "artist": "Toto"
+    },
+    {
+     "song": "Ain't It Fun",
+     "artist": "Paramore"
+    },
+    {
+     "song": "All The Small Things",
+     "artist": "Blink-182"
+    },
+    {
+     "song": "All You Need Is Love",
+     "artist": "The Beatles"
+    },
+    {
+     "song": "American Girl",
+     "artist": "Tom Petty"
+    },
+    {
+     "song": "American Pie",
+     "artist": "Don McLean"
+    },
+    {
+     "song": "The Anthem",
+     "artist": "Good Charlotte"
+    },
+    {
+     "song": "Ants Marching",
+     "artist": "Dave Matthews Band"
+    },
+    {
+     "song": "Beautiful Day",
+     "artist": "U2"
+    },
+    {
+     "song": "Best Day Of My Life",
+     "artist": "American Authors"
+    },
+    {
+     "song": "Better Together",
+     "artist": "Jack Johnson"
+    },
+    {
+     "song": "Bohemian Rhapsody",
+     "artist": "Queen"
+    },
+    {
+     "song": "Burning Love",
+     "artist": "Elvis Presley"
+    },
+    {
+     "song": "Chasing Cars",
+     "artist": "Snow Patrol"
+    },
+    {
+     "song": "Closing Time",
+     "artist": "Semisonic"
+    },
+    {
+     "song": "Come Together",
+     "artist": "The Beatles"
+    },
+    {
+     "song": "Crazy Little Thing Called Love",
+     "artist": "Queen"
+    },
+    {
+     "song": "Dancing In The Moonlight",
+     "artist": "Toploader"
+    },
+    {
+     "song": "Dear Maria, Count Me In",
+     "artist": "All Time Low"
+    },
+    {
+     "song": "Don’t Stop Believing",
+     "artist": "Journey"
+    },
+    {
+     "song": "Don't Stop Me Now",
+     "artist": "Queen"
+    },
+    {
+     "song": "Dreams",
+     "artist": "Fleetwood Mac"
+    },
+    {
+     "song": "Drift Away",
+     "artist": "Dobie Gray"
+    },
+    {
+     "song": "Drops of Jupiter",
+     "artist": "Train"
+    },
+    {
+     "song": "Electric Feel",
+     "artist": "MGMT"
+    },
+    {
+     "song": "Electric Love",
+     "artist": "Borns"
+    },
+    {
+     "song": "Every Breath You Take",
+     "artist": "The Police"
+    },
+    {
+     "song": "(Everything I Do) I Do It For You",
+     "artist": "Bryan Adams"
+    },
+    {
+     "song": "Everywhere",
+     "artist": "Fleetwood Mac"
+    },
+    {
+     "song": "Feel It Still",
+     "artist": "Portugal The Man"
+    },
+    {
+     "song": "Free Fallin’",
+     "artist": "Tom Petty"
+    },
+    {
+     "song": "Have You Ever Seen The Rain",
+     "artist": "Creedence Clearwater Revival"
+    },
+    {
+     "song": "Helena",
+     "artist": "My Chemical Romance"
+    },
+    {
+     "song": "Here Comes The Sun",
+     "artist": "Beatles"
+    },
+    {
+     "song": "Hey Soul Sister",
+     "artist": "Train"
+    },
+    {
+     "song": "High Hopes",
+     "artist": "Panic At The Disco"
+    },
+    {
+     "song": "Home",
+     "artist": "Edward Sharpe & The Magnetic Zeros"
+    },
+    {
+     "song": "Hotel California",
+     "artist": "The Eagles"
+    },
+    {
+     "song": "I Don't Want To Miss A Thing",
+     "artist": "Aerosmith"
+    },
+    {
+     "song": "I Still Haven't Found What I'm Looking For",
+     "artist": "U2"
+    },
+    {
+     "song": "I Will Wait",
+     "artist": "Mumford & Sons"
+    },
+    {
+     "song": "I Write Sins Not Tragedies",
+     "artist": "Panic At The Disco"
+    },
+    {
+     "song": "Iris",
+     "artist": "Goo Goo Dolls"
+    },
+    {
+     "song": "Just Like Heaven",
+     "artist": "The Cure"
+    },
+    {
+     "song": "Kiss Me",
+     "artist": "Sixpence None The Richer"
+    },
+    {
+     "song": "Landslide",
+     "artist": "Fleetwood Mac"
+    },
+    {
+     "song": "Livin' on a Prayer",
+     "artist": "Bon Jovi"
+    },
+    {
+     "song": "Love Shack",
+     "artist": "The B-52s"
+    },
+    {
+     "song": "Minute by Minute",
+     "artist": "The Doobie Brothers"
+    },
+    {
+     "song": "Misery Business",
+     "artist": "Paramore"
+    },
+    {
+     "song": "Mr. Brightside",
+     "artist": "The Killers"
+    },
+    {
+     "song": "Ocean Avenue",
+     "artist": "Yellowcard"
+    },
+    {
+     "song": "Peg",
+     "artist": "Steely Dan"
+    },
+    {
+     "song": "Piano Man",
+     "artist": "Billy Joel"
+    },
+    {
+     "song": "Pour Some Sugar On Me",
+     "artist": "Def Leppard"
+    },
+    {
+     "song": "Sex On Fire",
+     "artist": "Kings of Leon"
+    },
+    {
+     "song": "Shut Up and Dance",
+     "artist": "Walk The Moon"
+    },
+    {
+     "song": "A Sky Full Of Stars",
+     "artist": "Coldplay"
+    },
+    {
+     "song": "Stacy's Mom",
+     "artist": "Fountains of Wayne"
+    },
+    {
+     "song": "Still Into You",
+     "artist": "Paramore"
+    },
+    {
+     "song": "Sugar, We're Goin Down",
+     "artist": "Fall Out Boy"
+    },
+    {
+     "song": "Sweet Child O' Mine",
+     "artist": "Guns N' Roses"
+    },
+    {
+     "song": "Sweet Home Alabama",
+     "artist": "Lynyrd Skynyrd"
+    },
+    {
+     "song": "Take It Easy",
+     "artist": "The Eagles"
+    },
+    {
+     "song": "Teenage Dirtbag",
+     "artist": "Wheatus"
+    },
+    {
+     "song": "Thunderstruck",
+     "artist": "AC/DC"
+    },
+    {
+     "song": "Time Of Your Life (Good Riddance)",
+     "artist": "Green Day"
+    },
+    {
+     "song": "Tiny Dancer",
+     "artist": "Elton John"
+    },
+    {
+     "song": "Walk This Way",
+     "artist": "Aerosmith"
+    },
+    {
+     "song": "What a Fool Believes",
+     "artist": "The Doobie Brothers"
+    },
+    {
+     "song": "White Wedding",
+     "artist": "Billy Idol"
+    },
+    {
+     "song": "Wonderful Tonight",
+     "artist": "Eric Clapton"
+    },
+    {
+     "song": "Wonderwall",
+     "artist": "Oasis"
+    },
+    {
+     "song": "Yellow",
+     "artist": "Coldplay"
+    },
+    {
+     "song": "You're My Best Friend",
+     "artist": "Queen"
+    },
+    {
+     "song": "You Shook Me All Night Long",
+     "artist": "AC/DC"
+    }
+   ]
+  },
+  {
+   "name": "Country",
+   "count": 53,
+   "songs": [
+    {
+     "song": "All My Ex's Live In Texas",
+     "artist": "George Strait"
+    },
+    {
+     "song": "All Your'n",
+     "artist": "Tyler Childers"
+    },
+    {
+     "song": "Amarillo by Morning",
+     "artist": "George Strait"
+    },
+    {
+     "song": "Amazed",
+     "artist": "Lonestar"
+    },
+    {
+     "song": "Any Man of Mine",
+     "artist": "Shania Twain"
+    },
+    {
+     "song": "Bless The Broken Road",
+     "artist": "Rascal Flatts"
+    },
+    {
+     "song": "Blue Ain’t Your Color",
+     "artist": "Keith Urban"
+    },
+    {
+     "song": "Boot Scootin' Boogie",
+     "artist": "Brooks & Dunn"
+    },
+    {
+     "song": "Callin' Baton Rouge",
+     "artist": "Garth Brooks"
+    },
+    {
+     "song": "Chattahoochee",
+     "artist": "Alan Jackson"
+    },
+    {
+     "song": "Chicken Fried",
+     "artist": "Zac Brown Band"
+    },
+    {
+     "song": "Choosin' Texas",
+     "artist": "Ella Langley"
+    },
+    {
+     "song": "Cowboy Take Me Away",
+     "artist": "The Chicks"
+    },
+    {
+     "song": "Forever and Ever, Amen",
+     "artist": "Randy Travis"
+    },
+    {
+     "song": "Friends In Low Places",
+     "artist": "Garth Brooks"
+    },
+    {
+     "song": "The Gambler",
+     "artist": "Kenny Rogers"
+    },
+    {
+     "song": "God Blessed Texas",
+     "artist": "Little Texas"
+    },
+    {
+     "song": "Head Over Boots",
+     "artist": "Jon Pardi"
+    },
+    {
+     "song": "Heads Carolina, Tails California",
+     "artist": "Jo Dee Messina"
+    },
+    {
+     "song": "Humble and Kind",
+     "artist": "Tim McGraw"
+    },
+    {
+     "song": "I Still Do",
+     "artist": "Reckless Kelly"
+    },
+    {
+     "song": "In Your Love",
+     "artist": "Tyler Childers"
+    },
+    {
+     "song": "Islands in the Stream",
+     "artist": "Kenny Rogers & Dolly Parton"
+    },
+    {
+     "song": "It’s Five O’Clock Somewhere",
+     "artist": "Alan Jackson"
+    },
+    {
+     "song": "Joy of My Life",
+     "artist": "Chris Stapleton"
+    },
+    {
+     "song": "Kiss An Angel Good Morning",
+     "artist": "Charley Pride"
+    },
+    {
+     "song": "Love Story",
+     "artist": "Taylor Swift"
+    },
+    {
+     "song": "Mama Tried",
+     "artist": "Merle Haggard"
+    },
+    {
+     "song": "Man! I Feel Like A Woman",
+     "artist": "Shania Twain"
+    },
+    {
+     "song": "Margaritaville",
+     "artist": "Jimmy Buffett"
+    },
+    {
+     "song": "My Maria",
+     "artist": "Brooks & Dunn"
+    },
+    {
+     "song": "My Wish",
+     "artist": "Rascal Flatts"
+    },
+    {
+     "song": "Neon Moon",
+     "artist": "Brooks & Dunn"
+    },
+    {
+     "song": "Pay No Rent",
+     "artist": "Turnpike Troubadours"
+    },
+    {
+     "song": "Redneck Woman",
+     "artist": "Gretchen Wilson"
+    },
+    {
+     "song": "Revival",
+     "artist": "Zach Bryan"
+    },
+    {
+     "song": "Ring of Fire",
+     "artist": "Johnny Cash"
+    },
+    {
+     "song": "Save a Horse (Ride a Cowboy)",
+     "artist": "Big & Rich"
+    },
+    {
+     "song": "Should've Been a Cowboy",
+     "artist": "Toby Keith"
+    },
+    {
+     "song": "Take Me Home, Country Roads",
+     "artist": "John Denver"
+    },
+    {
+     "song": "Tennessee Whiskey",
+     "artist": "Chris Stapleton"
+    },
+    {
+     "song": "Till My Feet Don't Touch the Ground",
+     "artist": "Stoney LaRue"
+    },
+    {
+     "song": "Toes",
+     "artist": "Zac Brown Band"
+    },
+    {
+     "song": "Wagon Wheel",
+     "artist": "Darius Rucker"
+    },
+    {
+     "song": "Wave on Wave",
+     "artist": "Pat Green"
+    },
+    {
+     "song": "Wear My Ring",
+     "artist": "Bart Crow Band"
+    },
+    {
+     "song": "Whiskey Glasses",
+     "artist": "Morgan Wallen"
+    },
+    {
+     "song": "Why Don't We Just Dance",
+     "artist": "Josh Turner"
+    },
+    {
+     "song": "You",
+     "artist": "Chris Young"
+    },
+    {
+     "song": "You Make It Easy",
+     "artist": "Jason Aldean"
+    },
+    {
+     "song": "You Never Even Called Me by My Name",
+     "artist": "David Allan Coe"
+    },
+    {
+     "song": "You're Still The One",
+     "artist": "Shania Twain"
+    },
+    {
+     "song": "Your Man",
+     "artist": "Josh Turner"
+    }
+   ]
+  },
+  {
+   "name": "Funk / Disco",
+   "count": 16,
+   "songs": [
+    {
+     "song": "Dancing Queen",
+     "artist": "Abba"
+    },
+    {
+     "song": "Don't Stop 'Til You Get Enough",
+     "artist": "Michael Jackson"
+    },
+    {
+     "song": "Get Lucky",
+     "artist": "Daft Punk ft. Pharrell Williams"
+    },
+    {
+     "song": "Get Up (I Feel Like Being a) Sex Machine",
+     "artist": "James Brown"
+    },
+    {
+     "song": "Gimme! Gimme! Gimme! (A Man After Midnight)",
+     "artist": "ABBA"
+    },
+    {
+     "song": "I'm Coming Out",
+     "artist": "Diana Ross"
+    },
+    {
+     "song": "I Will Survive",
+     "artist": "Gloria Gaynor"
+    },
+    {
+     "song": "Kiss on My List",
+     "artist": "Hall & Oates"
+    },
+    {
+     "song": "Last Dance",
+     "artist": "Donna Summer"
+    },
+    {
+     "song": "Let's Groove",
+     "artist": "Earth, Wind & Fire"
+    },
+    {
+     "song": "Pick Up the Pieces",
+     "artist": "Average White Band"
+    },
+    {
+     "song": "Play That Funky Music",
+     "artist": "Wild Cherry"
+    },
+    {
+     "song": "Stayin' Alive",
+     "artist": "Bee Gees"
+    },
+    {
+     "song": "We Are Family",
+     "artist": "Sister Sledge"
+    },
+    {
+     "song": "Workin' Day and Night",
+     "artist": "Michael Jackson"
+    },
+    {
+     "song": "You Make My Dreams (Come True)",
+     "artist": "Hall & Oates"
+    }
+   ]
+  },
+  {
+   "name": "Jazz / Standards",
+   "count": 13,
+   "songs": [
+    {
+     "song": "The Best Is Yet to Come",
+     "artist": "Frank Sinatra"
+    },
+    {
+     "song": "Brazil",
+     "artist": "Frank Sinatra"
+    },
+    {
+     "song": "Come Fly with Me",
+     "artist": "Frank Sinatra"
+    },
+    {
+     "song": "Everything",
+     "artist": "Michael Bublé"
+    },
+    {
+     "song": "Fly Me To The Moon",
+     "artist": "Frank Sinatra"
+    },
+    {
+     "song": "I Get a Kick Out of You",
+     "artist": "Frank Sinatra"
+    },
+    {
+     "song": "L-O-V-E",
+     "artist": "Nat King Cole"
+    },
+    {
+     "song": "Moon River",
+     "artist": "Andy Williams"
+    },
+    {
+     "song": "My Funny Valentine",
+     "artist": "Frank Sinatra"
+    },
+    {
+     "song": "My Way",
+     "artist": "Frank Sinatra"
+    },
+    {
+     "song": "New York, New York",
+     "artist": "Frank Sinatra"
+    },
+    {
+     "song": "The Way You Look Tonight",
+     "artist": "Frank Sinatra"
+    },
+    {
+     "song": "What A Wonderful World",
+     "artist": "Louis Armstrong"
+    }
+   ]
+  },
+  {
+   "name": "Latin",
+   "count": 13,
+   "songs": [
+    {
+     "song": "Bailando",
+     "artist": "Enrique Iglesias"
+    },
+    {
+     "song": "Bidi Bidi Bom Bom",
+     "artist": "Selena"
+    },
+    {
+     "song": "Conga",
+     "artist": "Gloria Estefan & Miami Sound Machine"
+    },
+    {
+     "song": "Corazón Sin Cara",
+     "artist": "Prince Royce"
+    },
+    {
+     "song": "Danza Kuduro",
+     "artist": "Don Omar & Lucenzo"
+    },
+    {
+     "song": "Despacito",
+     "artist": "Luis Fonsi"
+    },
+    {
+     "song": "La Bamba",
+     "artist": "Ritchie Valens"
+    },
+    {
+     "song": "La Vida Es un Carnaval",
+     "artist": "Celia Cruz"
+    },
+    {
+     "song": "Livin' la Vida Loca",
+     "artist": "Ricky Martin"
+    },
+    {
+     "song": "Maria Maria",
+     "artist": "Santana"
+    },
+    {
+     "song": "Oye Como Va",
+     "artist": "Santana"
+    },
+    {
+     "song": "Suavemente",
+     "artist": "Elvis Crespo"
+    },
+    {
+     "song": "Vivir Mi Vida",
+     "artist": "Marc Anthony"
+    }
+   ]
+  },
+  {
+   "name": "Hip-Hop",
+   "count": 11,
+   "songs": [
+    {
+     "song": "Apache (Jump On It)",
+     "artist": "The Sugarhill Gang"
+    },
+    {
+     "song": "Hey Ya!",
+     "artist": "Outkast"
+    },
+    {
+     "song": "Hold On We're Going Home",
+     "artist": "Drake"
+    },
+    {
+     "song": "Hot In Herre",
+     "artist": "Nelly"
+    },
+    {
+     "song": "It Takes Two",
+     "artist": "Rob Base & DJ E-Z Rock"
+    },
+    {
+     "song": "Jump Around",
+     "artist": "House Of Pain"
+    },
+    {
+     "song": "Mo Money Mo Problems",
+     "artist": "The Notorious B.I.G."
+    },
+    {
+     "song": "Roses",
+     "artist": "Outkast"
+    },
+    {
+     "song": "Show Me What You Got",
+     "artist": "Jay-Z"
+    },
+    {
+     "song": "Sunflower",
+     "artist": "Post Malone"
+    },
+    {
+     "song": "The Way You Move",
+     "artist": "Outkast"
+    }
+   ]
+  },
+  {
+   "name": "Dance / Pop",
+   "count": 9,
+   "songs": [
+    {
+     "song": "Cold Water",
+     "artist": "Major Lazer"
+    },
+    {
+     "song": "I Gotta Feeling",
+     "artist": "Black Eyed Peas"
+    },
+    {
+     "song": "Latch",
+     "artist": "Disclosure ft. Sam Smith"
+    },
+    {
+     "song": "Let Me Love You",
+     "artist": "DJ Snake (ft. Justin Bieber)"
+    },
+    {
+     "song": "Levels",
+     "artist": "Avicii"
+    },
+    {
+     "song": "The Middle",
+     "artist": "Zedd"
+    },
+    {
+     "song": "One Kiss",
+     "artist": "Calvin Harris & Dua Lipa"
+    },
+    {
+     "song": "Something Just Like This",
+     "artist": "The Chainsmokers"
+    },
+    {
+     "song": "Wake Me Up!",
+     "artist": "Avicii"
+    }
+   ]
+  },
+  {
+   "name": "Folk / Indie",
+   "count": 4,
+   "songs": [
+    {
+     "song": "Brown Eyed Girl",
+     "artist": "Van Morrison"
+    },
+    {
+     "song": "Give Me One Reason",
+     "artist": "Tracy Chapman"
+    },
+    {
+     "song": "How Sweet It Is",
+     "artist": "James Taylor"
+    },
+    {
+     "song": "Swept Away",
+     "artist": "The Avett Brothers"
+    }
+   ]
+  },
+  {
+   "name": "Reggae / Caribbean",
+   "count": 3,
+   "songs": [
+    {
+     "song": "It Wasn’t Me",
+     "artist": "Shaggy"
+    },
+    {
+     "song": "No Woman No Cry",
+     "artist": "Bob Marley"
+    },
+    {
+     "song": "One Love/People Get Ready",
+     "artist": "Bob Marley & The Wailers"
+    }
+   ]
+  },
+  {
+   "name": "Classics",
+   "count": 2,
+   "songs": [
+    {
+     "song": "Can't Help Falling in Love",
+     "artist": "Elvis Presley"
+    },
+    {
+     "song": "Can't Take My Eyes Off You",
+     "artist": "Frankie Valli"
+    }
+   ]
+  },
+  {
+   "name": "Holiday",
+   "count": 7,
+   "songs": [
+    {
+     "song": "All I Want for Christmas Is You",
+     "artist": "Mariah Carey"
+    },
+    {
+     "song": "The Christmas Song",
+     "artist": "Nat King Cole"
+    },
+    {
+     "song": "Feliz Navidad",
+     "artist": "José Feliciano"
+    },
+    {
+     "song": "Jingle Bell Rock",
+     "artist": "Bobby Helms"
+    },
+    {
+     "song": "Santa Claus Is Coming to Town",
+     "artist": "The Jackson 5"
+    },
+    {
+     "song": "This Christmas",
+     "artist": "Donny Hathaway"
+    },
+    {
+     "song": "What Christmas Means to Me",
+     "artist": "Stevie Wonder"
+    }
+   ]
+  }
+ ]
+}

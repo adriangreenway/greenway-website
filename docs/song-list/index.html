@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Song List &middot; The Greenway Band</title>
+<meta name="description" content="433 recognizable favorites across generations and genres. Live wedding and event band.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231D392B'/%3E%3Ctext x='50' y='66' font-size='46' text-anchor='middle' fill='%23F5F2ED' font-family='Georgia,serif'%3EG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FBFAF8;
+    --mist: #F1F4EF;
+    --hairline: #E3E8E0;
+    --green-deep: #1D392B;
+    --green-deeper: #162D21;
+    --green: #27503A;
+    --green-dim: #57705F;
+    --ink: #161B17;
+    --dim: #5E6962;
+    --cream: #F5F2ED;
+    --cream-dim: #C7D2C4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 300;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: linear-gradient(180deg, var(--green-deep) 0%, var(--green-deeper) 100%);
+    color: var(--cream);
+    text-align: center;
+    padding: 76px 24px 68px;
+  }
+  .logo-rule { width: 72px; height: 1px; background: rgba(245,242,237,.28); margin: 0 auto; }
+  .logo-the  { font-size: 10px; letter-spacing: 5px; padding-left: 5px; color: var(--cream-dim); margin: 18px 0 6px; }
+  .logo-name { font-family: 'Bodoni Moda', serif; font-size: 30px; font-weight: 400; letter-spacing: 10px; padding-left: 10px; }
+  .logo-band { font-size: 11px; letter-spacing: 11px; padding-left: 11px; color: var(--cream-dim); margin: 6px 0 18px; }
+  .hero h1 {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 400;
+    font-size: clamp(42px, 6.5vw, 60px);
+    line-height: 1.15;
+    letter-spacing: 1px;
+    margin-top: 40px;
+  }
+  .hero .subtitle {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: 1.2px;
+    color: var(--cream-dim);
+    margin-top: 16px;
+  }
+  .hero .note {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: .4px;
+    color: rgba(245,242,237,.62);
+    margin-top: 26px;
+  }
+
+  /* ---------- Sticky genre bar ---------- */
+  .bar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251,250,248,.94);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .bar-inner {
+    max-width: 1080px; margin: 0 auto;
+    padding: 12px 24px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .chips {
+    display: flex; gap: 8px; flex: 1;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: 0 0 auto;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--green); text-decoration: none;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 7px 13px;
+    transition: background .18s ease, border-color .18s ease;
+    white-space: nowrap;
+  }
+  .chip:hover { background: var(--mist); border-color: var(--cream-dim); }
+  .chip-n { color: var(--green-dim); margin-left: 6px; font-weight: 400; }
+  .search {
+    flex: 0 0 210px;
+    font-family: inherit; font-size: 13px; font-weight: 400;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 8px 16px;
+    outline: none;
+    transition: border-color .18s ease;
+  }
+  .search::placeholder { color: var(--dim); }
+  .search:focus { border-color: var(--green); }
+
+  /* ---------- Sections ---------- */
+  main { max-width: 1080px; margin: 0 auto; padding: 20px 24px 40px; }
+  .genre { padding-top: 44px; scroll-margin-top: 74px; }
+  .genre-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 12px;
+  }
+  .genre-head h2 {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 400; font-size: 24px; letter-spacing: .5px;
+  }
+  .genre-n { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--green-dim); }
+  .songs { list-style: none; margin-top: 4px; }
+  @media (min-width: 760px) { .songs { columns: 2; column-gap: 64px; } }
+  .song {
+    display: flex; flex-direction: column;
+    padding: 9px 2px;
+    border-bottom: 1px solid var(--hairline);
+    break-inside: avoid;
+  }
+  .song .t { font-size: 14.5px; font-weight: 500; letter-spacing: .1px; }
+  .song .a { font-size: 12.5px; font-weight: 400; color: var(--dim); margin-top: 1px; }
+  .no-results {
+    display: none;
+    text-align: center; color: var(--dim);
+    font-size: 14px; padding: 72px 0 40px;
+  }
+  .no-results em { font-family: 'Bodoni Moda', serif; font-size: 17px; color: var(--green); font-style: italic; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    text-align: center;
+    border-top: 1px solid var(--hairline);
+    margin-top: 64px;
+    padding: 48px 24px 64px;
+  }
+  footer .tail-note {
+    font-family: 'Bodoni Moda', serif; font-style: italic;
+    font-size: 15px; color: var(--green);
+    letter-spacing: .5px;
+  }
+  footer .contact { margin-top: 18px; font-size: 12px; letter-spacing: .6px; }
+  footer .contact a {
+    color: var(--green-dim); text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color .18s ease, color .18s ease;
+  }
+  footer .contact a:hover { color: var(--green); border-bottom-color: var(--cream-dim); }
+  footer .dot { color: var(--cream-dim); margin: 0 8px; }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 640px) {
+    .hero { padding: 56px 20px 48px; }
+    .bar-inner { flex-wrap: wrap; gap: 10px; padding: 10px 16px; }
+    .search { flex: 1 1 100%; order: -1; }
+    main { padding: 12px 20px 32px; }
+  }
+
+  /* ---------- Print ---------- */
+  @media print {
+    .bar, .no-results { display: none; }
+    .hero { background: none; color: var(--green-deep); padding: 0 0 24px; }
+    .hero .subtitle, .hero .note { color: var(--green); }
+    .logo-rule { background: var(--green-deep); }
+    .logo-the, .logo-band { color: var(--green); }
+    .hero h1 { margin-top: 16px; font-size: 34px; }
+    .genre { padding-top: 24px; }
+    .songs { columns: 2; column-gap: 40px; }
+    .song { padding: 4px 0; border-bottom: none; }
+    footer { margin-top: 24px; padding: 16px 0 0; border-top: 1px solid var(--green-deep); }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="logo-rule"></div>
+  <div class="logo-the">THE</div>
+  <div class="logo-name">GREENWAY</div>
+  <div class="logo-band">BAND</div>
+  <div class="logo-rule"></div>
+  <h1>Song List</h1>
+  <p class="subtitle">433 recognizable favorites across generations and genres</p>
+  <p class="note">Set lists are tailored to each event. Special requests are always welcome.</p>
+</header>
+
+<nav class="bar" aria-label="Genres">
+  <div class="bar-inner">
+    <div class="chips">
+      <a class="chip" href="#pop">Pop<span class="chip-n">133</span></a>
+      <a class="chip" href="#r-b-soul">R&amp;B / Soul<span class="chip-n">93</span></a>
+      <a class="chip" href="#rock-alternative">Rock / Alternative<span class="chip-n">76</span></a>
+      <a class="chip" href="#country">Country<span class="chip-n">53</span></a>
+      <a class="chip" href="#funk-disco">Funk / Disco<span class="chip-n">16</span></a>
+      <a class="chip" href="#jazz-standards">Jazz / Standards<span class="chip-n">13</span></a>
+      <a class="chip" href="#latin">Latin<span class="chip-n">13</span></a>
+      <a class="chip" href="#hip-hop">Hip-Hop<span class="chip-n">11</span></a>
+      <a class="chip" href="#dance-pop">Dance / Pop<span class="chip-n">9</span></a>
+      <a class="chip" href="#folk-indie">Folk / Indie<span class="chip-n">4</span></a>
+      <a class="chip" href="#reggae-caribbean">Reggae / Caribbean<span class="chip-n">3</span></a>
+      <a class="chip" href="#classics">Classics<span class="chip-n">2</span></a>
+      <a class="chip" href="#holiday">Holiday<span class="chip-n">7</span></a>
+    </div>
+    <input class="search" id="q" type="search" placeholder="Search songs or artists" aria-label="Search songs or artists">
+  </div>
+</nav>
+
+<main>
+    <section class="genre" id="pop">
+      <div class="genre-head">
+        <h2>Pop</h2>
+        <span class="genre-n">133 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="about damn time lizzo"><span class="t">About Damn Time</span><span class="a">Lizzo</span></li>
+        <li class="song" data-q="accidentally in love counting crows"><span class="t">Accidentally In Love</span><span class="a">Counting Crows</span></li>
+        <li class="song" data-q="all about that bass meghan trainor"><span class="t">All About That Bass</span><span class="a">Meghan Trainor</span></li>
+        <li class="song" data-q="american girls harry styles"><span class="t">American Girls</span><span class="a">Harry Styles</span></li>
+        <li class="song" data-q="apt. rose &amp; bruno mars"><span class="t">APT.</span><span class="a">ROSÉ &amp; Bruno Mars</span></li>
+        <li class="song" data-q="as it was harry styles"><span class="t">As It Was</span><span class="a">Harry Styles</span></li>
+        <li class="song" data-q="as long as you love me backstreet boys"><span class="t">As Long As You Love Me</span><span class="a">Backstreet Boys</span></li>
+        <li class="song" data-q="bad habits ed sheeran"><span class="t">Bad Habits</span><span class="a">Ed Sheeran</span></li>
+        <li class="song" data-q="beautiful things benson boone"><span class="t">Beautiful Things</span><span class="a">Benson Boone</span></li>
+        <li class="song" data-q="believe cher"><span class="t">Believe</span><span class="a">Cher</span></li>
+        <li class="song" data-q="bigger than my body john mayer"><span class="t">Bigger Than My Body</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="birds of a feather billie eilish"><span class="t">Birds of a Feather</span><span class="a">Billie Eilish</span></li>
+        <li class="song" data-q="blinding lights the weeknd"><span class="t">Blinding Lights</span><span class="a">The Weeknd</span></li>
+        <li class="song" data-q="boogie shoes kc and the sunshine band"><span class="t">Boogie Shoes</span><span class="a">KC and The Sunshine Band</span></li>
+        <li class="song" data-q="butter bts"><span class="t">Butter</span><span class="a">BTS</span></li>
+        <li class="song" data-q="bye bye bye *nsync"><span class="t">Bye Bye Bye</span><span class="a">*NSYNC</span></li>
+        <li class="song" data-q="cake by the ocean dnce"><span class="t">Cake By The Ocean</span><span class="a">DNCE</span></li>
+        <li class="song" data-q="can&#x27;t feel my face the weeknd"><span class="t">Can’t Feel My Face</span><span class="a">The Weeknd</span></li>
+        <li class="song" data-q="can&#x27;t stop the feeling justin timberlake"><span class="t">Can’t Stop The Feeling</span><span class="a">Justin Timberlake</span></li>
+        <li class="song" data-q="candyman christina aguilera"><span class="t">Candyman</span><span class="a">Christina Aguilera</span></li>
+        <li class="song" data-q="castle on the hill ed sheeran"><span class="t">Castle On The Hill</span><span class="a">Ed Sheeran</span></li>
+        <li class="song" data-q="chapel of love the dixie cups"><span class="t">Chapel of Love</span><span class="a">The Dixie Cups</span></li>
+        <li class="song" data-q="circles post malone"><span class="t">Circles</span><span class="a">Post Malone</span></li>
+        <li class="song" data-q="cold heart elton john &amp; dua lipa"><span class="t">Cold Heart</span><span class="a">Elton John &amp; Dua Lipa</span></li>
+        <li class="song" data-q="complicated avril lavigne"><span class="t">Complicated</span><span class="a">Avril Lavigne</span></li>
+        <li class="song" data-q="dance the night dua lipa"><span class="t">Dance The Night</span><span class="a">Dua Lipa</span></li>
+        <li class="song" data-q="daughters john mayer"><span class="t">Daughters</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="die for you the weeknd"><span class="t">Die for You</span><span class="a">The Weeknd</span></li>
+        <li class="song" data-q="die with a smile lady gaga &amp; bruno mars"><span class="t">Die With a Smile</span><span class="a">Lady Gaga &amp; Bruno Mars</span></li>
+        <li class="song" data-q="dog days are over florence + the machine"><span class="t">Dog Days Are Over</span><span class="a">Florence + The Machine</span></li>
+        <li class="song" data-q="don&#x27;t start now dua lipa"><span class="t">Don’t Start Now</span><span class="a">Dua Lipa</span></li>
+        <li class="song" data-q="don&#x27;t stop the music rihanna"><span class="t">Don’t Stop the Music</span><span class="a">Rihanna</span></li>
+        <li class="song" data-q="escape (the pina colada song) rupert holmes"><span class="t">Escape (The Piña Colada Song)</span><span class="a">Rupert Holmes</span></li>
+        <li class="song" data-q="espresso sabrina carpenter"><span class="t">Espresso</span><span class="a">Sabrina Carpenter</span></li>
+        <li class="song" data-q="everybody (backstreet&#x27;s back) backstreet boys"><span class="t">Everybody (Backstreet’s Back)</span><span class="a">Backstreet Boys</span></li>
+        <li class="song" data-q="faith george michael"><span class="t">Faith</span><span class="a">George Michael</span></li>
+        <li class="song" data-q="fireball pitbull (ft. john ryan)"><span class="t">Fireball</span><span class="a">Pitbull (ft. John Ryan)</span></li>
+        <li class="song" data-q="flowers miley cyrus"><span class="t">Flowers</span><span class="a">Miley Cyrus</span></li>
+        <li class="song" data-q="footloose kenny loggins"><span class="t">Footloose</span><span class="a">Kenny Loggins</span></li>
+        <li class="song" data-q="forever now michael buble"><span class="t">Forever Now</span><span class="a">Michael Bublé</span></li>
+        <li class="song" data-q="girls just want to have fun cyndi lauper"><span class="t">Girls Just Want To Have Fun</span><span class="a">Cyndi Lauper</span></li>
+        <li class="song" data-q="give me everything pitbull feat. ne-yo, afrojack &amp; nayer"><span class="t">Give Me Everything</span><span class="a">Pitbull feat. Ne-Yo, Afrojack &amp; Nayer</span></li>
+        <li class="song" data-q="good as hell lizzo"><span class="t">Good as Hell</span><span class="a">Lizzo</span></li>
+        <li class="song" data-q="good luck, babe! chappell roan"><span class="t">Good Luck, Babe!</span><span class="a">Chappell Roan</span></li>
+        <li class="song" data-q="gravity john mayer"><span class="t">Gravity</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="half of my heart john mayer"><span class="t">Half Of My Heart</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="halo beyonce"><span class="t">Halo</span><span class="a">Beyoncé</span></li>
+        <li class="song" data-q="happy pharrell williams"><span class="t">Happy</span><span class="a">Pharrell Williams</span></li>
+        <li class="song" data-q="havana camila cabello"><span class="t">Havana</span><span class="a">Camila Cabello</span></li>
+        <li class="song" data-q="heaven los lonely boys"><span class="t">Heaven</span><span class="a">Los Lonely Boys</span></li>
+        <li class="song" data-q="hold on wilson phillips"><span class="t">Hold On</span><span class="a">Wilson Phillips</span></li>
+        <li class="song" data-q="hot to go! chappell roan"><span class="t">HOT TO GO!</span><span class="a">Chappell Roan</span></li>
+        <li class="song" data-q="i don&#x27;t care ed sheeran"><span class="t">I Don’t Care</span><span class="a">Ed Sheeran</span></li>
+        <li class="song" data-q="i don&#x27;t trust myself (with loving you) john mayer"><span class="t">I Don’t Trust Myself (With Loving You)</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="i feel it coming the weeknd"><span class="t">I Feel It Coming</span><span class="a">The Weeknd</span></li>
+        <li class="song" data-q="i love it icona pop feat. charli xcx"><span class="t">I Love It</span><span class="a">Icona Pop feat. Charli XCX</span></li>
+        <li class="song" data-q="i&#x27;m a believer smash mouth"><span class="t">I’m A Believer</span><span class="a">Smash Mouth</span></li>
+        <li class="song" data-q="i&#x27;m gonna find another you john mayer"><span class="t">I’m Gonna Find Another You</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="i&#x27;m yours jason mraz"><span class="t">I’m Yours</span><span class="a">Jason Mraz</span></li>
+        <li class="song" data-q="(i&#x27;ve had) the time of my life bill medley &amp; jennifer warnes"><span class="t">(I’ve Had) The Time Of My Life</span><span class="a">Bill Medley &amp; Jennifer Warnes</span></li>
+        <li class="song" data-q="if i can&#x27;t have you shawn mendes"><span class="t">If I Can’t Have You</span><span class="a">Shawn Mendes</span></li>
+        <li class="song" data-q="juice lizzo"><span class="t">Juice</span><span class="a">Lizzo</span></li>
+        <li class="song" data-q="kiss me more doja cat feat. sza"><span class="t">Kiss Me More</span><span class="a">Doja Cat feat. SZA</span></li>
+        <li class="song" data-q="last train home john mayer"><span class="t">Last Train Home</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="let&#x27;s get it started black eyed peas"><span class="t">Let’s Get It Started</span><span class="a">Black Eyed Peas</span></li>
+        <li class="song" data-q="levitating dua lipa"><span class="t">Levitating</span><span class="a">Dua Lipa</span></li>
+        <li class="song" data-q="like me better lauv"><span class="t">Like Me Better</span><span class="a">Lauv</span></li>
+        <li class="song" data-q="lose control teddy swims"><span class="t">Lose Control</span><span class="a">Teddy Swims</span></li>
+        <li class="song" data-q="love me like you do ellie goulding"><span class="t">Love Me Like You Do</span><span class="a">Ellie Goulding</span></li>
+        <li class="song" data-q="lovefool the cardigans"><span class="t">Lovefool</span><span class="a">The Cardigans</span></li>
+        <li class="song" data-q="lover taylor swift"><span class="t">Lover</span><span class="a">Taylor Swift</span></li>
+        <li class="song" data-q="make you feel my love adele"><span class="t">Make You Feel My Love</span><span class="a">Adele</span></li>
+        <li class="song" data-q="man i need olivia dean"><span class="t">Man I Need</span><span class="a">Olivia Dean</span></li>
+        <li class="song" data-q="moves like jagger maroon 5"><span class="t">Moves Like Jagger</span><span class="a">Maroon 5</span></li>
+        <li class="song" data-q="moving on and getting over john mayer"><span class="t">Moving On and Getting Over</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="murder on the dancefloor sophie ellis-bextor"><span class="t">Murder on the Dancefloor</span><span class="a">Sophie Ellis-Bextor</span></li>
+        <li class="song" data-q="new light john mayer"><span class="t">New Light</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="no such thing john mayer"><span class="t">No Such Thing</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="on the floor jennifer lopez feat. pitbull"><span class="t">On the Floor</span><span class="a">Jennifer Lopez feat. Pitbull</span></li>
+        <li class="song" data-q="only girl (in the world) rihanna"><span class="t">Only Girl (In the World)</span><span class="a">Rihanna</span></li>
+        <li class="song" data-q="ordinary alex warren"><span class="t">Ordinary</span><span class="a">Alex Warren</span></li>
+        <li class="song" data-q="party in the usa miley cyrus"><span class="t">Party In The USA</span><span class="a">Miley Cyrus</span></li>
+        <li class="song" data-q="peaches justin bieber"><span class="t">Peaches</span><span class="a">Justin Bieber</span></li>
+        <li class="song" data-q="perfect ed sheeran"><span class="t">Perfect</span><span class="a">Ed Sheeran</span></li>
+        <li class="song" data-q="pink pony club chappell roan"><span class="t">Pink Pony Club</span><span class="a">Chappell Roan</span></li>
+        <li class="song" data-q="raise your glass p!nk"><span class="t">Raise Your Glass</span><span class="a">P!nk</span></li>
+        <li class="song" data-q="rich girl hall &amp; oates"><span class="t">Rich Girl</span><span class="a">Hall &amp; Oates</span></li>
+        <li class="song" data-q="sailing christopher cross"><span class="t">Sailing</span><span class="a">Christopher Cross</span></li>
+        <li class="song" data-q="save your tears the weeknd"><span class="t">Save Your Tears</span><span class="a">The Weeknd</span></li>
+        <li class="song" data-q="shake it off taylor swift"><span class="t">Shake It Off</span><span class="a">Taylor Swift</span></li>
+        <li class="song" data-q="shallow lady gaga &amp; bradley cooper"><span class="t">Shallow</span><span class="a">Lady Gaga &amp; Bradley Cooper</span></li>
+        <li class="song" data-q="shape of you ed sheeran"><span class="t">Shape of You</span><span class="a">Ed Sheeran</span></li>
+        <li class="song" data-q="she will be loved maroon 5"><span class="t">She Will Be Loved</span><span class="a">Maroon 5</span></li>
+        <li class="song" data-q="since u been gone kelly clarkson"><span class="t">Since U Been Gone</span><span class="a">Kelly Clarkson</span></li>
+        <li class="song" data-q="slow dancing in a burning room john mayer"><span class="t">Slow Dancing in a Burning Room</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="slow hands niall horan"><span class="t">Slow Hands</span><span class="a">Niall Horan</span></li>
+        <li class="song" data-q="so easy (to fall in love) olivia dean"><span class="t">So Easy (To Fall in Love)</span><span class="a">Olivia Dean</span></li>
+        <li class="song" data-q="sorry justin bieber"><span class="t">Sorry</span><span class="a">Justin Bieber</span></li>
+        <li class="song" data-q="starboy the weeknd"><span class="t">Starboy</span><span class="a">The Weeknd</span></li>
+        <li class="song" data-q="stay the kid laroi &amp; justin bieber"><span class="t">Stay</span><span class="a">The Kid LAROI &amp; Justin Bieber</span></li>
+        <li class="song" data-q="stay zedd &amp; alessia cara"><span class="t">Stay</span><span class="a">Zedd &amp; Alessia Cara</span></li>
+        <li class="song" data-q="still feel like your man john mayer"><span class="t">Still Feel Like Your Man</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="sugar maroon 5"><span class="t">Sugar</span><span class="a">Maroon 5</span></li>
+        <li class="song" data-q="suit &amp; tie justin timberlake"><span class="t">Suit &amp; Tie</span><span class="a">Justin Timberlake</span></li>
+        <li class="song" data-q="summer breeze seals &amp; crofts"><span class="t">Summer Breeze</span><span class="a">Seals &amp; Crofts</span></li>
+        <li class="song" data-q="sunday morning maroon 5"><span class="t">Sunday Morning</span><span class="a">Maroon 5</span></li>
+        <li class="song" data-q="sweet caroline neil diamond"><span class="t">Sweet Caroline</span><span class="a">Neil Diamond</span></li>
+        <li class="song" data-q="thank you dido"><span class="t">Thank You</span><span class="a">Dido</span></li>
+        <li class="song" data-q="there&#x27;s nothing holdin&#x27; me back shawn mendes"><span class="t">There’s Nothing Holdin’ Me Back</span><span class="a">Shawn Mendes</span></li>
+        <li class="song" data-q="thinking out loud ed sheeran"><span class="t">Thinking Out Loud</span><span class="a">Ed Sheeran</span></li>
+        <li class="song" data-q="this love maroon 5"><span class="t">This Love</span><span class="a">Maroon 5</span></li>
+        <li class="song" data-q="a thousand years christina perri"><span class="t">A Thousand Years</span><span class="a">Christina Perri</span></li>
+        <li class="song" data-q="tik tok ke$ha"><span class="t">Tik Tok</span><span class="a">Ke$ha</span></li>
+        <li class="song" data-q="timber pitbull feat. kesha"><span class="t">Timber</span><span class="a">Pitbull feat. Kesha</span></li>
+        <li class="song" data-q="time of our lives pitbull &amp; ne-yo"><span class="t">Time of Our Lives</span><span class="a">Pitbull &amp; Ne-Yo</span></li>
+        <li class="song" data-q="treat you better shawn mendes"><span class="t">Treat You Better</span><span class="a">Shawn Mendes</span></li>
+        <li class="song" data-q="truth hurts lizzo"><span class="t">Truth Hurts</span><span class="a">Lizzo</span></li>
+        <li class="song" data-q="unchained melody the righteous brothers"><span class="t">Unchained Melody</span><span class="a">The Righteous Brothers</span></li>
+        <li class="song" data-q="unwritten natasha bedingfield"><span class="t">Unwritten</span><span class="a">Natasha Bedingfield</span></li>
+        <li class="song" data-q="valerie amy winehouse"><span class="t">Valerie</span><span class="a">Amy Winehouse</span></li>
+        <li class="song" data-q="wait maroon 5"><span class="t">Wait</span><span class="a">Maroon 5</span></li>
+        <li class="song" data-q="waiting on the world to change john mayer"><span class="t">Waiting on the World to Change</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="wannabe spice girls"><span class="t">Wannabe</span><span class="a">Spice Girls</span></li>
+        <li class="song" data-q="water tyla"><span class="t">Water</span><span class="a">Tyla</span></li>
+        <li class="song" data-q="watermelon sugar harry styles"><span class="t">Watermelon Sugar</span><span class="a">Harry Styles</span></li>
+        <li class="song" data-q="the way you make me feel michael jackson"><span class="t">The Way You Make Me Feel</span><span class="a">Michael Jackson</span></li>
+        <li class="song" data-q="we found love rihanna feat. calvin harris"><span class="t">We Found Love</span><span class="a">Rihanna feat. Calvin Harris</span></li>
+        <li class="song" data-q="where is my husband! raye"><span class="t">Where Is My Husband!</span><span class="a">Raye</span></li>
+        <li class="song" data-q="why georgia john mayer"><span class="t">Why Georgia</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="you and i both jason mraz"><span class="t">You and I Both</span><span class="a">Jason Mraz</span></li>
+        <li class="song" data-q="you belong with me taylor swift"><span class="t">You Belong With Me</span><span class="a">Taylor Swift</span></li>
+        <li class="song" data-q="your body is a wonderland john mayer"><span class="t">Your Body Is A Wonderland</span><span class="a">John Mayer</span></li>
+        <li class="song" data-q="your song elton john"><span class="t">Your Song</span><span class="a">Elton John</span></li>
+      </ol>
+    </section>
+
+    <section class="genre" id="r-b-soul">
+      <div class="genre-head">
+        <h2>R&amp;B / Soul</h2>
+        <span class="genre-n">93 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="1999 prince"><span class="t">1999</span><span class="a">Prince</span></li>
+        <li class="song" data-q="24k magic bruno mars"><span class="t">24K Magic</span><span class="a">Bruno Mars</span></li>
+        <li class="song" data-q="ain&#x27;t no mountain high enough marvin gaye &amp; tammi terrell"><span class="t">Ain’t No Mountain High Enough</span><span class="a">Marvin Gaye &amp; Tammi Terrell</span></li>
+        <li class="song" data-q="ain&#x27;t nobody chaka khan"><span class="t">Ain’t Nobody</span><span class="a">Chaka Khan</span></li>
+        <li class="song" data-q="ain&#x27;t too proud to beg the temptations"><span class="t">Ain’t Too Proud to Beg</span><span class="a">The Temptations</span></li>
+        <li class="song" data-q="all my life k-ci &amp; jojo"><span class="t">All My Life</span><span class="a">K-Ci &amp; JoJo</span></li>
+        <li class="song" data-q="all of me john legend"><span class="t">All of Me</span><span class="a">John Legend</span></li>
+        <li class="song" data-q="are you that somebody aaliyah"><span class="t">Are You That Somebody</span><span class="a">Aaliyah</span></li>
+        <li class="song" data-q="as stevie wonder"><span class="t">As</span><span class="a">Stevie Wonder</span></li>
+        <li class="song" data-q="at last etta james"><span class="t">At Last</span><span class="a">Etta James</span></li>
+        <li class="song" data-q="the best tina turner"><span class="t">The Best</span><span class="a">Tina Turner</span></li>
+        <li class="song" data-q="best of my love the emotions"><span class="t">Best Of My Love</span><span class="a">The Emotions</span></li>
+        <li class="song" data-q="beyond leon bridges"><span class="t">Beyond</span><span class="a">Leon Bridges</span></li>
+        <li class="song" data-q="billie jean michael jackson"><span class="t">Billie Jean</span><span class="a">Michael Jackson</span></li>
+        <li class="song" data-q="blurred lines robin thicke"><span class="t">Blurred Lines</span><span class="a">Robin Thicke</span></li>
+        <li class="song" data-q="boogie on reggae woman stevie wonder"><span class="t">Boogie On Reggae Woman</span><span class="a">Stevie Wonder</span></li>
+        <li class="song" data-q="brick house the commodores"><span class="t">Brick House</span><span class="a">The Commodores</span></li>
+        <li class="song" data-q="can&#x27;t take my eyes off of you lauryn hill"><span class="t">Can’t Take My Eyes Off of You</span><span class="a">Lauryn Hill</span></li>
+        <li class="song" data-q="celebration kool &amp; the gang"><span class="t">Celebration</span><span class="a">Kool &amp; The Gang</span></li>
+        <li class="song" data-q="colors black pumas"><span class="t">Colors</span><span class="a">Black Pumas</span></li>
+        <li class="song" data-q="coming home leon bridges"><span class="t">Coming Home</span><span class="a">Leon Bridges</span></li>
+        <li class="song" data-q="crazy gnarls barkley"><span class="t">Crazy</span><span class="a">Gnarls Barkley</span></li>
+        <li class="song" data-q="crazy in love beyonce"><span class="t">Crazy in Love</span><span class="a">Beyoncé</span></li>
+        <li class="song" data-q="cuff it beyonce"><span class="t">CUFF IT</span><span class="a">Beyoncé</span></li>
+        <li class="song" data-q="dancing in the street martha reeves &amp; the vandellas"><span class="t">Dancing in the Street</span><span class="a">Martha Reeves &amp; The Vandellas</span></li>
+        <li class="song" data-q="deja vu beyonce"><span class="t">Deja Vu</span><span class="a">Beyoncé</span></li>
+        <li class="song" data-q="don&#x27;t let go (love) en vogue"><span class="t">Don’t Let Go (Love)</span><span class="a">En Vogue</span></li>
+        <li class="song" data-q="family affair mary j. blige"><span class="t">Family Affair</span><span class="a">Mary J. Blige</span></li>
+        <li class="song" data-q="finesse bruno mars"><span class="t">Finesse</span><span class="a">Bruno Mars</span></li>
+        <li class="song" data-q="forever chris brown"><span class="t">Forever</span><span class="a">Chris Brown</span></li>
+        <li class="song" data-q="forget you ceelo green"><span class="t">Forget You</span><span class="a">CeeLo Green</span></li>
+        <li class="song" data-q="get down on it kool &amp; the gang"><span class="t">Get Down On It</span><span class="a">Kool &amp; The Gang</span></li>
+        <li class="song" data-q="higher ground stevie wonder"><span class="t">Higher Ground</span><span class="a">Stevie Wonder</span></li>
+        <li class="song" data-q="higher love whitney houston"><span class="t">Higher Love</span><span class="a">Whitney Houston</span></li>
+        <li class="song" data-q="how will i know whitney houston"><span class="t">How Will I Know</span><span class="a">Whitney Houston</span></li>
+        <li class="song" data-q="i can&#x27;t help myself (sugar pie, honey bunch) four tops"><span class="t">I Can’t Help Myself (Sugar Pie, Honey Bunch)</span><span class="a">Four Tops</span></li>
+        <li class="song" data-q="i got you (i feel good) james brown"><span class="t">I Got You (I Feel Good)</span><span class="a">James Brown</span></li>
+        <li class="song" data-q="i just called to say i love you stevie wonder"><span class="t">I Just Called To Say I Love You</span><span class="a">Stevie Wonder</span></li>
+        <li class="song" data-q="i just might bruno mars"><span class="t">I Just Might</span><span class="a">Bruno Mars</span></li>
+        <li class="song" data-q="i keep forgettin&#x27; (every time you&#x27;re near) michael mcdonald"><span class="t">I Keep Forgettin’ (Every Time You’re Near)</span><span class="a">Michael McDonald</span></li>
+        <li class="song" data-q="i wanna dance with somebody whitney houston"><span class="t">I Wanna Dance With Somebody</span><span class="a">Whitney Houston</span></li>
+        <li class="song" data-q="i want you back the jackson 5"><span class="t">I Want You Back</span><span class="a">The Jackson 5</span></li>
+        <li class="song" data-q="i will always love you whitney houston"><span class="t">I Will Always Love You</span><span class="a">Whitney Houston</span></li>
+        <li class="song" data-q="i wish stevie wonder"><span class="t">I Wish</span><span class="a">Stevie Wonder</span></li>
+        <li class="song" data-q="isn&#x27;t she lovely stevie wonder"><span class="t">Isn’t She Lovely</span><span class="a">Stevie Wonder</span></li>
+        <li class="song" data-q="just the way you are bruno mars"><span class="t">Just The Way You Are</span><span class="a">Bruno Mars</span></li>
+        <li class="song" data-q="killing me softly the fugees"><span class="t">Killing Me Softly</span><span class="a">The Fugees</span></li>
+        <li class="song" data-q="kiss prince"><span class="t">Kiss</span><span class="a">Prince</span></li>
+        <li class="song" data-q="kiss from a rose seal"><span class="t">Kiss From A Rose</span><span class="a">Seal</span></li>
+        <li class="song" data-q="let&#x27;s get it on marvin gaye"><span class="t">Let’s Get It On</span><span class="a">Marvin Gaye</span></li>
+        <li class="song" data-q="let&#x27;s stay together al green"><span class="t">Let’s Stay Together</span><span class="a">Al Green</span></li>
+        <li class="song" data-q="locked out of heaven bruno mars"><span class="t">Locked Out of Heaven</span><span class="a">Bruno Mars</span></li>
+        <li class="song" data-q="love on top beyonce"><span class="t">Love On Top</span><span class="a">Beyoncé</span></li>
+        <li class="song" data-q="lovely day bill withers"><span class="t">Lovely Day</span><span class="a">Bill Withers</span></li>
+        <li class="song" data-q="the man aloe blacc"><span class="t">The Man</span><span class="a">Aloe Blacc</span></li>
+        <li class="song" data-q="marry you bruno mars"><span class="t">Marry You</span><span class="a">Bruno Mars</span></li>
+        <li class="song" data-q="my girl the temptations"><span class="t">My Girl</span><span class="a">The Temptations</span></li>
+        <li class="song" data-q="never too much luther vandross"><span class="t">Never Too Much</span><span class="a">Luther Vandross</span></li>
+        <li class="song" data-q="no diggity blackstreet"><span class="t">No Diggity</span><span class="a">Blackstreet</span></li>
+        <li class="song" data-q="p.y.t. (pretty young thing) michael jackson"><span class="t">P.Y.T. (Pretty Young Thing)</span><span class="a">Michael Jackson</span></li>
+        <li class="song" data-q="poison bell biv devoe"><span class="t">Poison</span><span class="a">Bell Biv DeVoe</span></li>
+        <li class="song" data-q="pony ginuwine"><span class="t">Pony</span><span class="a">Ginuwine</span></li>
+        <li class="song" data-q="proud mary tina turner"><span class="t">Proud Mary</span><span class="a">Tina Turner</span></li>
+        <li class="song" data-q="real love mary j. blige"><span class="t">Real Love</span><span class="a">Mary J. Blige</span></li>
+        <li class="song" data-q="respect aretha franklin"><span class="t">Respect</span><span class="a">Aretha Franklin</span></li>
+        <li class="song" data-q="return of the mack mark morrison"><span class="t">Return of The Mack</span><span class="a">Mark Morrison</span></li>
+        <li class="song" data-q="rock with you michael jackson"><span class="t">Rock With You</span><span class="a">Michael Jackson</span></li>
+        <li class="song" data-q="the rubberband man the spinners"><span class="t">The Rubberband Man</span><span class="a">The Spinners</span></li>
+        <li class="song" data-q="september earth, wind &amp; fire"><span class="t">September</span><span class="a">Earth, Wind &amp; Fire</span></li>
+        <li class="song" data-q="she&#x27;s a bad mama jama carl carlton"><span class="t">She’s A Bad Mama Jama</span><span class="a">Carl Carlton</span></li>
+        <li class="song" data-q="shout! the isley brothers"><span class="t">Shout!</span><span class="a">The Isley Brothers</span></li>
+        <li class="song" data-q="signed, sealed, delivered (i&#x27;m yours) stevie wonder"><span class="t">Signed, Sealed, Delivered (I’m Yours)</span><span class="a">Stevie Wonder</span></li>
+        <li class="song" data-q="single ladies (put a ring on it) beyonce"><span class="t">Single Ladies (Put A Ring On It)</span><span class="a">Beyoncé</span></li>
+        <li class="song" data-q="sir duke stevie wonder"><span class="t">Sir Duke</span><span class="a">Stevie Wonder</span></li>
+        <li class="song" data-q="sitting on the dock of the bay otis redding"><span class="t">Sitting On The Dock of The Bay</span><span class="a">Otis Redding</span></li>
+        <li class="song" data-q="smooth operator sade"><span class="t">Smooth Operator</span><span class="a">Sade</span></li>
+        <li class="song" data-q="stand by me ben e. king"><span class="t">Stand By Me</span><span class="a">Ben E. King</span></li>
+        <li class="song" data-q="super freak rick james"><span class="t">Super Freak</span><span class="a">Rick James</span></li>
+        <li class="song" data-q="superstition / crazy in love stevie wonder / beyonce"><span class="t">Superstition / Crazy in Love</span><span class="a">Stevie Wonder / Beyoncé</span></li>
+        <li class="song" data-q="this is how we do it montell jordan"><span class="t">This Is How We Do It</span><span class="a">Montell Jordan</span></li>
+        <li class="song" data-q="this will be (an everlasting love) natalie cole"><span class="t">This Will Be (An Everlasting Love)</span><span class="a">Natalie Cole</span></li>
+        <li class="song" data-q="thriller michael jackson"><span class="t">Thriller</span><span class="a">Michael Jackson</span></li>
+        <li class="song" data-q="treasure bruno mars"><span class="t">Treasure</span><span class="a">Bruno Mars</span></li>
+        <li class="song" data-q="unforgettable natalie cole &amp; nat king cole"><span class="t">Unforgettable</span><span class="a">Natalie Cole &amp; Nat King Cole</span></li>
+        <li class="song" data-q="uptown funk bruno mars"><span class="t">Uptown Funk</span><span class="a">Bruno Mars</span></li>
+        <li class="song" data-q="use me bill withers"><span class="t">Use Me</span><span class="a">Bill Withers</span></li>
+        <li class="song" data-q="what you won&#x27;t do for love bobby caldwell"><span class="t">What You Won’t Do for Love</span><span class="a">Bobby Caldwell</span></li>
+        <li class="song" data-q="yeah usher feat. lil jon &amp; ludacris"><span class="t">Yeah</span><span class="a">Usher feat. Lil Jon &amp; Ludacris</span></li>
+        <li class="song" data-q="you are the best thing ray lamontagne"><span class="t">You Are The Best Thing</span><span class="a">Ray LaMontagne</span></li>
+        <li class="song" data-q="you are the sunshine of my life stevie wonder"><span class="t">You Are The Sunshine of My Life</span><span class="a">Stevie Wonder</span></li>
+        <li class="song" data-q="you dropped a bomb on me the gap band"><span class="t">You Dropped A Bomb On Me</span><span class="a">The Gap Band</span></li>
+        <li class="song" data-q="you make me wanna usher"><span class="t">You Make Me Wanna</span><span class="a">Usher</span></li>
+        <li class="song" data-q="(your love keeps lifting me) higher and higher jackie wilson"><span class="t">(Your Love Keeps Lifting Me) Higher and Higher</span><span class="a">Jackie Wilson</span></li>
+      </ol>
+    </section>
+
+    <section class="genre" id="rock-alternative">
+      <div class="genre-head">
+        <h2>Rock / Alternative</h2>
+        <span class="genre-n">76 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="africa toto"><span class="t">Africa</span><span class="a">Toto</span></li>
+        <li class="song" data-q="ain&#x27;t it fun paramore"><span class="t">Ain’t It Fun</span><span class="a">Paramore</span></li>
+        <li class="song" data-q="all the small things blink-182"><span class="t">All The Small Things</span><span class="a">Blink-182</span></li>
+        <li class="song" data-q="all you need is love the beatles"><span class="t">All You Need Is Love</span><span class="a">The Beatles</span></li>
+        <li class="song" data-q="american girl tom petty"><span class="t">American Girl</span><span class="a">Tom Petty</span></li>
+        <li class="song" data-q="american pie don mclean"><span class="t">American Pie</span><span class="a">Don McLean</span></li>
+        <li class="song" data-q="the anthem good charlotte"><span class="t">The Anthem</span><span class="a">Good Charlotte</span></li>
+        <li class="song" data-q="ants marching dave matthews band"><span class="t">Ants Marching</span><span class="a">Dave Matthews Band</span></li>
+        <li class="song" data-q="beautiful day u2"><span class="t">Beautiful Day</span><span class="a">U2</span></li>
+        <li class="song" data-q="best day of my life american authors"><span class="t">Best Day Of My Life</span><span class="a">American Authors</span></li>
+        <li class="song" data-q="better together jack johnson"><span class="t">Better Together</span><span class="a">Jack Johnson</span></li>
+        <li class="song" data-q="bohemian rhapsody queen"><span class="t">Bohemian Rhapsody</span><span class="a">Queen</span></li>
+        <li class="song" data-q="burning love elvis presley"><span class="t">Burning Love</span><span class="a">Elvis Presley</span></li>
+        <li class="song" data-q="chasing cars snow patrol"><span class="t">Chasing Cars</span><span class="a">Snow Patrol</span></li>
+        <li class="song" data-q="closing time semisonic"><span class="t">Closing Time</span><span class="a">Semisonic</span></li>
+        <li class="song" data-q="come together the beatles"><span class="t">Come Together</span><span class="a">The Beatles</span></li>
+        <li class="song" data-q="crazy little thing called love queen"><span class="t">Crazy Little Thing Called Love</span><span class="a">Queen</span></li>
+        <li class="song" data-q="dancing in the moonlight toploader"><span class="t">Dancing In The Moonlight</span><span class="a">Toploader</span></li>
+        <li class="song" data-q="dear maria, count me in all time low"><span class="t">Dear Maria, Count Me In</span><span class="a">All Time Low</span></li>
+        <li class="song" data-q="don&#x27;t stop believing journey"><span class="t">Don’t Stop Believing</span><span class="a">Journey</span></li>
+        <li class="song" data-q="don&#x27;t stop me now queen"><span class="t">Don’t Stop Me Now</span><span class="a">Queen</span></li>
+        <li class="song" data-q="dreams fleetwood mac"><span class="t">Dreams</span><span class="a">Fleetwood Mac</span></li>
+        <li class="song" data-q="drift away dobie gray"><span class="t">Drift Away</span><span class="a">Dobie Gray</span></li>
+        <li class="song" data-q="drops of jupiter train"><span class="t">Drops of Jupiter</span><span class="a">Train</span></li>
+        <li class="song" data-q="electric feel mgmt"><span class="t">Electric Feel</span><span class="a">MGMT</span></li>
+        <li class="song" data-q="electric love borns"><span class="t">Electric Love</span><span class="a">Borns</span></li>
+        <li class="song" data-q="every breath you take the police"><span class="t">Every Breath You Take</span><span class="a">The Police</span></li>
+        <li class="song" data-q="(everything i do) i do it for you bryan adams"><span class="t">(Everything I Do) I Do It For You</span><span class="a">Bryan Adams</span></li>
+        <li class="song" data-q="everywhere fleetwood mac"><span class="t">Everywhere</span><span class="a">Fleetwood Mac</span></li>
+        <li class="song" data-q="feel it still portugal the man"><span class="t">Feel It Still</span><span class="a">Portugal The Man</span></li>
+        <li class="song" data-q="free fallin&#x27; tom petty"><span class="t">Free Fallin’</span><span class="a">Tom Petty</span></li>
+        <li class="song" data-q="have you ever seen the rain creedence clearwater revival"><span class="t">Have You Ever Seen The Rain</span><span class="a">Creedence Clearwater Revival</span></li>
+        <li class="song" data-q="helena my chemical romance"><span class="t">Helena</span><span class="a">My Chemical Romance</span></li>
+        <li class="song" data-q="here comes the sun beatles"><span class="t">Here Comes The Sun</span><span class="a">Beatles</span></li>
+        <li class="song" data-q="hey soul sister train"><span class="t">Hey Soul Sister</span><span class="a">Train</span></li>
+        <li class="song" data-q="high hopes panic at the disco"><span class="t">High Hopes</span><span class="a">Panic At The Disco</span></li>
+        <li class="song" data-q="home edward sharpe &amp; the magnetic zeros"><span class="t">Home</span><span class="a">Edward Sharpe &amp; The Magnetic Zeros</span></li>
+        <li class="song" data-q="hotel california the eagles"><span class="t">Hotel California</span><span class="a">The Eagles</span></li>
+        <li class="song" data-q="i don&#x27;t want to miss a thing aerosmith"><span class="t">I Don’t Want To Miss A Thing</span><span class="a">Aerosmith</span></li>
+        <li class="song" data-q="i still haven&#x27;t found what i&#x27;m looking for u2"><span class="t">I Still Haven’t Found What I’m Looking For</span><span class="a">U2</span></li>
+        <li class="song" data-q="i will wait mumford &amp; sons"><span class="t">I Will Wait</span><span class="a">Mumford &amp; Sons</span></li>
+        <li class="song" data-q="i write sins not tragedies panic at the disco"><span class="t">I Write Sins Not Tragedies</span><span class="a">Panic At The Disco</span></li>
+        <li class="song" data-q="iris goo goo dolls"><span class="t">Iris</span><span class="a">Goo Goo Dolls</span></li>
+        <li class="song" data-q="just like heaven the cure"><span class="t">Just Like Heaven</span><span class="a">The Cure</span></li>
+        <li class="song" data-q="kiss me sixpence none the richer"><span class="t">Kiss Me</span><span class="a">Sixpence None The Richer</span></li>
+        <li class="song" data-q="landslide fleetwood mac"><span class="t">Landslide</span><span class="a">Fleetwood Mac</span></li>
+        <li class="song" data-q="livin&#x27; on a prayer bon jovi"><span class="t">Livin’ on a Prayer</span><span class="a">Bon Jovi</span></li>
+        <li class="song" data-q="love shack the b-52s"><span class="t">Love Shack</span><span class="a">The B-52s</span></li>
+        <li class="song" data-q="minute by minute the doobie brothers"><span class="t">Minute by Minute</span><span class="a">The Doobie Brothers</span></li>
+        <li class="song" data-q="misery business paramore"><span class="t">Misery Business</span><span class="a">Paramore</span></li>
+        <li class="song" data-q="mr. brightside the killers"><span class="t">Mr. Brightside</span><span class="a">The Killers</span></li>
+        <li class="song" data-q="ocean avenue yellowcard"><span class="t">Ocean Avenue</span><span class="a">Yellowcard</span></li>
+        <li class="song" data-q="peg steely dan"><span class="t">Peg</span><span class="a">Steely Dan</span></li>
+        <li class="song" data-q="piano man billy joel"><span class="t">Piano Man</span><span class="a">Billy Joel</span></li>
+        <li class="song" data-q="pour some sugar on me def leppard"><span class="t">Pour Some Sugar On Me</span><span class="a">Def Leppard</span></li>
+        <li class="song" data-q="sex on fire kings of leon"><span class="t">Sex On Fire</span><span class="a">Kings of Leon</span></li>
+        <li class="song" data-q="shut up and dance walk the moon"><span class="t">Shut Up and Dance</span><span class="a">Walk The Moon</span></li>
+        <li class="song" data-q="a sky full of stars coldplay"><span class="t">A Sky Full Of Stars</span><span class="a">Coldplay</span></li>
+        <li class="song" data-q="stacy&#x27;s mom fountains of wayne"><span class="t">Stacy’s Mom</span><span class="a">Fountains of Wayne</span></li>
+        <li class="song" data-q="still into you paramore"><span class="t">Still Into You</span><span class="a">Paramore</span></li>
+        <li class="song" data-q="sugar, we&#x27;re goin down fall out boy"><span class="t">Sugar, We’re Goin Down</span><span class="a">Fall Out Boy</span></li>
+        <li class="song" data-q="sweet child o&#x27; mine guns n&#x27; roses"><span class="t">Sweet Child O’ Mine</span><span class="a">Guns N’ Roses</span></li>
+        <li class="song" data-q="sweet home alabama lynyrd skynyrd"><span class="t">Sweet Home Alabama</span><span class="a">Lynyrd Skynyrd</span></li>
+        <li class="song" data-q="take it easy the eagles"><span class="t">Take It Easy</span><span class="a">The Eagles</span></li>
+        <li class="song" data-q="teenage dirtbag wheatus"><span class="t">Teenage Dirtbag</span><span class="a">Wheatus</span></li>
+        <li class="song" data-q="thunderstruck ac/dc"><span class="t">Thunderstruck</span><span class="a">AC/DC</span></li>
+        <li class="song" data-q="time of your life (good riddance) green day"><span class="t">Time Of Your Life (Good Riddance)</span><span class="a">Green Day</span></li>
+        <li class="song" data-q="tiny dancer elton john"><span class="t">Tiny Dancer</span><span class="a">Elton John</span></li>
+        <li class="song" data-q="walk this way aerosmith"><span class="t">Walk This Way</span><span class="a">Aerosmith</span></li>
+        <li class="song" data-q="what a fool believes the doobie brothers"><span class="t">What a Fool Believes</span><span class="a">The Doobie Brothers</span></li>
+        <li class="song" data-q="white wedding billy idol"><span class="t">White Wedding</span><span class="a">Billy Idol</span></li>
+        <li class="song" data-q="wonderful tonight eric clapton"><span class="t">Wonderful Tonight</span><span class="a">Eric Clapton</span></li>
+        <li class="song" data-q="wonderwall oasis"><span class="t">Wonderwall</span><span class="a">Oasis</span></li>
+        <li class="song" data-q="yellow coldplay"><span class="t">Yellow</span><span class="a">Coldplay</span></li>
+        <li class="song" data-q="you&#x27;re my best friend queen"><span class="t">You’re My Best Friend</span><span class="a">Queen</span></li>
+        <li class="song" data-q="you shook me all night long ac/dc"><span class="t">You Shook Me All Night Long</span><span class="a">AC/DC</span></li>
+      </ol>
+    </section>
+
+    <section class="genre" id="country">
+      <div class="genre-head">
+        <h2>Country</h2>
+        <span class="genre-n">53 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="all my ex&#x27;s live in texas george strait"><span class="t">All My Ex’s Live In Texas</span><span class="a">George Strait</span></li>
+        <li class="song" data-q="all your&#x27;n tyler childers"><span class="t">All Your’n</span><span class="a">Tyler Childers</span></li>
+        <li class="song" data-q="amarillo by morning george strait"><span class="t">Amarillo by Morning</span><span class="a">George Strait</span></li>
+        <li class="song" data-q="amazed lonestar"><span class="t">Amazed</span><span class="a">Lonestar</span></li>
+        <li class="song" data-q="any man of mine shania twain"><span class="t">Any Man of Mine</span><span class="a">Shania Twain</span></li>
+        <li class="song" data-q="bless the broken road rascal flatts"><span class="t">Bless The Broken Road</span><span class="a">Rascal Flatts</span></li>
+        <li class="song" data-q="blue ain&#x27;t your color keith urban"><span class="t">Blue Ain’t Your Color</span><span class="a">Keith Urban</span></li>
+        <li class="song" data-q="boot scootin&#x27; boogie brooks &amp; dunn"><span class="t">Boot Scootin’ Boogie</span><span class="a">Brooks &amp; Dunn</span></li>
+        <li class="song" data-q="callin&#x27; baton rouge garth brooks"><span class="t">Callin’ Baton Rouge</span><span class="a">Garth Brooks</span></li>
+        <li class="song" data-q="chattahoochee alan jackson"><span class="t">Chattahoochee</span><span class="a">Alan Jackson</span></li>
+        <li class="song" data-q="chicken fried zac brown band"><span class="t">Chicken Fried</span><span class="a">Zac Brown Band</span></li>
+        <li class="song" data-q="choosin&#x27; texas ella langley"><span class="t">Choosin’ Texas</span><span class="a">Ella Langley</span></li>
+        <li class="song" data-q="cowboy take me away the chicks"><span class="t">Cowboy Take Me Away</span><span class="a">The Chicks</span></li>
+        <li class="song" data-q="forever and ever, amen randy travis"><span class="t">Forever and Ever, Amen</span><span class="a">Randy Travis</span></li>
+        <li class="song" data-q="friends in low places garth brooks"><span class="t">Friends In Low Places</span><span class="a">Garth Brooks</span></li>
+        <li class="song" data-q="the gambler kenny rogers"><span class="t">The Gambler</span><span class="a">Kenny Rogers</span></li>
+        <li class="song" data-q="god blessed texas little texas"><span class="t">God Blessed Texas</span><span class="a">Little Texas</span></li>
+        <li class="song" data-q="head over boots jon pardi"><span class="t">Head Over Boots</span><span class="a">Jon Pardi</span></li>
+        <li class="song" data-q="heads carolina, tails california jo dee messina"><span class="t">Heads Carolina, Tails California</span><span class="a">Jo Dee Messina</span></li>
+        <li class="song" data-q="humble and kind tim mcgraw"><span class="t">Humble and Kind</span><span class="a">Tim McGraw</span></li>
+        <li class="song" data-q="i still do reckless kelly"><span class="t">I Still Do</span><span class="a">Reckless Kelly</span></li>
+        <li class="song" data-q="in your love tyler childers"><span class="t">In Your Love</span><span class="a">Tyler Childers</span></li>
+        <li class="song" data-q="islands in the stream kenny rogers &amp; dolly parton"><span class="t">Islands in the Stream</span><span class="a">Kenny Rogers &amp; Dolly Parton</span></li>
+        <li class="song" data-q="it&#x27;s five o&#x27;clock somewhere alan jackson"><span class="t">It’s Five O’Clock Somewhere</span><span class="a">Alan Jackson</span></li>
+        <li class="song" data-q="joy of my life chris stapleton"><span class="t">Joy of My Life</span><span class="a">Chris Stapleton</span></li>
+        <li class="song" data-q="kiss an angel good morning charley pride"><span class="t">Kiss An Angel Good Morning</span><span class="a">Charley Pride</span></li>
+        <li class="song" data-q="love story taylor swift"><span class="t">Love Story</span><span class="a">Taylor Swift</span></li>
+        <li class="song" data-q="mama tried merle haggard"><span class="t">Mama Tried</span><span class="a">Merle Haggard</span></li>
+        <li class="song" data-q="man! i feel like a woman shania twain"><span class="t">Man! I Feel Like A Woman</span><span class="a">Shania Twain</span></li>
+        <li class="song" data-q="margaritaville jimmy buffett"><span class="t">Margaritaville</span><span class="a">Jimmy Buffett</span></li>
+        <li class="song" data-q="my maria brooks &amp; dunn"><span class="t">My Maria</span><span class="a">Brooks &amp; Dunn</span></li>
+        <li class="song" data-q="my wish rascal flatts"><span class="t">My Wish</span><span class="a">Rascal Flatts</span></li>
+        <li class="song" data-q="neon moon brooks &amp; dunn"><span class="t">Neon Moon</span><span class="a">Brooks &amp; Dunn</span></li>
+        <li class="song" data-q="pay no rent turnpike troubadours"><span class="t">Pay No Rent</span><span class="a">Turnpike Troubadours</span></li>
+        <li class="song" data-q="redneck woman gretchen wilson"><span class="t">Redneck Woman</span><span class="a">Gretchen Wilson</span></li>
+        <li class="song" data-q="revival zach bryan"><span class="t">Revival</span><span class="a">Zach Bryan</span></li>
+        <li class="song" data-q="ring of fire johnny cash"><span class="t">Ring of Fire</span><span class="a">Johnny Cash</span></li>
+        <li class="song" data-q="save a horse (ride a cowboy) big &amp; rich"><span class="t">Save a Horse (Ride a Cowboy)</span><span class="a">Big &amp; Rich</span></li>
+        <li class="song" data-q="should&#x27;ve been a cowboy toby keith"><span class="t">Should’ve Been a Cowboy</span><span class="a">Toby Keith</span></li>
+        <li class="song" data-q="take me home, country roads john denver"><span class="t">Take Me Home, Country Roads</span><span class="a">John Denver</span></li>
+        <li class="song" data-q="tennessee whiskey chris stapleton"><span class="t">Tennessee Whiskey</span><span class="a">Chris Stapleton</span></li>
+        <li class="song" data-q="till my feet don&#x27;t touch the ground stoney larue"><span class="t">Till My Feet Don’t Touch the Ground</span><span class="a">Stoney LaRue</span></li>
+        <li class="song" data-q="toes zac brown band"><span class="t">Toes</span><span class="a">Zac Brown Band</span></li>
+        <li class="song" data-q="wagon wheel darius rucker"><span class="t">Wagon Wheel</span><span class="a">Darius Rucker</span></li>
+        <li class="song" data-q="wave on wave pat green"><span class="t">Wave on Wave</span><span class="a">Pat Green</span></li>
+        <li class="song" data-q="wear my ring bart crow band"><span class="t">Wear My Ring</span><span class="a">Bart Crow Band</span></li>
+        <li class="song" data-q="whiskey glasses morgan wallen"><span class="t">Whiskey Glasses</span><span class="a">Morgan Wallen</span></li>
+        <li class="song" data-q="why don&#x27;t we just dance josh turner"><span class="t">Why Don’t We Just Dance</span><span class="a">Josh Turner</span></li>
+        <li class="song" data-q="you chris young"><span class="t">You</span><span class="a">Chris Young</span></li>
+        <li class="song" data-q="you make it easy jason aldean"><span class="t">You Make It Easy</span><span class="a">Jason Aldean</span></li>
+        <li class="song" data-q="you never even called me by my name david allan coe"><span class="t">You Never Even Called Me by My Name</span><span class="a">David Allan Coe</span></li>
+        <li class="song" data-q="you&#x27;re still the one shania twain"><span class="t">You’re Still The One</span><span class="a">Shania Twain</span></li>
+        <li class="song" data-q="your man josh turner"><span class="t">Your Man</span><span class="a">Josh Turner</span></li>
+      </ol>
+    </section>
+
+    <section class="genre" id="funk-disco">
+      <div class="genre-head">
+        <h2>Funk / Disco</h2>
+        <span class="genre-n">16 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="dancing queen abba"><span class="t">Dancing Queen</span><span class="a">Abba</span></li>
+        <li class="song" data-q="don&#x27;t stop &#x27;til you get enough michael jackson"><span class="t">Don’t Stop ’Til You Get Enough</span><span class="a">Michael Jackson</span></li>
+        <li class="song" data-q="get lucky daft punk ft. pharrell williams"><span class="t">Get Lucky</span><span class="a">Daft Punk ft. Pharrell Williams</span></li>
+        <li class="song" data-q="get up (i feel like being a) sex machine james brown"><span class="t">Get Up (I Feel Like Being a) Sex Machine</span><span class="a">James Brown</span></li>
+        <li class="song" data-q="gimme! gimme! gimme! (a man after midnight) abba"><span class="t">Gimme! Gimme! Gimme! (A Man After Midnight)</span><span class="a">ABBA</span></li>
+        <li class="song" data-q="i&#x27;m coming out diana ross"><span class="t">I’m Coming Out</span><span class="a">Diana Ross</span></li>
+        <li class="song" data-q="i will survive gloria gaynor"><span class="t">I Will Survive</span><span class="a">Gloria Gaynor</span></li>
+        <li class="song" data-q="kiss on my list hall &amp; oates"><span class="t">Kiss on My List</span><span class="a">Hall &amp; Oates</span></li>
+        <li class="song" data-q="last dance donna summer"><span class="t">Last Dance</span><span class="a">Donna Summer</span></li>
+        <li class="song" data-q="let&#x27;s groove earth, wind &amp; fire"><span class="t">Let’s Groove</span><span class="a">Earth, Wind &amp; Fire</span></li>
+        <li class="song" data-q="pick up the pieces average white band"><span class="t">Pick Up the Pieces</span><span class="a">Average White Band</span></li>
+        <li class="song" data-q="play that funky music wild cherry"><span class="t">Play That Funky Music</span><span class="a">Wild Cherry</span></li>
+        <li class="song" data-q="stayin&#x27; alive bee gees"><span class="t">Stayin’ Alive</span><span class="a">Bee Gees</span></li>
+        <li class="song" data-q="we are family sister sledge"><span class="t">We Are Family</span><span class="a">Sister Sledge</span></li>
+        <li class="song" data-q="workin&#x27; day and night michael jackson"><span class="t">Workin’ Day and Night</span><span class="a">Michael Jackson</span></li>
+        <li class="song" data-q="you make my dreams (come true) hall &amp; oates"><span class="t">You Make My Dreams (Come True)</span><span class="a">Hall &amp; Oates</span></li>
+      </ol>
+    </section>
+
+    <section class="genre" id="jazz-standards">
+      <div class="genre-head">
+        <h2>Jazz / Standards</h2>
+        <span class="genre-n">13 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="the best is yet to come frank sinatra"><span class="t">The Best Is Yet to Come</span><span class="a">Frank Sinatra</span></li>
+        <li class="song" data-q="brazil frank sinatra"><span class="t">Brazil</span><span class="a">Frank Sinatra</span></li>
+        <li class="song" data-q="come fly with me frank sinatra"><span class="t">Come Fly with Me</span><span class="a">Frank Sinatra</span></li>
+        <li class="song" data-q="everything michael buble"><span class="t">Everything</span><span class="a">Michael Bublé</span></li>
+        <li class="song" data-q="fly me to the moon frank sinatra"><span class="t">Fly Me To The Moon</span><span class="a">Frank Sinatra</span></li>
+        <li class="song" data-q="i get a kick out of you frank sinatra"><span class="t">I Get a Kick Out of You</span><span class="a">Frank Sinatra</span></li>
+        <li class="song" data-q="l-o-v-e nat king cole"><span class="t">L-O-V-E</span><span class="a">Nat King Cole</span></li>
+        <li class="song" data-q="moon river andy williams"><span class="t">Moon River</span><span class="a">Andy Williams</span></li>
+        <li class="song" data-q="my funny valentine frank sinatra"><span class="t">My Funny Valentine</span><span class="a">Frank Sinatra</span></li>
+        <li class="song" data-q="my way frank sinatra"><span class="t">My Way</span><span class="a">Frank Sinatra</span></li>
+        <li class="song" data-q="new york, new york frank sinatra"><span class="t">New York, New York</span><span class="a">Frank Sinatra</span></li>
+        <li class="song" data-q="the way you look tonight frank sinatra"><span class="t">The Way You Look Tonight</span><span class="a">Frank Sinatra</span></li>
+        <li class="song" data-q="what a wonderful world louis armstrong"><span class="t">What A Wonderful World</span><span class="a">Louis Armstrong</span></li>
+      </ol>
+    </section>
+
+    <section class="genre" id="latin">
+      <div class="genre-head">
+        <h2>Latin</h2>
+        <span class="genre-n">13 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="bailando enrique iglesias"><span class="t">Bailando</span><span class="a">Enrique Iglesias</span></li>
+        <li class="song" data-q="bidi bidi bom bom selena"><span class="t">Bidi Bidi Bom Bom</span><span class="a">Selena</span></li>
+        <li class="song" data-q="conga gloria estefan &amp; miami sound machine"><span class="t">Conga</span><span class="a">Gloria Estefan &amp; Miami Sound Machine</span></li>
+        <li class="song" data-q="corazon sin cara prince royce"><span class="t">Corazón Sin Cara</span><span class="a">Prince Royce</span></li>
+        <li class="song" data-q="danza kuduro don omar &amp; lucenzo"><span class="t">Danza Kuduro</span><span class="a">Don Omar &amp; Lucenzo</span></li>
+        <li class="song" data-q="despacito luis fonsi"><span class="t">Despacito</span><span class="a">Luis Fonsi</span></li>
+        <li class="song" data-q="la bamba ritchie valens"><span class="t">La Bamba</span><span class="a">Ritchie Valens</span></li>
+        <li class="song" data-q="la vida es un carnaval celia cruz"><span class="t">La Vida Es un Carnaval</span><span class="a">Celia Cruz</span></li>
+        <li class="song" data-q="livin&#x27; la vida loca ricky martin"><span class="t">Livin’ la Vida Loca</span><span class="a">Ricky Martin</span></li>
+        <li class="song" data-q="maria maria santana"><span class="t">Maria Maria</span><span class="a">Santana</span></li>
+        <li class="song" data-q="oye como va santana"><span class="t">Oye Como Va</span><span class="a">Santana</span></li>
+        <li class="song" data-q="suavemente elvis crespo"><span class="t">Suavemente</span><span class="a">Elvis Crespo</span></li>
+        <li class="song" data-q="vivir mi vida marc anthony"><span class="t">Vivir Mi Vida</span><span class="a">Marc Anthony</span></li>
+      </ol>
+    </section>
+
+    <section class="genre" id="hip-hop">
+      <div class="genre-head">
+        <h2>Hip-Hop</h2>
+        <span class="genre-n">11 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="apache (jump on it) the sugarhill gang"><span class="t">Apache (Jump On It)</span><span class="a">The Sugarhill Gang</span></li>
+        <li class="song" data-q="hey ya! outkast"><span class="t">Hey Ya!</span><span class="a">Outkast</span></li>
+        <li class="song" data-q="hold on we&#x27;re going home drake"><span class="t">Hold On We’re Going Home</span><span class="a">Drake</span></li>
+        <li class="song" data-q="hot in herre nelly"><span class="t">Hot In Herre</span><span class="a">Nelly</span></li>
+        <li class="song" data-q="it takes two rob base &amp; dj e-z rock"><span class="t">It Takes Two</span><span class="a">Rob Base &amp; DJ E-Z Rock</span></li>
+        <li class="song" data-q="jump around house of pain"><span class="t">Jump Around</span><span class="a">House Of Pain</span></li>
+        <li class="song" data-q="mo money mo problems the notorious b.i.g."><span class="t">Mo Money Mo Problems</span><span class="a">The Notorious B.I.G.</span></li>
+        <li class="song" data-q="roses outkast"><span class="t">Roses</span><span class="a">Outkast</span></li>
+        <li class="song" data-q="show me what you got jay-z"><span class="t">Show Me What You Got</span><span class="a">Jay-Z</span></li>
+        <li class="song" data-q="sunflower post malone"><span class="t">Sunflower</span><span class="a">Post Malone</span></li>
+        <li class="song" data-q="the way you move outkast"><span class="t">The Way You Move</span><span class="a">Outkast</span></li>
+      </ol>
+    </section>
+
+    <section class="genre" id="dance-pop">
+      <div class="genre-head">
+        <h2>Dance / Pop</h2>
+        <span class="genre-n">9 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="cold water major lazer"><span class="t">Cold Water</span><span class="a">Major Lazer</span></li>
+        <li class="song" data-q="i gotta feeling black eyed peas"><span class="t">I Gotta Feeling</span><span class="a">Black Eyed Peas</span></li>
+        <li class="song" data-q="latch disclosure ft. sam smith"><span class="t">Latch</span><span class="a">Disclosure ft. Sam Smith</span></li>
+        <li class="song" data-q="let me love you dj snake (ft. justin bieber)"><span class="t">Let Me Love You</span><span class="a">DJ Snake (ft. Justin Bieber)</span></li>
+        <li class="song" data-q="levels avicii"><span class="t">Levels</span><span class="a">Avicii</span></li>
+        <li class="song" data-q="the middle zedd"><span class="t">The Middle</span><span class="a">Zedd</span></li>
+        <li class="song" data-q="one kiss calvin harris &amp; dua lipa"><span class="t">One Kiss</span><span class="a">Calvin Harris &amp; Dua Lipa</span></li>
+        <li class="song" data-q="something just like this the chainsmokers"><span class="t">Something Just Like This</span><span class="a">The Chainsmokers</span></li>
+        <li class="song" data-q="wake me up! avicii"><span class="t">Wake Me Up!</span><span class="a">Avicii</span></li>
+      </ol>
+    </section>
+
+    <section class="genre" id="folk-indie">
+      <div class="genre-head">
+        <h2>Folk / Indie</h2>
+        <span class="genre-n">4 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="brown eyed girl van morrison"><span class="t">Brown Eyed Girl</span><span class="a">Van Morrison</span></li>
+        <li class="song" data-q="give me one reason tracy chapman"><span class="t">Give Me One Reason</span><span class="a">Tracy Chapman</span></li>
+        <li class="song" data-q="how sweet it is james taylor"><span class="t">How Sweet It Is</span><span class="a">James Taylor</span></li>
+        <li class="song" data-q="swept away the avett brothers"><span class="t">Swept Away</span><span class="a">The Avett Brothers</span></li>
+      </ol>
+    </section>
+
+    <section class="genre" id="reggae-caribbean">
+      <div class="genre-head">
+        <h2>Reggae / Caribbean</h2>
+        <span class="genre-n">3 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="it wasn&#x27;t me shaggy"><span class="t">It Wasn’t Me</span><span class="a">Shaggy</span></li>
+        <li class="song" data-q="no woman no cry bob marley"><span class="t">No Woman No Cry</span><span class="a">Bob Marley</span></li>
+        <li class="song" data-q="one love/people get ready bob marley &amp; the wailers"><span class="t">One Love/People Get Ready</span><span class="a">Bob Marley &amp; The Wailers</span></li>
+      </ol>
+    </section>
+
+    <section class="genre" id="classics">
+      <div class="genre-head">
+        <h2>Classics</h2>
+        <span class="genre-n">2 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="can&#x27;t help falling in love elvis presley"><span class="t">Can’t Help Falling in Love</span><span class="a">Elvis Presley</span></li>
+        <li class="song" data-q="can&#x27;t take my eyes off you frankie valli"><span class="t">Can’t Take My Eyes Off You</span><span class="a">Frankie Valli</span></li>
+      </ol>
+    </section>
+
+    <section class="genre" id="holiday">
+      <div class="genre-head">
+        <h2>Holiday</h2>
+        <span class="genre-n">7 songs</span>
+      </div>
+      <ol class="songs">
+        <li class="song" data-q="all i want for christmas is you mariah carey"><span class="t">All I Want for Christmas Is You</span><span class="a">Mariah Carey</span></li>
+        <li class="song" data-q="the christmas song nat king cole"><span class="t">The Christmas Song</span><span class="a">Nat King Cole</span></li>
+        <li class="song" data-q="feliz navidad jose feliciano"><span class="t">Feliz Navidad</span><span class="a">José Feliciano</span></li>
+        <li class="song" data-q="jingle bell rock bobby helms"><span class="t">Jingle Bell Rock</span><span class="a">Bobby Helms</span></li>
+        <li class="song" data-q="santa claus is coming to town the jackson 5"><span class="t">Santa Claus Is Coming to Town</span><span class="a">The Jackson 5</span></li>
+        <li class="song" data-q="this christmas donny hathaway"><span class="t">This Christmas</span><span class="a">Donny Hathaway</span></li>
+        <li class="song" data-q="what christmas means to me stevie wonder"><span class="t">What Christmas Means to Me</span><span class="a">Stevie Wonder</span></li>
+      </ol>
+    </section>
+  <div class="no-results" id="none">
+    <em>No matches.</em><br><br>Set lists are tailored to each event. Special requests are always welcome.
+  </div>
+</main>
+
+<footer>
+  <div class="tail-note">Set lists are tailored to each event. Special requests are always welcome.</div>
+  <p class="contact">
+    <a href="https://greenwayband.com">greenwayband.com</a><span class="dot">&middot;</span><a href="mailto:adrian@greenwayband.com">adrian@greenwayband.com</a>
+  </p>
+</footer>
+
+<script>
+  (function () {
+    var q = document.getElementById('q');
+    var none = document.getElementById('none');
+    var songs = [].slice.call(document.querySelectorAll('.song'));
+    var sections = [].slice.call(document.querySelectorAll('.genre'));
+    function fold(s) {
+      return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\u2019/g, "'");
+    }
+    q.addEventListener('input', function () {
+      var needle = fold(q.value.trim());
+      var any = false;
+      songs.forEach(function (li) {
+        var hit = !needle || li.getAttribute('data-q').indexOf(needle) !== -1;
+        li.style.display = hit ? '' : 'none';
+        if (hit) any = true;
+      });
+      sections.forEach(function (sec) {
+        var visible = sec.querySelectorAll('.song:not([style*="none"])').length > 0;
+        sec.style.display = visible ? '' : 'none';
+      });
+      none.style.display = any ? 'none' : 'block';
+    });
+  })();
+</script>
+
+</body>
+</html>

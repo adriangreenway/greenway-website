@@ -9,9 +9,7 @@ Rules for this file (Claude Code, obey these):
 - Never delete a Known Issue without fixing it or moving it to ROADMAP.md as deferred.
 
 ## Working version
-Working tree on branch `docs/build-context`, ahead of `origin` by 1 (proposal-record commit, push pending Adrian's word). The site itself lives on two diverged branches: `dev` (deployed — strong inference from the netlify.app redirect existing only there) and `main` (has Reviews + FAQ committed, not deployed). Neither is checked out right now; this branch carries documentation only.
-**Unexplained, untouched:** `docs/song-list/` (website repo) and `song-list/` (proposals repo), both created 2026-07-24 ~09:23-24, not by this session's Claude — investigate with Adrian before touching (may be his own concurrent work).
-
+Working tree on branch `docs/build-context`, ahead of `origin` by 3 (hinojosa record, end-session pass, song-list D15; push pending Adrian's word). The site itself lives on two diverged branches: `dev` (deployed — strong inference from the netlify.app redirect existing only there) and `main` (has Reviews + FAQ committed, not deployed). Neither is checked out right now; this branch carries documentation only.
 ## Active task
 **Two separate tracks. Only one is paused.**
 
@@ -20,6 +18,7 @@ Working tree on branch `docs/build-context`, ahead of `origin` by 1 (proposal-re
    **2026-07-03, same day: Adrian said "go" on Gate 3, then reconsidered before anything was touched in Squarespace (nothing was actually changed there — Claude has no Squarespace access).** He wants nothing live on greenwayband.com until BOTH this website's build and the separate Growth Hour app are entirely finished, not just at a milestone. Reason: a past form went live early and lost real submissions. See `docs/DECISIONS.md` D13 (controlling) and the memory note `greenway_golive_hold`. **Do not propose or execute Gate 3 again until Adrian says both builds are done.**
 
 ## Recently completed (last 5 max, then archive)
+- 2026-07-24 Song list page (D15), by the parallel session that made the folders the end-session pass flagged as unexplained (mystery resolved, they were Adrian's ask): client xlsx v4 → `docs/song-list/` build.py → white+green branded page + songs.json, all 433 songs from the doc, browser-verified desktop/mobile. Staged in the proposals repo at `/song-list`; deploy awaits Adrian's go; Squarespace later.
 - 2026-07-24 **Marli's live page updated in place** (Adrian's explicit ask): `proposals.greenwayband.com/hinojosa` now serves the full v5-v9 redesign — production deploy verified live (HTTP 200, correct package order, no deposit copy, badge on 10-Piece, real domain screenshot-checked). Proposals repo commit `59716b4`; rollback deploy `6a569f09a251fd14726df077` (her July 21 original) if ever needed.
 - 2026-07-24 Template v7+v8+v9 (D14 v7-v9), committed + pushed to website repo (`1198ee3`, `c6ae119`). v7 = Adrian's strict rollback spec: original per-package two-column itemization restored, shared services section removed, subtitles → one benefit sentence, closing back to Schedule-a-Call primary. v8 (same day, his feedback): 10-Piece ALWAYS leads Recommended, desktop ≥900px side-by-side comparison cards, video trimmed to label + player + caption. v9: the one payment-copy line (50% deposit) removed for good — the only cut he wanted; all established helper lines (inline CTA, closing note, "Ready now?") kept verbatim, "Two Ways to Fill the Room" locked ("i love that one"). Naming CLOSED: 6-Piece/10-Piece Band.
 - 2026-07-23 (session 3) Template `a7884bd` (v4) was extended to v5 (dedicated 7-page print/PDF layout; crowd photo height-capped everywhere; fixed a real phone CSS bug) then v6 (a ChatGPT correction pass: shared services, Move Forward CTA, video click fix, contrast floors). A package-rename experiment was tried and rejected. Adrian's verdict on v6: "I'm not liking these changes" — superseded by the 2026-07-24 v7 rollback above. Nothing beyond `a7884bd` is committed.
@@ -49,8 +48,8 @@ Working tree on branch `docs/build-context`, ahead of `origin` by 1 (proposal-re
 ## Next recommended action
 Proposal-template arc CLOSED for now. Template v5-v9 committed and pushed
 (website repo `c6ae119`, in sync with origin). Marli's live page updated to
-match, verified on the real domain (see Recently completed). Nothing pending
-on the proposals track. Deferred at Adrian's word, whenever he wants it:
+match, verified on the real domain (see Recently completed). Pending on the
+proposals track: song-list deploy on Adrian's go (D15). Deferred at his word:
 a canned "next steps" reply email (contract → invoice → payment methods) for
 EMAIL_TEMPLATES.md — that's the one place Zelle/check/card details can live.
 Session ending 2026-07-24; next session's likely start is either a fresh ask
