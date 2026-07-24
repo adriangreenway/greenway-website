@@ -49,6 +49,17 @@ sitting in it rides along. Always list ride-alongs in the pre-deploy summary to 
    ```
    Compare against `ls ~/Desktop/greenway-proposals`. Anything live but missing
    locally = STOP and investigate. Note the `DEPLOY_ID` — it is the rollback point.
+
+   > **This step is not a formality — it has already saved a live page once.**
+   > 2026-07-24: `assets/uptown-funk-2026a.mp4` (73 MB) had been moved out to
+   > `~/Desktop/EPK` during EPK Phase 0. It was still live and still referenced by
+   > `hinojosa/index.html`, so a `--prod` deploy would have deleted it and broken the
+   > video on Marli's live proposal. Restoring the file (EPK keeps its own copy) made
+   > the diff clean. **Assets shared between the proposals site and another track
+   > (EPK, gig sheets) are the standing hazard here:** moving one out silently arms a
+   > deletion on the next full-directory deploy. `git status` in the proposals repo is
+   > a useful second check — tracked assets show as deleted — but run the live diff
+   > regardless, since not everything live is necessarily committed.
 2. **Deploy** (from the folder itself — never from a directory containing another
    `netlify.toml`, or the CLI runs that project's build):
    ```bash
