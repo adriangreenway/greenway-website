@@ -18,7 +18,9 @@ Working tree on branch `docs/build-context`, ahead of `origin` by 3 (hinojosa re
    **2026-07-03, same day: Adrian said "go" on Gate 3, then reconsidered before anything was touched in Squarespace (nothing was actually changed there — Claude has no Squarespace access).** He wants nothing live on greenwayband.com until BOTH this website's build and the separate Growth Hour app are entirely finished, not just at a milestone. Reason: a past form went live early and lost real submissions. See `docs/DECISIONS.md` D13 (controlling) and the memory note `greenway_golive_hold`. **Do not propose or execute Gate 3 again until Adrian says both builds are done.**
 
 ## Recently completed (last 5 max, then archive)
-- 2026-07-24 Song list page (D15), by the parallel session that made the folders the end-session pass flagged as unexplained (mystery resolved, they were Adrian's ask): client xlsx v4 → `docs/song-list/` build.py → white+green branded page + songs.json, all 433 songs from the doc, browser-verified desktop/mobile. Staged in the proposals repo at `/song-list`; deploy awaits Adrian's go; Squarespace later.
+- 2026-07-24 Photo duo (D14 v11), IN REVIEW: Adrian brought the parked greenhouse photo back, paired side-by-side with the existing crowd photo (his idea: "since they're from the same wedding"). Screen-only `.photo-duo`; print keeps the original single crowd band unchanged via a hidden twin — 8-page PDF untouched. One honest finding, not a regression: a camera operator is visible in the crowd photo at every object-position tested at this width (present in the original crop too). Draft: `6a637987e17381d512647c42--greenway-proposals.netlify.app/hinojosa/`.
+- 2026-07-24 Photo band 3 (D14 v10), IN REVIEW: Adrian shared 3 real gig photos asking if any belong on proposals. Devil's-advocate discussion landed on exactly one — a real sparkler exit (his gig, unnamed couple) — as a new default photo band right before the closing, screen-only (print/PDF untouched by design). Built into TEMPLATE.html + hinojosa; browser-verified (no console errors, correct gradient/crop/order via computed-style checks; a Browser-pane screenshot quirk on this long page was worked around with an isolated crop-check harness). Not committed, not on prod.
+- 2026-07-24 Song list page (D15 + v2): client xlsx v4 → `docs/song-list/` (build.py + template.html) → 433 songs + songs.json. Green v1 rejected by Adrian ("our color scheme isn't green"); rebuilt via 16-agent ultracode workflow strictly on the proposal motif — charcoal cover, cream body, copy stripped to wordmark/title/genres/songs. Token/copy/UX audited, headless-verified both widths. Staged in the proposals repo at `/song-list`; deploy awaits Adrian's go; Squarespace later.
 - 2026-07-24 **Marli's live page updated in place** (Adrian's explicit ask): `proposals.greenwayband.com/hinojosa` now serves the full v5-v9 redesign — production deploy verified live (HTTP 200, correct package order, no deposit copy, badge on 10-Piece, real domain screenshot-checked). Proposals repo commit `59716b4`; rollback deploy `6a569f09a251fd14726df077` (her July 21 original) if ever needed.
 - 2026-07-24 Template v7+v8+v9 (D14 v7-v9), committed + pushed to website repo (`1198ee3`, `c6ae119`). v7 = Adrian's strict rollback spec: original per-package two-column itemization restored, shared services section removed, subtitles → one benefit sentence, closing back to Schedule-a-Call primary. v8 (same day, his feedback): 10-Piece ALWAYS leads Recommended, desktop ≥900px side-by-side comparison cards, video trimmed to label + player + caption. v9: the one payment-copy line (50% deposit) removed for good — the only cut he wanted; all established helper lines (inline CTA, closing note, "Ready now?") kept verbatim, "Two Ways to Fill the Room" locked ("i love that one"). Naming CLOSED: 6-Piece/10-Piece Band.
 - 2026-07-23 (session 3) Template `a7884bd` (v4) was extended to v5 (dedicated 7-page print/PDF layout; crowd photo height-capped everywhere; fixed a real phone CSS bug) then v6 (a ChatGPT correction pass: shared services, Move Forward CTA, video click fix, contrast floors). A package-rename experiment was tried and rejected. Adrian's verdict on v6: "I'm not liking these changes" — superseded by the 2026-07-24 v7 rollback above. Nothing beyond `a7884bd` is committed.
@@ -46,12 +48,12 @@ Working tree on branch `docs/build-context`, ahead of `origin` by 3 (hinojosa re
 - `PROJECT_STATE.md`, `ARCHITECTURE.md`, and `INTEGRATIONS.md` hold the deep, evidence-backed detail behind every line above; this file is the quick truth only.
 
 ## Next recommended action
-Proposal-template arc CLOSED for now. Template v5-v9 committed and pushed
-(website repo `c6ae119`, in sync with origin). Marli's live page updated to
-match, verified on the real domain (see Recently completed). Pending on the
-proposals track: song-list deploy on Adrian's go (D15). Deferred at his word:
+Adrian reviews the v11 draft (photo duo, link above — v10's closing photo is
+in the same draft). If approved, "go" = commit TEMPLATE.html + hinojosa +
+docs, then draft-vs-prod deploy call for Marli's page (same pattern as v9).
+Also pending: song-list deploy on Adrian's go (D15). Deferred at his word:
 a canned "next steps" reply email (contract → invoice → payment methods) for
 EMAIL_TEMPLATES.md — that's the one place Zelle/check/card details can live.
-Session ending 2026-07-24; next session's likely start is either a fresh ask
+Session's likely next start
 or the Astro-rebuild pause lifting (still gated on Growth Hour M3 — check
 `~/greenway-growth-hour` for that). Gate 3 frozen (D13).
