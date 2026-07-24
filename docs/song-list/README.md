@@ -40,3 +40,39 @@ links (D15 v2 — a green v1 was rejected; never reintroduce it).
 Palette: proposal tokens only — cover `#0A0A09`, body cream `#F5F2ED`, inks
 `#111110`/`#2A2A27`, dims `#706D66`/`#8A867E`/`#4A4740`, hairlines
 `rgba(10,10,9,.12/.16/.26)` and `rgba(245,242,237,…)` on the cover.
+
+## Updating the repertoire
+
+Adrian never edits the xlsx himself. He just says what changed in chat
+("add X by Y", "we don't play Z anymore", "rename this genre to..."), and
+Claude does the edit + rebuild + resync every time, then reports back with a
+PASS/FAIL. This is the whole convention — everything below is the mechanic
+Claude follows, not a tool Adrian needs to touch.
+
+- **The xlsx is one single alphabetical list, genre-tagged, not grouped by
+  genre.** Row 5 is the header (`Song | Artist | Genre`), rows 6+ are songs,
+  sorted A→Z across the whole catalog regardless of genre. `build.py` then
+  regroups by the genre column for display — because the source is already
+  alphabetical, each genre bucket comes out alphabetical too, for free, with
+  **no sort code**. This only holds if edits go in at the right spot.
+- **Adding a song:** insert a new row in correct alphabetical position by
+  song title (ignore a leading "The"/"A" if that's the existing convention
+  for neighboring rows — check a couple of neighbors before trusting it),
+  matching the **exact existing genre string** from another song in that
+  genre (e.g. `Reggae / Caribbean`, not `Reggae/Caribbean` — a mismatched
+  string silently creates a new, duplicate genre bucket instead of joining
+  the real one). Use `openpyxl` (`insert_rows`, not a manual append) so nothing
+  else in the sheet shifts wrong. Never hand-edit the generated `index.html`
+  or `embed.html` — they're overwritten by every rebuild.
+- **Removing or renaming a song:** find the row, edit or delete it in place
+  the same way.
+- **Then always:** run `python3 build.py`, diff the printed genre counts
+  against what you expect, spot-check the new/changed song rendered in the
+  right place in `index.html`, then re-copy `index.html` to
+  `~/Desktop/greenway-proposals/song-list/index.html` (the staged proposals
+  copy is not auto-synced) and re-send `embed.html` to Adrian if the
+  Squarespace copy needs updating too — Claude has no Squarespace access, so
+  that file only updates live once Adrian re-pastes it in.
+- **A new xlsx entirely** (Adrian hands over a whole new file): confirm the
+  sheet name is still `SONG LIST` and the columns are still `Song | Artist |
+  Genre` in that order, then `python3 build.py path/to/new.xlsx`.
