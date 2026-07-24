@@ -19,7 +19,8 @@ Working tree on branch `docs/build-context`, up to date with `origin`. The site 
    **2026-07-03, same day: Adrian said "go" on Gate 3, then reconsidered before anything was touched in Squarespace (nothing was actually changed there — Claude has no Squarespace access).** He wants nothing live on greenwayband.com until BOTH this website's build and the separate Growth Hour app are entirely finished, not just at a milestone. Reason: a past form went live early and lost real submissions. See `docs/DECISIONS.md` D13 (controlling) and the memory note `greenway_golive_hold`. **Do not propose or execute Gate 3 again until Adrian says both builds are done.**
 
 ## Recently completed (last 5 max, then archive)
-- 2026-07-24 Template v7+v8 (D14 v7/v8). v7 = targeted rollback per Adrian's strict spec: original per-package two-column itemization + five original labels restored, shared "Included With Every…" section removed, subtitles retired for one secondary benefit sentence each, closing back to Schedule-a-Call primary + quiet Move-Forward email secondary; all v5/v6 approved improvements kept. Adrian: "this actually looks really good." v8 same day on his feedback: 10-Piece ALWAYS leads Recommended (hinojosa realigned, v5 flag 1 closed), desktop ≥900px side-by-side bordered comparison cards (mobile stacked unchanged, print untouched), video section trimmed to label + player + caption. Names stay 6/10-Piece Band (naming CLOSED). Browser-verified both breakpoints, console clean; docs synced. Nothing committed, prod untouched.
+- 2026-07-24 **Marli's live page updated in place** (Adrian's explicit ask): `proposals.greenwayband.com/hinojosa` now serves the full v5-v9 redesign — production deploy verified live (HTTP 200, correct package order, no deposit copy, badge on 10-Piece, real domain screenshot-checked). Proposals repo commit `59716b4`; rollback deploy `6a569f09a251fd14726df077` (her July 21 original) if ever needed.
+- 2026-07-24 Template v7+v8+v9 (D14 v7-v9), committed + pushed to website repo (`1198ee3`, `c6ae119`). v7 = Adrian's strict rollback spec: original per-package two-column itemization restored, shared services section removed, subtitles → one benefit sentence, closing back to Schedule-a-Call primary. v8 (same day, his feedback): 10-Piece ALWAYS leads Recommended, desktop ≥900px side-by-side comparison cards, video trimmed to label + player + caption. v9: the one payment-copy line (50% deposit) removed for good — the only cut he wanted; all established helper lines (inline CTA, closing note, "Ready now?") kept verbatim, "Two Ways to Fill the Room" locked ("i love that one"). Naming CLOSED: 6-Piece/10-Piece Band.
 - 2026-07-23 (session 3) Template `a7884bd` (v4) was extended to v5 (dedicated 7-page print/PDF layout; crowd photo height-capped everywhere; fixed a real phone CSS bug) then v6 (a ChatGPT correction pass: shared services, Move Forward CTA, video click fix, contrast floors). A package-rename experiment was tried and rejected. Adrian's verdict on v6: "I'm not liking these changes" — superseded by the 2026-07-24 v7 rollback above. Nothing beyond `a7884bd` is committed.
 - 2026-07-23 Proposal live: `proposals.greenwayband.com/campbell` (Kate Campbell wedding 2027-03-13, Evelyn's Park, Bellaire; 10-Piece $14,375 recommended + 6-Piece $10,350 + cocktail cards). New defaults: 10-Piece always leads Recommended, cocktail cards on by default. Template 4.1 email sent, links clean. Proposals repo commit `0f33446`; rollback deploy `6a5fe15d2d011fbb9622cc16`.
 
@@ -45,14 +46,12 @@ Working tree on branch `docs/build-context`, up to date with `origin`. The site 
 - `PROJECT_STATE.md`, `ARCHITECTURE.md`, and `INTEGRATIONS.md` hold the deep, evidence-backed detail behind every line above; this file is the quick truth only.
 
 ## Next recommended action
-Template SETTLED through v9 and committed 2026-07-24 (D14 v9): the 50%
-deposit line is the ONLY copy cut (policy lives in PRICING_AND_CONTENT
-"Reservation + payment flow", contract/invoice use only, never on a page);
-Adrian restored the helper lines a broader sweep had cut ("that one was
-fine") and locked "Two Ways to Fill the Room" ("i love that one"). Final
-draft, verified: `6a63654a839ef42d67904902--greenway-proposals.netlify.app
-/hinojosa/`. Branch ahead 1 after the v9 commit — his "push" backs it up.
-Open: does Marli's live page get the reworked version? (prod = her
-2026-07-21 original; his explicit ask + prod deploy.) Deferred at his word:
-"next steps" reply email for EMAIL_TEMPLATES.md. Proposals repo still
-uncommitted (normal). Gate 3 frozen (D13).
+Proposal-template arc CLOSED for now. Template v5-v9 committed and pushed
+(website repo `c6ae119`, in sync with origin). Marli's live page updated to
+match, verified on the real domain (see Recently completed). Nothing pending
+on the proposals track. Deferred at Adrian's word, whenever he wants it:
+a canned "next steps" reply email (contract → invoice → payment methods) for
+EMAIL_TEMPLATES.md — that's the one place Zelle/check/card details can live.
+Session ending 2026-07-24; next session's likely start is either a fresh ask
+or the Astro-rebuild pause lifting (still gated on Growth Hour M3 — check
+`~/greenway-growth-hour` for that). Gate 3 frozen (D13).
