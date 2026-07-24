@@ -178,7 +178,13 @@ embed = (
     .replace("@@NAV@@", nav_html_embed)
     .replace("@@SECTIONS@@", sections_html_embed)
 )
-(HERE / "embed.html").write_text(embed, encoding="utf-8")
+# Squarespace's Code Block re-encoded our UTF-8 bytes as MacRoman on paste
+# (2026-07-24: every curly apostrophe rendered as "Can,Aot"). The embed has no
+# <head> of its own, so it cannot declare a charset and is at the mercy of
+# whatever the host CMS does. Emitting pure ASCII with numeric entities makes
+# the file immune to that. index.html is unaffected — it declares UTF-8 itself.
+embed = embed.encode("ascii", "xmlcharrefreplace").decode("ascii")
+(HERE / "embed.html").write_text(embed, encoding="ascii")
 
 (HERE / "songs.json").write_text(
     json.dumps(
