@@ -1,7 +1,7 @@
 # CURRENT STATE: The Greenway Band Website
 
 **Last updated:** 2026-07-24
-**Last verified build:** PASS on 2026-07-03 (`npm run build`, 6 pages, clean; no test/typecheck scripts exist in this repo to run).
+**Last verified build:** PASS on 2026-07-24 (`npm run build`, 6 pages, clean; no test/typecheck scripts exist in this repo to run).
 
 Rules for this file (Claude Code, obey these):
 - Keep it under 60 lines. This file gets read every session, so it must stay cheap.
@@ -9,7 +9,8 @@ Rules for this file (Claude Code, obey these):
 - Never delete a Known Issue without fixing it or moving it to ROADMAP.md as deferred.
 
 ## Working version
-Working tree on branch `docs/build-context`, up to date with `origin`. The site itself lives on two diverged branches: `dev` (deployed — strong inference from the netlify.app redirect existing only there) and `main` (has Reviews + FAQ committed, not deployed). Neither is checked out right now; this branch carries documentation only.
+Working tree on branch `docs/build-context`, ahead of `origin` by 1 (proposal-record commit, push pending Adrian's word). The site itself lives on two diverged branches: `dev` (deployed — strong inference from the netlify.app redirect existing only there) and `main` (has Reviews + FAQ committed, not deployed). Neither is checked out right now; this branch carries documentation only.
+**Unexplained, untouched:** `docs/song-list/` (website repo) and `song-list/` (proposals repo), both created 2026-07-24 ~09:23-24, not by this session's Claude — investigate with Adrian before touching (may be his own concurrent work).
 
 ## Active task
 **Two separate tracks. Only one is paused.**

@@ -14,7 +14,7 @@ The public marketing website for The Greenway Band, your Houston premium live we
 **STATUS:** YELLOW
 **Last verified build:** 2026-07-24 (`npm run build` clean, 6 pages; no test suite exists in this repo, so that's the whole check)
 **Blockers:** None. Both site tracks are deliberately on hold by your own decision: the Astro rebuild waits for Growth Hour's M3, and the Squarespace form's go-live waits until both builds are entirely done (docs/DECISIONS.md D13).
-**Heads up:** the site lives on two branches that disagree with each other (`dev` and `main`). The docs and workflow files are now committed and pushed (2026-07-14); the only uncommitted things left are the April page files that belong to that branch cleanup (kept safe on purpose), one stale leftover folder (`public/proposals/`), and a small local dev-server config tweak. The proposal template work (v5–v9) is committed and pushed as of 2026-07-24. Nothing is broken, but don't commit or push here without reading `docs/CURRENT_STATE.md` first.
+**Heads up:** the site lives on two branches that disagree with each other (`dev` and `main`). The docs and workflow files are now committed and pushed (2026-07-14); the only uncommitted things left are the April page files that belong to that branch cleanup (kept safe on purpose), one stale leftover folder (`public/proposals/`), and a small local dev-server config tweak. The proposal template work (v5–v9) is committed; one small record-keeping commit is one push behind GitHub, waiting on your word. Also: new `song-list` files appeared in both this repo and the proposals folder today that Claude didn't create, likely something you were doing yourself, worth a quick check next time you're in. Nothing is broken, but don't commit or push here without reading `docs/CURRENT_STATE.md` first.
 
 GREEN means everything works and it's safe to build. YELLOW means something needs attention first. RED means stop and run a fix-bug or audit session before anything else.
 
@@ -41,7 +41,7 @@ None of these affect your live site today, because your live site is still Squar
 ---
 
 ## Your next step
-**Right now:** the proposal work this session is finished and live. Nothing is waiting on you here. Whenever you want it: a reusable "next steps" reply email (deposit, contract, invoice, payment options) for when a client asks what happens next. Just say the word in a future session.
+**Right now:** the proposal work this session is finished and live. One small housekeeping item: say **push** next session to back up the last record-keeping commit to GitHub (nothing depends on it, it's just not backed up yet). Also worth a quick look: new `song-list` files showed up in two repos today that this session didn't create. Whenever you want it: a reusable "next steps" reply email (deposit, contract, invoice, payment options).
 
 Everyone with a live proposal today (Garrett, Giulia, Marli, Kate) still has their original links working no matter what you decide, nothing is live-broken. Two small offers stay open, either starts with one word: the fix that stops proposal pages showing you hour-old copies after a revision, and moving the GitHub access key on this Mac into the keychain.
 
