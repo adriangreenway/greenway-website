@@ -1,89 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--
-  ============================================================
-  GREENWAY BAND — PROPOSAL TEMPLATE (wedding)
-  Source design: garcia proposal as shipped 2026-06 (newest generation:
-  itemized investment + optional timeline). For corporate events, base on
-  the live the-united-way page instead of this template.
-
-  HOW TO USE (full workflow: .claude/skills/create-proposal/SKILL.md)
-  1. Copy this file to ~/Desktop/greenway-proposals/<slug>/index.html
-  2. Replace every {{TOKEN}}. Before deploy: grep '{{' must return NOTHING.
-  3. CSS below is the locked proposal brand (Bodoni Moda + Plus Jakarta Sans,
-     near-black/cream). Never restyle. This palette is separate from the
-     website's design tokens.
-  4. Copy integrity: prices/lineups only from docs/proposals/PRICING_AND_CONTENT.md
-     or Adrian. Testimonials are verbatim-locked. No invented venue experience.
-  5. Voice (Adrian, 2026-07-14): plain sentences, less is more, nothing corny,
-     no metaphors. NO intro section at all — the Template 4.1 email
-     (docs/proposals/EMAIL_TEMPLATES.md) carries the greeting and thanks; the
-     page is a pure document: cover → details → options. Never mention another
-     client, couple, or their wedding by name anywhere in a proposal.
-
-  TOKENS
-  {{COUPLE_SHORT}}          e.g. Victoria & Will          (title tag)
-  {{COVER_NAMES_HTML}}      e.g. Victoria <em>&</em> Will (cover, HTML allowed)
-  {{EVENT_DATE_LONG}}       e.g. February 13, 2027
-  {{VENUE_SHORT}}           e.g. Hotel ZaZa               (cover)
-  {{VENUE_FULL}}            e.g. Hotel ZaZa               (details grid; add city if not Houston)
-  {{CLIENT_FULL_NAMES}}     e.g. Victoria Garcia & Will Rosell
-  {{COORDINATOR}}           e.g. Stephanie Ton, Peachy Events
-  {{EVENT_TYPE}}            e.g. Wedding Reception
-  {{SERVICES_SUMMARY}}      e.g. Entertainment + MC + DJ
-  {{T1..T5_TIME/HEADING/DESC}} timeline blocks (section optional, see below)
-  {{PKG1_*}} / {{PKG2_*}}   package cards (titles, price rows, totals); no
-                            subtitle line (removed 2026-07-24, Adrian's
-                            correction spec — one benefit sentence instead)
-  {{SLUG}}                  e.g. garcia — the folder name; used by the video
-                            links that make the PDF poster/caption clickable
-  {{VALID_THROUGH_DATE}}    e.g. August 20, 2026 — send date + 30 days
-                            (see the comment at the closing validity line)
-  {{PKG1_DESC}} / {{PKG2_DESC}}  one short benefit sentence directly under
-                            each package title, visually secondary — never
-                            competing with the name or the price.
-                            Approved copy for the standard 10/6
-                            configs is in PRICING_AND_CONTENT.md — reuse it
-                            verbatim; only adapt if the lineup differs, and
-                            never claim instruments the config doesn't have.
-  {{MOVE_FORWARD_MAILTO}}   href of the closing's SECONDARY email link (the
-                            primary button is Schedule a Call), percent-encoded:
-                            mailto:adrian@greenwayband.com
-                            ?subject=<Last name> Wedding Proposal
-                            &body=Hi Adrian, I'm ready to move forward with
-                            the proposal for <event date>. My preferred band
-                            size is:
-                            (encode spaces %20, commas %2C, apostrophes %27,
-                            colon %3A; escape & as &amp; in the attribute)
-
-  MEDIA + CTA (default on every wedding proposal, added 2026-07-23, D14 +
-  v2 amendment same day, in docs/DECISIONS.md; full spec in
-  docs/proposals/PRICING_AND_CONTENT.md "Approved media pool") — NOT tokens,
-  shared assets referenced by fixed relative path from every <slug>/index.html:
-  - ../assets/band-stage-2026a.webp   (photo band after cover)
-  - ../assets/uptown-funk-poster-2026a.jpg + ../assets/uptown-funk-2026a.mp4
-    (click-to-load, self-hosted video — no third party, no watermark. Master
-    stays on Vimeo unlisted for Adrian's own reference only.)
-  - ../assets/crowd-2026a.webp        (photo band before testimonials)
-  - Schedule-a-Call CTA (inline + closing button) uses the same static 17hats
-    scheduler URL as the Template 4.1 email.
-  These assets live once in ~/Desktop/greenway-proposals/assets/ (shared by
-  every proposal folder). Do not duplicate them per-client.
-
-  PALETTE (v2, 2026-07-23, D14 amendment, Adrian's "C" — hybrid): cover +
-  closing keep the original dark palette (scoped CSS vars). Everything between
-  uses the website's own cream design-system tokens. Never invent new colors
-  here — reuse docs/DESIGN_SYSTEM.md's locked tokens only. A venue-strip trust
-  line was built and then REMOVED same day at Adrian's call ("doesn't add much
-  value") — do not re-add without him asking.
-  ============================================================
--->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>The Greenway Band — Proposal for {{COUPLE_SHORT}}</title>
+<title>The Greenway Band — Proposal for Marli</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -140,11 +62,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    /* Dark text on a light page reads thinner than light text on dark at the
-       identical weight (a real optical effect, not a font change) — this
-       hairline stroke compensates so the cream body matches the weight of
-       the original all-dark proposals. Cancelled inside .cover/.closing,
-       which don't need it (light-on-dark already reads correctly). */
     -webkit-text-stroke: 0.35px var(--cream);
     text-stroke: 0.35px var(--cream);
   }
@@ -285,11 +202,11 @@
   }
 
   .cover-footer p {
-    font-size: 10px;
+    font-size: 9px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--cream-dim);
-    opacity: 0.85;
+    color: var(--cream-faint);
+    opacity: 0.5;
   }
 
   /* ===== SECTION DIVIDERS ===== */
@@ -514,6 +431,14 @@
     color: var(--cream);
     font-weight: 400;
     margin-bottom: 6px;
+  }
+
+  .package-subtitle {
+    font-size: 11px;
+    color: var(--cream-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
   }
 
   .package-columns {
@@ -833,11 +758,11 @@
 
   .closing-validity {
     margin-top: 48px;
-    font-size: 10px;
+    font-size: 9px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--cream-dim);
-    opacity: 0.9;
+    color: var(--cream-faint);
+    opacity: 0.5;
   }
 
   /* ===== SCROLL INDICATOR ===== */
@@ -854,11 +779,11 @@
   }
 
   .scroll-hint span {
-    font-size: 10px;
+    font-size: 8px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--cream-dim);
-    opacity: 0.7;
+    color: var(--cream-faint);
+    opacity: 0.4;
   }
 
   .scroll-line {
@@ -898,9 +823,6 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    /* Blends dark at the top (into the cover above) and cream at the bottom
-       (into the body below) — a smoother seam than a hard cut, per Adrian's
-       call after seeing the hard-edge version. */
     background: linear-gradient(to bottom,
       #0A0A09 0%, rgba(10,10,9,0) 20%,
       rgba(10,10,9,0) 65%, #F5F2ED 100%);
@@ -912,11 +834,6 @@
     border-bottom: 0.5px solid rgba(10,10,9,0.16);
   }
 
-  /* Crowd photo (photo-band--short) stays height-capped at every width, full
-     width but not full frame, because the whole uncropped frame at 100% width
-     read as too large/"in your face" (Adrian, 2026-07-23, seeing the draft
-     deploy). The first photo (band-stage) keeps whole-frame on wide screens
-     below; only this second one reverted. */
   .photo-band--short img {
     height: 52vh;
     min-height: 300px;
@@ -924,10 +841,6 @@
     object-fit: cover;
   }
 
-  /* Wide screens show the first photo's whole 3:2 frame (the strip crop was
-     cutting the musicians out of the shot); phones keep the taller immersive
-     crop because a phone-width whole frame is only ~250px tall and the scrim
-     swallows it. Adrian's call 2026-07-23 (D14 open item closed, "you decide"). */
   @media (max-width: 560px) {
     .photo-band img {
       height: 68vh;
@@ -935,20 +848,28 @@
       max-height: 640px;
       object-fit: cover;
     }
-
-    /* Must re-assert after the rule above: both selectors are single-class
-       (equal specificity), so source order decides, and the crowd photo
-       keeps its shorter cap on phones too. */
-    .photo-band--short img {
-      height: 52vh;
-      min-height: 300px;
-      max-height: 480px;
-    }
   }
 
   /* ===== NEW 2026-07-23 (D14): VIDEO SECTION (self-hosted mp4, click-to-load) ===== */
   .video-section {
     padding: 80px 0;
+  }
+
+  .video-title {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(24px, 5vw, 28px);
+    color: var(--cream);
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+
+  .video-desc {
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--cream-muted);
+    font-weight: 300;
+    margin-bottom: 36px;
+    max-width: 480px;
   }
 
   /* Video frame is always a dark plate, regardless of section palette — it
@@ -1043,7 +964,7 @@
 
   .closing-cta-note {
     font-size: 12px;
-    color: var(--cream-muted);
+    color: var(--cream-dim);
     font-weight: 300;
     margin-bottom: 24px;
     max-width: 320px;
@@ -1072,216 +993,6 @@
     color: var(--cream);
     border-color: var(--border-med);
   }
-
-  /* ===== SCREEN SUPPORT FOR PRINT-AWARE MARKUP (2026-07-23) ===== */
-  .video-caption--print { display: none; }
-  .video-print-link { display: none; }
-  .video-frame { cursor: pointer; }
-  .closing-website a { color: inherit; text-decoration: none; }
-  .cover-footer a { color: inherit; text-decoration: none; }
-
-  /* ===== 2026-07-23 CORRECTION PASS ===== */
-  /* Video section may run wider than the 640px document column (item 6):
-     764px border-box minus the 2x32px side padding = a ~700px video frame. */
-  .video-section .content { max-width: 764px; }
-
-  /* Package benefit sentence, visually secondary (2026-07-24 rollback: the
-     uppercase subtitle is gone; one short sentence under the package name,
-     never competing with the name or the price). */
-  .package-desc {
-    font-size: 13px;
-    color: var(--cream-dim);
-    line-height: 1.7;
-    font-weight: 300;
-    max-width: 480px;
-    margin: 8px 0 40px;
-  }
-
-  /* Reception-duration sentence as body copy, not fine print (item 4). */
-  .duration-line {
-    font-size: 14px;
-    color: var(--cream-muted);
-    font-weight: 300;
-    line-height: 1.8;
-    margin: 40px 0 32px;
-  }
-
-  /* Quiet secondary action line under the primary closing button (2026-07-24:
-     Schedule a Call primary, Move Forward email secondary). */
-  .closing-cta-secondary {
-    font-size: 13px;
-    color: var(--cream-muted);
-    font-weight: 300;
-    margin-top: 24px;
-  }
-
-  .closing-cta-secondary a {
-    color: var(--cream);
-    text-decoration: none;
-    border-bottom: 0.5px solid var(--cream-dim);
-    padding-bottom: 1px;
-  }
-
-  /* Mobile utility-text floor (item 10): nothing meaningful under 10px. */
-  @media (max-width: 560px) {
-    .section-label { font-size: 10px; }
-    .package-badge { font-size: 10px; }
-  }
-
-  /* ===== 2026-07-24: DESKTOP PACKAGE COMPARISON (screen only) =====
-     Adrian: both packages side by side on desktop — both prices visible at
-     once, so scroll order stops being an anchor problem; the 10-Piece leads
-     left with the badge. Cards go bordered, the badge sits on the card's top
-     border, the two lists stack inside each card (two internal columns don't
-     fit half-width), and totals pin to the bottom edge so the prices sit on
-     one line. Mobile/tablet keep the stacked editorial layout untouched.
-     `screen and` keeps print untouched (Letter is 816px wide anyway; print
-     stays one package per page). */
-  @media screen and (min-width: 900px) {
-    .packages .content { max-width: 1080px; }
-    .packages-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: stretch;
-    }
-    .packages-grid .card-divider { display: none; }
-    .package-card {
-      position: relative;
-      border: 0.5px solid var(--border-light);
-      padding: 40px 36px 36px;
-      margin-bottom: 0;
-      display: flex;
-      flex-direction: column;
-    }
-    .package-card .package-badge {
-      position: absolute;
-      top: -11px;
-      left: 36px;
-      margin-bottom: 0;
-    }
-    .package-columns {
-      grid-template-columns: 1fr;
-      gap: 36px;
-      margin-bottom: 36px;
-    }
-    .package-card .investment-total { margin-top: auto; }
-  }
-
-  /* ===== REDUCED MOTION: content always visible, no animation ===== */
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .reveal { opacity: 1; transform: none; transition: none; }
-    .scroll-hint { animation: none; }
-  }
-
-  /* ===== PRINT / PDF LAYOUT (2026-07-23) =====
-     Dedicated paginated Letter-portrait layout for the PDF export (8
-     intentional pages: cover / photo+details / video / package 1 /
-     package 2 / cocktail hour / crowd photo+testimonials / closing). Screen layout
-     is untouched; everything here is @media print scoped. Full-bleed pages:
-     @page margin 0, sections carry their own padding. Export runbook:
-     docs/proposals/PROPOSAL_SYSTEM.md (headless Chrome --print-to-pdf
-     --no-pdf-header-footer, photo srcs swapped to the -print.jpg copies). */
-  @media print {
-    @page { size: letter portrait; margin: 0; }
-
-    html, body {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-      background: #F5F2ED;
-    }
-
-    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-    .scroll-hint, .section-divider, .card-divider { display: none !important; }
-
-    /* No CSS filters in print: a filtered image forces the PDF printer to
-       re-rasterize it at 300dpi (~3-4MB per photo in the exported file). */
-    .photo-band img, .video-frame img { filter: none !important; }
-
-    /* Page 1: the cover is one intentional full dark page. */
-    .cover {
-      min-height: 0 !important;
-      height: 10.98in;
-      box-sizing: border-box;
-      padding: 1in 32px;
-      break-after: page;
-      page-break-after: always;
-    }
-    .cover-footer { bottom: 0.6in; }
-
-    /* Page 2: band photo (capped, full-bleed) + event details. */
-    .photo-band img { height: 4.7in !important; min-height: 0 !important; max-height: none !important; object-fit: cover; }
-    .photo-band { break-inside: avoid; page-break-inside: avoid; }
-    .evening { padding: 0.45in 0; }
-    .details-grid { break-inside: avoid; page-break-inside: avoid; margin-bottom: 0; }
-
-    /* Page 3: video, vertically centered as one intentional page. */
-    .video-section {
-      break-before: page;
-      page-break-before: always;
-      height: 10.98in;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0;
-    }
-    .video-section .content { width: 100%; }
-    .video-frame { break-inside: avoid; page-break-inside: avoid; }
-    .video-caption { display: none; }
-    .video-caption--print {
-      display: block;
-      margin-top: 16px;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--cream-dim);
-      text-decoration: none;
-    }
-
-    /* Pages 4-5: heading stays with the first card; one package per page. */
-    /* No bottom padding: the section ends with the fixed-height cocktail page,
-       and any extra spills a blank page. */
-    .packages { break-before: page; page-break-before: always; padding: 0.55in 0 0; }
-    .package-card { break-inside: avoid; page-break-inside: avoid; margin-bottom: 0; }
-    .card-divider + .package-card { break-before: page; page-break-before: always; padding-top: 0.55in; }
-    .addon-section, .package-note, .cta-inline { break-inside: avoid; page-break-inside: avoid; }
-
-    /* 2026-07-23 correction pass: the duration + cocktail block becomes one
-       vertically centered page; the poster's print-only overlay link becomes
-       active. */
-    .cocktail-page {
-      break-before: page;
-      page-break-before: always;
-      height: 10.98in;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .duration-line { break-inside: avoid; page-break-inside: avoid; }
-    .video-print-link { display: block; position: absolute; inset: 0; }
-
-    /* Crowd photo opens the testimonial page; all three quotes fit under it
-       (spacing tightened for print so no quote ever splits or orphans). */
-    .photo-band--short { break-before: page; page-break-before: always; }
-    .photo-band--short img { height: 3.3in !important; }
-    .testimonials { padding: 0.4in 0 0.3in; break-inside: avoid; page-break-inside: avoid; }
-    .testimonial-block { break-inside: avoid; page-break-inside: avoid; margin-bottom: 28px; }
-    .t-divider { margin: 24px 0; }
-    .t-quote-mark { margin-bottom: 10px; }
-    .t-text { margin-bottom: 14px; }
-
-    /* Last page: the closing is one intentional full dark page. */
-    .closing {
-      break-before: page;
-      page-break-before: always;
-      height: 10.98in;
-      box-sizing: border-box;
-      padding: 1.6in 0 1in;
-    }
-  }
 </style>
 <!-- No-JS fallback: the scroll reveals need JavaScript; without it the page must
      still be readable (some previews and readers never run scripts). -->
@@ -1305,10 +1016,10 @@
   <div class="cover-couple reveal reveal-delay-2">
     <div class="cover-prepared">Prepared for</div>
     <!-- e.g. Victoria <em>&</em> Will — the <em>&</em> is the house style for couples -->
-    <div class="cover-couple-names">{{COVER_NAMES_HTML}}</div>
+    <div class="cover-couple-names">Marli Hinojosa</div>
     <div class="cover-details">
-      {{EVENT_DATE_LONG}}<br>
-      {{VENUE_SHORT}}
+      July 17, 2027<br>
+      The Junior League of Houston
     </div>
   </div>
 
@@ -1318,7 +1029,7 @@
   </div>
 
   <div class="cover-footer">
-    <p><a href="https://greenwayband.com">greenwayband.com</a> &nbsp;&middot;&nbsp; <a href="mailto:adrian@greenwayband.com">adrian@greenwayband.com</a></p>
+    <p>greenwayband.com &nbsp;&middot;&nbsp; adrian@greenwayband.com</p>
   </div>
 </section>
 
@@ -1352,78 +1063,31 @@
          guess, and never reference another client's wedding. -->
     <div class="details-grid reveal reveal-delay-2">
       <div class="detail-cell">
-        <div class="detail-label">Couple</div>
-        <div class="detail-value">{{CLIENT_FULL_NAMES}}</div>
+        <div class="detail-label">Prepared For</div>
+        <div class="detail-value">Marli Hinojosa</div>
       </div>
       <div class="detail-cell">
         <div class="detail-label">Date</div>
-        <div class="detail-value">{{EVENT_DATE_LONG}}</div>
+        <div class="detail-value">July 17, 2027</div>
       </div>
       <div class="detail-cell">
         <div class="detail-label">Venue</div>
-        <div class="detail-value">{{VENUE_FULL}}</div>
-      </div>
-      <div class="detail-cell">
-        <div class="detail-label">Event Coordinator</div>
-        <div class="detail-value">{{COORDINATOR}}</div>
+        <div class="detail-value">The Junior League of Houston</div>
       </div>
       <div class="detail-cell">
         <div class="detail-label">Event Type</div>
-        <div class="detail-value">{{EVENT_TYPE}}</div>
+        <div class="detail-value">Wedding Reception</div>
       </div>
       <div class="detail-cell">
-        <div class="detail-label">Services</div>
-        <div class="detail-value">{{SERVICES_SUMMARY}}</div>
+        <div class="detail-label">Guests</div>
+        <div class="detail-value">100&ndash;200</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Reception</div>
+        <div class="detail-value">7:00 PM &ndash; 11:00 PM</div>
       </div>
     </div>
 
-    <!-- ===== TIMELINE (OPTIONAL) =====
-         Include ONLY when the schedule is actually known from the inquiry or Adrian.
-         If unknown, DELETE from "timeline-label" through the closing div of the
-         blocks wrapper below. Duplicate or remove blocks to fit; renumber tokens. -->
-    <div class="timeline-label reveal">Timeline</div>
-
-    <div class="reveal reveal-delay-1">
-      <div class="timeline-block">
-        <div class="timeline-time">{{T1_TIME}}</div>
-        <div class="timeline-content">
-          <div class="timeline-heading">{{T1_HEADING}}</div>
-          <div class="timeline-desc">{{T1_DESC}}</div>
-        </div>
-      </div>
-
-      <div class="timeline-block">
-        <div class="timeline-time">{{T2_TIME}}</div>
-        <div class="timeline-content">
-          <div class="timeline-heading">{{T2_HEADING}}</div>
-          <div class="timeline-desc">{{T2_DESC}}</div>
-        </div>
-      </div>
-
-      <div class="timeline-block">
-        <div class="timeline-time">{{T3_TIME}}</div>
-        <div class="timeline-content">
-          <div class="timeline-heading">{{T3_HEADING}}</div>
-          <div class="timeline-desc">{{T3_DESC}}</div>
-        </div>
-      </div>
-
-      <div class="timeline-block">
-        <div class="timeline-time">{{T4_TIME}}</div>
-        <div class="timeline-content">
-          <div class="timeline-heading">{{T4_HEADING}}</div>
-          <div class="timeline-desc">{{T4_DESC}}</div>
-        </div>
-      </div>
-
-      <div class="timeline-block">
-        <div class="timeline-time">{{T5_TIME}}</div>
-        <div class="timeline-content">
-          <div class="timeline-heading">{{T5_HEADING}}</div>
-          <div class="timeline-desc">{{T5_DESC}}</div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1440,25 +1104,21 @@
 <!-- ============================================ -->
 <section class="video-section">
   <div class="content">
-    <!-- 2026-07-24: label + player + caption only. The serif title and desc
-         line were cut (Adrian: the stacked copy read cluttered; let the video
-         speak). Keep captions honest: one song, never "full set". -->
     <div class="section-label reveal">Watch the band</div>
+    <div class="video-title reveal reveal-delay-1">See the Band Live</div>
+    <div class="video-desc reveal reveal-delay-1">
+      Photos only say so much. Here's a full song, live.
+    </div>
 
-    <div class="video-frame reveal reveal-delay-1" id="proposalVideoFrame">
-      <!-- Screen: clicking anywhere on the frame plays inline (JS below); no
-           link, no navigation. PDF: the print-only overlay <a> makes the
-           poster clickable; it is display:none on screen. -->
+    <div class="video-frame reveal reveal-delay-2" id="proposalVideoFrame">
       <img src="../assets/uptown-funk-poster-2026a.jpg" alt="The Greenway Band performing live on stage" loading="lazy">
       <button class="video-play" type="button" aria-label="Play video" onclick="playProposalVideo()">
         <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M8 5.14v13.72L19 12 8 5.14z"/>
         </svg>
       </button>
-      <a class="video-print-link" href="https://proposals.greenwayband.com/{{SLUG}}/" tabindex="-1" aria-hidden="true"></a>
     </div>
-    <div class="video-caption reveal reveal-delay-2">Uptown Funk, recorded live &middot; tap to play</div>
-    <a class="video-caption--print" href="https://proposals.greenwayband.com/{{SLUG}}/">Uptown Funk, recorded live &middot; watch at proposals.greenwayband.com/{{SLUG}}</a>
+    <div class="video-caption reveal reveal-delay-3">Tap to watch &middot; Uptown Funk, recorded live</div>
   </div>
 </section>
 
@@ -1473,19 +1133,52 @@
     <div class="packages-heading reveal reveal-delay-1">Two Ways to Fill the Room</div>
 
     <!-- ===== CARD 1 (RECOMMENDED) =====
-         The 10-Piece ALWAYS leads with the Recommended badge (Adrian,
-         2026-07-13; made exceptionless 2026-07-24 — no per-client swaps).
-         Premium-first: the price descends, so the smaller band reads as the
-         saving. Lineup rows below are the standard 10-Piece. If offering a
-         different size, swap rows to the exact config in
-         docs/proposals/PRICING_AND_CONTENT.md. Never invent an instrumentation.
-         .packages-grid: stacked cards on mobile/tablet, side-by-side
-         comparison columns on desktop (screen-only CSS, ≥900px). -->
-    <div class="packages-grid">
+         The 10-Piece leads with the Recommended badge by default (Adrian, 2026-07-13).
+         Lineup rows below are the standard 10-Piece. If offering a different size,
+         swap rows to the exact config in docs/proposals/PRICING_AND_CONTENT.md.
+         Never invent an instrumentation.
+         Subtitle style: "Full horn section + reception entertainment + MC". -->
     <div class="package-card reveal reveal-delay-2">
       <div class="package-badge">Recommended</div>
-      <div class="package-title">{{PKG1_TITLE}}</div>
-      <div class="package-desc">{{PKG1_DESC}}</div>
+      <div class="package-title">6-Piece Band</div>
+      <div class="package-subtitle">Reception entertainment + MC</div>
+
+      <div class="package-columns">
+        <div>
+          <div class="col-label">Musicians</div>
+          <ul class="item-list">
+            <li>Male Vocals <span class="count">1</span></li>
+            <li>Female Vocals <span class="count">1</span></li>
+            <li>Keys <span class="count">1</span></li>
+            <li>Guitar <span class="count">1</span></li>
+            <li>Bass <span class="count">1</span></li>
+            <li>Drums <span class="count">1</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="col-label">Included Services</div>
+          <ul class="item-list services-list">
+            <li>Sound Equipment and Engineer</li>
+            <li>Lighting Equipment and Engineer</li>
+            <li>Emcee Services</li>
+            <li>Personalized First Dances</li>
+            <li>Song Requests</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="investment-total">
+        <div class="investment-total-label">Investment</div>
+        <div class="investment-total-price">$10,350</div>
+      </div>
+    </div>
+
+    <!-- ===== CARD SEPARATOR ===== -->
+    <div class="card-divider reveal"></div>
+
+    <div class="package-card reveal">
+      <div class="package-title">10-Piece Band</div>
+      <div class="package-subtitle">Full horn section + reception entertainment + MC</div>
 
       <div class="package-columns">
         <div>
@@ -1512,99 +1205,10 @@
         </div>
       </div>
 
-      <!-- Delete unused add-on rows. Total must equal the sum of the rows kept.
-           NO add-ons in this package at all? Then this whole itemized block is
-           WRONG (Adrian, 2026-07-13): replace everything from <div class="investment">
-           through its closing </div> with the single-line form, and nothing else:
-             <div class="investment-total">
-               <div class="investment-total-label">Investment</div>
-               <div class="investment-total-price">{{PKG1_TOTAL}}</div>
-             </div>
-           One label, one price. Never show a band-only row plus a Total row. -->
-      <div class="investment">
-        <div class="investment-label">Investment</div>
-        <div class="investment-row">
-          <div class="investment-item">{{PKG1_TITLE}}</div>
-          <div class="investment-price">{{PKG1_BAND_PRICE}}</div>
-        </div>
-        <div class="investment-row">
-          <div class="investment-item">{{PKG1_ADDON1_ITEM}}</div>
-          <div class="investment-price">{{PKG1_ADDON1_PRICE}}</div>
-        </div>
-        <div class="investment-row">
-          <div class="investment-item">{{PKG1_ADDON2_ITEM}}</div>
-          <div class="investment-price">{{PKG1_ADDON2_PRICE}}</div>
-        </div>
-        <div class="investment-total">
-          <div class="investment-total-label">Total Investment</div>
-          <div class="investment-total-price">{{PKG1_TOTAL}}</div>
-        </div>
+      <div class="investment-total">
+        <div class="investment-total-label">Investment</div>
+        <div class="investment-total-price">$14,375</div>
       </div>
-    </div>
-
-    <!-- ===== CARD SEPARATOR (mobile/tablet only; hidden on the desktop grid) ===== -->
-    <div class="card-divider reveal"></div>
-
-    <!-- ===== CARD 2 (alternative) =====
-         Lineup rows below are the 7-Piece with sax. For the 6-Piece, delete the
-         Saxophone row and set Female Vocals to 1 (see PRICING_AND_CONTENT.md). -->
-    <div class="package-card reveal reveal-delay-3">
-      <div class="package-title">{{PKG2_TITLE}}</div>
-      <div class="package-desc">{{PKG2_DESC}}</div>
-
-      <div class="package-columns">
-        <div>
-          <div class="col-label">Musicians</div>
-          <ul class="item-list">
-            <li>Male Vocals <span class="count">1</span></li>
-            <li>Female Vocals <span class="count">1</span></li>
-            <li>Keys <span class="count">1</span></li>
-            <li>Guitar <span class="count">1</span></li>
-            <li>Bass <span class="count">1</span></li>
-            <li>Drums <span class="count">1</span></li>
-            <li>Saxophone <span class="count">1</span></li>
-          </ul>
-        </div>
-        <div>
-          <div class="col-label">Included Services</div>
-          <ul class="item-list services-list">
-            <li>Sound Equipment and Engineer</li>
-            <li>Lighting Equipment and Engineer</li>
-            <li>Emcee Services</li>
-            <li>Personalized First Dances</li>
-            <li>Song Requests</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="investment">
-        <div class="investment-label">Investment</div>
-        <div class="investment-row">
-          <div class="investment-item">{{PKG2_TITLE}}</div>
-          <div class="investment-price">{{PKG2_BAND_PRICE}}</div>
-        </div>
-        <div class="investment-row">
-          <div class="investment-item">{{PKG2_ADDON1_ITEM}}</div>
-          <div class="investment-price">{{PKG2_ADDON1_PRICE}}</div>
-        </div>
-        <div class="investment-row">
-          <div class="investment-item">{{PKG2_ADDON2_ITEM}}</div>
-          <div class="investment-price">{{PKG2_ADDON2_PRICE}}</div>
-        </div>
-        <div class="investment-total">
-          <div class="investment-total-label">Total Investment</div>
-          <div class="investment-total-price">{{PKG2_TOTAL}}</div>
-        </div>
-      </div>
-    </div>
-    </div><!-- /.packages-grid -->
-
-    <!-- .cocktail-page has no screen styles; it exists so print can treat the
-         duration line + cocktail block as one vertically centered page. -->
-    <div class="cocktail-page">
-
-    <div class="duration-line reveal">
-      Each reception package includes three hours of live performance across a four-hour reception.
     </div>
 
     <!-- ===== COCKTAIL HOUR ADD-ON (style locked 2026-07-13 from Adrian's
@@ -1643,20 +1247,14 @@
          (NEW 2026-07-23, D14) is the real contract standard from
          PRICING_AND_CONTENT.md — answers "for how many hours?" without a payer
          having to ask. -->
-    <!-- 2026-07-23 correction pass: the duration sentence lives above Cocktail
-         Hour as body copy (.duration-line), never down here as fine print.
-         TRAVEL SENTENCE IS CONDITIONAL: keep it ONLY when the venue is 50+
-         miles from Houston; delete it for Houston-area venues. -->
     <div class="package-note reveal">
-      Additional instrumentation available upon request. Travel fee may apply for events over 50 miles from Houston.
+      Additional instrumentation available upon request. Travel fee may apply for events over 50 miles from Houston. Includes three hours of live music across a four hour reception.
     </div>
 
     <!-- NEW 2026-07-23 (D14): quiet CTA right after the prices land. -->
     <div class="cta-inline reveal">
       Want to talk through your options? <a href="https://greenwayband.17hats.com/p#/scheduling/tttktcfskcdfwcxbvprcvkhxzxsfxvht" target="_blank" rel="noopener">Schedule a call</a>.
     </div>
-
-    </div><!-- /.cocktail-page -->
   </div>
 </section>
 
@@ -1727,14 +1325,9 @@
     <!-- NEW 2026-07-23 (D14): closing CTA. Note line only states what the call
          covers; never asserts date availability (that stays the email's job,
          confirmed by Adrian before he sends it). -->
-    <!-- 2026-07-24 rollback (Adrian's correction spec): Schedule a Call is the
-         primary action again; Move Forward stays as the quiet email secondary.
-         {{MOVE_FORWARD_MAILTO}} is the whole secondary href, percent-encoded;
-         build it per the token notes at the top. -->
     <div class="closing-cta reveal">
       <div class="closing-cta-note">On the call we'll walk through the options and how to hold your date.</div>
       <a class="cta-button" href="https://greenwayband.17hats.com/p#/scheduling/tttktcfskcdfwcxbvprcvkhxzxsfxvht" target="_blank" rel="noopener">Schedule a Call</a>
-      <div class="closing-cta-secondary">Ready now? <a href="{{MOVE_FORWARD_MAILTO}}">Move forward by email</a>.</div>
     </div>
 
     <div class="closing-contact reveal reveal-delay-2">
@@ -1742,7 +1335,7 @@
       <p><a href="mailto:adrian@greenwayband.com">adrian@greenwayband.com</a></p>
       <p><a href="tel:+12814671226">(281) 467-1226</a></p>
     </div>
-    <div class="closing-website reveal reveal-delay-3"><a href="https://greenwayband.com">greenwayband.com</a></div>
+    <div class="closing-website reveal reveal-delay-3">greenwayband.com</div>
 
     <div class="closing-logo reveal reveal-delay-4">
       <div class="logo-rule" style="margin-bottom: 14px;"></div>
@@ -1753,11 +1346,7 @@
     </div>
 
     <div class="closing-validity reveal reveal-delay-5">
-      <!-- {{VALID_THROUGH_DATE}} = the day the Template 4.1 email goes out
-           + 30 days, e.g. "August 20, 2026". The build and the send happen
-           the same day (the skill ends with the Gmail draft), so compute it
-           from today's date at build time. -->
-      This proposal is valid through {{VALID_THROUGH_DATE}}.
+      This proposal is valid for 30 days from date of receipt.
     </div>
   </div>
 </section>
@@ -1770,16 +1359,6 @@
     var frame = document.getElementById('proposalVideoFrame');
     if (!frame) return;
     frame.innerHTML = '<video src="../assets/uptown-funk-2026a.mp4" controls autoplay playsinline></video>';
-  }
-
-  // Clicking anywhere on the video frame plays inline (2026-07-23 correction
-  // pass). The guard stops a second click from reloading the player after the
-  // play button's own onclick has already swapped the poster out.
-  const videoFrame = document.getElementById('proposalVideoFrame');
-  if (videoFrame) {
-    videoFrame.addEventListener('click', function () {
-      if (!videoFrame.querySelector('video')) playProposalVideo();
-    });
   }
 
   // Intersection Observer for scroll reveals

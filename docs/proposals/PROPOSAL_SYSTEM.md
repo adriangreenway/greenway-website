@@ -67,7 +67,33 @@ sitting in it rides along. Always list ride-alongs in the pre-deploy summary to 
    `Cache-Control: max-age=3600`, so a pre-deploy 404 can get cached at the edge.
 5. **Commit** in `~/Desktop/greenway-proposals` (its own repo): `Add proposal: <slug>`.
 
-## Revisions and rollback
+## PDF export (added 2026-07-23)
+
+Every proposal built on the current template carries a dedicated `@media print`
+layout: 8 intentional Letter pages (cover / band photo + details / video /
+package 1 / package 2 / cocktail hour / crowd photo + testimonials / closing), all
+links clickable (17hats, mailto, tel, greenwayband.com, and the video poster +
+print caption, which link to the proposal's live URL). Export:
+
+```bash
+cd ~/Desktop/greenway-proposals
+sed -e 's|assets/band-stage-2026a.webp|assets/band-stage-2026a-print.jpg|' \
+    -e 's|assets/crowd-2026a.webp|assets/crowd-2026a-print.jpg|' \
+    <slug>/index.html > <slug>/.pdf-export.html
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
+  --disable-gpu --run-all-compositor-stages-before-draw --virtual-time-budget=10000 \
+  --no-pdf-header-footer \
+  --print-to-pdf="$HOME/Desktop/<slug>-proposal.pdf" \
+  "file://$HOME/Desktop/greenway-proposals/<slug>/.pdf-export.html"
+rm <slug>/.pdf-export.html
+```
+
+Why the sed swap: Chrome passes JPEG sources into the PDF as-is but re-encodes
+webp to ~3MB lossless each. The `-print.jpg` copies (same photos, q85) live in
+the shared `assets/` folder; keep them in sync if a photo ever changes. Do not
+add CSS filters to print images — a filtered image gets re-rasterized at 300dpi
+(that alone was ~9MB). Result: ~1.4MB, 8 pages. Verify with `pdftoppm -png`
+before sending anything.
 
 - Revising a sent proposal: overwrite the same `<slug>/index.html`, redeploy. URL
   stays valid for the client. Client browsers may show the old version for up to

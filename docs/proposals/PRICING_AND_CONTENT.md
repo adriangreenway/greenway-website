@@ -60,9 +60,22 @@ fee may apply for events over 50 miles from Houston.*
 | 7-Piece | Male Vocals 1 · Female Vocals 1 · Keys 1 · Guitar 1 · Bass 1 · Drums 1 · Saxophone 1 |
 | 6-Piece | Male Vocals 1 · Female Vocals 1 · Keys 1 · Guitar 1 · Bass 1 · Drums 1 |
 
-Included services (all wedding configs, verbatim): Sound Equipment and Engineer ·
-Lighting Equipment and Engineer · Emcee Services · Personalized First Dances · Song
-Requests. Corporate variant (the-united-way) can show `Production: Provided by Venue`.
+Included services (all wedding configs, verbatim — an "Included Services" column
+inside EACH package card, restored 2026-07-24 by Adrian's correction spec; the
+2026-07-23 shared-section rewording is retired): Sound Equipment and Engineer ·
+Lighting Equipment and Engineer · Emcee Services · Personalized First Dances ·
+Song Requests.
+Corporate variant (the-united-way) can show `Production: Provided by Venue`.
+
+Package benefit sentences (2026-07-24, Adrian's correction spec; `{{PKG1_DESC}}`/
+`{{PKG2_DESC}}`, exactly one short, visually-secondary sentence directly under
+each package title — the uppercase subtitle line is retired — verbatim for the
+standard configs, adapt only if the lineup differs, never claim instruments a
+config doesn't have):
+- 10-Piece: *Three featured vocalists and a full horn section for a bigger sound
+  and more dynamic stage presence.*
+- 6-Piece: *Two featured vocalists and a versatile rhythm section for a polished,
+  high-energy reception.*
 
 ## Approved testimonial pool — the ONLY three, verbatim
 
@@ -80,8 +93,19 @@ not — a new testimonial requires Adrian supplying the real review.
 
 - Descriptor: *The sound of a great night.*
 - Closing phrase: *Your guests won't stop talking about it.*
-- Validity: *This proposal is valid for 30 days from date of receipt.*
-- Travel note: *Travel fee may apply for events over 50 miles from Houston.*
+- Validity: *This proposal is valid through {{VALID_THROUGH_DATE}}.* (exact date =
+  send date + 30 days; the old "30 days from date of receipt" wording retired
+  2026-07-23, still live on pre-v5 pages)
+- Duration line (2026-07-23, body copy directly above Cocktail Hour, never fine
+  print): *Each reception package includes three hours of live performance across
+  a four-hour reception.*
+- Travel note, CONDITIONAL (only when the venue is 50+ miles from Houston):
+  *Travel fee may apply for events over 50 miles from Houston.*
+- Closing CTA (2026-07-24, Adrian's correction spec — Schedule a Call is primary
+  again): note *On the call we'll walk through the options and how to hold your
+  date.* → primary solid button **Schedule a Call** (static 17hats scheduler URL)
+  → quiet secondary line *Ready now? Move forward by email.*
+  ({{MOVE_FORWARD_MAILTO}}, prefilled email, no preselected package).
 - Contact block: Adrian Michael · adrian@greenwayband.com · (281) 467-1226 ·
   greenwayband.com
 - **NO-INTRO IS THE STANDARD (Adrian, 2026-07-14, locked on the turner build):** the
@@ -102,8 +126,15 @@ not — a new testimonial requires Adrian supplying the real review.
 - Greeting format (2026-07-14): "Congratulations,&lt;br&gt;&lt;first name(s)&gt;!" — ends
   with an exclamation point, never a period. The old "&lt;names&gt;, congratulations."
   style is retired.
-- Package subtitle style: "Full horn section + reception entertainment + MC" (garcia).
-- The 10-Piece leads with the Recommended badge by default (Adrian, 2026-07-13).
+- Package subtitles RETIRED (2026-07-24, Adrian's correction spec): no uppercase
+  subtitle under package names; the single benefit sentence above replaces it.
+  (Historical style on pre-2026-07-24 shipped pages: "Full horn section +
+  reception entertainment + MC", garcia.)
+- The 10-Piece ALWAYS leads with the Recommended badge — no per-client
+  exceptions (Adrian 2026-07-13, made exceptionless 2026-07-24 on the hinojosa
+  redo). Premium-first: the price descends, the 6-Piece reads as the saving.
+  On desktop (≥900px) the two packages sit side by side (`.packages-grid`,
+  10-Piece left); on mobile they stack, 10-Piece first.
 
 ## Approved media pool (D14, 2026-07-23, v2 same day)
 
@@ -127,9 +158,13 @@ couples and the photographer's work. This is the standing basis for using any
 gig photo/video as proposal media — no separate release needed per photo.
 
 **Video honesty rule:** captions and copy must stay true to whatever asset is
-actually linked. The current video is one song — call it "a full song, live" or
-similar, never "full performance" or "full set" unless the linked video actually
-is one.
+actually linked. The current video is one song — never "full performance" or
+"full set" unless the linked video actually is one.
+
+**Video section structure (2026-07-24):** the small "Watch the band" label,
+the player, and one caption (*Uptown Funk, recorded live · tap to play*) —
+nothing else. The serif title and the "Photos only say so much" desc line were
+cut (Adrian: the stacked copy read cluttered; let the video speak).
 
 **Venue strip: REMOVED (Adrian, 2026-07-23, same day it was built).** A "Where
 we've played" trust line was built, then Adrian pulled it: "I don't think it

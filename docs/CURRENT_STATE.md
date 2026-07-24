@@ -1,6 +1,6 @@
 # CURRENT STATE: The Greenway Band Website
 
-**Last updated:** 2026-07-23
+**Last updated:** 2026-07-24
 **Last verified build:** PASS on 2026-07-03 (`npm run build`, 6 pages, clean; no test/typecheck scripts exist in this repo to run).
 
 Rules for this file (Claude Code, obey these):
@@ -19,9 +19,9 @@ Working tree on branch `docs/build-context`, up to date with `origin`. The site 
    **2026-07-03, same day: Adrian said "go" on Gate 3, then reconsidered before anything was touched in Squarespace (nothing was actually changed there — Claude has no Squarespace access).** He wants nothing live on greenwayband.com until BOTH this website's build and the separate Growth Hour app are entirely finished, not just at a milestone. Reason: a past form went live early and lost real submissions. See `docs/DECISIONS.md` D13 (controlling) and the memory note `greenway_golive_hold`. **Do not propose or execute Gate 3 again until Adrian says both builds are done.**
 
 ## Recently completed (last 5 max, then archive)
-- 2026-07-23 Proposal template upgrade v1+v2+v3 built, locally verified, **not yet committed** (D14 + amendments, see DECISIONS.md): every new wedding proposal defaults to two performance-photo bands, a self-hosted click-to-load video (`assets/uptown-funk-2026a.mp4`, 720p, no Vimeo/watermark), the three-hours contract line, and two Schedule-a-Call CTAs. Palette is the hybrid "C" (dark cover+closing, cream `#F5F2ED` body on the site's own tokens) — a 3-judge panel voted it unanimously over full-dark/full-cream. Venue strip built then dropped (Adrian: low value). Built a real preview of Marli Hinojosa's actual proposal on the new template (real facts, no live page touched); Adrian called it "a good first pass" and flagged 3 items, all now fixed: (1) **FIXED 2026-07-23 (D14 v4, Adrian's "you decide")** — photo bands show the whole 3:2 frame on wide screens (the strip crop was cutting the musicians out); phones keep the immersive 68vh/52vh crop via a 560px media query. (2) **FIXED** — perceived font/weight difference between palette zones was a real optical effect (dark-on-light reads thinner than light-on-dark at equal weight); compensated with a `-webkit-text-stroke` on the cream body, cancelled in `.cover`/`.closing`. (3) **FIXED** — the hard-edge cut after the first photo felt too abrupt to him; reinstated a gradient (dark top → cream bottom) overriding the judge panel's hard-edge recommendation, per Adrian's direct instruction. **Nothing in either repo is committed** — Adrian: "I don't want to commit it just yet."
-- 2026-07-23 Proposal live: `proposals.greenwayband.com/campbell` (Kate Campbell wedding 2027-03-13, Evelyn's Park, Bellaire; 10-Piece $14,375 recommended + 6-Piece $10,350 + cocktail add-on cards). **New defaults set this build (Adrian, 2026-07-23):** the 10-Piece now always leads Recommended regardless of what the client asked for, and the Cocktail Hour cards are on by default on every wedding proposal (both were previously conditional; docs/skill updated). Template 4.1 email SENT to katercampbell111@gmail.com, links verified clean in Sent. Proposals repo commit `0f33446`; rollback deploy `6a5fe15d2d011fbb9622cc16`.
-- 2026-07-21 Proposal live: `proposals.greenwayband.com/hinojosa` (Marli Hinojosa wedding 2027-07-17, The Junior League of Houston, 100-200 guests, reception 7-11 PM; 6-Piece $10,350 recommended + 10-Piece $14,375 + cocktail add-on cards, no timeline). Template 4.1 email SENT to Marlihinojosa13@gmail.com same day with an Adrian-approved apology line (her Jul 5 form sat 16 days, came from a different address than her Jun 23 yahoo email); links verified clean in Sent 2026-07-23 (correction — the 2026-07-21 end-of-session note wrongly called this a pending draft; it was already sent). Proposals repo commit `c5a5845`; rollback deploy `6a569f09a251fd14726df077`.
+- 2026-07-24 Template v7+v8 (D14 v7/v8). v7 = targeted rollback per Adrian's strict spec: original per-package two-column itemization + five original labels restored, shared "Included With Every…" section removed, subtitles retired for one secondary benefit sentence each, closing back to Schedule-a-Call primary + quiet Move-Forward email secondary; all v5/v6 approved improvements kept. Adrian: "this actually looks really good." v8 same day on his feedback: 10-Piece ALWAYS leads Recommended (hinojosa realigned, v5 flag 1 closed), desktop ≥900px side-by-side bordered comparison cards (mobile stacked unchanged, print untouched), video section trimmed to label + player + caption. Names stay 6/10-Piece Band (naming CLOSED). Browser-verified both breakpoints, console clean; docs synced. Nothing committed, prod untouched.
+- 2026-07-23 (session 3) Template `a7884bd` (v4) was extended to v5 (dedicated 7-page print/PDF layout; crowd photo height-capped everywhere; fixed a real phone CSS bug) then v6 (a ChatGPT correction pass: shared services, Move Forward CTA, video click fix, contrast floors). A package-rename experiment was tried and rejected. Adrian's verdict on v6: "I'm not liking these changes" — superseded by the 2026-07-24 v7 rollback above. Nothing beyond `a7884bd` is committed.
+- 2026-07-23 Proposal live: `proposals.greenwayband.com/campbell` (Kate Campbell wedding 2027-03-13, Evelyn's Park, Bellaire; 10-Piece $14,375 recommended + 6-Piece $10,350 + cocktail cards). New defaults: 10-Piece always leads Recommended, cocktail cards on by default. Template 4.1 email sent, links clean. Proposals repo commit `0f33446`; rollback deploy `6a5fe15d2d011fbb9622cc16`.
 
 ## Known issues
 | Issue | Severity | Notes |
@@ -45,12 +45,14 @@ Working tree on branch `docs/build-context`, up to date with `origin`. The site 
 - `PROJECT_STATE.md`, `ARCHITECTURE.md`, and `INTEGRATIONS.md` hold the deep, evidence-backed detail behind every line above; this file is the quick truth only.
 
 ## Next recommended action
-Proposals track: turner, giulia-costantini, hinojosa, and campbell all live
-under the OLD template. The NEW template (v4: hybrid palette + self-hosted
-video + gradient seam + text-weight fix + whole-frame photos on wide screens)
-is built and verified on real Hinojosa content with all review items closed,
-but uncommitted by Adrian's explicit choice — do not commit either repo
-without him saying so again. Next: get Adrian's go to commit, and his call on
-whether Hinojosa's live page gets the new look or the template just becomes
-the default going forward. Nothing to build on Astro/Squarespace — Gate 3
-stays frozen until Adrian confirms both builds are entirely done (D13).
+v5–v8 approved by Adrian ("this is great") and committed 2026-07-24 on
+`docs/build-context` (branch ahead 2, unpushed — pushing needs his OK).
+Verified draft: `6a635cb4a77bc929e716cdd5--greenway-proposals.netlify.app
+/hinojosa/`. Open calls for Adrian, in value order: (1) send real
+reservation/retainer terms in plain English → one clean line gets added
+(v5 flag 2, the last buyer question the page can't answer); (2) decide if
+Marli's live page gets the reworked version (prod = her 2026-07-21 original
+with 6pc Recommended; the redo flips to 10pc per the no-exceptions default) —
+needs his explicit ask, then a prod deploy; (3) "push" to back the branch up
+to GitHub. Proposals repo still uncommitted (normal — commits happen after a
+verified prod deploy). Gate 3 frozen (D13).
