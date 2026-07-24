@@ -1,0 +1,150 @@
+{
+  "identity": {
+    "name": "Adrian Michael",
+    "eyebrow": "ADRIAN MICHAEL • BOSTON",
+    "base_line": "Based in Boston. Performing across New England.",
+    "band_line": "Owner and lead singer of Adrian Michael & The Greenway Band, Houston.",
+    "disclosure": "The full-band footage is Adrian's Houston band, Adrian Michael & The Greenway Band. In Boston, Adrian performs solo or as a lead or harmony vocalist with your band."
+  },
+  "contact": {
+    "email": "adrian@greenwayband.com",
+    "email_subject": "Booking Adrian Michael",
+    "phone_display": "(281) 467-1226",
+    "phone_tel": "+12814671226",
+    "links": [
+      { "label": "greenwayband.com", "href": "https://www.greenwayband.com" },
+      { "label": "@adrianmichael", "href": "https://instagram.com/adrianmichael" },
+      { "label": "@greenwayband", "href": "https://instagram.com/greenwayband" }
+    ]
+  },
+  "proof": [
+    "Ten years as a full-time professional musician",
+    "Owner and lead singer, Adrian Michael & The Greenway Band",
+    "High-end weddings, galas, corporate and private events",
+    "Top 40, country, Motown, classic rock and pop",
+    "Lead vocals, harmony vocals, acoustic guitar"
+  ],
+  "root": {
+    "title": "Adrian Michael | Boston Vocalist & Acoustic Guitarist",
+    "description": "Adrian Michael, Boston-based professional vocalist and acoustic guitarist. Solo for private events and hospitality, or lead and harmony vocals with established bands.",
+    "hero_img": "hero-vocalist",
+    "hero_pos": "50% 22%",
+    "headline": "Boston-based vocalist and acoustic guitarist.",
+    "sub": "A full-time professional vocalist and guitarist for ten years. Two ways to book him in New England.",
+    "lanes": [
+      {
+        "slug": "solo",
+        "card_img": "hero-solo",
+        "card_pos": "50% 30%",
+        "label": "Adrian, solo",
+        "line": "Voice and acoustic guitar for private events, cocktail hours, restaurants and lounges.",
+        "cta": "Watch Adrian Solo"
+      },
+      {
+        "slug": "vocalist",
+        "card_img": "poster-reel",
+        "card_pos": "50% 35%",
+        "label": "Adrian, in your band",
+        "line": "Lead and harmony vocals for established event bands. Substitute and select recurring work.",
+        "cta": "Watch the Live Reel"
+      }
+    ]
+  },
+  "solo": {
+    "title": "Adrian Michael | Solo Vocals & Acoustic Guitar, Boston",
+    "description": "Solo vocals and acoustic guitar for private events, hospitality, cocktail hours, restaurants and lounges in Boston and New England.",
+    "hero_img": "hero-solo",
+    "hero_pos": "50% 18%",
+    "headline": "Solo vocals and acoustic guitar for private events, hospitality, and live rooms.",
+    "sub": "Adrian Michael is a full-time professional vocalist and guitarist with ten years of experience performing for weddings, corporate events, private parties, and live audiences. Now based in Boston, he is available for solo private events, cocktail hours, restaurants, lounges, and select public dates.",
+    "cta_primary": { "label": "Watch Adrian Solo", "href": "#watch" },
+    "cta_secondary": { "label": "View Repertoire", "href": "#songs" }
+  },
+  "vocalist": {
+    "title": "Adrian Michael | Lead & Harmony Vocalist, Boston",
+    "description": "Lead and harmony vocals for established event bands in Boston and New England. Experienced frontman, learns the material, follows the musical director.",
+    "hero_img": "hero-vocalist",
+    "hero_pos": "50% 22%",
+    "headline": "Lead and harmony vocals for established event bands.",
+    "sub": "Adrian is an experienced frontman and harmony vocalist who learns the material, follows the musical director, works cleanly within an established show, and knows how to connect with a crowd. He is available for substitute and select recurring vocalist work in Boston and across New England.",
+    "cta_primary": { "label": "Watch the Live Reel", "href": "#watch" },
+    "cta_secondary": { "label": "Check Availability", "href": "#contact" },
+    "role_points": [
+      "Learns the material",
+      "Follows the musical director",
+      "Works cleanly within an established show",
+      "Substitute dates and select recurring work, Boston and New England"
+    ]
+  },
+  "videos": {
+    "neon": {
+      "source_file": "Neon_Moon.mp4",
+      "media": "neon-moon.mp4",
+      "poster": "poster-neon-720",
+      "orient": "v",
+      "title": "Adrian Michael performing Neon Moon, solo voice and acoustic guitar",
+      "caption": "Neon Moon"
+    },
+    "reel": {
+      "source_file": "renders/adrian_michael_vocalist_reel_v4_draft.mp4",
+      "media": "adrian-reel.mp4",
+      "poster": "poster-reel-1600",
+      "orient": "h",
+      "title": "Live reel of Adrian Michael fronting bands",
+      "caption": ""
+    },
+    "film": {
+      "source_file": "big_spring_ranch_wedding_v1 (2160p).mp4",
+      "media": "big-spring-wedding.mp4",
+      "poster": "poster-film-1600",
+      "orient": "h",
+      "title": "Adrian Michael and The Greenway Band at a Big Spring Ranch wedding",
+      "caption": "Big Spring Ranch, Texas"
+    },
+    "testimonial": {
+      "source_file": "november_12,_2022_testimonial_v1 (720p).mp4",
+      "media": "testimonial-nov-2022.mp4",
+      "poster": "poster-testimonial-720",
+      "orient": "v",
+      "title": "A wedding couple on booking Adrian Michael and The Greenway Band",
+      "caption": "From a Greenway wedding couple"
+    }
+  },
+  "repertoire": {
+    "intro": "",
+    "full_list_label": "View the full song list",
+    "footnote": "400+ songs. Requests welcome.",
+    "categories": [
+      {
+        "name": "Current Pop & Top 40",
+        "genres": ["Pop", "Dance / Pop"],
+        "prefer": ["As It Was", "Espresso", "Levitating", "Can't Stop the Feeling", "Blinding Lights", "Die With a Smile", "About Damn Time"]
+      },
+      {
+        "name": "Motown & Soul",
+        "genres": ["R&B / Soul", "Funk / Disco"],
+        "prefer": ["September", "Uptown Funk", "Ain't No Mountain High Enough", "My Girl", "Let's Stay Together", "Ain't Too Proud to Beg", "(Your Love Keeps Lifting Me) Higher and Higher"]
+      },
+      {
+        "name": "Classic Rock & Sing-Alongs",
+        "genres": ["Rock / Alternative", "Folk / Indie", "Pop"],
+        "prefer": ["Don't Stop Believing", "Sweet Caroline", "Mr. Brightside", "Livin' on a Prayer", "Brown Eyed Girl", "Africa", "Wonderwall"]
+      },
+      {
+        "name": "Country",
+        "genres": ["Country"],
+        "prefer": ["Tennessee Whiskey", "Wagon Wheel", "Friends in Low Places", "Neon Moon", "All My Ex's Live In Texas", "Amarillo By Morning", "Die a Happy Man"]
+      },
+      {
+        "name": "Dance & Party",
+        "genres": ["Funk / Disco", "Hip-Hop", "Latin", "Pop", "R&B / Soul", "Reggae / Caribbean"],
+        "prefer": ["Yeah!", "Crazy in Love", "Play That Funky Music", "Suavemente", "24K Magic", "Apache (Jump On It)", "Dancing Queen", "Get Lucky"]
+      },
+      {
+        "name": "Cocktail & Laid-Back",
+        "genres": ["Jazz / Standards", "Classics", "R&B / Soul", "Folk / Indie"],
+        "prefer": ["Fly Me to the Moon", "The Way You Look Tonight", "Can't Help Falling in Love", "Feeling Good", "L-O-V-E", "The Best Is Yet to Come", "Isn't She Lovely", "Stand by Me"]
+      }
+    ]
+  }
+}

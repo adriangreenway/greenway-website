@@ -48,8 +48,8 @@
     {
       "name": "adrian-epk",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8895", "--directory", "/private/tmp/claude-501/-Users-adrianjoseph-greenway-website/ee6fdab9-e92d-4a13-9e04-d59b22923671/scratchpad/preview-root-epk"],
-      "port": 8895
+      "runtimeArgs": ["/private/tmp/claude-501/-Users-adrianjoseph-greenway-website/ee6fdab9-e92d-4a13-9e04-d59b22923671/scratchpad/range_server.py", "8894", "/private/tmp/claude-501/-Users-adrianjoseph-greenway-website/ee6fdab9-e92d-4a13-9e04-d59b22923671/scratchpad/preview-root-epk"],
+      "port": 8894
     }
   ]
 }
