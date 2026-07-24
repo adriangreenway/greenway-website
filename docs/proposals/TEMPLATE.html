@@ -1104,6 +1104,24 @@
     color: var(--cream-dim);
   }
 
+  /* ===== NEW 2026-07-24: song list link under the video (D15) ===== */
+  .songlist-link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--cream-dim);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--cream-dim);
+    padding-bottom: 2px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .songlist-link:hover {
+    color: var(--cream);
+    border-color: var(--cream);
+  }
+
   /* ===== NEW 2026-07-23 (D14): SCHEDULE-A-CALL CTA ===== */
   .cta-inline {
     margin-top: 48px;
@@ -1327,6 +1345,7 @@
     .video-section .content { width: 100%; }
     .video-frame { break-inside: avoid; page-break-inside: avoid; }
     .video-caption { display: none; }
+    .songlist-link { display: none; }
     .video-caption--print {
       display: block;
       margin-top: 16px;
@@ -1556,6 +1575,7 @@
     </div>
     <div class="video-caption reveal reveal-delay-2">Uptown Funk, recorded live &middot; tap to play</div>
     <a class="video-caption--print" href="https://proposals.greenwayband.com/{{SLUG}}/">Uptown Funk, recorded live &middot; watch at proposals.greenwayband.com/{{SLUG}}</a>
+    <a class="songlist-link reveal reveal-delay-2" href="https://proposals.greenwayband.com/song-list/" target="_blank" rel="noopener">See the full song list &rarr;</a>
   </div>
 </section>
 
