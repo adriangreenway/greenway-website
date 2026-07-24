@@ -18,14 +18,10 @@ Working tree on branch `docs/build-context`, up to date with `origin`. The site 
 2. **The Squarespace lead-form embed: Gates 0-2 CLOSED, Gate 3 ON HOLD (not just paused on a "go").** Growth Hour's `POST /api/lead-intake` is deployed and live. v3 (premium dark redesign, `docs/squarespace/lead-form-embed.html` + `README.md`) is live and dark at `greenwayband.com/inquiry-test`. **2026-07-03: all 5 previously-deferred fields added** (`event_type`, `cocktail_hour_interest`, `budget_range`, `planner_name`, `message`) now that Growth Hour's endpoint accepts them, and the iOS Safari date-field height bug Adrian spotted is fixed and phone-confirmed. Gates 0-2 fully closed on the full 13-field form.
    **2026-07-03, same day: Adrian said "go" on Gate 3, then reconsidered before anything was touched in Squarespace (nothing was actually changed there — Claude has no Squarespace access).** He wants nothing live on greenwayband.com until BOTH this website's build and the separate Growth Hour app are entirely finished, not just at a milestone. Reason: a past form went live early and lost real submissions. See `docs/DECISIONS.md` D13 (controlling) and the memory note `greenway_golive_hold`. **Do not propose or execute Gate 3 again until Adrian says both builds are done.**
 
-Reconciliation debt on the Astro rebuild, open whenever Adrian wants it tackled (not urgent, unaffected by the Squarespace track): `dev` vs `main` branch split, the uncommitted "April work" on `dev`'s working tree (publishes Reviews + FAQ), and the staging self-redirect. Full detail in `PROJECT_STATE.md`.
-
 ## Recently completed (last 5 max, then archive)
+- 2026-07-23 Proposal template upgrade v1+v2+v3 built, locally verified, **not yet committed** (D14 + amendments, see DECISIONS.md): every new wedding proposal defaults to two performance-photo bands, a self-hosted click-to-load video (`assets/uptown-funk-2026a.mp4`, 720p, no Vimeo/watermark), the three-hours contract line, and two Schedule-a-Call CTAs. Palette is the hybrid "C" (dark cover+closing, cream `#F5F2ED` body on the site's own tokens) — a 3-judge panel voted it unanimously over full-dark/full-cream. Venue strip built then dropped (Adrian: low value). Built a real preview of Marli Hinojosa's actual proposal on the new template (real facts, no live page touched); Adrian called it "a good first pass" and flagged 3 items, all now fixed: (1) **FIXED 2026-07-23 (D14 v4, Adrian's "you decide")** — photo bands show the whole 3:2 frame on wide screens (the strip crop was cutting the musicians out); phones keep the immersive 68vh/52vh crop via a 560px media query. (2) **FIXED** — perceived font/weight difference between palette zones was a real optical effect (dark-on-light reads thinner than light-on-dark at equal weight); compensated with a `-webkit-text-stroke` on the cream body, cancelled in `.cover`/`.closing`. (3) **FIXED** — the hard-edge cut after the first photo felt too abrupt to him; reinstated a gradient (dark top → cream bottom) overriding the judge panel's hard-edge recommendation, per Adrian's direct instruction. **Nothing in either repo is committed** — Adrian: "I don't want to commit it just yet."
 - 2026-07-23 Proposal live: `proposals.greenwayband.com/campbell` (Kate Campbell wedding 2027-03-13, Evelyn's Park, Bellaire; 10-Piece $14,375 recommended + 6-Piece $10,350 + cocktail add-on cards). **New defaults set this build (Adrian, 2026-07-23):** the 10-Piece now always leads Recommended regardless of what the client asked for, and the Cocktail Hour cards are on by default on every wedding proposal (both were previously conditional; docs/skill updated). Template 4.1 email SENT to katercampbell111@gmail.com, links verified clean in Sent. Proposals repo commit `0f33446`; rollback deploy `6a5fe15d2d011fbb9622cc16`.
 - 2026-07-21 Proposal live: `proposals.greenwayband.com/hinojosa` (Marli Hinojosa wedding 2027-07-17, The Junior League of Houston, 100-200 guests, reception 7-11 PM; 6-Piece $10,350 recommended + 10-Piece $14,375 + cocktail add-on cards, no timeline). Template 4.1 email SENT to Marlihinojosa13@gmail.com same day with an Adrian-approved apology line (her Jul 5 form sat 16 days, came from a different address than her Jun 23 yahoo email); links verified clean in Sent 2026-07-23 (correction — the 2026-07-21 end-of-session note wrongly called this a pending draft; it was already sent). Proposals repo commit `c5a5845`; rollback deploy `6a569f09a251fd14726df077`.
-- 2026-07-14 Proposal live: `proposals.greenwayband.com/turner` (Garrett Turner wedding 2027-10-23, Le Tesserae, Houston; 6-Piece $10,350 recommended + 10-Piece $14,375 + cocktail add-on cards). Intro section REMOVED same day (repetitive with the Template 4.1 email, now in `docs/proposals/EMAIL_TEMPLATES.md`); **no-intro is the locked standard** for new proposals (see PRICING_AND_CONTENT.md). Template 4.1 email SENT to Garrett 2026-07-14 with clean direct links (17hats `#`-URL trips a Google Redirect Notice inside Gmail — gotcha noted in EMAIL_TEMPLATES.md). Page client-visible, 30-day validity running. Proposals repo commits `4d6f93a` + `706cef4`; this repo's doc edits uncommitted.
-- 2026-07-13 Proposal live: `proposals.greenwayband.com/giulia-costantini` (wedding 2027-05-29, The Houstonian Hotel; 10-Piece $14,375 recommended + 6-Piece $10,350 + cocktail add-on cards). Adrian's proposal style rules locked into `docs/proposals/` (commit `09f5b3a` on this branch, not pushed). Third track, unaffected by any hold.
-- 2026-07-03 Squarespace lead-form embed v3: premium dark redesign ported from the Chat 1.3 "CSS Branded Forms" session (Bodoni Moda, charcoal shadowed fields, cream button, phone auto-format, staggered reveal); wrapper carries its own background so section color can't cause invisible text again. Same 8-field payload, schema-matched. Adrian's phone test from `/inquiry-test` succeeded earlier the same day (browser-side confirmed; Growth Hour record check still pending — Claude has no dashboard login). Awaiting re-paste of v3 + one re-test. Gate 3 still needs Adrian's "go". Extra old-form fields (event type, budget, cocktail hour, planner) deferred — need a Growth Hour schema change first.
 
 ## Known issues
 | Issue | Severity | Notes |
@@ -40,7 +36,7 @@ Reconciliation debt on the Astro rebuild, open whenever Adrian wants it tackled 
 
 ## Blockers
 - Astro rebuild: none technical, self-paused per Active task note above.
-- Squarespace lead-form embed: intentionally on hold at Gate 3 by Adrian's explicit request (see D13). Not blocked on anything code-side; do not raise going-live again until he says both builds are done.
+- Squarespace lead-form embed: on hold at Gate 3 by Adrian's request (D13); not code-blocked, don't raise going-live until he says both builds are done.
 
 ## Technical warnings
 - No test script and no `astro check` configured. Verification = `npm run build` clean + manual browser check.
@@ -50,9 +46,11 @@ Reconciliation debt on the Astro rebuild, open whenever Adrian wants it tackled 
 
 ## Next recommended action
 Proposals track: turner, giulia-costantini, hinojosa, and campbell all live
-and emailed (links verified clean in Sent for every one). Awaiting client
-replies, nothing queued. If Adrian brings a ChatGPT-locked page-copy spec, fold it
-into TEMPLATE.html. Open one-word offers: shortening the proposals site's
-1-hour cache, and moving the GitHub token out of the proposals repo's
-remote URL into the keychain.
-Nothing to build right now on either site track. Gates 0-2 are fully closed and phone-tested on the Squarespace embed, but Gate 3 (going live) is deliberately on hold until Adrian confirms both this website's build and the Growth Hour app are entirely done (see D13). The Astro rebuild stays paused behind Growth Hour's M3. Do not propose go-live steps for either track until Adrian raises it himself.
+under the OLD template. The NEW template (v4: hybrid palette + self-hosted
+video + gradient seam + text-weight fix + whole-frame photos on wide screens)
+is built and verified on real Hinojosa content with all review items closed,
+but uncommitted by Adrian's explicit choice — do not commit either repo
+without him saying so again. Next: get Adrian's go to commit, and his call on
+whether Hinojosa's live page gets the new look or the template just becomes
+the default going forward. Nothing to build on Astro/Squarespace — Gate 3
+stays frozen until Adrian confirms both builds are entirely done (D13).

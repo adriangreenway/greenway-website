@@ -14,7 +14,7 @@ The public marketing website for The Greenway Band, your Houston premium live we
 **STATUS:** YELLOW
 **Last verified build:** 2026-07-03 (`npm run build` clean, 6 pages; no test suite exists in this repo, so that's the whole check)
 **Blockers:** None. Both site tracks are deliberately on hold by your own decision: the Astro rebuild waits for Growth Hour's M3, and the Squarespace form's go-live waits until both builds are entirely done (docs/DECISIONS.md D13).
-**Heads up:** the site lives on two branches that disagree with each other (`dev` and `main`). The docs and workflow files are now committed and pushed (2026-07-14); the only uncommitted things left are the April page files that belong to that branch cleanup (kept safe on purpose) and one stale leftover folder (`public/proposals/`). Nothing is broken, but don't commit or push here without reading `docs/CURRENT_STATE.md` first.
+**Heads up:** the site lives on two branches that disagree with each other (`dev` and `main`). The docs and workflow files are now committed and pushed (2026-07-14); the only uncommitted things left are the April page files that belong to that branch cleanup (kept safe on purpose), one stale leftover folder (`public/proposals/`), and now the new proposal template redesign, held back on purpose at your word (see below). Nothing is broken, but don't commit or push here without reading `docs/CURRENT_STATE.md` first.
 
 GREEN means everything works and it's safe to build. YELLOW means something needs attention first. RED means stop and run a fix-bug or audit session before anything else.
 
@@ -29,7 +29,7 @@ Two separate things. Only one is paused.
 
 **Client proposals: the third track, never paused.** Kate Campbell's proposal shipped 2026-07-23, live at `proposals.greenwayband.com/campbell` (10-piece $14,375 recommended, 6-piece $10,350, cocktail hour cards), and her reply email went out the same day, links verified clean. Two defaults changed on this build: the 10-piece now leads Recommended by default on every new proposal (previously it depended on what the client asked for), and the cocktail hour option cards now show by default on every wedding proposal (previously only when you asked for them).
 
-**What happened last session (2026-07-23):** Kate Campbell's inquiry became a live proposal. You changed two standing defaults (10-piece always leads, cocktail hour cards always show), both now locked into the docs and the proposal skill for every future proposal. The reply email went out with clean links, verified in Sent. You also flagged that Marli Hinojosa's email might not have gone out. Checked: it did send, 2026-07-21, links clean. That correction is now in the record.
+**What happened last session (2026-07-23, proposal redesign):** you asked for a bigger upgrade to how proposals look and feel: real photos of the band, a real video people can watch, and a button to book a call, right on the page. Built it, stress-tested it with a panel of reviewers, then you reviewed it yourself and asked for changes on the spot: a lighter background instead of all-dark (matches your actual brand guide better), the video hosted on your own site instead of Vimeo (no logo, no ads, fully yours), and the venue-name trust line removed because you felt it undersold you. You then saw it built on Marli Hinojosa's real proposal and caught two more things: the text looked slightly thinner in the light sections (a real optical effect, now corrected) and one photo transition felt too abrupt (softened with a fade). **None of this is committed or live yet, on purpose** — you want to see it once more, in a fresh session on Fable 5, before it becomes the standing look for every proposal.
 
 **Reconciliation debt, whenever you want it tackled (not urgent, part of the Astro track only):**
 - Two branches disagree about which pages exist: `dev` (the one that's live) is missing the Reviews and FAQ pages that `main` already has.
@@ -41,7 +41,11 @@ None of these affect your live site today, because your live site is still Squar
 ---
 
 ## Your next step
-**Right now:** nothing is required from you. Everyone (Garrett, Giulia, Marli, Kate) has their links and live pages, replies sent, nothing queued. If you run the ChatGPT copy interview, paste the finished spec into a session and it gets folded into the proposal template. Two small offers stay open, either starts with one word in a new session: the fix that stops proposal pages showing you hour-old copies after a revision, and moving the GitHub access key on this Mac into the keychain.
+**Right now:** the new proposal look (photos, video, lighter background, book-a-call button) is built and waiting for your final look. Start your next session on **Fable 5**, and say:
+
+**Run the start-session skill. Context: reviewing the new proposal template design one more time before it goes live.**
+
+Everyone with a live proposal today (Garrett, Giulia, Marli, Kate) still has their original links working, nothing breaks for them either way. If you run the ChatGPT copy interview, paste the finished spec in and it gets folded in too. Two small offers stay open, either starts with one word: the fix that stops proposal pages showing you hour-old copies after a revision, and moving the GitHub access key on this Mac into the keychain.
 
 **Separately, whenever:** the Astro rebuild waits for Growth Hour's M3. When that ships, start a session here on **Sonnet 5** and say:
 

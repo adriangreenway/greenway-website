@@ -58,11 +58,28 @@ Model: Sonnet 5 is fine for this workflow.
    timeline section only if the schedule is known — else delete it; lineups exactly
    per PRICING_AND_CONTENT.md. Corporate event → base on the live `the-united-way`
    page instead of the wedding template.
+   **Media + CTA are on by default (D14, 2026-07-23 + v2 same day, see
+   PRICING_AND_CONTENT.md "Approved media pool" + "Palette (v2)"):** the two
+   photo bands, the click-to-load self-hosted video, the hours line, and both
+   Schedule-a-Call CTAs all come with the template unchanged — nothing to fill
+   in, they reference the shared `~/Desktop/greenway-proposals/assets/` files
+   by fixed relative path. Confirm that folder exists in the deploy directory
+   before building (it should already be there from the 2026-07-23 build; if
+   missing, stop and tell Adrian rather than recreating it from guesswork).
+   Never change the video file without Adrian supplying a new source. **No
+   venue strip** — it was built then removed same day (Adrian: "doesn't add
+   much value"); don't re-add it without him asking. **Palette is the hybrid**
+   (dark cover + dark closing, cream document body) — never flatten it back to
+   all-dark or all-cream without Adrian raising it again.
 
 6. **Verify locally.**
    - `grep -c '{{' index.html` must output 0
    - names, date, venue, prices correct against the fact sheet; totals = sum of rows
    - open the file in a browser and eyeball cover, packages, closing
+   - `assets/band-stage-2026a.webp`, `assets/crowd-2026a.webp`,
+     `assets/uptown-funk-poster-2026a.jpg`, and `assets/uptown-funk-2026a.mp4`
+     all exist in the deploy folder (shared, sit one level up from `<slug>/`,
+     not per-client — don't recreate them)
 
 7. **Present the draft and WAIT.** Status card: client, date, venue, packages with
    prices and totals, add-ons, the URL it will get, plus anything else in the deploy

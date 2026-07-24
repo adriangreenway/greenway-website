@@ -35,6 +35,27 @@
   {{T1..T5_TIME/HEADING/DESC}} timeline blocks (section optional, see below)
   {{PKG1_*}} / {{PKG2_*}}   package cards (titles, subtitles, price rows, totals);
                             subtitle style: "Full horn section + reception entertainment + MC"
+
+  MEDIA + CTA (default on every wedding proposal, added 2026-07-23, D14 +
+  v2 amendment same day, in docs/DECISIONS.md; full spec in
+  docs/proposals/PRICING_AND_CONTENT.md "Approved media pool") — NOT tokens,
+  shared assets referenced by fixed relative path from every <slug>/index.html:
+  - ../assets/band-stage-2026a.webp   (photo band after cover)
+  - ../assets/uptown-funk-poster-2026a.jpg + ../assets/uptown-funk-2026a.mp4
+    (click-to-load, self-hosted video — no third party, no watermark. Master
+    stays on Vimeo unlisted for Adrian's own reference only.)
+  - ../assets/crowd-2026a.webp        (photo band before testimonials)
+  - Schedule-a-Call CTA (inline + closing button) uses the same static 17hats
+    scheduler URL as the Template 4.1 email.
+  These assets live once in ~/Desktop/greenway-proposals/assets/ (shared by
+  every proposal folder). Do not duplicate them per-client.
+
+  PALETTE (v2, 2026-07-23, D14 amendment, Adrian's "C" — hybrid): cover +
+  closing keep the original dark palette (scoped CSS vars). Everything between
+  uses the website's own cream design-system tokens. Never invent new colors
+  here — reuse docs/DESIGN_SYSTEM.md's locked tokens only. A venue-strip trust
+  line was built and then REMOVED same day at Adrian's call ("doesn't add much
+  value") — do not re-add without him asking.
   ============================================================
 -->
 <meta charset="UTF-8">
@@ -46,7 +67,32 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* ===== v2 PALETTE (2026-07-23, D14 amendment): hybrid, Adrian's "C" =====
+     Cover + closing keep the ORIGINAL dark palette (scoped override below) so
+     the first-impression cover stays byte-identical to every shipped dark
+     proposal during the coexistence window. Everything between (the document
+     body: details, video, packages, testimonials) uses the website's own
+     locked design-system tokens (docs/DESIGN_SYSTEM.md): cream #F5F2ED bg
+     ("never pure white"), near-black ink, secondary/faint text roles mapped
+     directly from the site's --color-dim / --color-faint. 3-judge panel voted
+     this palette unanimously (art director, buyer-simulation, brand-system —
+     all strong confidence) over full-cream and full-dark alternatives. */
   :root {
+    --black: #F5F2ED;
+    --charcoal: #111110;
+    --charcoal-mid: #1A1A18;
+    --cream: #0A0A09;
+    --cream-muted: #2A2A27;
+    --cream-dim: #706D66;
+    --cream-faint: #4A4740;
+    --border: rgba(10,10,9,0.12);
+    --border-light: rgba(10,10,9,0.16);
+    --border-med: rgba(10,10,9,0.26);
+  }
+
+  /* Cover + closing re-declare the original dark values, scoped — anything
+     inside these two sections automatically resolves to the dark palette. */
+  .cover, .closing {
     --black: #0A0A09;
     --charcoal: #111110;
     --charcoal-mid: #1A1A18;
@@ -57,6 +103,7 @@
     --border: rgba(245,242,237,0.08);
     --border-light: rgba(245,242,237,0.12);
     --border-med: rgba(245,242,237,0.18);
+    background: var(--black);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -72,6 +119,18 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    /* Dark text on a light page reads thinner than light text on dark at the
+       identical weight (a real optical effect, not a font change) — this
+       hairline stroke compensates so the cream body matches the weight of
+       the original all-dark proposals. Cancelled inside .cover/.closing,
+       which don't need it (light-on-dark already reads correctly). */
+    -webkit-text-stroke: 0.35px var(--cream);
+    text-stroke: 0.35px var(--cream);
+  }
+
+  .cover, .closing {
+    -webkit-text-stroke: 0;
+    text-stroke: 0;
   }
 
   /* ===== FADE-IN SYSTEM ===== */
@@ -800,6 +859,208 @@
     0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
     50% { opacity: 0.5; transform: translateX(-50%) translateY(4px); }
   }
+
+  /* ===== NEW 2026-07-23 (D14): FULL-BLEED PHOTO BAND =====
+     v2 (hybrid palette): photo band 1 sits between the dark cover and the
+     cream body, so it blends into dark at the top only and cuts hard into
+     cream at the bottom (hairline seam). The crowd photo band sits entirely
+     inside the cream body (packages above, testimonials below) — hard edges
+     both sides, no gradient scrim, per the judge panel's "photos read as
+     tipped-in plates" note. Both stay dark plates regardless of section. */
+  .photo-band {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .photo-band img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: saturate(0.88) contrast(1.02);
+  }
+
+  .photo-band::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    /* Blends dark at the top (into the cover above) and cream at the bottom
+       (into the body below) — a smoother seam than a hard cut, per Adrian's
+       call after seeing the hard-edge version. */
+    background: linear-gradient(to bottom,
+      #0A0A09 0%, rgba(10,10,9,0) 20%,
+      rgba(10,10,9,0) 65%, #F5F2ED 100%);
+  }
+
+  .photo-band--short::after {
+    background: none;
+    border-top: 0.5px solid rgba(10,10,9,0.16);
+    border-bottom: 0.5px solid rgba(10,10,9,0.16);
+  }
+
+  /* Wide screens show the whole 3:2 frame (the strip crop was cutting the
+     musicians out of the shot); phones keep the taller immersive crop because
+     a phone-width whole frame is only ~250px tall and the scrim swallows it.
+     Adrian's call 2026-07-23 (D14 open item closed, "you decide"). */
+  @media (max-width: 560px) {
+    .photo-band img {
+      height: 68vh;
+      min-height: 380px;
+      max-height: 640px;
+      object-fit: cover;
+    }
+
+    .photo-band--short img {
+      height: 52vh;
+      min-height: 300px;
+      max-height: 480px;
+    }
+  }
+
+  /* ===== NEW 2026-07-23 (D14): VIDEO SECTION (self-hosted mp4, click-to-load) ===== */
+  .video-section {
+    padding: 80px 0;
+  }
+
+  .video-title {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(24px, 5vw, 28px);
+    color: var(--cream);
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+
+  .video-desc {
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--cream-muted);
+    font-weight: 300;
+    margin-bottom: 36px;
+    max-width: 480px;
+  }
+
+  /* Video frame is always a dark plate, regardless of section palette — it
+     holds a dark stage photo/video, so its background and play-button colors
+     are hardcoded, not tied to the flipping --cream/--black variables. */
+  .video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0.5px solid var(--border-light);
+    overflow: hidden;
+    background: #111110;
+  }
+
+  .video-frame img,
+  .video-frame video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-frame img {
+    filter: saturate(0.88);
+  }
+
+  .video-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border: 0.5px solid rgba(245,242,237,0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10,10,9,0.45);
+    transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+    color: #F5F2ED;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .video-play:hover {
+    background: #F5F2ED;
+    border-color: #F5F2ED;
+    color: #0A0A09;
+  }
+
+  .video-play svg {
+    width: 16px;
+    height: 16px;
+    margin-left: 3px;
+  }
+
+  .video-caption {
+    margin-top: 16px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+  }
+
+  /* ===== NEW 2026-07-23 (D14): SCHEDULE-A-CALL CTA ===== */
+  .cta-inline {
+    margin-top: 48px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--cream-dim);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+
+  .cta-inline a {
+    color: var(--cream);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--cream-dim);
+    padding-bottom: 2px;
+    white-space: nowrap;
+    transition: border-color 0.3s ease;
+  }
+
+  .cta-inline a:hover {
+    border-color: var(--cream);
+  }
+
+  .closing-cta {
+    margin-bottom: 40px;
+  }
+
+  .closing-cta-note {
+    font-size: 12px;
+    color: var(--cream-dim);
+    font-weight: 300;
+    margin-bottom: 24px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Solid fill by default (judge-panel fix: it's the page's only conversion
+     action, an outline was too weak against the dark closing). Hover inverts
+     to an outline instead of the usual fill-on-hover. */
+  .cta-button {
+    display: inline-block;
+    padding: 20px 56px;
+    border: 0.5px solid var(--cream);
+    background: var(--cream);
+    color: var(--black);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+  }
+
+  .cta-button:hover {
+    background: transparent;
+    color: var(--cream);
+    border-color: var(--border-med);
+  }
 </style>
 <!-- No-JS fallback: the scroll reveals need JavaScript; without it the page must
      still be readable (some previews and readers never run scripts). -->
@@ -839,6 +1100,14 @@
     <p>greenwayband.com &nbsp;&middot;&nbsp; adrian@greenwayband.com</p>
   </div>
 </section>
+
+<!-- ============================================ -->
+<!-- NEW 2026-07-23 (D14): PHOTO BAND — see the band before the price.
+     Shared asset, same file on every proposal: ../assets/band-stage-2026a.webp -->
+<!-- ============================================ -->
+<div class="photo-band reveal">
+  <img src="../assets/band-stage-2026a.webp" alt="The Greenway Band performing live at a wedding reception" loading="eager" style="object-position: 50% 62%;">
+</div>
 
 <!-- NO INTRO SECTION (Adrian, 2026-07-14, decided on the turner build): the
      Template 4.1 email already greets, thanks, and congratulates, so the page
@@ -934,6 +1203,37 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============================================ -->
+<!-- NEW 2026-07-23 (D14, v2): VIDEO — see the band live before pricing.
+     Shared asset on every proposal: poster ../assets/uptown-funk-poster-2026a.jpg,
+     click-to-load self-hosted mp4 ../assets/uptown-funk-2026a.mp4 (720p,
+     ~73MB, encoded from Adrian's "Uptown Funk" clip — no third-party host,
+     no watermark. Master copy stays on Vimeo, unlisted, for Adrian's own
+     reference only; the page never links to it.) Caption must stay honest to
+     the actual clip: this is one song, never call it a full set. -->
+<!-- ============================================ -->
+<section class="video-section">
+  <div class="content">
+    <div class="section-label reveal">Watch the band</div>
+    <div class="video-title reveal reveal-delay-1">See the Band Live</div>
+    <div class="video-desc reveal reveal-delay-1">
+      Photos only say so much. Here's a full song, live.
+    </div>
+
+    <div class="video-frame reveal reveal-delay-2" id="proposalVideoFrame">
+      <img src="../assets/uptown-funk-poster-2026a.jpg" alt="The Greenway Band performing live on stage" loading="lazy">
+      <button class="video-play" type="button" aria-label="Play video" onclick="playProposalVideo()">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 5.14v13.72L19 12 8 5.14z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="video-caption reveal reveal-delay-3">Tap to watch &middot; Uptown Funk, recorded live</div>
   </div>
 </section>
 
@@ -1101,12 +1401,30 @@
     <!-- ===== END COCKTAIL HOUR ADD-ON ===== -->
 
     <!-- Standard approved copy. Keep unless the event is 50+ miles out and travel
-         is already priced in — then Adrian decides the wording. -->
+         is already priced in — then Adrian decides the wording. Third sentence
+         (NEW 2026-07-23, D14) is the real contract standard from
+         PRICING_AND_CONTENT.md — answers "for how many hours?" without a payer
+         having to ask. -->
     <div class="package-note reveal">
-      Additional instrumentation available upon request. Travel fee may apply for events over 50 miles from Houston.
+      Additional instrumentation available upon request. Travel fee may apply for events over 50 miles from Houston. Includes three hours of live music across a four hour reception.
+    </div>
+
+    <!-- NEW 2026-07-23 (D14): quiet CTA right after the prices land. -->
+    <div class="cta-inline reveal">
+      Want to talk through your options? <a href="https://greenwayband.17hats.com/p#/scheduling/tttktcfskcdfwcxbvprcvkhxzxsfxvht" target="_blank" rel="noopener">Schedule a call</a>.
     </div>
   </div>
 </section>
+
+<!-- ============================================ -->
+<!-- NEW 2026-07-23 (D14): PHOTO BAND — the packed floor, right before the
+     reviews that describe it. Shared asset: ../assets/crowd-2026a.webp.
+     object-position pushed up to keep the videographer's camera rig out of
+     frame on mobile crops. -->
+<!-- ============================================ -->
+<div class="photo-band photo-band--short reveal">
+  <img src="../assets/crowd-2026a.webp" alt="A full dance floor at a Greenway Band wedding reception" loading="lazy" style="object-position: 50% 30%;">
+</div>
 
 <div class="section-divider"></div>
 
@@ -1161,10 +1479,19 @@
   <div class="content">
     <div class="closing-phrase reveal">Your guests won't stop talking about it.</div>
     <div class="closing-rule reveal reveal-delay-1"></div>
+
+    <!-- NEW 2026-07-23 (D14): closing CTA. Note line only states what the call
+         covers; never asserts date availability (that stays the email's job,
+         confirmed by Adrian before he sends it). -->
+    <div class="closing-cta reveal">
+      <div class="closing-cta-note">On the call we'll walk through the options and how to hold your date.</div>
+      <a class="cta-button" href="https://greenwayband.17hats.com/p#/scheduling/tttktcfskcdfwcxbvprcvkhxzxsfxvht" target="_blank" rel="noopener">Schedule a Call</a>
+    </div>
+
     <div class="closing-contact reveal reveal-delay-2">
       <p>Adrian Michael</p>
       <p><a href="mailto:adrian@greenwayband.com">adrian@greenwayband.com</a></p>
-      <p>(281) 467-1226</p>
+      <p><a href="tel:+12814671226">(281) 467-1226</a></p>
     </div>
     <div class="closing-website reveal reveal-delay-3">greenwayband.com</div>
 
@@ -1183,6 +1510,15 @@
 </section>
 
 <script>
+  // NEW 2026-07-23 (D14, v2): click-to-load self-hosted video. The mp4 is
+  // never fetched until tapped, keeping first-paint weight identical to the
+  // text-only page. No third-party player, no watermark, no related-video rail.
+  function playProposalVideo() {
+    var frame = document.getElementById('proposalVideoFrame');
+    if (!frame) return;
+    frame.innerHTML = '<video src="../assets/uptown-funk-2026a.mp4" controls autoplay playsinline></video>';
+  }
+
   // Intersection Observer for scroll reveals
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

@@ -53,7 +53,17 @@ The Greenway Band — {{date_full}}
   when the stored href is the correct raw URL. Adrian fixed the turner draft by
   re-inserting the link in Gmail compose before sending (select the anchor word,
   Cmd+K, paste the URL). Rule for next time: hrefs must be the exact raw URLs (never
-  a google.com/url or any tracking wrapper), and the status card must tell Adrian to
-  click-test both links in the draft before sending; if one shows the redirect page,
-  re-insert that link in Gmail compose. The sent turner email was verified clean in
-  Sent (direct hrefs on both anchors).
+  a google.com/url or any tracking wrapper). The sent turner email was verified clean
+  in Sent (direct hrefs on both anchors).
+- **UPDATE (2026-07-21, hinojosa draft — supersedes the turner theory): Gmail wraps
+  the hrefs ITSELF when a draft is created through the connector API.** Proven by the
+  compose-view "Go to link" chip showing `google.com/url?...&ust=...` on a freshly
+  created, never-edited test draft. Passing clean HTML does not help; recreating the
+  draft does not help. The turner email only sent clean because Adrian manually
+  re-inserted both links in compose first. **Standing procedure for every API-created
+  draft:** Adrian must re-link both anchor words before sending (click the anchor →
+  "Change" in the link chip → paste the raw URL), pasting the raw URLs from Claude's
+  status card, NEVER from anything Google renders (the Redirect Notice page, the
+  chip, or the rendered draft — those give the wrapper). The status card must always
+  include both raw URLs in copyable form. After sending, Claude verifies the Sent
+  copy's hrefs via the API (the turner sent copy verified clean this way).
