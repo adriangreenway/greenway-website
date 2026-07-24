@@ -4,216 +4,334 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Song List &middot; The Greenway Band</title>
-<meta name="description" content="433 recognizable favorites across generations and genres. Live wedding and event band.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231D392B'/%3E%3Ctext x='50' y='66' font-size='46' text-anchor='middle' fill='%23F5F2ED' font-family='Georgia,serif'%3EG%3C/text%3E%3C/svg%3E">
+<meta name="description" content="The Greenway Band&#8217;s song list.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230A0A09'/%3E%3Ctext x='50' y='66' font-size='46' text-anchor='middle' fill='%23F5F2ED' font-family='serif'%3EG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Proposal palette. Variable names are inverted in the cream body (proposal idiom):
+     --black holds cream, --cream holds ink, so component CSS matches the proposal verbatim. */
   :root {
-    --paper: #FBFAF8;
-    --mist: #F1F4EF;
-    --hairline: #E3E8E0;
-    --green-deep: #1D392B;
-    --green-deeper: #162D21;
-    --green: #27503A;
-    --green-dim: #57705F;
-    --ink: #161B17;
-    --dim: #5E6962;
-    --cream: #F5F2ED;
-    --cream-dim: #C7D2C4;
+    --black: #F5F2ED;
+    --charcoal: #111110;
+    --charcoal-mid: #1A1A18;
+    --cream: #0A0A09;
+    --cream-muted: #2A2A27;
+    --cream-dim: #706D66;
+    --cream-faint: #4A4740;
+    --border: rgba(10,10,9,0.12);
+    --border-light: rgba(10,10,9,0.16);
+    --border-med: rgba(10,10,9,0.26);
   }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
   body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 300;
-    background: var(--paper);
-    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.6;
+    background: var(--black);
+    color: var(--cream-muted);
+    -webkit-text-stroke: 0.35px var(--cream);
   }
 
-  /* ---------- Hero ---------- */
+  /* ---------- Cover (scoped dark palette, exactly as the proposal cover) ---------- */
   .hero {
-    background: linear-gradient(180deg, var(--green-deep) 0%, var(--green-deeper) 100%);
-    color: var(--cream);
+    --cream: #F5F2ED;
+    --cream-muted: #D4D0C8;
+    --cream-dim: #8A867E;
+    --cream-faint: #5A5750;
+    --border: rgba(245,242,237,0.08);
+    --border-light: rgba(245,242,237,0.12);
+    --border-med: rgba(245,242,237,0.18);
+    background: #0A0A09;
     text-align: center;
-    padding: 76px 24px 68px;
+    padding: 96px 32px 88px;
+    -webkit-text-stroke: 0;
   }
-  .logo-rule { width: 72px; height: 1px; background: rgba(245,242,237,.28); margin: 0 auto; }
-  .logo-the  { font-size: 10px; letter-spacing: 5px; padding-left: 5px; color: var(--cream-dim); margin: 18px 0 6px; }
-  .logo-name { font-family: 'Bodoni Moda', serif; font-size: 30px; font-weight: 400; letter-spacing: 10px; padding-left: 10px; }
-  .logo-band { font-size: 11px; letter-spacing: 11px; padding-left: 11px; color: var(--cream-dim); margin: 6px 0 18px; }
+
+  .logo-group { margin-bottom: 80px; }
+
+  .logo-rule {
+    width: 48px;
+    height: 0.5px;
+    background: var(--cream-dim);
+    margin: 0 auto;
+  }
+
+  .logo-the {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 11px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    margin-top: 28px;
+    text-indent: 10px;
+  }
+
+  .logo-name {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(28px, 8vw, 42px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--cream);
+    font-weight: 400;
+    margin: 4px 0;
+    text-indent: 5px;
+  }
+
+  .logo-band {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 14px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    font-weight: 400;
+    text-indent: 14px;
+  }
+
+  .logo-rule-bottom { margin-top: 16px; }
+
   .hero h1 {
     font-family: 'Bodoni Moda', serif;
+    font-size: clamp(24px, 6vw, 32px);
     font-weight: 400;
-    font-size: clamp(42px, 6.5vw, 60px);
-    line-height: 1.15;
     letter-spacing: 1px;
-    margin-top: 40px;
-  }
-  .hero .subtitle {
-    font-family: 'Bodoni Moda', serif;
-    font-style: italic;
-    font-size: 15px;
-    letter-spacing: 1.2px;
-    color: var(--cream-dim);
-    margin-top: 16px;
-  }
-  .hero .note {
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: .4px;
-    color: rgba(245,242,237,.62);
-    margin-top: 26px;
+    line-height: 1.3;
+    color: var(--cream);
   }
 
-  /* ---------- Sticky genre bar ---------- */
+  /* ---------- Sticky genre bar (cream) ---------- */
   .bar {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(251,250,248,.94);
-    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--hairline);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--black);
+    border-bottom: 0.5px solid var(--border-light);
   }
+
   .bar-inner {
-    max-width: 1080px; margin: 0 auto;
-    padding: 12px 24px;
-    display: flex; align-items: center; gap: 14px;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
   }
+
   .chips {
-    display: flex; gap: 8px; flex: 1;
-    overflow-x: auto; scrollbar-width: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    flex: 1;
+    min-width: 0;
   }
   .chips::-webkit-scrollbar { display: none; }
+
   .chip {
-    flex: 0 0 auto;
-    font-size: 10px; font-weight: 500;
-    letter-spacing: 1.6px; text-transform: uppercase;
-    color: var(--green); text-decoration: none;
-    border: 1px solid var(--hairline);
-    border-radius: 999px;
-    padding: 7px 13px;
-    transition: background .18s ease, border-color .18s ease;
+    flex: none;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    text-decoration: none;
+    padding: 4px 0;
     white-space: nowrap;
+    transition: color 0.3s ease;
   }
-  .chip:hover { background: var(--mist); border-color: var(--cream-dim); }
-  .chip-n { color: var(--green-dim); margin-left: 6px; font-weight: 400; }
+  .chip:hover { color: var(--cream); }
+
   .search {
-    flex: 0 0 210px;
-    font-family: inherit; font-size: 13px; font-weight: 400;
-    color: var(--ink);
-    background: var(--paper);
-    border: 1px solid var(--hairline);
-    border-radius: 999px;
-    padding: 8px 16px;
+    flex: 0 0 200px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    color: var(--cream);
+    background: transparent;
+    border: none;
+    border-bottom: 0.5px solid var(--border-light);
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 6px 2px 8px;
     outline: none;
-    transition: border-color .18s ease;
+    transition: border-color 0.3s ease;
   }
-  .search::placeholder { color: var(--dim); }
-  .search:focus { border-color: var(--green); }
+  .search::placeholder { color: var(--cream-dim); opacity: 1; }
+  .search:focus { border-color: var(--cream-dim); }
 
   /* ---------- Sections ---------- */
-  main { max-width: 1080px; margin: 0 auto; padding: 20px 24px 40px; }
-  .genre { padding-top: 44px; scroll-margin-top: 74px; }
-  .genre-head {
-    display: flex; align-items: baseline; justify-content: space-between;
-    border-bottom: 1px solid var(--hairline);
-    padding-bottom: 12px;
+  main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 8px 32px 96px;
   }
+
+  .genre {
+    padding-top: 72px;
+    scroll-margin-top: 176px;
+  }
+
+  .genre-head {
+    border-bottom: 0.5px solid var(--border-light);
+    padding-bottom: 14px;
+  }
+
   .genre-head h2 {
     font-family: 'Bodoni Moda', serif;
-    font-weight: 400; font-size: 24px; letter-spacing: .5px;
+    font-size: clamp(24px, 5vw, 28px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--cream);
   }
-  .genre-n { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--green-dim); }
-  .songs { list-style: none; margin-top: 4px; }
-  @media (min-width: 760px) { .songs { columns: 2; column-gap: 64px; } }
+
+  .songs {
+    list-style: none;
+    margin-top: 6px;
+  }
+  @media (min-width: 760px) {
+    .songs { columns: 2; column-gap: 72px; }
+  }
+
   .song {
-    display: flex; flex-direction: column;
-    padding: 9px 2px;
-    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding: 11px 0;
+    border-bottom: 0.5px solid var(--border);
     break-inside: avoid;
   }
-  .song .t { font-size: 14.5px; font-weight: 500; letter-spacing: .1px; }
-  .song .a { font-size: 12.5px; font-weight: 400; color: var(--dim); margin-top: 1px; }
+  .songs li:last-child { border-bottom: none; }
+
+  .song .t {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--cream-muted);
+  }
+
+  .song .a {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--cream-dim);
+    text-align: right;
+    max-width: 46%;
+  }
+
   .no-results {
     display: none;
-    text-align: center; color: var(--dim);
-    font-size: 14px; padding: 72px 0 40px;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: var(--cream-dim);
+    padding: 96px 0 48px;
   }
-  .no-results em { font-family: 'Bodoni Moda', serif; font-size: 17px; color: var(--green); font-style: italic; }
 
   /* ---------- Footer ---------- */
   footer {
+    border-top: 0.5px solid var(--border-light);
     text-align: center;
-    border-top: 1px solid var(--hairline);
-    margin-top: 64px;
-    padding: 48px 24px 64px;
+    padding: 56px 32px 72px;
   }
-  footer .tail-note {
-    font-family: 'Bodoni Moda', serif; font-style: italic;
-    font-size: 15px; color: var(--green);
-    letter-spacing: .5px;
+
+  footer .contact {
+    font-size: 12px;
+    letter-spacing: 0.5px;
   }
-  footer .contact { margin-top: 18px; font-size: 12px; letter-spacing: .6px; }
+
   footer .contact a {
-    color: var(--green-dim); text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color .18s ease, color .18s ease;
+    color: var(--cream-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
   }
-  footer .contact a:hover { color: var(--green); border-bottom-color: var(--cream-dim); }
-  footer .dot { color: var(--cream-dim); margin: 0 8px; }
+  footer .contact a:hover { color: var(--cream); }
+
+  footer .dot {
+    color: var(--cream-faint);
+    margin: 0 12px;
+  }
 
   /* ---------- Mobile ---------- */
   @media (max-width: 640px) {
-    .hero { padding: 56px 20px 48px; }
-    .bar-inner { flex-wrap: wrap; gap: 10px; padding: 10px 16px; }
-    .search { flex: 1 1 100%; order: -1; }
-    main { padding: 12px 20px 32px; }
+    .hero { padding: 72px 24px 64px; }
+    .logo-group { margin-bottom: 64px; }
+    .bar-inner { display: block; padding: 14px 24px; }
+    .search { display: block; width: 100%; }
+    .chips {
+      margin-top: 14px;
+      flex-wrap: nowrap;
+      gap: 24px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    main { padding: 0 24px 80px; }
+    .genre { scroll-margin-top: 124px; }
+    .song { gap: 16px; }
   }
 
   /* ---------- Print ---------- */
   @media print {
     .bar, .no-results { display: none; }
-    .hero { background: none; color: var(--green-deep); padding: 0 0 24px; }
-    .hero .subtitle, .hero .note { color: var(--green); }
-    .logo-rule { background: var(--green-deep); }
-    .logo-the, .logo-band { color: var(--green); }
-    .hero h1 { margin-top: 16px; font-size: 34px; }
-    .genre { padding-top: 24px; }
-    .songs { columns: 2; column-gap: 40px; }
-    .song { padding: 4px 0; border-bottom: none; }
-    footer { margin-top: 24px; padding: 16px 0 0; border-top: 1px solid var(--green-deep); }
+    body { -webkit-text-stroke: 0; }
+    .hero {
+      --cream: #0A0A09;
+      --cream-muted: #2A2A27;
+      --cream-dim: #706D66;
+      --cream-faint: #4A4740;
+      background: none;
+      padding: 0 0 40px;
+    }
+    .logo-group { margin-bottom: 48px; }
+    .hero h1 { font-size: 26px; }
+    main { max-width: none; padding: 0; }
+    .genre { padding-top: 28px; }
+    .genre-head { break-after: avoid; padding-bottom: 8px; }
+    .songs { columns: 2; column-gap: 48px; }
+    .song { padding: 5px 0; border-bottom: none; }
+    footer {
+      border-top: 0.5px solid #0A0A09;
+      margin-top: 40px;
+      padding: 24px 0 0;
+    }
   }
 </style>
 </head>
 <body>
 
 <header class="hero">
-  <div class="logo-rule"></div>
-  <div class="logo-the">THE</div>
-  <div class="logo-name">GREENWAY</div>
-  <div class="logo-band">BAND</div>
-  <div class="logo-rule"></div>
+  <div class="logo-group">
+    <div class="logo-rule"></div>
+    <div class="logo-the">THE</div>
+    <div class="logo-name">GREENWAY</div>
+    <div class="logo-band">BAND</div>
+    <div class="logo-rule logo-rule-bottom"></div>
+  </div>
   <h1>Song List</h1>
-  <p class="subtitle">433 recognizable favorites across generations and genres</p>
-  <p class="note">Set lists are tailored to each event. Special requests are always welcome.</p>
 </header>
 
-<nav class="bar" aria-label="Genres">
+<nav class="bar">
   <div class="bar-inner">
     <div class="chips">
-      <a class="chip" href="#pop">Pop<span class="chip-n">133</span></a>
-      <a class="chip" href="#r-b-soul">R&amp;B / Soul<span class="chip-n">93</span></a>
-      <a class="chip" href="#rock-alternative">Rock / Alternative<span class="chip-n">76</span></a>
-      <a class="chip" href="#country">Country<span class="chip-n">53</span></a>
-      <a class="chip" href="#funk-disco">Funk / Disco<span class="chip-n">16</span></a>
-      <a class="chip" href="#jazz-standards">Jazz / Standards<span class="chip-n">13</span></a>
-      <a class="chip" href="#latin">Latin<span class="chip-n">13</span></a>
-      <a class="chip" href="#hip-hop">Hip-Hop<span class="chip-n">11</span></a>
-      <a class="chip" href="#dance-pop">Dance / Pop<span class="chip-n">9</span></a>
-      <a class="chip" href="#folk-indie">Folk / Indie<span class="chip-n">4</span></a>
-      <a class="chip" href="#reggae-caribbean">Reggae / Caribbean<span class="chip-n">3</span></a>
-      <a class="chip" href="#classics">Classics<span class="chip-n">2</span></a>
-      <a class="chip" href="#holiday">Holiday<span class="chip-n">7</span></a>
+      <a class="chip" href="#pop">Pop</a>
+      <a class="chip" href="#r-b-soul">R&amp;B / Soul</a>
+      <a class="chip" href="#rock-alternative">Rock / Alternative</a>
+      <a class="chip" href="#country">Country</a>
+      <a class="chip" href="#funk-disco">Funk / Disco</a>
+      <a class="chip" href="#jazz-standards">Jazz / Standards</a>
+      <a class="chip" href="#latin">Latin</a>
+      <a class="chip" href="#hip-hop">Hip-Hop</a>
+      <a class="chip" href="#dance-pop">Dance / Pop</a>
+      <a class="chip" href="#folk-indie">Folk / Indie</a>
+      <a class="chip" href="#reggae-caribbean">Reggae / Caribbean</a>
+      <a class="chip" href="#classics">Classics</a>
+      <a class="chip" href="#holiday">Holiday</a>
     </div>
     <input class="search" id="q" type="search" placeholder="Search songs or artists" aria-label="Search songs or artists">
   </div>
@@ -223,7 +341,6 @@
     <section class="genre" id="pop">
       <div class="genre-head">
         <h2>Pop</h2>
-        <span class="genre-n">133 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="about damn time lizzo"><span class="t">About Damn Time</span><span class="a">Lizzo</span></li>
@@ -365,7 +482,6 @@
     <section class="genre" id="r-b-soul">
       <div class="genre-head">
         <h2>R&amp;B / Soul</h2>
-        <span class="genre-n">93 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="1999 prince"><span class="t">1999</span><span class="a">Prince</span></li>
@@ -467,7 +583,6 @@
     <section class="genre" id="rock-alternative">
       <div class="genre-head">
         <h2>Rock / Alternative</h2>
-        <span class="genre-n">76 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="africa toto"><span class="t">Africa</span><span class="a">Toto</span></li>
@@ -552,7 +667,6 @@
     <section class="genre" id="country">
       <div class="genre-head">
         <h2>Country</h2>
-        <span class="genre-n">53 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="all my ex&#x27;s live in texas george strait"><span class="t">All My Ex’s Live In Texas</span><span class="a">George Strait</span></li>
@@ -614,7 +728,6 @@
     <section class="genre" id="funk-disco">
       <div class="genre-head">
         <h2>Funk / Disco</h2>
-        <span class="genre-n">16 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="dancing queen abba"><span class="t">Dancing Queen</span><span class="a">Abba</span></li>
@@ -639,7 +752,6 @@
     <section class="genre" id="jazz-standards">
       <div class="genre-head">
         <h2>Jazz / Standards</h2>
-        <span class="genre-n">13 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="the best is yet to come frank sinatra"><span class="t">The Best Is Yet to Come</span><span class="a">Frank Sinatra</span></li>
@@ -661,7 +773,6 @@
     <section class="genre" id="latin">
       <div class="genre-head">
         <h2>Latin</h2>
-        <span class="genre-n">13 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="bailando enrique iglesias"><span class="t">Bailando</span><span class="a">Enrique Iglesias</span></li>
@@ -683,7 +794,6 @@
     <section class="genre" id="hip-hop">
       <div class="genre-head">
         <h2>Hip-Hop</h2>
-        <span class="genre-n">11 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="apache (jump on it) the sugarhill gang"><span class="t">Apache (Jump On It)</span><span class="a">The Sugarhill Gang</span></li>
@@ -703,7 +813,6 @@
     <section class="genre" id="dance-pop">
       <div class="genre-head">
         <h2>Dance / Pop</h2>
-        <span class="genre-n">9 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="cold water major lazer"><span class="t">Cold Water</span><span class="a">Major Lazer</span></li>
@@ -721,7 +830,6 @@
     <section class="genre" id="folk-indie">
       <div class="genre-head">
         <h2>Folk / Indie</h2>
-        <span class="genre-n">4 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="brown eyed girl van morrison"><span class="t">Brown Eyed Girl</span><span class="a">Van Morrison</span></li>
@@ -734,7 +842,6 @@
     <section class="genre" id="reggae-caribbean">
       <div class="genre-head">
         <h2>Reggae / Caribbean</h2>
-        <span class="genre-n">3 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="it wasn&#x27;t me shaggy"><span class="t">It Wasn’t Me</span><span class="a">Shaggy</span></li>
@@ -746,7 +853,6 @@
     <section class="genre" id="classics">
       <div class="genre-head">
         <h2>Classics</h2>
-        <span class="genre-n">2 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="can&#x27;t help falling in love elvis presley"><span class="t">Can’t Help Falling in Love</span><span class="a">Elvis Presley</span></li>
@@ -757,7 +863,6 @@
     <section class="genre" id="holiday">
       <div class="genre-head">
         <h2>Holiday</h2>
-        <span class="genre-n">7 songs</span>
       </div>
       <ol class="songs">
         <li class="song" data-q="all i want for christmas is you mariah carey"><span class="t">All I Want for Christmas Is You</span><span class="a">Mariah Carey</span></li>
@@ -769,13 +874,10 @@
         <li class="song" data-q="what christmas means to me stevie wonder"><span class="t">What Christmas Means to Me</span><span class="a">Stevie Wonder</span></li>
       </ol>
     </section>
-  <div class="no-results" id="none">
-    <em>No matches.</em><br><br>Set lists are tailored to each event. Special requests are always welcome.
-  </div>
+  <div class="no-results" id="none">No matches.</div>
 </main>
 
 <footer>
-  <div class="tail-note">Set lists are tailored to each event. Special requests are always welcome.</div>
   <p class="contact">
     <a href="https://greenwayband.com">greenwayband.com</a><span class="dot">&middot;</span><a href="mailto:adrian@greenwayband.com">adrian@greenwayband.com</a>
   </p>
