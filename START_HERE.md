@@ -14,7 +14,7 @@ The public marketing website for The Greenway Band, your Houston premium live we
 **STATUS:** YELLOW
 **Last verified build:** 2026-07-24 (`npm run build` clean, 6 pages; no test suite exists in this repo, so that's the whole check)
 **Blockers:** None. Both site tracks are deliberately on hold by your own decision: the Astro rebuild waits for Growth Hour's M3, and the Squarespace form's go-live waits until both builds are entirely done (docs/DECISIONS.md D13).
-**Heads up:** the site lives on two branches that disagree with each other (`dev` and `main`). The only uncommitted things left are the April page files that belong to that branch cleanup (kept safe on purpose), one stale leftover folder (`public/proposals/`), and today's finished-but-uncommitted EPK build 02 (see below, waiting on you to say "commit it"). Two commits from earlier (the song-list encoding fix and the proposal-template link) are behind GitHub, waiting on your word to push, same as the earlier EPK ones. Nothing is broken, but don't commit or push here without reading `docs/CURRENT_STATE.md` first.
+**Heads up:** the site lives on two branches that disagree with each other (`dev` and `main`). Today's EPK work is now saved properly. The only uncommitted things left are the April page files that belong to that branch cleanup (kept safe on purpose), one stale leftover folder (`public/proposals/`), and the Codex files that showed up today (`AGENTS.md` and `.agents/`, left alone until you say what you want done with them). Three commits are sitting on this Mac and not yet backed up to GitHub, waiting on your word to push. Nothing is broken, but don't commit or push here without reading `docs/CURRENT_STATE.md` first.
 
 GREEN means everything works and it's safe to build. YELLOW means something needs attention first. RED means stop and run a fix-bug or audit session before anything else.
 
@@ -45,9 +45,13 @@ None of these affect your live site today, because your live site is still Squar
 ---
 
 ## Your next step
-**Right now: review the page copy.** That's what you said you'd do next after settling the reel at full length. Read through the page's words (headline, the three credibility lines, the experience paragraph, contact) and tell me anything you'd say differently. Then say "commit it" to save the whole build 02 permanently — nothing is saved or public until you do.
+**Right now: review the EPK page copy.** That's what you said you'd do next after settling the reel. Today's build is saved, so nothing is at risk either way. Start a session on **Sonnet 5** and paste:
 
-After that: draft link only (not the real public site), so you and I can look at it together, followed by checking it on your own iPhone. Nothing goes public until you separately say so.
+**Run the start-session skill. Context: Adrian EPK build 02 is committed at b3d4b9e. I want to review the page copy.**
+
+Then tell me anything you'd word differently. Most of the current wording came from the ChatGPT brief rather than from you, so your taste wins over it every time.
+
+After that: a draft link only (not the real public site), so you and I can look at it together, followed by you checking it on your own iPhone. Nothing goes public until you separately say so.
 
 **Small housekeeping:** say **push** whenever you want today's commits backed up to GitHub (the song-list fix, the proposal-template link, plus the earlier EPK ones). Nothing depends on it. Whenever you want it: a reusable "next steps" reply email (deposit, contract, invoice, payment options).
 
