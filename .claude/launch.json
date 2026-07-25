@@ -4,51 +4,88 @@
     {
       "name": "dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 4321
     },
     {
       "name": "nbb",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 5173,
       "cwd": "/Users/adrianjoseph/Desktop/natural-bodybuilding-app"
     },
     {
       "name": "growth-hour",
       "runtimeExecutable": "bash",
-      "runtimeArgs": ["-lc", "cd /Users/adrianjoseph/greenway-growth-hour && exec npm run dev"],
+      "runtimeArgs": [
+        "-lc",
+        "cd /Users/adrianjoseph/greenway-growth-hour && exec npm run dev"
+      ],
       "port": 3000,
       "autoPort": true
     },
     {
       "name": "proposals",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8899", "--directory", "/Users/adrianjoseph/Desktop/greenway-proposals"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8899",
+        "--directory",
+        "/Users/adrianjoseph/Desktop/greenway-proposals"
+      ],
       "port": 8899
     },
     {
       "name": "proposal-preview",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8898", "--directory", "/private/tmp/claude-501/-Users-adrianjoseph-greenway-website/790d9e42-b8b7-42e1-8045-a674fcf298ce/scratchpad/preview-root"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8898",
+        "--directory",
+        "/private/tmp/claude-501/-Users-adrianjoseph-greenway-website/790d9e42-b8b7-42e1-8045-a674fcf298ce/scratchpad/preview-root"
+      ],
       "port": 8898
     },
     {
       "name": "proposals-live-check",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8897", "--directory", "/Users/adrianjoseph/Desktop/greenway-proposals"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8897",
+        "--directory",
+        "/Users/adrianjoseph/Desktop/greenway-proposals"
+      ],
       "port": 8897
     },
     {
       "name": "proposals-photo-check",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8896", "--directory", "/Users/adrianjoseph/Desktop/greenway-proposals"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8896",
+        "--directory",
+        "/Users/adrianjoseph/Desktop/greenway-proposals"
+      ],
       "port": 8896
     },
     {
       "name": "adrian-epk",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["/Users/adrianjoseph/greenway-website/docs/adrian-epk/tools/range_server.py", "8893", "/private/tmp/claude-501/-Users-adrianjoseph-greenway-website/f79cd74b-1e1a-4fff-9058-3833179fcedd/scratchpad/preview-root-epk"],
+      "runtimeArgs": [
+        "/Users/adrianjoseph/greenway-website/docs/adrian-epk/tools/range_server.py",
+        "8893",
+        "/private/tmp/claude-501/-Users-adrianjoseph-greenway-website/5ba2b19f-be4c-48c2-90fb-fb009dfc4679/scratchpad/preview-root-epk"
+      ],
       "port": 8893
     }
   ]

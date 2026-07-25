@@ -26,12 +26,21 @@ for video, ts, name in FRAMES:
 
 JOBS = [
     # (source path, out base name, widths)
-    (os.path.join(EPK, "04_a_strong.JPEG"),                                   "hero-vocalist", [1600, 800]),
+    # Hero swapped 2026-07-25 (D16 v7): Adrian wanted the shot where he's
+    # looking at the camera. The old hero (sequin jacket + acoustic) moves to
+    # the closing band above CONTACT as "closing-guitar" — he asked to keep it.
+    (os.path.join(EPK, "Adrian Closeup Eden Showcase.JPEG"),                  "hero-vocalist", [1600, 800]),
+    (os.path.join(EPK, "04_a_strong.JPEG"),                                   "closing-guitar", [1600, 800]),
     (os.path.join(EPK, "04_captures_band_members_performing_on_stage_2.jpg"), "hero-solo",     [1600, 800]),
     (os.path.join(SRC, "bigspring_t2_4k.jpg"),                                "poster-reel",    [1600, 800]),
     (os.path.join(SRC, "bigspring_t40_4k.jpg"),                               "poster-film",    [1600, 800]),
     (os.path.join(SRC, "neon_t13.jpg"),                                       "poster-neon",    [720]),
     (os.path.join(SRC, "testimonial_t3.jpg"),                                 "poster-testimonial", [720]),
+    # Photo row (Adrian picked all three, 2026-07-24). NOTE: _55.jpg is a
+    # duplicate of _2.jpg (the bow-tie shot); _2 is the one used.
+    (os.path.join(EPK, "04_shows_band_members_performing_on_stage_13.jpg"),   "photo-brick",   [1600, 800]),
+    (os.path.join(EPK, "04_captures_band_members_performing_on_stage_2.jpg"), "photo-bowtie",  [1600, 800]),
+    (os.path.join(EPK, "03_shows_band_members_performing_on_stage_12.JPG"),   "photo-rustic",  [1600, 800]),
 ]
 
 manifest = []

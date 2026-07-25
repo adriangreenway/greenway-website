@@ -1,27 +1,27 @@
 {
   "meta": {
-    "title": "Adrian Michael | Boston Vocalist & Live Performer",
-    "description": "Boston-based professional vocalist available for band work, private events, hospitality, and select solo, duo, and trio dates."
+    "title": "Adrian Michael | Boston-Based Vocalist",
+    "description": "Boston-based vocalist available for substitute and recurring band work, private events, hotels and restaurants, and solo, duo, or trio dates."
   },
   "hero": {
-    "eyebrow": "ADRIAN MICHAEL • BOSTON",
-    "headline": "Professional vocalist and live performer, now based in Boston.",
-    "sub": "Available for substitute and recurring band work, private events, hospitality, and select solo, duo, or trio dates.",
+    "eyebrow": "",
+    "headline": "Boston-based vocalist.",
+    "sub": "Available for substitute and recurring band work, private events, hotels and restaurants, and solo, duo, or trio dates.",
     "hero_img": "hero-vocalist",
-    "hero_pos": "50% 22%",
-    "cta_primary": { "label": "WATCH THE LIVE REEL", "href": "#reel" },
-    "cta_secondary_label": "EMAIL ADRIAN"
+    "hero_pos": "56% 26%",
+    "cta_primary": { "label": "PLAY REEL", "href": "#reel" },
+    "cta_secondary_label": "CONTACT",
+    "cta_secondary_href": "#contact"
   },
   "proof": [
-    "10 years full-time",
+    "Full-time musician since 2016",
     "Lead and harmony vocals",
-    "Owner and lead singer of The Greenway Band"
+    "Owner and lead singer, The Greenway Band"
   ],
   "reel": {
     "label": "LIVE REEL",
-    "cta_label": "EMAIL ADRIAN",
     "video": {
-      "source_file": "renders/adrian_michael_vocalist_reel_v6_draft.mp4",
+      "source_file": "renders/adrian_michael_vocalist_reel_v7_draft.mp4",
       "media": "adrian-reel.mp4",
       "poster": "poster-reel-1600",
       "orient": "h",
@@ -29,26 +29,38 @@
       "caption": ""
     }
   },
+  "photos": [
+    { "img": "photo-brick", "alt": "Adrian Michael singing and playing acoustic guitar with his band in a brick-walled loft", "pos": "50% 24%" },
+    { "img": "photo-rustic", "alt": "Adrian Michael singing to a crowd with congas and drums behind him", "pos": "42% 50%" },
+    { "img": "photo-bowtie", "alt": "Adrian Michael in a bow tie singing and playing acoustic guitar at a ballroom event", "pos": "50% 20%" }
+  ],
   "experience": {
-    "label": "EXPERIENCE",
-    "copy": "Adrian has performed full-time for 10 years and owns and fronts The Greenway Band, a Houston-based private-event band.",
+    "label": "REPERTOIRE",
+    "copy": "",
     "range": "Top 40 • Motown • country • classic rock • pop",
-    "link": { "label": "VISIT GREENWAYBAND.COM", "href": "https://www.greenwayband.com" }
+    "links": [
+      { "label": "FULL SONG LIST", "href": "https://proposals.greenwayband.com/song-list/", "new_tab": true },
+      { "label": "THE GREENWAY BAND (HOUSTON)", "href": "https://www.greenwayband.com", "new_tab": true }
+    ]
+  },
+  "closing": {
+    "img": "closing-guitar",
+    "alt": "Adrian Michael in a sequin jacket singing and playing acoustic guitar with his band",
+    "pos": "50% 32%"
   },
   "contact": {
     "label": "CONTACT",
-    "headline": "Get in touch.",
+    "headline": "",
     "email": "adrian@greenwayband.com",
     "email_subject": "Booking Adrian Michael",
     "phone_display": "(281) 467-1226",
     "phone_tel": "+12814671226",
-    "cta_label": "Email Adrian",
     "links": [
       { "label": "@adrianmichael", "href": "https://instagram.com/adrianmichael" },
       { "label": "@greenwayband", "href": "https://instagram.com/greenwayband" }
     ]
   },
   "footer": {
-    "disclosure": "Full-band footage features Adrian Michael & The Greenway Band, Adrian's Houston-based band."
+    "disclosure": "Full-band footage features Adrian Michael & The Greenway Band, based in Houston."
   }
 }

@@ -77,23 +77,61 @@ a{color:inherit}
 .btn:hover{background:transparent;color:var(--cream)}
 .textlink{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--cream);text-decoration:none;border-bottom:1px solid var(--dim);padding-bottom:3px}
 .textlink:hover{border-color:var(--cream)}
-.explink .textlink{color:var(--black);border-color:var(--muted)}
-.explink .textlink:hover{border-color:var(--black)}
+/* Repertoire links are outlined boxes, not bare underlines. Adrian's call
+   2026-07-25: as plain links on open cream they read as "randomly placed."
+   Border gives them a deliberate shape and keeps the 44px tap target. */
+.explink .textlink{display:inline-flex;align-items:center;min-height:44px;color:var(--black);
+  border:1px solid var(--muted);padding:0 24px;
+  transition:background 200ms ease-out,color 200ms ease-out,border-color 200ms ease-out}
+.explink .textlink:hover{background:var(--black);color:var(--cream);border-color:var(--black)}
 
 /* sections */
-section{padding:80px var(--pad)}
+section{padding:64px var(--pad)}
+.photoband{padding-top:0;padding-bottom:0}
+/* mobile: horizontal swipe strip (scroll-snap), so three photos don't triple the page length */
+.photogrid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;max-width:var(--max);margin:0 auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.photogrid::-webkit-scrollbar{display:none}
+.photogrid picture{display:block;flex:0 0 78%;scroll-snap-align:center}
+.photogrid img{width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+/* Phone-only affordances for the swipe strip. Adrian's worry (2026-07-25): a
+   client won't realise there are three photos and won't think to swipe. Dots show
+   how many there are and which one you're on; the strip also auto-advances (see
+   CAROUSEL_JS). Both are mobile-only — the desktop grid shows all three at once,
+   so it needs neither. */
+.dots{display:flex;justify-content:center;gap:9px;margin-top:16px}
+.dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;background:var(--muted);
+  opacity:.45;cursor:pointer;transition:opacity 200ms ease-out,transform 200ms ease-out}
+.dots button[aria-current="true"]{opacity:1;transform:scale(1.45);background:var(--faint)}
+/* bigger invisible hit area than the 7px visual, so the dots stay tappable */
+.dots button::after{content:"";position:absolute;inset:-16px}
+.dots button{position:relative}
+/* closing band: full-bleed, still height-capped so a portrait source can't balloon
+   the page, but taller than the original 46vh/460px. At that cap a 4:5 portrait
+   became a ~3:1 letterbox slice on desktop and read as over-cropped (Adrian,
+   2026-07-25). A taller window also self-corrects the framing: the visible slice
+   grows, so object-position resolves to a higher start point and his head gains
+   headroom without touching the crop value. */
+.closingband{padding:0}
+.closingband img{width:100%;height:clamp(300px,66vh,700px);object-fit:cover;display:block}
 .wrap{max-width:var(--max);margin:0 auto}
 .label{font-size:11px;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--faint);margin-bottom:28px}
 .lede{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.6vw,40px);line-height:1.2;max-width:24ch}
 .bodytext{font-size:17px;line-height:1.7;max-width:58ch;margin-top:6px}
 .range{font-size:14px;letter-spacing:.02em;color:var(--faint);margin-top:20px}
-.explink{margin-top:26px}
+.explink{margin-top:26px;display:flex;gap:28px;flex-wrap:wrap;align-items:center}
 
 /* proof strip */
 .proofband{background:var(--charcoal);color:var(--cream);padding:34px var(--pad)}
 .proof{list-style:none;display:flex;flex-wrap:wrap;gap:10px 0;max-width:var(--max);margin:0 auto;justify-content:center}
 .proof li{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:center;max-width:100%}
 .proof li+li::before{content:"\\2022";margin:0 14px;color:var(--faint)}
+/* Narrow screens stack the three claims, and the middot separator then strands
+   a bullet at the start of every line. Must come AFTER the rule above: same
+   specificity, so source order decides. */
+@media(max-width:640px){
+  .proof{flex-direction:column;gap:12px}
+  .proof li+li::before{content:none}
+}
 
 /* media */
 .media{margin-top:8px}
@@ -112,14 +150,13 @@ section{padding:80px var(--pad)}
 .frame.busy .vstate--loading{display:flex}
 .frame.failed .vstate--error{display:flex}
 .vstate button,.vstate a{font:inherit;color:var(--cream);background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
-.reelcta{margin-top:28px}
 
 /* contact + footer */
 .contactband{background:var(--charcoal);color:var(--cream)}
 .contactband .lede{color:var(--cream)}
 .contactband .label{color:var(--muted)}
-.contactrow{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:34px}
-.phone{font-size:15px;letter-spacing:.06em;color:var(--cream);text-decoration:none;border-bottom:1px solid var(--dim);padding-bottom:3px}
+.contactrow{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.phone{font-size:15px;letter-spacing:.06em;color:var(--cream);text-decoration:none;border-bottom:1px solid var(--dim);padding:14px 0 3px}
 .phone:hover{border-color:var(--cream)}
 .outlinks{display:flex;gap:26px;flex-wrap:wrap;margin-top:36px}
 .outlinks a{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none}
@@ -128,7 +165,11 @@ footer{background:var(--charcoal);color:var(--muted);padding:28px var(--pad);bor
 footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between;font-size:12px}
 @media(min-width:768px){
   :root{--pad:48px}
-  section{padding:110px var(--pad)}
+  section{padding:88px var(--pad)}
+  .photoband{padding-top:0;padding-bottom:0}
+  .photogrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;overflow:visible}
+  .photogrid picture{flex:none}
+  .dots{display:none}
   .hero .inner{padding-bottom:72px}
 }
 """
@@ -184,6 +225,121 @@ document.querySelectorAll('.retry').forEach(function(btn){
 });
 """
 
+CAROUSEL_JS = """
+(function(){
+  var strip = document.querySelector('.photogrid');
+  if (!strip) return;
+  var slides = [].slice.call(strip.querySelectorAll('picture'));
+  if (slides.length < 2) return;
+
+  // Everything here is for the phone swipe strip only. On desktop .photogrid is a
+  // grid with overflow:visible, so scrollWidth == clientWidth and this all no-ops.
+  function scrollable(){ return strip.scrollWidth - strip.clientWidth > 8; }
+
+  var dots = document.createElement('div');
+  dots.className = 'dots';
+  dots.setAttribute('aria-label', 'Choose a performance photo');
+  slides.forEach(function(_, n){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Photo ' + (n + 1) + ' of ' + slides.length);
+    b.addEventListener('click', function(){ stop(); go(n); });
+    dots.appendChild(b);
+  });
+  strip.parentNode.appendChild(dots);
+  var buttons = [].slice.call(dots.querySelectorAll('button'));
+
+  var idx = 0, timer = null, stopped = false;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function targetLeft(n){
+    var s = slides[n];
+    return s.offsetLeft - (strip.clientWidth - s.offsetWidth) / 2;
+  }
+  function mark(n){
+    buttons.forEach(function(b, i){
+      b.setAttribute('aria-current', i === n ? 'true' : 'false');
+    });
+  }
+  function go(n){
+    idx = (n + slides.length) % slides.length;
+    mark(idx);
+    // scroll-snap:x mandatory fights a programmatic smooth scroll (iOS especially):
+    // the snap can yank it back mid-animation. Drop snap for the animation, then
+    // restore it so manual swiping still snaps.
+    var prev = strip.style.scrollSnapType;
+    strip.style.scrollSnapType = 'none';
+    try { strip.scrollTo({ left: targetLeft(idx), behavior: reduce.matches ? 'auto' : 'smooth' }); }
+    catch (e) { strip.scrollLeft = targetLeft(idx); }
+    setTimeout(function(){ strip.style.scrollSnapType = prev || ''; }, 600);
+  }
+  function pause(){ if (timer) { clearInterval(timer); timer = null; } }
+  function stop(){ stopped = true; pause(); }
+  function start(){
+    if (stopped || timer || reduce.matches || !scrollable()) return;
+    timer = setInterval(function(){ go(idx + 1); }, 3600);
+  }
+
+  // Handing control to the visitor has to be based on a gesture that actually
+  // means "I want to drive this strip". The first version stopped on any
+  // touchstart, which killed auto-advance on a real iPhone before it ever ran:
+  // the strip is nearly full-width on a phone, so simply scrolling the PAGE
+  // vertically starts a touch on it. Only a horizontal drag counts now.
+  // Deliberately not bound to 'scroll' either, which our own smooth scroll fires.
+  var t0 = null;
+  strip.addEventListener('touchstart', function(e){
+    var t = e.touches && e.touches[0];
+    t0 = t ? { x: t.clientX, y: t.clientY } : null;
+  }, { passive: true });
+  strip.addEventListener('touchmove', function(e){
+    var t = e.touches && e.touches[0];
+    if (!t0 || !t) return;
+    var dx = Math.abs(t.clientX - t0.x), dy = Math.abs(t.clientY - t0.y);
+    if (dx > 12 && dx > dy) stop();   // sideways = theirs; vertical = page scroll
+  }, { passive: true });
+  strip.addEventListener('wheel', function(e){
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) stop();
+  }, { passive: true });
+  strip.addEventListener('keydown', stop, { passive: true });
+  // a mouse press on the strip is unambiguous intent (and desktop never
+  // auto-advances anyway, since the grid isn't scrollable)
+  strip.addEventListener('pointerdown', function(e){
+    if (e.pointerType === 'mouse') stop();
+  }, { passive: true });
+
+  // keep the dots truthful when the visitor swipes by hand
+  var settle = null;
+  strip.addEventListener('scroll', function(){
+    clearTimeout(settle);
+    settle = setTimeout(function(){
+      var mid = strip.scrollLeft + strip.clientWidth / 2, best = 0, dist = Infinity;
+      slides.forEach(function(s, i){
+        var d = Math.abs(s.offsetLeft + s.offsetWidth / 2 - mid);
+        if (d < dist) { dist = d; best = i; }
+      });
+      idx = best; mark(idx);
+    }, 90);
+  }, { passive: true });
+
+  // only advance while it is actually on screen, and never in a background tab.
+  // Threshold kept low: on a phone the strip is tall (4:5 slides) and a stricter
+  // threshold can go unmet on short viewports, which reads as "it never moved".
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries){
+      if (entries[0].isIntersecting) { start(); } else { pause(); }
+    }, { threshold: 0.2 }).observe(strip);
+  } else { start(); }
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) { pause(); } else { start(); }
+  });
+
+  mark(0);
+  function sync(){ dots.style.display = scrollable() ? '' : 'none'; }
+  sync();
+  window.addEventListener('resize', sync);
+})();
+"""
+
 esc = html.escape
 
 
@@ -228,7 +384,7 @@ def topbar():
   <a class="wordmark" href="#">Adrian Michael</a>
   <nav aria-label="Primary">
     <a href="#reel">Reel</a>
-    <a href="#experience">Experience</a>
+    <a href="#experience">Repertoire</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>"""
@@ -236,12 +392,14 @@ def topbar():
 
 def hero(c, mailto):
     h = c["hero"]
+    eyebrow = f'<p class="eyebrow">{esc(h["eyebrow"])}</p>' if h.get("eyebrow") else ""
+    secondary_href = h.get("cta_secondary_href") or mailto
     ctas = (f'<div class="ctas"><a class="btn" href="{h["cta_primary"]["href"]}">{esc(h["cta_primary"]["label"])}</a>'
-            f'<a class="textlink" href="{mailto}">{esc(h["cta_secondary_label"])}</a></div>')
+            f'<a class="textlink" href="{secondary_href}">{esc(h["cta_secondary_label"])}</a></div>')
     return f"""<div class="hero">
   <div class="bg">{picture(h['hero_img'], "Adrian Michael performing", pos=h.get('hero_pos'), eager=True)}</div>
   <div class="inner">
-    <p class="eyebrow">{esc(h['eyebrow'])}</p>
+    {eyebrow}
     <h1>{esc(h['headline'])}</h1>
     <p>{esc(h['sub'])}</p>
     {ctas}
@@ -281,19 +439,38 @@ def reel_section(c, mailto):
   <div class="wrap">
     <h2 class="label">{esc(r['label'])}</h2>
     {media_block(r['video'])}
-    <div class="reelcta"><a class="btn" href="{mailto}">{esc(r['cta_label'])}</a></div>
   </div>
 </section>"""
 
 
+def photoband(c):
+    ph = c.get("photos") or []
+    if not ph:
+        return ""
+    pics = "".join(picture(p["img"], p["alt"], sizes="(min-width:768px) 33vw, 78vw", pos=p.get("pos")) for p in ph)
+    return f'<section class="photoband" aria-label="Performance photos"><div class="photogrid">{pics}</div></section>'
+
+
+def closing_band(c):
+    cl = c.get("closing")
+    if not cl:
+        return ""
+    return (f'<section class="closingband">'
+            f'{picture(cl["img"], cl["alt"], sizes="100vw", pos=cl.get("pos"))}</section>')
+
+
 def experience_section(c):
     e = c["experience"]
-    link = (f'<p class="explink"><a class="textlink" href="{esc(e["link"]["href"])}" rel="noopener">{esc(e["link"]["label"])}</a></p>'
-            if e.get("link") else "")
+    def explink(l):
+        tab = ' target="_blank"' if l.get("new_tab") else ""
+        return f'<a class="textlink" href="{esc(l["href"])}"{tab} rel="noopener">{esc(l["label"])}</a>'
+    links = e.get("links") or ([e["link"]] if e.get("link") else [])
+    link = f'<p class="explink">{"".join(explink(l) for l in links)}</p>' if links else ""
+    body = f'<p class="bodytext">{esc(e["copy"])}</p>' if e.get("copy") else ""
     return f"""<section id="experience">
   <div class="wrap">
     <h2 class="label">{esc(e['label'])}</h2>
-    <p class="bodytext">{esc(e['copy'])}</p>
+    {body}
     <p class="range">{esc(e['range'])}</p>
     {link}
   </div>
@@ -303,12 +480,13 @@ def experience_section(c):
 def contact_section(c, mailto):
     ct = c["contact"]
     links = "".join(f'<a href="{esc(l["href"])}" rel="noopener">{esc(l["label"])}</a>' for l in ct["links"])
+    lede = f'<p class="lede">{esc(ct["headline"])}</p>' if ct.get("headline") else ""
     return f"""<section id="contact" class="contactband">
   <div class="wrap">
     <h2 class="label">{esc(ct['label'])}</h2>
-    <p class="lede">{esc(ct['headline'])}</p>
+    {lede}
     <div class="contactrow">
-      <a class="btn" href="{mailto}">{esc(ct['cta_label'])}</a>
+      <a class="phone" href="{mailto}">{esc(ct['email'])}</a>
       <a class="phone" href="tel:{ct['phone_tel']}">{esc(ct['phone_display'])}</a>
     </div>
     <div class="outlinks">{links}</div>
@@ -330,7 +508,8 @@ def page_shell(headx, body, mode):
 <body data-mode="{mode}">
 <a class="skip" href="#main">Skip to content</a>
 {body}
-<script>{FACADE_JS}</script>
+<script>{FACADE_JS}
+{CAROUSEL_JS}</script>
 </body>
 </html>
 """
@@ -346,7 +525,9 @@ def build_page(c, mode):
 {hero(c, mailto)}
 {proofband(c)}
 {reel_section(c, mailto)}
+{photoband(c)}
 {experience_section(c)}
+{closing_band(c)}
 {contact_section(c, mailto)}
 </main>
 {footer(c)}"""

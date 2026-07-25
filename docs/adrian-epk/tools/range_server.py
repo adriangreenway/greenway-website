@@ -5,7 +5,12 @@ Python's stock http.server ignores Range headers and always returns 200 with
 the whole file, which makes browsers treat the video as unseekable. Netlify
 serves Range correctly in production; this closes the gap locally.
 
-Usage: python3 range_server.py <port> <directory>
+Usage: python3 range_server.py <port> <directory> [bind_host]
+
+bind_host defaults to 127.0.0.1. Pass 0.0.0.0 to also reach it from a phone on
+the same wifi, which is how the reel gets tested on real iPhone Safari and
+Android Chrome. Only do that for a review session, then stop the server: the
+EPK is unlisted and not meant to sit open on a network.
 """
 import os
 import re
@@ -97,5 +102,6 @@ class _Slice:
 
 if __name__ == "__main__":
     port, directory = int(sys.argv[1]), sys.argv[2]
+    bind = sys.argv[3] if len(sys.argv) > 3 else "127.0.0.1"
     handler = partial(RangeHandler, directory=directory)
-    ThreadingHTTPServer(("127.0.0.1", port), handler).serve_forever()
+    ThreadingHTTPServer((bind, port), handler).serve_forever()

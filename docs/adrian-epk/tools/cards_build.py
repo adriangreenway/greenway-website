@@ -26,10 +26,6 @@ CARD_TPL = """<!DOCTYPE html><html><head><meta charset="utf-8">
   img.bg {{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:{pos}; }}
   .shade {{ position:absolute; inset:0;
            background:linear-gradient(180deg,rgba(10,10,9,.18) 0%,rgba(10,10,9,.12) 55%,rgba(10,10,9,.86) 100%); }}
-  .play {{ position:absolute; left:50%; top:42%; transform:translate(-50%,-50%);
-          width:104px; height:104px; border:2px solid #F5F2ED; border-radius:50%;
-          background:rgba(10,10,9,.38); display:flex; align-items:center; justify-content:center; }}
-  .play svg {{ width:34px; height:34px; fill:#F5F2ED; margin-left:6px; }}
   .txt {{ position:absolute; left:56px; right:56px; bottom:44px; color:#F5F2ED; }}
   h1 {{ font-family:'Bodoni Moda',serif; font-weight:400; font-size:52px; letter-spacing:.01em; margin-bottom:14px; }}
   .role {{ font-size:17px; font-weight:600; letter-spacing:.28em; color:#B8B4AC; margin-bottom:22px; }}
@@ -38,32 +34,52 @@ CARD_TPL = """<!DOCTYPE html><html><head><meta charset="utf-8">
 </style></head><body>
 <img class="bg" src="{img}">
 <div class="shade"></div>
-<div class="play"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></div>
 <div class="txt">
   <h1>ADRIAN MICHAEL</h1>
-  <div class="role">BOSTON VOCALIST &amp; LIVE PERFORMER</div>
-  <div class="cta">WATCH THE LIVE REEL</div>
+  <div class="role">BOSTON-BASED VOCALIST</div>
+  <div class="cta">PLAY THE REEL</div>
 </div>
 </body></html>"""
+
+# The end card is authored at the reel's NATIVE output size. Keep END_W/END_H in
+# step with OUT_W/OUT_H in reel_build.py so the card is never resampled.
+#
+# Adrian called this card "grainy" on 2026-07-25. TWO encoding theories were
+# tested and BOTH were wrong, so don't retry them:
+#   1. "It's the 1920->1280 downscale." Authored it natively at 720p instead:
+#      edge energy 23.5 -> 22.3. No visible change. The card was already as
+#      sharp as 720p allows.
+#   2. "It's the output resolution." Rebuilt at 1080p: edge energy 23.47 ->
+#      24.16 measured at the width he actually views it (~1250px). A 3% gain
+#      for a 55% bigger file (53MB -> 82MB). Not worth it, and not the cause.
+#
+# The real cause is TYPE, not pixels. On a Retina display the video sits beside
+# page text that renders at 2x device pixels; video text renders at 1x and can
+# never match it. Thin, widely letter-spaced, muted-gray glyphs lose that
+# contest badly. The fix is legibility: heavier weight, brighter cream instead
+# of muted gray, larger, and less letter-spacing on the long contact line.
+# Judge changes here by looking at the card at ~1250px and at 390px, not by
+# reaching for resolution.
+END_W, END_H = 1280, 720
 
 END_TPL = """<!DOCTYPE html><html><head><meta charset="utf-8">
 <link href="{fonts}" rel="stylesheet">
 <style>
   * {{ margin:0; box-sizing:border-box; }}
-  body {{ width:1920px; height:1080px; background:#111110; color:#F5F2ED;
+  body {{ width:1280px; height:720px; background:#111110; color:#F5F2ED;
          font-family:'Plus Jakarta Sans',sans-serif; display:flex; align-items:center; justify-content:center; }}
   .in {{ text-align:center; }}
-  .rule {{ width:88px; height:1px; background:rgba(245,242,237,.35); margin:0 auto 42px; }}
-  .eyebrow {{ font-size:19px; font-weight:600; letter-spacing:.42em; color:#B8B4AC; margin-bottom:30px; }}
-  h1 {{ font-family:'Bodoni Moda',serif; font-weight:400; font-size:124px; letter-spacing:.06em; margin-bottom:34px; }}
-  .roles {{ font-size:23px; font-weight:500; letter-spacing:.3em; color:#B8B4AC; margin-bottom:66px; }}
-  .contact {{ font-size:21px; font-weight:400; letter-spacing:.14em; color:#706D66; }}
+  .rule {{ width:64px; height:2px; background:rgba(245,242,237,.45); margin:0 auto 26px; }}
+  .eyebrow {{ font-size:22px; font-weight:600; letter-spacing:.3em; color:#B8B4AC; margin-bottom:20px; }}
+  h1 {{ font-family:'Bodoni Moda',serif; font-weight:500; font-size:92px; letter-spacing:.05em; margin-bottom:22px; }}
+  .roles {{ font-size:34px; font-weight:600; letter-spacing:.16em; color:#F5F2ED; margin-bottom:38px; }}
+  .contact {{ font-size:33px; font-weight:500; letter-spacing:.03em; color:#F5F2ED; }}
 </style></head><body>
 <div class="in">
   <div class="rule"></div>
   <div class="eyebrow">BOSTON &bull; NEW ENGLAND</div>
   <h1>ADRIAN MICHAEL</h1>
-  <div class="roles">BOSTON VOCALIST &amp; LIVE PERFORMER</div>
+  <div class="roles">BOSTON-BASED VOCALIST</div>
   <div class="contact">ADRIAN@GREENWAYBAND.COM &nbsp;&bull;&nbsp; (281)&nbsp;467-1226</div>
 </div>
 </body></html>"""
@@ -89,5 +105,8 @@ print("card:", name, os.path.getsize(os.path.join(DIST_EMAIL, name + '.jpg')) //
 
 end_html = os.path.join(CARDS, "endcard.html")
 open(end_html, "w").write(END_TPL.format(fonts=FONTS))
-shoot(end_html, f"{RENDERS}/endcard.png", 1920, 1080)
-print("endcard:", os.path.getsize(os.path.join(RENDERS, "endcard.png")) // 1024, "KB")
+shoot(end_html, f"{RENDERS}/endcard.png", END_W, END_H)
+_ec = Image.open(os.path.join(RENDERS, "endcard.png"))
+assert _ec.size == (END_W, END_H), f"endcard rendered {_ec.size}, expected {(END_W, END_H)}"
+print("endcard:", f"{_ec.size[0]}x{_ec.size[1]}",
+      os.path.getsize(os.path.join(RENDERS, "endcard.png")) // 1024, "KB")

@@ -25,13 +25,16 @@ redirect here at the Netlify level (see Deploy).
 ## Build
 
 - `python3 build.py` regenerates `dist/adrian/index.html` from `content.json`
-  alone. No external data dependency (the song-list link and repertoire grid
-  were removed in the v1 correction, so `../song-list/songs.json` is no
-  longer read).
+  alone. No external data dependency: `../song-list/songs.json` is not read.
+  The repertoire grid and the "400+ songs" claim stay cut per the v1
+  correction, but **the song-list link is back as of the 2026-07-24 copy pass**
+  (Adrian's call, D16 v5) — it is a plain hyperlink to the already-live
+  `proposals.greenwayband.com/song-list/`, carrying no count claim, so it
+  reintroduces no build dependency.
 - `python3 build.py --mode preview --out <dir>` writes the same page with
   assets copied alongside. Preview root is session-scratch with a
   `adrian/media` symlink to `~/Desktop/EPK/renders/web/`; serve with the
-  `adrian-epk` entry in `.claude/launch.json` (port 8894). That entry runs
+  `adrian-epk` entry in `.claude/launch.json` (port 8893). That entry runs
   `range_server.py`, NOT `python3 -m http.server` — the stock module ignores
   HTTP Range, which makes every preview video unseekable and looks like a
   broken player. Netlify handles Range correctly in production.
@@ -60,7 +63,7 @@ fallback link to the mp4 (Required Technical Correction #6).
 Moon, the Big Spring Ranch film, and the testimonial are cut from the first
 release per the brief, but their web encodes are preserved (not deleted) in
 `~/Desktop/EPK/renders/web/`: `neon-moon.mp4` 12MB, `big-spring-wedding.mp4`
-70MB, `testimonial-nov-2022.mp4` 2MB, `adrian-reel.mp4` 31MB. The 9pc promo
+70MB, `testimonial-nov-2022.mp4` 2MB, `adrian-reel.mp4` 50MB. The 9pc promo
 stays excluded everywhere per Adrian (it showcases another vocalist).
 
 ## Deploy (Phase 2/3, only on Adrian's go)
@@ -95,30 +98,49 @@ Then:
 
 One universal card, `dist/adrian/assets/email/card-universal.jpg` (1200x675),
 vocalist hero image, replacing the prior card-solo/card-vocalist pair. Copy is
-fixed: `ADRIAN MICHAEL` / `BOSTON VOCALIST & LIVE PERFORMER` /
-`WATCH THE LIVE REEL`. Once deployed, the outreach snippet is a linked image
+fixed: `ADRIAN MICHAEL` / `BOSTON-BASED VOCALIST` / `PLAY THE REEL`
+(updated 2026-07-25 per ChatGPT's audit; the play-circle overlay was removed in
+the same pass). The rendered file is byte-identical to the version that audit
+approved — check the hash before regenerating it. Once deployed, the outreach snippet is a linked image
 pointing at the page, with a visible text link under it for image-blocked
 recipients:
 
     [card image] -> https://proposals.greenwayband.com/adrian/
     Watch the live reel: https://proposals.greenwayband.com/adrian/
 
-Alt text: "Adrian Michael, Boston vocalist and live performer."
+Alt text: "Adrian Michael, Boston-based vocalist."
 It also serves as the page's Open Graph image (Required Technical
 Correction #7).
 
 ## Open items before production
 
-- **Reel: SETTLED at 2:21 by Adrian's final call (v6).** He tried a 55s
-  5-moment cut (v5), then decided the same day to keep all thirteen of his
-  clip windows at full length — "if they don't want to scroll through the
-  whole thing, they don't have to." v6 is the v4 edit exactly, with the one
-  v5 improvement kept: the end card now reads "BOSTON VOCALIST & LIVE
-  PERFORMER." This consciously overrides the correction brief's 50-60s
-  requirement — owner's call beats auditor's brief. Watch-item if real
-  Boston replies suggest it's too long (already noted in DECISIONS D16).
-- Adrian still reviewing the rest of the page copy (his note when settling
-  the reel).
+- **Reel: SETTLED at 2:21 by Adrian's final call. Current build is v7.** He
+  tried a 55s 5-moment cut (v5), then decided the same day to keep all thirteen
+  of his clip windows at full length — "if they don't want to scroll through the
+  whole thing, they don't have to." Same edit ever since. This consciously
+  overrides the correction brief's 50-60s requirement — owner's call beats
+  auditor's brief. Watch-item if real Boston replies suggest it's too long.
+  **v7 (2026-07-25) is a re-encode only, no edit change:** 720p, H.264 High /
+  yuv420p (v6 shipped `High 4:4:4 Predictive` / yuv444p, outside iPhone's
+  hardware-decode path), and the end card now reads `BOSTON-BASED VOCALIST` to
+  match the page and email card. **Never hand-encode `web/adrian-reel.mp4`
+  again** — that undocumented step is what produced the bad pixel format. Copy
+  `reel_build.py`'s output across instead. See `MEDIA_MANIFEST.md` and
+  DECISIONS D16 v9. **End card retyped 2026-07-25 (D16 v10)** after Adrian called
+  it "grainy": heavier weight and cream instead of muted gray. Two encoding
+  theories were tested and both failed — authoring the card natively at 720p did
+  nothing, and 1080p bought 3% for a 55% bigger file. It was a TYPE problem, not
+  a resolution problem. Don't reach for resolution here.
+- **Page copy: DONE 2026-07-24 (D16 v5 + v6), corrected again 2026-07-25 (D16 v8).**
+  v8 is the current state: headline "Boston-based vocalist.", Boston back in the
+  title/meta/support line, reel's EMAIL ADRIAN
+  button removed, email card regenerated to match (`BOSTON-BASED VOCALIST`, no
+  play circle). Full detail and rationale in `docs/DECISIONS.md` D16 v8 — read
+  **Superseded in part by D16 v10 (same day):** photo order is now
+  brick/rustic/bowtie (Adrian's order, re-reversing v8's), the closing photo crop
+  moved to `50% 32%`, and the two repertoire links are outlined boxes. Read
+  that before changing any of the above, since v8 knowingly reverses v5's
+  "Boston removed" call and v6 follow-up's photo order call.
 - Testimonial exact quote if Adrian ever wants it as on-page text (dropped
   from the first release entirely per the brief; video preserved, unused).
 - Commit this folder, then Phase 2 draft deploy on his go.

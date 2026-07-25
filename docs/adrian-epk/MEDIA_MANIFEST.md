@@ -100,10 +100,29 @@ couldn't be matched as one.
 
 ## Page video encodes (self-hosted; live in `~/Desktop/EPK/renders/web/`)
 
-`adrian-reel.mp4` (78MB, from the v6 master, 2:21), `neon-moon.mp4` (13MB,
-full 31s), `big-spring-wedding.mp4` (61MB, full 1:36 at 1080p),
-`testimonial-nov-2022.mp4` (2MB). x264 CRF23-24, `-g 60` (2s keyframes),
-`+faststart`. Deploy destination: `proposals.greenwayband.com/adrian/media/`.
+`adrian-reel.mp4` (50MB / 52,564,766 bytes, 2:21) is now a straight copy of
+`renders/adrian_michael_vocalist_reel_v7_draft.mp4` — no separate hand-rolled
+re-encode step. **This changed 2026-07-25.** The old `adrian-reel.mp4` was a
+manual CRF23-24 pass over the v6 master that existed in no script, and because
+it pinned no pixel format it shipped as H.264 `High 4:4:4 Predictive` /
+`yuv444p`, which ChatGPT's final audit correctly flagged as unsafe for iPhone
+Safari. `reel_build.py` now produces a web-ready file directly, so copy it
+across and do not re-encode by hand:
+
+    cp ~/Desktop/EPK/renders/adrian_michael_vocalist_reel_v7_draft.mp4 \
+       ~/Desktop/EPK/renders/web/adrian-reel.mp4
+
+Verified specs of the current file: H.264 **High** profile (not 4:4:4), level
+4.1, **yuv420p**, 1280x720, 30fps, 2.79 Mbps video; AAC-LC 48kHz stereo
+187kbps; `+faststart` confirmed (moov at byte 36, before mdat); keyframe every
+1.0s; duration 141.126s.
+
+Other files, still the earlier encodes: `neon-moon.mp4` (13MB, full 31s),
+`big-spring-wedding.mp4` (61MB, full 1:36 at 1080p),
+`testimonial-nov-2022.mp4` (2MB) — none of these are embedded on the page
+today, so their pixel format has not been audited. **Pin `yuv420p` on any of
+them before ever putting them on a page.**
+Deploy destination: `proposals.greenwayband.com/adrian/media/`.
 No Vimeo anywhere (Adrian's call, 2026-07-24, matching the proposal
 template's self-hosted pattern).
 
