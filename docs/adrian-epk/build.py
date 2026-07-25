@@ -70,7 +70,11 @@ a{color:inherit}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,9,.42) 0%,rgba(10,10,9,.28) 45%,rgba(10,10,9,.82) 100%)}
 .hero .inner{position:relative;z-index:10;width:100%;max-width:var(--max);margin:0 auto;padding:120px var(--pad) 56px}
 .eyebrow{font-size:11px;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--muted)}
-.hero h1{font-family:var(--font-display);font-weight:400;font-size:clamp(36px,6.4vw,72px);line-height:1.12;letter-spacing:.01em;margin:18px 0 20px;max-width:17ch}
+.hero h1{font-family:var(--font-display);font-weight:400;font-size:clamp(44px,7.2vw,84px);line-height:1.08;letter-spacing:.02em;margin:0 0 14px;max-width:14ch}
+/* His name is the headline (Adrian, 2026-07-25: "adrian michael should be more
+   prominent... they wouldn't know to automatically find my name"). The role sits
+   under it as a letterspaced label, so name reads first, role second. */
+.hero .role{font-size:clamp(13px,1.6vw,17px);font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--cream);opacity:.85;margin:0 0 22px}
 .hero p{max-width:58ch;font-size:16px;color:var(--cream);opacity:.92}
 .ctas{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:32px}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--cream);color:var(--black);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:0 34px;border:1px solid var(--cream);border-radius:0;transition:background 200ms ease-out,color 200ms ease-out}
@@ -393,6 +397,7 @@ def topbar():
 def hero(c, mailto):
     h = c["hero"]
     eyebrow = f'<p class="eyebrow">{esc(h["eyebrow"])}</p>' if h.get("eyebrow") else ""
+    role = f'<p class="role">{esc(h["role"])}</p>' if h.get("role") else ""
     secondary_href = h.get("cta_secondary_href") or mailto
     ctas = (f'<div class="ctas"><a class="btn" href="{h["cta_primary"]["href"]}">{esc(h["cta_primary"]["label"])}</a>'
             f'<a class="textlink" href="{secondary_href}">{esc(h["cta_secondary_label"])}</a></div>')
@@ -401,6 +406,7 @@ def hero(c, mailto):
   <div class="inner">
     {eyebrow}
     <h1>{esc(h['headline'])}</h1>
+    {role}
     <p>{esc(h['sub'])}</p>
     {ctas}
   </div>

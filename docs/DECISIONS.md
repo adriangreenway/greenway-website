@@ -283,6 +283,14 @@ Format:
 - **Consequences:** the audit's publication-permission gate is closed. Remaining production gates are Adrian's draft-deploy authorization, an Android Chrome / desktop Safari pass, and his word on the reel's pacing critique (he has settled the *duration* twice; the pacing complaint itself he has never addressed in those terms). Nothing is deployed and this does not authorize a deploy.
 - **Reconsider if:** he ever wants the phone number off the page — it is the one item here with real ongoing exposure, and it is a one-line removal in `content.json`.
 
+### D16 v13 amendment: hero hierarchy flipped — his name is the headline, the role is a label under it
+- **Date:** 2026-07-25 (third review round the same day)
+- **Why:** his note, circling both the wordmark and the headline: "i think adrian michael should be more prominent. right now it looks like a generic squarespace template... if someone opened this up they wouldn't know to automatically find my name." Fair hit — after v8 dropped the eyebrow, the name existed only as the 15px topbar wordmark, and the biggest type on the page was the role.
+- **Consequences:** h1 is now `Adrian Michael` in the display serif (clamp up to 84px, up from 72px, tighter line-height since a name doesn't wrap like a sentence); `BOSTON-BASED VOCALIST` renders beneath it as a new `.role` line (letterspaced uppercase, cream at .85 opacity). `content.json` gained a `hero.role` field, rendered conditionally like `eyebrow`. Page title, meta, share card, support line, and CTAs unchanged — the Boston-first identity ChatGPT's audit asked for is still stated immediately, just second instead of first. Topbar wordmark kept as navigation; the duplication with the h1 is the standard artist-page pattern, not an error.
+- **History note:** this is the third arrangement of the same two facts (v5: name as eyebrow above "Vocalist." / v8: name nowhere in the hero, per the audit / v13: name as the headline). Each was a deliberate call; v13 is Adrian's own and supersedes the audit's "remove the repeated eyebrow" reasoning, which solved repetition but left the page effectively nameless at first glance.
+- **Verified:** desktop 1440x900 and mobile 390x844 renders both checked visually; name dominant, role legible, no wrap issues at either size; `npm run build` clean; evidence zip captures regenerated.
+- **Reconsider if:** he wants the role line brighter/dimmer, or a future audit objects to the name/role inversion — owner call, surface it, don't revert.
+
 ---
 ## Open decisions (not yet made — see `docs/ROADMAP.md`)
 - Reconcile `dev` vs `main` and decide the canonical deploy branch.
