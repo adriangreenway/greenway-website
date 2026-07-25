@@ -26,18 +26,24 @@ CARD_TPL = """<!DOCTYPE html><html><head><meta charset="utf-8">
   img.bg {{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:{pos}; }}
   .shade {{ position:absolute; inset:0;
            background:linear-gradient(180deg,rgba(10,10,9,.18) 0%,rgba(10,10,9,.12) 55%,rgba(10,10,9,.86) 100%); }}
-  .play {{ position:absolute; left:50%; top:44%; transform:translate(-50%,-50%);
+  .play {{ position:absolute; left:50%; top:42%; transform:translate(-50%,-50%);
           width:104px; height:104px; border:2px solid #F5F2ED; border-radius:50%;
           background:rgba(10,10,9,.38); display:flex; align-items:center; justify-content:center; }}
   .play svg {{ width:34px; height:34px; fill:#F5F2ED; margin-left:6px; }}
   .txt {{ position:absolute; left:56px; right:56px; bottom:44px; color:#F5F2ED; }}
-  .eyebrow {{ font-size:17px; font-weight:600; letter-spacing:.32em; color:#B8B4AC; margin-bottom:14px; }}
-  h1 {{ font-family:'Bodoni Moda',serif; font-weight:400; font-size:52px; letter-spacing:.01em; }}
+  h1 {{ font-family:'Bodoni Moda',serif; font-weight:400; font-size:52px; letter-spacing:.01em; margin-bottom:14px; }}
+  .role {{ font-size:17px; font-weight:600; letter-spacing:.28em; color:#B8B4AC; margin-bottom:22px; }}
+  .cta {{ display:inline-block; font-size:14px; font-weight:600; letter-spacing:.22em;
+         color:#F5F2ED; border-top:1px solid rgba(245,242,237,.35); padding-top:16px; }}
 </style></head><body>
 <img class="bg" src="{img}">
 <div class="shade"></div>
 <div class="play"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></div>
-<div class="txt"><div class="eyebrow">ADRIAN MICHAEL &bull; BOSTON</div><h1>{title}</h1></div>
+<div class="txt">
+  <h1>ADRIAN MICHAEL</h1>
+  <div class="role">BOSTON VOCALIST &amp; LIVE PERFORMER</div>
+  <div class="cta">WATCH THE LIVE REEL</div>
+</div>
 </body></html>"""
 
 END_TPL = """<!DOCTYPE html><html><head><meta charset="utf-8">
@@ -57,7 +63,7 @@ END_TPL = """<!DOCTYPE html><html><head><meta charset="utf-8">
   <div class="rule"></div>
   <div class="eyebrow">BOSTON &bull; NEW ENGLAND</div>
   <h1>ADRIAN MICHAEL</h1>
-  <div class="roles">LEAD &amp; HARMONY VOCALS &nbsp;&bull;&nbsp; ACOUSTIC GUITAR</div>
+  <div class="roles">BOSTON VOCALIST &amp; LIVE PERFORMER</div>
   <div class="contact">ADRIAN@GREENWAYBAND.COM &nbsp;&bull;&nbsp; (281)&nbsp;467-1226</div>
 </div>
 </body></html>"""
@@ -70,20 +76,16 @@ def shoot(html_path, png_path, w, h):
                     "file://" + html_path], capture_output=True)
 
 
-# Card titles stay honest to the actual media: the reel is 2:21 as of v4, so
-# no duration claim goes on the card.
-cards = [
-    ("card-solo", os.path.join(IMG, "hero-solo-1600.jpg"), "50% 18%", "Solo vocals &amp; acoustic guitar."),
-    ("card-vocalist", os.path.join(IMG, "poster-reel-1600.jpg"), "50% 30%", "Watch the live reel."),
-]
-for name, img, pos, title in cards:
-    html_path = os.path.join(CARDS, f"{name}.html")
-    open(html_path, "w").write(
-        CARD_TPL.format(fonts=FONTS, img="file://" + img, pos=pos, title=title))
-    shoot(html_path, f"{CARDS}/{name}.png", 1200, 675)
-    Image.open(f"{CARDS}/{name}.png").convert("RGB").save(
-        os.path.join(DIST_EMAIL, f"{name}.jpg"), "JPEG", quality=88, optimize=True)
-    print("card:", name, os.path.getsize(os.path.join(DIST_EMAIL, name + '.jpg')) // 1024, "KB")
+# Correction brief v1 (2026-07-24): one universal card replaces the prior
+# card-solo/card-vocalist pair. Vocalist hero image, per Adrian's call, so the
+# card matches the page's own hero exactly.
+name, img, pos = "card-universal", os.path.join(IMG, "hero-vocalist-1600.jpg"), "50% 22%"
+html_path = os.path.join(CARDS, f"{name}.html")
+open(html_path, "w").write(CARD_TPL.format(fonts=FONTS, img="file://" + img, pos=pos))
+shoot(html_path, f"{CARDS}/{name}.png", 1200, 675)
+Image.open(f"{CARDS}/{name}.png").convert("RGB").save(
+    os.path.join(DIST_EMAIL, f"{name}.jpg"), "JPEG", quality=88, optimize=True)
+print("card:", name, os.path.getsize(os.path.join(DIST_EMAIL, name + '.jpg')) // 1024, "KB")
 
 end_html = os.path.join(CARDS, "endcard.html")
 open(end_html, "w").write(END_TPL.format(fonts=FONTS))

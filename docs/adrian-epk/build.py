@@ -1,39 +1,34 @@
 #!/usr/bin/env python3
 """Adrian Michael EPK generator (Boston outreach track).
 
-Reads content.json (all copy, links, media wiring) and ../song-list/songs.json
-(the 433-song authority) and generates three static pages:
+Reads content.json (all copy, links, media wiring) and generates one static
+page:
 
-    dist/adrian/index.html            lane chooser / general
-    dist/adrian/solo/index.html       solo singer-guitarist lane
-    dist/adrian/vocalist/index.html   lead/harmony vocalist lane
+    dist/adrian/index.html
 
-Deploy target: proposals.greenwayband.com (copy dist/adrian/ into
-~/Desktop/greenway-proposals/ and run the usual proposals deploy, only on
-Adrian's go). Pages are noindex until Adrian approves indexing.
+Correction brief v1 (2026-07-24) unified the prior three-page solo/vocalist
+lane structure into this single page. Deploy target: proposals.greenwayband.com
+(copy dist/adrian/ into ~/Desktop/greenway-proposals/ and run the usual
+proposals deploy, only on Adrian's go). Page carries noindex until Adrian
+approves indexing.
 
 Modes:
-    python3 build.py                         # prod pages -> dist/adrian/
-    python3 build.py --mode preview --out D  # same pages + assets copied next to them
+    python3 build.py                         # prod page -> dist/adrian/
+    python3 build.py --mode preview --out D  # same page + assets copied alongside
 
-Video hosting (Adrian's call, 2026-07-24): NO Vimeo. Videos are self-hosted
-mp4s in /adrian/media/ on the proposals site, exactly like the proposal
+Video hosting (Adrian's call, 2026-07-24): NO Vimeo. Video is a self-hosted
+mp4 in /adrian/media/ on the proposals site, exactly like the proposal
 template's ../assets/uptown-funk-2026a.mp4 pattern: poster facade, click swaps
 in a native <video controls autoplay playsinline>. Nothing loads until click.
-
-Copy integrity: every song title rendered comes from songs.json; nothing is
-hand-typed here.
 """
 import argparse
 import html
 import json
 import os
 import shutil
-import re
 import urllib.parse
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-SONGS_JSON = os.path.join(BASE, os.pardir, "song-list", "songs.json")
 
 # ---------------------------------------------------------------- tokens/CSS
 # Colors and type mirror the locked site tokens in src/styles/global.css
@@ -55,19 +50,18 @@ a{color:inherit}
 .skip{position:absolute;left:-9999px;top:0;background:var(--cream);color:var(--black);padding:10px 16px;z-index:200}
 .skip:focus{left:0}
 :focus-visible{outline:2px solid var(--cream);outline-offset:3px}
-main :focus-visible,footer :focus-visible{outline-color:var(--black)}
+#reel :focus-visible,#experience :focus-visible{outline-color:var(--black)}
 
 /* top bar (over dark hero) */
 .top{position:absolute;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px var(--pad);color:var(--cream)}
 .top .wordmark{font-family:var(--font-display);font-size:15px;letter-spacing:.28em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
 .top nav{display:flex;gap:18px;flex-wrap:wrap;justify-content:flex-end}
-.top nav a{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:var(--muted);padding:4px 0}
-.top nav a:hover,.top nav a[aria-current]{color:var(--cream)}
-.top nav a[aria-current]{border-bottom:1px solid var(--cream)}
+.top nav a{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:var(--muted);display:inline-flex;align-items:center;min-height:44px;padding:0 2px}
+.top nav a:hover{color:var(--cream)}
 @media(max-width:640px){
-  .top{flex-direction:column;align-items:flex-start;gap:10px;padding:16px var(--pad)}
+  .top{flex-direction:column;align-items:flex-start;gap:2px;padding:12px var(--pad)}
   .top .wordmark{font-size:13px}
-  .top nav{gap:14px;justify-content:flex-start}
+  .top nav{gap:8px;justify-content:flex-start}
 }
 
 /* hero */
@@ -79,20 +73,21 @@ main :focus-visible,footer :focus-visible{outline-color:var(--black)}
 .hero h1{font-family:var(--font-display);font-weight:400;font-size:clamp(36px,6.4vw,72px);line-height:1.12;letter-spacing:.01em;margin:18px 0 20px;max-width:17ch}
 .hero p{max-width:58ch;font-size:16px;color:var(--cream);opacity:.92}
 .ctas{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:32px}
-.btn{display:inline-block;background:var(--cream);color:var(--black);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:15px 34px;border:1px solid var(--cream);border-radius:0;transition:background 200ms ease-out,color 200ms ease-out}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--cream);color:var(--black);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:0 34px;border:1px solid var(--cream);border-radius:0;transition:background 200ms ease-out,color 200ms ease-out}
 .btn:hover{background:transparent;color:var(--cream)}
-.btn.dark{background:var(--black);color:var(--cream);border-color:var(--black)}
-.btn.dark:hover{background:transparent;color:var(--black)}
 .textlink{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--cream);text-decoration:none;border-bottom:1px solid var(--dim);padding-bottom:3px}
 .textlink:hover{border-color:var(--cream)}
-main .textlink{color:var(--black);border-color:var(--muted)}
-main .textlink:hover{border-color:var(--black)}
+.explink .textlink{color:var(--black);border-color:var(--muted)}
+.explink .textlink:hover{border-color:var(--black)}
 
 /* sections */
 section{padding:80px var(--pad)}
 .wrap{max-width:var(--max);margin:0 auto}
-.label{font-size:11px;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--dim);margin-bottom:28px}
+.label{font-size:11px;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--faint);margin-bottom:28px}
 .lede{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.6vw,40px);line-height:1.2;max-width:24ch}
+.bodytext{font-size:17px;line-height:1.7;max-width:58ch;margin-top:6px}
+.range{font-size:14px;letter-spacing:.02em;color:var(--faint);margin-top:20px}
+.explink{margin-top:26px}
 
 /* proof strip */
 .proofband{background:var(--charcoal);color:var(--cream);padding:34px var(--pad)}
@@ -103,10 +98,8 @@ section{padding:80px var(--pad)}
 /* media */
 .media{margin-top:8px}
 .media.h{max-width:880px}
-.media.v{max-width:390px}
 .media .frame{position:relative;width:100%;background:var(--charcoal)}
 .media.h .frame{aspect-ratio:16/9}
-.media.v .frame{aspect-ratio:9/16}
 .facade{position:absolute;inset:0;width:100%;height:100%;display:block;border:0;padding:0;cursor:pointer;background:var(--charcoal)}
 .facade picture,.facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .facade::after{content:"";position:absolute;inset:0;background:rgba(10,10,9,.18);transition:background 200ms ease-out}
@@ -114,37 +107,12 @@ section{padding:80px var(--pad)}
 .play{position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border:1px solid var(--cream);border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(10,10,9,.35)}
 .play svg{width:18px;height:18px;fill:var(--cream);margin-left:3px}
 .frame iframe,.frame video{position:absolute;inset:0;width:100%;height:100%;border:0}
-.cap{font-size:13px;color:var(--dim);margin-top:14px}
-.mediarow{display:grid;gap:40px;margin-top:36px}
-@media(min-width:900px){.mediarow{grid-template-columns:1fr 1fr}}
-.note{font-size:14px;color:var(--dim);max-width:64ch;margin-top:18px}
-
-/* role points */
-.points{list-style:none;margin-top:30px;max-width:560px}
-.points li{font-size:16px;padding:16px 0;border-bottom:1px solid rgba(10,10,9,.12)}
-.points li:first-child{border-top:1px solid rgba(10,10,9,.12)}
-
-/* repertoire */
-.songgrid{display:grid;gap:40px 56px;margin-top:40px}
-@media(min-width:700px){.songgrid{grid-template-columns:1fr 1fr}}
-@media(min-width:1024px){.songgrid{grid-template-columns:1fr 1fr 1fr}}
-.songcat h3{font-family:var(--font-display);font-weight:400;font-size:21px;margin-bottom:14px}
-.songcat ul{list-style:none}
-.songcat li{font-size:14px;color:var(--faint);padding:5px 0}
-.songcat li span{color:var(--muted);font-size:12px}
-.songfoot{margin-top:44px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
-.songfoot .count{font-size:13px;color:var(--dim)}
-
-/* lane cards (root) */
-.lanes{display:grid;gap:28px;margin-top:40px}
-@media(min-width:820px){.lanes{grid-template-columns:1fr 1fr}}
-.lane{position:relative;display:block;text-decoration:none;color:var(--cream);background:var(--charcoal);min-height:420px;overflow:hidden}
-.lane img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.72;transition:opacity 200ms ease-out,transform 400ms ease-out}
-.lane:hover img{opacity:.6;transform:scale(1.015)}
-.lane .laneinner{position:relative;z-index:5;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;min-height:420px;padding:28px;background:linear-gradient(180deg,rgba(10,10,9,0) 40%,rgba(10,10,9,.78) 100%)}
-.lane h2{font-family:var(--font-display);font-weight:400;font-size:30px}
-.lane p{font-size:14px;color:var(--muted);max-width:44ch}
-.lane .go{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;margin-top:8px;border-bottom:1px solid var(--dim);align-self:flex-start;padding-bottom:3px}
+.cap{font-size:13px;color:var(--faint);margin-top:14px}
+.vstate{position:absolute;left:0;right:0;bottom:0;z-index:8;display:none;align-items:center;justify-content:center;gap:8px 16px;flex-wrap:wrap;text-align:center;padding:12px 16px;font-size:12px;line-height:1.5;color:var(--muted);background:rgba(10,10,9,.82)}
+.frame.busy .vstate--loading{display:flex}
+.frame.failed .vstate--error{display:flex}
+.vstate button,.vstate a{font:inherit;color:var(--cream);background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
+.reelcta{margin-top:28px}
 
 /* contact + footer */
 .contactband{background:var(--charcoal);color:var(--cream)}
@@ -156,8 +124,7 @@ section{padding:80px var(--pad)}
 .outlinks{display:flex;gap:26px;flex-wrap:wrap;margin-top:36px}
 .outlinks a{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none}
 .outlinks a:hover{color:var(--cream)}
-.baseline{margin-top:30px;font-size:13px;color:var(--dim)}
-footer{background:var(--charcoal);color:var(--faint);padding:28px var(--pad);border-top:1px solid rgba(245,242,237,.08)}
+footer{background:var(--charcoal);color:var(--muted);padding:28px var(--pad);border-top:1px solid rgba(245,242,237,.08)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between;font-size:12px}
 @media(min-width:768px){
   :root{--pad:48px}
@@ -179,16 +146,40 @@ FONTS = ("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0
 SITE_ORIGIN = "https://proposals.greenwayband.com"
 
 FACADE_JS = """
-document.querySelectorAll('.facade').forEach(function(b){
-  b.addEventListener('click',function(){
-    var frame=b.parentElement;
-    if(frame.querySelector('video'))return;
-    var v=document.createElement('video');
-    v.controls=true; v.autoplay=true; v.playsInline=true;
-    v.setAttribute('playsinline','');
-    v.src=b.dataset.src;
-    v.setAttribute('aria-label',b.getAttribute('aria-label'));
-    frame.replaceChildren(v);
+document.querySelectorAll('.facade').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var frame = btn.parentElement;
+    if (frame.classList.contains('busy') || frame.querySelector('video')) return;
+    frame.classList.remove('failed');
+    frame.classList.add('busy');
+    var src = btn.dataset.src;
+    var v = document.createElement('video');
+    v.controls = true;
+    v.autoplay = true;
+    v.playsInline = true;
+    v.setAttribute('playsinline', '');
+    v.setAttribute('aria-label', btn.getAttribute('aria-label'));
+    v.style.opacity = '0';
+    v.addEventListener('playing', function(){
+      frame.classList.remove('busy');
+      v.style.opacity = '';
+      btn.remove();
+    });
+    v.addEventListener('error', function(){
+      v.remove();
+      frame.classList.remove('busy');
+      frame.classList.add('failed');
+    });
+    frame.appendChild(v);
+    v.src = src;
+  });
+});
+document.querySelectorAll('.retry').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var frame = btn.closest('.frame');
+    frame.classList.remove('failed');
+    var facade = frame.querySelector('.facade');
+    if (facade) facade.click();
   });
 });
 """
@@ -196,51 +187,20 @@ document.querySelectorAll('.facade').forEach(function(b){
 esc = html.escape
 
 
-def norm(s):
-    return re.sub(r"[^a-z0-9]+", "", s.lower())
-
-
-def pick_songs(rep):
-    """Curated picks per category. Only titles that exist in songs.json render."""
-    data = json.load(open(SONGS_JSON))
-    by_genre = {g["name"]: g["songs"] for g in data["genres"]}
-    total = data["total"]
-    used = set()
-    cards = []
-    for cat in rep["categories"]:
-        pool = []
-        for g in cat["genres"]:
-            pool += by_genre.get(g, [])
-        index = {norm(s["song"]): s for s in pool}
-        picks = []
-        for want in cat["prefer"]:
-            s = index.get(norm(want))
-            if s and norm(s["song"]) not in used and len(picks) < 6:
-                picks.append(s)
-                used.add(norm(s["song"]))
-        for s in pool:  # fill to six from the real list if preferences missed
-            if len(picks) >= 6:
-                break
-            if norm(s["song"]) not in used:
-                picks.append(s)
-                used.add(norm(s["song"]))
-        cards.append((cat["name"], picks))
-    return cards, total
-
-
 # ---------------------------------------------------------------- fragments
 
-def picture(img_base, alt, assets, sizes="100vw", pos=None):
+def picture(img_base, alt, sizes="100vw", pos=None, eager=False):
     style = f' style="object-position:{pos}"' if pos else ""
+    attrs = 'loading="eager" fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
     has_800 = not img_base.endswith(("-720", "-1600"))
     if has_800:
-        return (f'<picture><source type="image/webp" srcset="{assets}img/{img_base}-800.webp 800w, {assets}img/{img_base}-1600.webp 1600w" sizes="{sizes}">'
-                f'<img src="{assets}img/{img_base}-800.jpg" srcset="{assets}img/{img_base}-800.jpg 800w, {assets}img/{img_base}-1600.jpg 1600w" sizes="{sizes}" alt="{esc(alt)}"{style} loading="lazy" decoding="async"></picture>')
-    return (f'<picture><source type="image/webp" srcset="{assets}img/{img_base}.webp">'
-            f'<img src="{assets}img/{img_base}.jpg" alt="{esc(alt)}"{style} loading="lazy" decoding="async"></picture>')
+        return (f'<picture><source type="image/webp" srcset="assets/img/{img_base}-800.webp 800w, assets/img/{img_base}-1600.webp 1600w" sizes="{sizes}">'
+                f'<img src="assets/img/{img_base}-800.jpg" srcset="assets/img/{img_base}-800.jpg 800w, assets/img/{img_base}-1600.jpg 1600w" sizes="{sizes}" alt="{esc(alt)}"{style} {attrs}></picture>')
+    return (f'<picture><source type="image/webp" srcset="assets/img/{img_base}.webp">'
+            f'<img src="assets/img/{img_base}.jpg" alt="{esc(alt)}"{style} {attrs}></picture>')
 
 
-def head(title, desc, og_img, path):
+def head(title, desc, og_path, path):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -251,7 +211,7 @@ def head(title, desc, og_img, path):
 <meta name="robots" content="noindex, nofollow">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
-<meta property="og:image" content="{SITE_ORIGIN}/adrian/assets/img/{og_img}">
+<meta property="og:image" content="{SITE_ORIGIN}/adrian/{og_path}">
 <meta property="og:url" content="{SITE_ORIGIN}{path}">
 <meta property="og:type" content="profile">
 <link rel="icon" href="{FAVICON}">
@@ -263,28 +223,28 @@ def head(title, desc, og_img, path):
 </head>"""
 
 
-def topbar(root, active):
-    def cur(k):
-        return ' aria-current="page"' if active == k else ""
-    return f"""<header class="top">
-  <a class="wordmark" href="{root}">Adrian Michael</a>
-  <nav aria-label="EPK">
-    <a href="{root}solo/"{cur('solo')}>Solo</a>
-    <a href="{root}vocalist/"{cur('vocalist')}>Vocalist</a>
-    <a href="{root}../song-list/">Song List</a>
+def topbar():
+    return """<header class="top">
+  <a class="wordmark" href="#">Adrian Michael</a>
+  <nav aria-label="Primary">
+    <a href="#reel">Reel</a>
+    <a href="#experience">Experience</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>"""
 
 
-def hero(page, c, assets, ctas_html):
+def hero(c, mailto):
+    h = c["hero"]
+    ctas = (f'<div class="ctas"><a class="btn" href="{h["cta_primary"]["href"]}">{esc(h["cta_primary"]["label"])}</a>'
+            f'<a class="textlink" href="{mailto}">{esc(h["cta_secondary_label"])}</a></div>')
     return f"""<div class="hero">
-  <div class="bg">{picture(page['hero_img'], f"Adrian Michael performing", assets, pos=page.get('hero_pos'))}</div>
+  <div class="bg">{picture(h['hero_img'], "Adrian Michael performing", pos=h.get('hero_pos'), eager=True)}</div>
   <div class="inner">
-    <p class="eyebrow">{esc(c['identity']['eyebrow'])}</p>
-    <h1>{esc(page['headline'])}</h1>
-    <p>{esc(page['sub'])}</p>
-    {ctas_html}
+    <p class="eyebrow">{esc(h['eyebrow'])}</p>
+    <h1>{esc(h['headline'])}</h1>
+    <p>{esc(h['sub'])}</p>
+    {ctas}
   </div>
 </div>"""
 
@@ -294,73 +254,64 @@ def proofband(c):
     return f'<div class="proofband"><ul class="proof">{lis}</ul></div>'
 
 
-def media_block(v, root, assets, extra=""):
+def media_block(v):
     orient = "v" if v["orient"] == "v" else "h"
     cap = f'<p class="cap">{esc(v["caption"])}</p>' if v.get("caption") else ""
-    return f"""<div class="media {orient} {extra}">
+    src = f"media/{esc(v['media'])}"
+    return f"""<div class="media {orient}">
   <div class="frame">
-    <button type="button" class="facade" data-src="{root}media/{esc(v['media'])}" aria-label="Play video: {esc(v['title'])}">
-      {picture(v['poster'], v['title'], assets)}
+    <button type="button" class="facade" data-src="{src}" aria-label="Play video: {esc(v['title'])}">
+      {picture(v['poster'], v['title'])}
       <span class="play">{PLAY_SVG}</span>
     </button>
+    <div class="vstate vstate--loading" aria-hidden="true"><span>Loading video&hellip;</span></div>
+    <div class="vstate vstate--error">
+      <span>Playback failed.</span>
+      <button type="button" class="retry">Try again</button>
+      <a href="{src}">Open the video directly</a>
+    </div>
   </div>
   {cap}
 </div>"""
 
 
-def repertoire(c, assets, root):
-    cards, total = pick_songs(c["repertoire"])
-    cats = ""
-    for name, picks in cards:
-        lis = "".join(f'<li>{esc(s["song"])} <span>&middot; {esc(s["artist"])}</span></li>' for s in picks)
-        cats += f'<div class="songcat"><h3>{esc(name)}</h3><ul>{lis}</ul></div>'
-    lede = f'<p class="lede">{esc(c["repertoire"]["intro"])}</p>' if c["repertoire"].get("intro") else ""
-    return f"""<section id="songs">
+def reel_section(c, mailto):
+    r = c["reel"]
+    return f"""<section id="reel">
   <div class="wrap">
-    <h2 class="label">Repertoire</h2>
-    {lede}
-    <div class="songgrid">{cats}</div>
-    <div class="songfoot">
-      <a class="btn dark" href="{root}../song-list/">{esc(c['repertoire']['full_list_label'])}</a>
-      <span class="count">{esc(c['repertoire']['footnote'])}</span>
-    </div>
+    <h2 class="label">{esc(r['label'])}</h2>
+    {media_block(r['video'])}
+    <div class="reelcta"><a class="btn" href="{mailto}">{esc(r['cta_label'])}</a></div>
   </div>
 </section>"""
 
 
-def greenway_section(c, root, assets):
-    return f"""<section id="greenway">
+def experience_section(c):
+    e = c["experience"]
+    link = (f'<p class="explink"><a class="textlink" href="{esc(e["link"]["href"])}" rel="noopener">{esc(e["link"]["label"])}</a></p>'
+            if e.get("link") else "")
+    return f"""<section id="experience">
   <div class="wrap">
-    <h2 class="label">With The Greenway Band</h2>
-    {media_block(c['videos']['film'], root, assets)}
-    <p class="note">{esc(c['identity']['disclosure'])}</p>
+    <h2 class="label">{esc(e['label'])}</h2>
+    <p class="bodytext">{esc(e['copy'])}</p>
+    <p class="range">{esc(e['range'])}</p>
+    {link}
   </div>
 </section>"""
 
 
-def testimonial_section(c, root, assets):
-    return f"""<section id="testimonial">
-  <div class="wrap">
-    <h2 class="label">Testimonial</h2>
-    {media_block(c['videos']['testimonial'], root, assets)}
-  </div>
-</section>"""
-
-
-def contact_section(c):
+def contact_section(c, mailto):
     ct = c["contact"]
-    mail = f"mailto:{ct['email']}?subject={urllib.parse.quote(ct['email_subject'])}"
     links = "".join(f'<a href="{esc(l["href"])}" rel="noopener">{esc(l["label"])}</a>' for l in ct["links"])
     return f"""<section id="contact" class="contactband">
   <div class="wrap">
-    <h2 class="label">Contact</h2>
-    <p class="lede">Check availability.</p>
+    <h2 class="label">{esc(ct['label'])}</h2>
+    <p class="lede">{esc(ct['headline'])}</p>
     <div class="contactrow">
-      <a class="btn" href="{mail}">Email Adrian</a>
+      <a class="btn" href="{mailto}">{esc(ct['cta_label'])}</a>
       <a class="phone" href="tel:{ct['phone_tel']}">{esc(ct['phone_display'])}</a>
     </div>
     <div class="outlinks">{links}</div>
-    <p class="baseline">{esc(c['identity']['base_line'])}</p>
   </div>
 </section>"""
 
@@ -368,13 +319,13 @@ def contact_section(c):
 def footer(c):
     return f"""<footer>
   <div class="wrap">
-    <span>{esc(c['identity']['band_line'])}</span>
+    <span>{esc(c['footer']['disclosure'])}</span>
     <span>&copy; 2026 Adrian Michael</span>
   </div>
 </footer>"""
 
 
-def page_shell(c, headx, body, mode):
+def page_shell(headx, body, mode):
     return f"""{headx}
 <body data-mode="{mode}">
 <a class="skip" href="#main">Skip to content</a>
@@ -385,89 +336,21 @@ def page_shell(c, headx, body, mode):
 """
 
 
-# ---------------------------------------------------------------- pages
+# ---------------------------------------------------------------- page
 
-def build_lane(c, lane, mode):
-    p = c[lane]
-    assets, root = "../assets/", "../"
-    ctas = (f'<div class="ctas"><a class="btn" href="{p["cta_primary"]["href"]}">{esc(p["cta_primary"]["label"])}</a>'
-            f'<a class="textlink" href="{p["cta_secondary"]["href"]}">{esc(p["cta_secondary"]["label"])}</a></div>')
-    if lane == "solo":
-        watch = f"""<section id="watch">
-  <div class="wrap">
-    <h2 class="label">Watch</h2>
-    {media_block(c['videos']['neon'], root, assets)}
-  </div>
-</section>"""
-        mid = ""
-    else:
-        watch = f"""<section id="watch">
-  <div class="wrap">
-    <h2 class="label">Watch</h2>
-    {media_block(c['videos']['reel'], root, assets)}
-  </div>
-</section>"""
-        pts = "".join(f"<li>{esc(x)}</li>" for x in p["role_points"])
-        mid = f"""<section id="role">
-  <div class="wrap">
-    <h2 class="label">In Your Band</h2>
-    <ul class="points">{pts}</ul>
-  </div>
-</section>
-<section id="solo-proof">
-  <div class="wrap">
-    <h2 class="label">Adrian, Solo</h2>
-    {media_block(c['videos']['neon'], root, assets)}
-  </div>
-</section>"""
-    body = f"""{topbar(root, lane)}
-{hero(p, c, assets, ctas)}
-{proofband(c)}
+def build_page(c, mode):
+    m = c["meta"]
+    mailto = f"mailto:{c['contact']['email']}?subject={urllib.parse.quote(c['contact']['email_subject'])}"
+    body = f"""{topbar()}
 <main id="main">
-{watch}
-{mid}
-{repertoire(c, assets, root) if lane == 'solo' else ''}
-{greenway_section(c, root, assets)}
-{'' if lane == 'solo' else repertoire(c, assets, root)}
-{testimonial_section(c, root, assets)}
-{contact_section(c)}
+{hero(c, mailto)}
+{proofband(c)}
+{reel_section(c, mailto)}
+{experience_section(c)}
+{contact_section(c, mailto)}
 </main>
 {footer(c)}"""
-    path = f"/adrian/{lane}/"
-    return page_shell(c, head(p["title"], p["description"], f"{p['hero_img']}-1600.jpg", path), body, mode)
-
-
-def build_root(c, mode):
-    p = c["root"]
-    assets, root = "assets/", "./"
-    lanes = ""
-    for lane in p["lanes"]:
-        img = lane["card_img"]
-        base = f"{img}-800" if not img.endswith("-1600") else img
-        lanes += f"""<a class="lane" href="{lane['slug']}/">
-  <img src="assets/img/{base}.jpg" alt="" style="object-position:{lane['card_pos']}" loading="lazy" decoding="async">
-  <span class="laneinner">
-    <h2>{esc(lane['label'])}</h2>
-    <p>{esc(lane['line'])}</p>
-    <span class="go">{esc(lane['cta'])}</span>
-  </span>
-</a>"""
-    ctas = ('<div class="ctas"><a class="btn" href="solo/">Watch Adrian Solo</a>'
-            '<a class="textlink" href="vocalist/">Watch the Live Reel</a></div>')
-    body = f"""{topbar(root, None)}
-{hero(p, c, assets, ctas)}
-{proofband(c)}
-<main id="main">
-<section id="lanes">
-  <div class="wrap">
-    <h2 class="label">Two Ways To Book Adrian</h2>
-    <div class="lanes">{lanes}</div>
-  </div>
-</section>
-{contact_section(c)}
-</main>
-{footer(c)}"""
-    return page_shell(c, head(p["title"], p["description"], f"{p['hero_img']}-1600.jpg", "/adrian/"), body, mode)
+    return page_shell(head(m["title"], m["description"], "assets/email/card-universal.jpg", "/adrian/"), body, mode)
 
 
 def main():
@@ -478,17 +361,12 @@ def main():
     c = json.load(open(os.path.join(BASE, "content.json")))
     out = os.path.abspath(a.out)
     os.makedirs(out, exist_ok=True)
-    pages = {
-        os.path.join(out, "index.html"): build_root(c, a.mode),
-        os.path.join(out, "solo", "index.html"): build_lane(c, "solo", a.mode),
-        os.path.join(out, "vocalist", "index.html"): build_lane(c, "vocalist", a.mode),
-    }
-    for path, htmlx in pages.items():
-        os.makedirs(os.path.dirname(path), exist_ok=True)
-        with open(path, "w") as f:
-            f.write(htmlx)
-        print("wrote", path, f"({len(htmlx)//1024}KB)")
-    # preview builds need the assets alongside the pages
+    path = os.path.join(out, "index.html")
+    htmlx = build_page(c, a.mode)
+    with open(path, "w") as f:
+        f.write(htmlx)
+    print("wrote", path, f"({len(htmlx)//1024}KB)")
+    # preview builds need the assets alongside the page
     dist_assets = os.path.join(BASE, "dist", "adrian", "assets")
     if a.mode == "preview" and os.path.abspath(out) != os.path.join(BASE, "dist", "adrian"):
         shutil.copytree(dist_assets, os.path.join(out, "assets"), dirs_exist_ok=True)

@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Draft vocalist reel v1 (~51s, 1080p30). EDL v2 as approved in Phase 0.
+"""Vocalist reel v6 (~2:21, 1080p30). Adrian's final call 2026-07-24: keep
+ALL thirteen of his clip windows at full length ("it's too hard for me to
+pick which ones are better... if they don't want to scroll through the whole
+thing, they don't have to"). Identical edit to v4; the only change vs v4 is
+the corrected end card (BOSTON VOCALIST & LIVE PERFORMER). The 55s v5 cut is
+superseded — its 5-moment SEGS live in git history if ever wanted again.
 Verticals get a blurred pillarbox; audio is per-clip live sound, loudness-normalized,
 0.5s crossfades. Draft only: nothing uploaded."""
 import os, subprocess, math, json
@@ -10,8 +15,8 @@ TMP = os.path.join(OUT, "_reel_tmp")  # scratch, lives beside the renders
 os.makedirs(OUT, exist_ok=True)
 os.makedirs(TMP, exist_ok=True)
 
-# v4: every window is Adrian's own timestamp pass (2026-07-24), used at the
-# full length he gave. Running order is an energy arc; his windows untouched.
+# v6 = v4's windows exactly: every window is Adrian's own timestamp pass
+# (2026-07-24), used at the full length he gave. Energy-arc running order.
 SEGS = [
     ("big_spring_ranch_wedding_v1 (2160p).mp4",  0.0,  5.0, "h"),
     ("suavemente_v1 (720p).mp4",                 0.0, 13.0, "v"),
@@ -90,7 +95,7 @@ for i in range(1, len(files)):
     fc.append(f"{aprev}[{i}:a]acrossfade=d={XF}{aout}")
     vprev, aprev = vout, aout
 
-final = os.path.join(OUT, "adrian_michael_vocalist_reel_v4_draft.mp4")
+final = os.path.join(OUT, "adrian_michael_vocalist_reel_v6_draft.mp4")
 run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", *inputs,
      "-filter_complex", ";".join(fc),
      "-map", vprev, "-map", aprev,
