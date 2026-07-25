@@ -274,6 +274,15 @@ Format:
 - **Not verified, and flagged to Adrian:** the carousel has only been exercised in emulation, never on a real iOS device — and iOS is precisely where scroll-snap plus programmatic scrolling misbehaves. Real-device check is on his list.
 - **Reconsider if:** the auto-advance proves annoying in front of a real booker (the fallback is dots-only, a one-line change: drop the `setInterval` in `CAROUSEL_JS`), or a real iPhone shows the snap/scroll conflict surviving the workaround.
 
+### D16 v12: publication permission granted — the EPK's contact details, photos, and footage are cleared to be public
+- **Date:** 2026-07-25
+- **Why:** ChatGPT's V2 final audit made this an explicit production gate (its "exact final pass" item 10) and it had been open across three evidence packages. Asked plainly — "Are your phone number, photos, and the footage cleared to be public?" — Adrian answered "yes they're cleared to the public."
+- **What is cleared:** everything the page publishes. Contact details `adrian@greenwayband.com`, `(281) 467-1226`, `@adrianmichael`, `@greenwayband`. Photographs `hero-vocalist`, `photo-brick`, `photo-rustic`, `photo-bowtie`, `closing-guitar`, `poster-reel`. Footage `adrian-reel.mp4` (the 2:21 reel, all thirteen clip windows).
+- **Scope precisely:** he was asked about the phone number, photographs, and footage. The email and both Instagram handles are treated as covered because they are already public (the email is on greenwayband.com; both accounts are public profiles), **not** because he was asked about them by name. If that distinction ever matters, it is recorded here rather than assumed.
+- **Do not confuse this with the ad-campaign photographer hold.** The separate Facebook/Instagram ad campaign has two images (`GW_01_Dance_Floor`, `GW_05_Bridesmaids`) marked `HOLD_do_not_run_yet` pending written photographer clearance. **No EPK asset is one of those and no EPK asset is affected.** Logged because a future reader scanning the Greenway records for "photographer permission" would otherwise reasonably assume the EPK inherits that block.
+- **Consequences:** the audit's publication-permission gate is closed. Remaining production gates are Adrian's draft-deploy authorization, an Android Chrome / desktop Safari pass, and his word on the reel's pacing critique (he has settled the *duration* twice; the pacing complaint itself he has never addressed in those terms). Nothing is deployed and this does not authorize a deploy.
+- **Reconsider if:** he ever wants the phone number off the page — it is the one item here with real ongoing exposure, and it is a one-line removal in `content.json`.
+
 ---
 ## Open decisions (not yet made — see `docs/ROADMAP.md`)
 - Reconcile `dev` vs `main` and decide the canonical deploy branch.
