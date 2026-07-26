@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Song List link preview card</title>
+<!--
+  SOURCE FOR og-song-list.png (1200x630 link preview card).
+  Not hosted anywhere. Rendered to PNG by make_og.py via headless Chrome.
+
+  Design: the song list page's own charcoal cover (template.html .hero),
+  scaled up so the wordmark stays legible at thumbnail size in iMessage,
+  Gmail and WhatsApp. Same tokens, no new colors, no copy beyond the
+  wordmark and "Song List" (no song count, no claims).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400&family=Plus+Jakarta+Sans:wght@400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+  }
+
+  body {
+    background: #0A0A09;
+    color: #F5F2ED;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .rule {
+    width: 120px;
+    height: 1px;
+    background: #8A867E;
+  }
+
+  .the {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 26px;
+    letter-spacing: 24px;
+    text-indent: 24px;
+    text-transform: uppercase;
+    color: #8A867E;
+    margin-top: 62px;
+  }
+
+  .name {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 100px;
+    font-weight: 400;
+    letter-spacing: 12px;
+    text-indent: 12px;
+    text-transform: uppercase;
+    color: #F5F2ED;
+    margin: 8px 0;
+  }
+
+  .band {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 33px;
+    text-indent: 33px;
+    text-transform: uppercase;
+    color: #8A867E;
+  }
+
+  .rule-bottom { margin-top: 36px; }
+
+  .title {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 66px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1.3;
+    color: #F5F2ED;
+    margin-top: 92px;
+  }
+</style>
+</head>
+<body>
+
+<div class="rule"></div>
+<div class="the">The</div>
+<div class="name">Greenway</div>
+<div class="band">Band</div>
+<div class="rule rule-bottom"></div>
+
+<div class="title">Song List</div>
+
+</body>
+</html>

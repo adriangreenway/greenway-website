@@ -41,6 +41,36 @@ Palette: proposal tokens only — cover `#0A0A09`, body cream `#F5F2ED`, inks
 `#111110`/`#2A2A27`, dims `#706D66`/`#8A867E`/`#4A4740`, hairlines
 `rgba(10,10,9,.12/.16/.26)` and `rgba(245,242,237,…)` on the cover.
 
+## Link preview card (the thumbnail)
+
+When the URL is pasted into a text, an email, or WhatsApp, the receiving app
+scrapes the page's Open Graph tags and draws a card. Without them it draws a
+blank one, which is what it did until 2026-07-25.
+
+- `og_card.html` → `og-song-list.png` via `python3 make_og.py`. Laid out at
+  1200x630, the aspect every app expects, and shot at 2x for **2400x1260** so
+  it stays sharp on retina phones and on cards that upscale it. `SCALE` in
+  `make_og.py` and the `og:image:width`/`height` tags must move together.
+  The card is the page's own charcoal cover scaled up: wordmark, hairline
+  rules, "Song List". **No song count and no claims on it** — the count is a
+  computed number that would go stale inside a cached preview image the day
+  Adrian adds a song, and previews are cached for weeks by the receiving apps.
+- The tags live in `template.html`'s `<head>` (so `build.py` carries them
+  into `index.html`). They use **absolute** URLs on purpose: the fetch is made
+  by someone else's server, not the reader's browser, so relative paths fail.
+- **Deploying it takes two files, not one.** `index.html` *and*
+  `og-song-list.png` both go to `~/Desktop/greenway-proposals/song-list/`.
+  Ship the image without the page and nothing changes; ship the page without
+  the image and every preview breaks to a blank card.
+- Re-run `make_og.py` only when `og_card.html` changes. Repertoire edits do
+  not touch the card, so the normal update flow below ignores it entirely.
+- The Squarespace `embed.html` has no `<head>` of its own and cannot carry
+  these tags. On Squarespace the preview image is whatever Squarespace's own
+  page settings say, which is Adrian's to set there, not ours.
+- Previews are cached hard by iMessage, WhatsApp and Gmail. After a deploy,
+  a link already sent may keep showing the old blank card on that device.
+  Testing in a fresh conversation with a fresh link is the reliable check.
+
 ## Updating the repertoire
 
 Adrian never edits the xlsx himself. He just says what changed in chat
