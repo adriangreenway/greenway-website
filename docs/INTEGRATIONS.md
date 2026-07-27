@@ -45,7 +45,14 @@ never secret values.**
 - **Account id:** `fe59812014feb92ff5a43ea304b16e58`
 - **Nameservers:** carter / coraline.
 - **Records (as recorded):** `A` records → Squarespace; `command` subdomain `CNAME` → the CRM's
-  Netlify site; `MX` → Google Workspace.
+  Netlify site; `proposals` subdomain `CNAME` → `greenway-proposals.netlify.app` (verified live
+  2026-07-26 by `dig`); `MX` → Google Workspace.
+- **Cloudflare is authoritative, NOT Squarespace.** Verified 2026-07-26: `dig NS greenwayband.com`
+  returns `carter/coraline.ns.cloudflare.com`, and the apex resolves to Cloudflare proxy IPs
+  (104.21.x / 172.67.x) which front Squarespace. Adrian believed subdomains could be added from
+  the Squarespace panel — they cannot; Squarespace's DNS panel is not in the resolution path for
+  this domain. Every new hostname is a Cloudflare record. Correct this expectation before starting
+  any subdomain work.
 - **Launch** = flip the `greenwayband.com` A record from Squarespace to Netlify (reversible in
   minutes). Owner-approved action only.
 
