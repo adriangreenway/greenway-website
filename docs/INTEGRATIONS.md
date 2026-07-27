@@ -46,7 +46,8 @@ never secret values.**
 - **Nameservers:** carter / coraline.
 - **Records (as recorded):** `A` records → Squarespace; `command` subdomain `CNAME` → the CRM's
   Netlify site; `proposals` subdomain `CNAME` → `greenway-proposals.netlify.app` (verified live
-  2026-07-26 by `dig`); `MX` → Google Workspace.
+  2026-07-26 by `dig`); `epk` subdomain `CNAME` → `greenway-epk-adrian.netlify.app` (added
+  2026-07-27, proxied, same pattern as the others; verified live); `MX` → Google Workspace.
 - **Cloudflare is authoritative, NOT Squarespace.** Verified 2026-07-26: `dig NS greenwayband.com`
   returns `carter/coraline.ns.cloudflare.com`, and the apex resolves to Cloudflare proxy IPs
   (104.21.x / 172.67.x) which front Squarespace. Adrian believed subdomains could be added from

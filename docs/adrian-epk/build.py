@@ -188,11 +188,11 @@ FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox
 FONTS = ("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400"
          "&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap")
 
-SITE_ORIGIN = "https://proposals.greenwayband.com"
+SITE_ORIGIN = "https://epk.greenwayband.com"
 # Live path for this page. Used to build absolute og:image / og:url, so it MUST
-# match the deployed folder name or link previews 404. Changed 2026-07-26 when
-# Adrian picked the slug (D16 v11).
-SITE_PATH = "/adrian-michael-epk/"
+# match the deployed folder name or link previews 404. Changed 2026-07-27: EPK
+# moved off proposals.greenwayband.com to its own hostname, page now at root.
+SITE_PATH = "/"
 
 FACADE_JS = """
 document.querySelectorAll('.facade').forEach(function(btn){

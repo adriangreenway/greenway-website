@@ -18,9 +18,20 @@ corrected, single-page build.
 - `dist/adrian/index.html` — the one canonical page
 - `dist/adrian/assets/` — responsive images (`img/`) + the universal email card (`email/`)
 
-Live target: `proposals.greenwayband.com/adrian`. Carries `noindex` until
-Adrian approves indexing. The retired `/solo` and `/vocalist` child routes
-redirect here at the Netlify level (see Deploy).
+**2026-07-27: LIVE at its own address, `https://epk.greenwayband.com/`.** Moved
+off `proposals.greenwayband.com` per Adrian's call (that host is for proposals
+only). Own Netlify site (`greenway-epk-adrian`, id
+`835b67b1-c813-4951-af0b-ba476528a4cb`, deploy source
+`~/Desktop/greenway-epk-site`, not git-linked, same pattern as
+`~/Desktop/greenway-proposals`), Cloudflare CNAME `epk` → 
+`greenway-epk-adrian.netlify.app`, proxied, same pattern as `command` and
+`proposals`. `SITE_ORIGIN`/`SITE_PATH` in `build.py` updated so og:image/og:url
+point at the new root path. Still carries `noindex` — Adrian hasn't said go on
+search indexing yet. Legacy `/adrian/*` and `/adrian-michael-epk/*` paths
+301-redirect to `/` on the new site (nothing was ever public at either old
+path, so this breaks no real link). The proposals site's own copy under
+`adrian-michael-epk/` is now orphaned (never promoted to prod there) and can
+be deleted from `~/Desktop/greenway-proposals` next time that repo is touched.
 
 ## Build
 
