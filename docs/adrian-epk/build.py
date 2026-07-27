@@ -189,6 +189,10 @@ FONTS = ("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0
          "&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap")
 
 SITE_ORIGIN = "https://proposals.greenwayband.com"
+# Live path for this page. Used to build absolute og:image / og:url, so it MUST
+# match the deployed folder name or link previews 404. Changed 2026-07-26 when
+# Adrian picked the slug (D16 v11).
+SITE_PATH = "/adrian-michael-epk/"
 
 FACADE_JS = """
 document.querySelectorAll('.facade').forEach(function(btn){
@@ -371,7 +375,7 @@ def head(title, desc, og_path, path):
 <meta name="robots" content="noindex, nofollow">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
-<meta property="og:image" content="{SITE_ORIGIN}/adrian/{og_path}">
+<meta property="og:image" content="{SITE_ORIGIN}{SITE_PATH}{og_path}">
 <meta property="og:url" content="{SITE_ORIGIN}{path}">
 <meta property="og:type" content="profile">
 <link rel="icon" href="{FAVICON}">
@@ -537,7 +541,7 @@ def build_page(c, mode):
 {contact_section(c, mailto)}
 </main>
 {footer(c)}"""
-    return page_shell(head(m["title"], m["description"], "assets/email/card-universal.jpg", "/adrian/"), body, mode)
+    return page_shell(head(m["title"], m["description"], "assets/email/card-universal.jpg", SITE_PATH), body, mode)
 
 
 def main():
