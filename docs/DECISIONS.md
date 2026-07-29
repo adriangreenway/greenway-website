@@ -291,6 +291,32 @@ Format:
 - **Verified:** desktop 1440x900 and mobile 390x844 renders both checked visually; name dominant, role legible, no wrap issues at either size; `npm run build` clean; evidence zip captures regenerated.
 - **Reconsider if:** he wants the role line brighter/dimmer, or a future audit objects to the name/role inversion — owner call, surface it, don't revert.
 
+### D17: gig sheets use one shared dated URL convention
+- **Date:** 2026-07-27
+- **Decision:** New gig sheets live at `gigs.greenwayband.com/<client-last-name>/<mm-dd-yy>/` on one shared Netlify site. Older one-off gig sites remain untouched.
+- **Why:** Adrian chose one consistent client-and-date URL convention while moving the workflow from Claude to ChatGPT.
+- **Safety consequence:** Every production deploy must use the complete permanent `~/Desktop/greenway-gigs/` folder. A partial deploy would remove other weddings from the shared hostname.
+- **Migration rule:** When a live URL changes, leave transition pages and a service worker at the old path. Fresh visits forward immediately. A phone already controlled by the old cache keeps its last usable sheet until the browser checks the service worker for an update; the transition worker then deletes that old cache and moves the client to the dated path.
+- **Verified:** Netlify site `greenway-gigs` (`8205364b-6929-454b-bfe0-51afaeb02636`), DNS-only Cloudflare CNAME, HTTPS, privacy headers, the dated Matey pages, legacy transition pages, and the older Ditta site are production-verified. Deploy `6a67cdbfbdd3a32e2faee4a9`.
+
+### D18: Freeman/Dass is the canonical gig-sheet formula, with modern fact and offline safeguards
+- **Date:** 2026-07-27
+- **Decision:** Every new gig sheet uses Freeman/Dass's visual hierarchy, page roles, section order, music filtering, and MC workflow. The controlling formula lives in `.agents/skills/create-gig-sheet/references/final-formula.md`; Ditta remains working code for the enhanced specialty controls.
+- **Evidence:** Reviewed every live Freeman/Dass source file, the full relevant Gmail threads, and the attached four-page final timeline. The build's strength is its role-specific repetition: comprehensive Full Gig Sheet, shorter Band Sheet, one-cue-at-a-time MC view, and practice-only Listening Room. The emails show why the long request list was filtered down to specials and actual learn tracks.
+- **Important correction:** The live old site preserved three earlier times after the final timeline changed them: cocktail hour `6:15` vs final `6:30`, garter toss `9:15` vs final `9:30`, and bouquet toss `9:20` vs final `9:35`. The architecture is canonical; its stale facts are not. The new skill requires a source-dated ledger and a final cross-page fact audit.
+- **Consequences:** MC Cue Sheet applies when Greenway announces as well as when an outside vendor needs a reference. Landing order is MC, Listening Room, Full Gig Sheet, Band Sheet. Confirmed meal time and room return to core information while meal counts stay private. Routine repertoire requests stay off the operational sheet. Pages cache atomically, and every new cache version fetches its core pages with `{ cache: 'reload' }` so the browser's one-hour HTML cache cannot preserve an earlier revision; audio caches separately and best-effort. D17's dated paths, scoped cache cleanup, shared-site deploy safety, and privacy headers remain controlling.
+- **2026-07-27 owner amendment:** Listening Room is permanent on every gig sheet, even when no files exist. An empty room says `No practice tracks have been added yet.` Files and player cards can be added later without changing the page formula.
+- **2026-07-27 owner amendment:** `Attire` always means the band's attire, never the guests': guys wear a black suit, black shoes, black tie, and white shirt; girls wear a black dress or jumpsuit. Meal counts are computed privately as musicians plus one sound engineer, but the sheet shows only meal time and useful room information.
+- **2026-07-27 owner amendment:** On the Full Gig Sheet, Attire sits directly beneath Configuration in the core information and is not repeated as a later standalone section.
+- **Reconsider if:** Adrian identifies a later real gig sheet as a better page formula or wants a different role order.
+
+### D19: lead vetting gate — no pricing goes out until a lead passes 2 of 3 checks
+- **Date:** 2026-07-29
+- **Decision:** Every inbound lead must pass 2 of 3 checks before any pricing, package list, or proposal is sent: (1) named venue or city, (2) phone number, (3) referral source or arrival via the 17hats form. Classic scam markers (overseas/email-only framing, third-party payment, overpayment/refund mechanics) auto-fail the lead regardless of score. Standing money rule: never refund or forward an overpayment under any circumstances.
+- **Why:** A scam inquiry from "nicoleandbillwedding@gmail.com" (2026-07-29, "October 2027 Texas wedding") scored 0/3 with two auto-fail markers. The address has zero online footprint and the wording matches the fake-check overpayment template documented across the wedding industry. Adrian also treats venue-less blind price-fishing as a decline on its own, scam or not, since it is often competitors collecting pricing.
+- **Consequences:** The gate is written into the create-proposal skill ahead of its steps, and `docs/LEAD_VETTING_GATE.md` is the standalone reference (also shared with ChatGPT, which reads the same Gmail). Any future automation of lead intake must hard-stop on a failed gate and queue for human review; it must never auto-send prices. The future site/Squarespace intake forms should make venue and phone required fields so the gate is passed structurally.
+- **Reconsider if:** the gate starts costing real bookings (e.g. legitimate planners who inquire without a venue), in which case loosen the score, not the auto-fail markers or the money rule.
+
 ---
 ## Open decisions (not yet made — see `docs/ROADMAP.md`)
 - Reconcile `dev` vs `main` and decide the canonical deploy branch.

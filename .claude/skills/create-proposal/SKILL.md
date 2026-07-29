@@ -1,6 +1,6 @@
 ---
 name: create-proposal
-description: Create and deploy a branded client proposal at proposals.greenwayband.com from a Gmail inquiry. Use whenever Adrian gives a client name and wants a proposal ("make a proposal for X", "she filled out the form", "send the Smiths a proposal"), or wants an existing proposal revised.
+description: Create and deploy a branded client proposal at proposals.greenwayband.com from a Gmail inquiry, wedding or corporate. Use whenever Adrian gives a client name and wants a proposal ("make a proposal for X", "she filled out the form", "send the Smiths a proposal", "quote this corporate gig"), or wants an existing proposal revised. Corporate events follow the Corporate proposals section.
 ---
 
 # Create Proposal
@@ -12,6 +12,38 @@ Read first: `docs/proposals/PROPOSAL_SYSTEM.md` (where things live, deploy runbo
 `docs/proposals/PRICING_AND_CONTENT.md` (real prices, locked lineups, testimonial
 pool, copy rules), `docs/proposals/TEMPLATE.html` (the page to fill in).
 Model: Sonnet 5 is fine for this workflow.
+
+## Lead vetting gate (D19, 2026-07-29 — run before ANY pricing leaves the building)
+
+No proposal, pricing sheet, or package list goes out until the lead passes
+**2 of 3**:
+
+1. A named venue, or at least a named city (not just a state or region).
+2. A phone number.
+3. A stated referral source ("how did you hear about us"), or the lead arrived
+   through the 17hats capture form (form arrival satisfies this check by itself).
+
+**Auto-fail regardless of score** if the message contains any classic scam
+marker: "overseas" / "international trip" / "email only, can't take calls",
+hearing-impaired framing, a third party who will handle payment, an offer to
+overpay, a check plus a refund or forward of the difference, an unusually
+rushed booking with no questions about the music itself.
+
+- Leads that fail: do NOT send pricing. Report the score and markers to Adrian
+  with a recommended action (vetting reply asking for venue + phone + a call,
+  or ghost). His call.
+- Money rule with no exceptions: never refund or forward an overpayment.
+  Overpayment + refund request = fake-check scam, even if their payment
+  initially appears to clear.
+- Fishing note: a "send me your standard pricing sheet" email with no event
+  specifics fails this gate even if it isn't a scam — Adrian treats blind
+  price-fishing (often competitors) as a no.
+- This gate is inherited by ANY future automation of lead intake or proposal
+  generation. An automated pipeline must hard-stop at a failed gate and queue
+  the lead for human review, never auto-reply with prices.
+- Precedent: 2026-07-29 "Nicole and Bill" (nicoleandbillwedding@gmail.com)
+  scored 0/3 with two auto-fail markers; ghosted. Full write-up in
+  `docs/LEAD_VETTING_GATE.md`.
 
 ## Steps
 
@@ -56,8 +88,8 @@ Model: Sonnet 5 is fine for this workflow.
    PROPOSAL_SYSTEM.md). Fill every `{{TOKEN}}`; NO intro section — the Template 4.1
    email carries the greeting (Adrian, 2026-07-14; see PRICING_AND_CONTENT.md);
    timeline section only if the schedule is known — else delete it; lineups exactly
-   per PRICING_AND_CONTENT.md. Corporate event → base on the live `the-united-way`
-   page instead of the wedding template.
+   per PRICING_AND_CONTENT.md. Corporate event → follow **Corporate proposals**
+   below instead of the wedding template.
    **Media + CTA are on by default (D14, 2026-07-23 + v2 same day, see
    PRICING_AND_CONTENT.md "Approved media pool" + "Palette (v2)"):** the two
    photo bands, the click-to-load self-hosted video, the hours line, and both
@@ -99,6 +131,45 @@ Model: Sonnet 5 is fine for this workflow.
    links. The draft sitting in Gmail is the source of truth for what gets sent.
    Report that it's in Drafts and tell Adrian to click-test both links before
    sending (see the Google "Redirect Notice" gotcha noted there).
+
+## Corporate proposals (Adrian, 2026-07-27, Ken-Ran build)
+
+Same pipeline as the steps above — Gmail fact sheet, verify, present, wait for
+"go", deploy, Gmail draft. Where this section is silent, wedding rules apply.
+
+- **Base page:** copy `~/Desktop/greenway-proposals/the-united-way/index.html`
+  (the approved corporate layout), NOT the wedding TEMPLATE.html. `opengroup` is
+  a second shipped corporate reference. **Delete the intro section** ("A note
+  for you" / greeting / body / signature) when you copy it — corporate follows
+  the same no-intro standard as weddings (Adrian, 2026-07-28); the page runs
+  cover straight into the package. Any personal note belongs in the email only.
+- **Cover "Prepared for" = the client or company name, never the event name**
+  (Adrian, 2026-07-28). If the inquiry only names a talent-buying agency
+  (e.g. Ken-Ran Productions) and no separate host org, the agency's name still
+  goes there — not the event title. The event name/date/venue belong in the
+  Event Details grid as their own row, not the cover.
+- **Slug:** hyphenated org name per PROPOSAL_SYSTEM.md (`the-united-way`). If an
+  agency inquires on behalf of an end client, ask Adrian which name the slug
+  should carry (agencies shop proposals to their client).
+- **Tone:** no "Congratulations" greeting, no wedding words (reception, first
+  dance, big day). It's "your event", "your program", "your guests".
+- **One package by default** — the configuration that fits the event (10-Piece
+  unless the inquiry says otherwise). A second config card only if Adrian asks.
+  No Cocktail Hour block — that default is wedding-only.
+- **Production lines mirror the inquiry.** If production/staging is provided by
+  the purchaser or venue, the page says so (`Production: Provided by Purchaser`)
+  and Sound/Lighting Equipment come OUT of the included-services list. Backline,
+  stage specs, and set times come from the inquiry, never invented.
+- **Travel pricing:** use the corporate travel formula in
+  PRICING_AND_CONTENT.md. Show Adrian the math (miles, rate, headcount) in the
+  pre-build questions; fold the result into a single Investment figure on the
+  page. Miles and the final price are pay decisions — his confirm required.
+- **Testimonials:** same approved pool of 3, nothing new.
+- **Email draft:** adapt Template 4.1 — strip congratulations and wedding lines,
+  keep the proposal-link-on-"proposal" and scheduler-link mechanics exactly.
+- **Agencies are repeat buyers.** Search Gmail for prior threads from the same
+  domain (e.g. kenran.com goes back to 2022). Prior quotes and negotiation
+  history inform Adrian's pricing but NEVER appear on the page.
 
 ## Revisions
 
