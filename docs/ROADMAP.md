@@ -10,10 +10,14 @@ Statuses: PLANNED, APPROVED (plan exists), IN PROGRESS, SHIPPED, DEFERRED, PAUSE
 | Item | Size | Status | Depends on | Done means |
 |---|---|---|---|---|
 | Squarespace lead-form embed (Gates 0-3) | S | Gates 0-2 SHIPPED 2026-07-03; Gate 3 PLANNED | Adrian's explicit "go" | Gates 0-2 done: v3 premium-dark embed live and dark at `greenwayband.com/inquiry-test`, real phone test confirmed landing correctly in Growth Hour Contacts. Gate 3 (actually going live — publish or link from the real Book page) needs Adrian's explicit "go," plus a same-day and one-week-later canary check. |
+| Gig-sheet dated URL convention | M | SHIPPED 2026-07-27 | — | New sheets use `gigs.greenwayband.com/<client-last-name>/<mm-dd-yy>/`; Matey is live at `/matey/08-01-26/`; fresh visits to the old landing, gig, and band links forward; the transition worker retires the old offline cache when the browser checks for its update; privacy headers and older gig sites remain intact. |
+| Gig-sheet canonical Freeman/Dass formula | S | SHIPPED 2026-07-27 | — | ChatGPT skill uses Freeman/Dass's hierarchy and filtering, newest-source ledger checks, Greenway-or-vendor MC handling, a permanent Listening Room, standing band attire directly below Full-sheet Configuration, hidden meal counts with time/room retained, and best-effort audio caching. D18. |
+| Matey Band Sheet timeline and song placement | S | PLANNED for next session | Latest planner timeline and current live Band Sheet | Pre-dinner calls and logistics stay in the top block. The reception schedule reflects the planner timeline from dinner set onward, with each special song shown at its actual moment. It stays informative and easy to read while excluding money, packages, private contacts, and unnecessary MC/DJ detail. |
 
 ## Proposals track (independent of all holds)
 | Item | Size | Status | Depends on | Done means |
 |---|---|---|---|---|
+| Lead vetting gate | S | SHIPPED 2026-07-29 | — | Every inquiry is scored on place, phone, and source before pricing; 2 of 3 must pass, scam markers and blind price-fishing hard-stop the workflow, and overpayments are never refunded or forwarded. D19; `docs/LEAD_VETTING_GATE.md`; `$create-proposal`. |
 | Proposal template upgrade: photos + embedded video + CTA | M | SHIPPED 2026-07-23 | — | Built, locally verified (see spec below + CURRENT_STATE.md). Applies to every new proposal build automatically; hinojosa was redeployed live 2026-07-24 with the full v5-v9 upgrade. |
 | Template v2: hybrid palette + self-hosted video | S/M | SHIPPED 2026-07-23 | — | Built + locally verified same day as v1. Palette locked "C" (hybrid) after a 3-judge panel voted unanimously, strong confidence. Video is now self-hosted, no Vimeo, no watermark. Venue strip built then removed at Adrian's call. See CURRENT_STATE.md for the verified summary. |
 | Template v4: whole-frame photos | S | SHIPPED 2026-07-23 | — | Committed `a7884bd`. Photo bands show the whole frame on wide screens, immersive crop kept on phones. All 3 items from the v3 Hinojosa review closed. |
@@ -60,6 +64,14 @@ Statuses: PLANNED, APPROVED (plan exists), IN PROGRESS, SHIPPED, DEFERRED, PAUSE
   6. CTAs: quiet inline link after the cocktail block ("Want to talk through your options? Schedule a call." — `white-space: nowrap` on the anchor) + closing bordered button "Schedule a Call", both to the 17hats scheduler URL; one plain line above the button: "On the call we'll walk through the options and how to hold your date." Phone number becomes `tel:+12814671226`.
 - **Docs:** PRICING_AND_CONTENT.md gains an "Approved media pool" section (the 3 photos + the Vimeo URL + poster file, usage rights note, video-honesty rule) and the two new approved copy lines. SKILL.md: media + CTA become defaults on every wedding proposal; build gate adds "video URL is real and returns 200 via oEmbed" and "all referenced /assets/ files exist in the deploy folder" alongside the existing `grep '{{'` check.
 - **Verify:** grep tokens = 0, all links checked, desktop + phone-width render pass. 2026-07-24: hinojosa redeployed live and verified on the real domain (HTTP 200, correct content); every other existing proposal page untouched.
+
+## Band EPK track (WISHLIST — paused 2026-07-27 on footage, not on approval)
+| Item | Size | Status | Depends on | Done means |
+|---|---|---|---|---|
+| Videographer multi-wedding shoot | — (Adrian's, not code) | PLANNED, Adrian executing | Adrian booking a shooter + 3-4 gigs | Goal sheet at `docs/band-epk/VIDEO_SHOOT_PLAN.md`: raw horizontal footage + board audio + written usage rights across 3-4 weddings, coverage tracker filled, files landing in `~/Desktop/BAND_EPK/`. Buying shoot-only raw handoff, NOT $3k edited videos — we own the edit pipeline. |
+| Band reel | M | PAUSED (wishlist) | The shoot above | Cut with the solo-reel pipeline from Adrian's chosen windows. Existing phone footage is nearly all vertical, judged insufficient 2026-07-27. Open question parked with it: whether the 9pc promo is fair game for band material (currently excluded per D16, different vocalist). |
+| Band EPK page | M | PAUSED (wishlist) | Band reel | Clone of the solo EPK build system, no pricing, venue/planner relationship tool. Parked address recommendation: `epk.greenwayband.com/band` (solo stays at root). |
+| Proposal template: EPK-grade media upgrade | S/M | PAUSED (wishlist) | Band EPK assets | Template gets the band reel + polished photos, keeps quotes. Template-only, existing live proposals untouched. |
 
 ## Now (Astro reconciliation hygiene — paused, optional, do only if Adrian asks)
 | Item | Size | Status | Depends on | Done means |
