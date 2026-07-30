@@ -1,20 +1,38 @@
-const CACHE = 'gig-ditta-v1';
+const CACHE = 'gig-ditta-v2';
 
 // Core pages — small, must all cache (atomic). These make the site work offline.
 const CORE = [
   '/',
   '/index.html',
+  // Netlify rewrites internal .html links to these extensionless paths.
+  '/band',
   '/band.html',
+  '/gig',
   '/gig.html',
+  '/mc',
   '/mc.html',
+  '/listen',
   '/listen.html',
   '/manifest.json'
 ];
 
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(CORE))
+async function cacheFreshCore() {
+  const fresh = await Promise.all(
+    CORE.map(async path => {
+      const response = await fetch(path, { cache: 'reload' });
+      if (!response.ok) {
+        throw new Error(`Unable to cache ${path}: ${response.status}`);
+      }
+      return [path, response];
+    })
   );
+
+  const cache = await caches.open(CACHE);
+  await Promise.all(fresh.map(([path, response]) => cache.put(path, response)));
+}
+
+self.addEventListener('install', e => {
+  e.waitUntil(cacheFreshCore());
   self.skipWaiting();
 });
 

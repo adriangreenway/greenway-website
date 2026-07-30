@@ -55,6 +55,14 @@
   .section-note {
     font-size: 13px; color: #706D66; margin-bottom: 24px; line-height: 1.6;
   }
+  .empty-state {
+    border: 1px solid rgba(245,242,237,0.08);
+    border-radius: 12px;
+    padding: 28px 20px;
+    color: #706D66;
+    font-size: 14px;
+    line-height: 1.6;
+  }
 
   .track-card {
     background: rgba(245,242,237,0.04);
@@ -272,7 +280,7 @@
     <input type="file" id="fileInput" accept="audio/*" multiple style="display:none;">
   </div>
 
-  <a class='back-link' href='/'>&larr; Back to Gig Day</a>
+  <a class='back-link' href='/'>&larr; Back to Band Hub</a>
 </div>
 
 <script>
@@ -297,6 +305,11 @@ function formatTime(s) {
 
 function renderTracks() {
   const list = document.getElementById('trackList');
+
+  if (TRACKS.length === 0) {
+    list.innerHTML = '<div class="empty-state">No practice tracks have been added yet.</div>';
+    return;
+  }
 
   TRACKS.forEach((track, i) => {
     const card = document.createElement('div');
@@ -531,7 +544,7 @@ function handleFiles(files) {
 renderTracks();
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').catch(() => {});
+  navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 </script>
 </body>

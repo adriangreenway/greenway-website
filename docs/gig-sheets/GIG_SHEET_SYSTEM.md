@@ -1,74 +1,113 @@
 # Gig Sheet System
 
-Per-wedding offline microsites for gig day: what the band needs, what the emcee/DJ
-needs, and (when practice tracks exist) a Listening Room for the band to learn
-live songs. This is a **separate track** from proposals, the Astro rebuild, and
-the Squarespace embed. Deploying a gig sheet touches nothing else.
+Per-wedding, offline-capable microsites with separate band and Adrian views.
+This is separate from proposals, the Astro rebuild, and the Squarespace embed.
 
-Last verified: 2026-07-21.
+Last verified: 2026-07-30.
 
 ## Where things live
 
-| What | Where | Notes |
-|---|---|---|
-| Deploy source | a scratch folder you build fresh each time (e.g. this session's scratchpad) | Not git-tracked. Each gig sheet is its own throwaway Netlify site, not a shared repo. |
-| Reference example | `docs/gig-sheets/EXAMPLE/` (this repo) | Most recent full-featured build (Ditta/Johnson). Copy and adapt — see its README. |
-| Workflow skill | `.claude/skills/create-gig-sheet/SKILL.md` | The end-to-end runbook. |
-| Source material | Gmail (search + `get_thread` FULL_CONTENT), plus any timeline/questionnaire PDFs Adrian attaches | Never the sole source — cross-check both. |
+| What | Where |
+|---|---|
+| Permanent deploy source | `~/Desktop/greenway-gigs/` |
+| Wedding folder | `~/Desktop/greenway-gigs/<client-last-name>/<mm-dd-yy>/` |
+| Public URL | `https://gigs.greenwayband.com/<client-last-name>/<mm-dd-yy>/` |
+| ChatGPT workflow | `.agents/skills/create-gig-sheet/SKILL.md` |
+| Controlling page formula | `.agents/skills/create-gig-sheet/references/final-formula.md` |
+| Specialty-page rules | `.agents/skills/create-gig-sheet/references/specialty-pages.md` |
+| Working page code | `docs/gig-sheets/EXAMPLE/` |
+| Source facts | Full Gmail threads, timeline/questionnaire PDFs, and Adrian's chat instructions |
 
-There is no shared "gig-sheets" Netlify site. Each wedding gets its **own** Netlify
-site, created fresh the first time you deploy it.
+## Hosting facts
 
-## Netlify facts
+- Netlify site: `greenway-gigs`
+- Netlify site ID: `8205364b-6929-454b-bfe0-51afaeb02636`
+- Account: `Proposal Landing Page`
+- Cloudflare record: DNS-only CNAME `gigs.greenwayband.com` to
+  `greenway-gigs.netlify.app`
+- Privacy: `noindex, nofollow` on every path
+- Matey/Sackschewsky is the first wedding on the shared hostname.
+- Older weddings remain on their original one-off Netlify sites. Do not migrate,
+  delete, or redeploy them unless Adrian asks.
 
-- Account: "Proposal Landing Page" (same Netlify account as `greenway-proposals`,
-  but each gig sheet is its own separate site, not a folder inside that site).
-- No 1Password token needed — the Netlify CLI already has stored auth on this
-  machine. Just run `netlify deploy`.
-- Site naming, current convention: `greenway-<lastname>` (e.g. `greenway-dass`,
-  `greenway-ditta`). Two lastnames if there's a collision risk
-  (`greenway-kaylynn-cameron`, `greenway-lutz-provenza`). Older sites used
-  `{mon}-{day}-{venue}` (e.g. `apr-11-woodlands`, `mar-21-galvez`) — don't reuse
-  that pattern for new sites, but recognize it if Adrian references an old one.
-- Production URL is always `https://<site-name>.netlify.app` — there is no custom
-  domain for gig sheets.
+## Critical deploy hazard
 
-## Build + deploy runbook
+`netlify deploy --prod` replaces the entire shared site. Deploying one wedding's
+folder by itself would remove every other wedding from `gigs.greenwayband.com`.
 
-1. **Check for an existing site first.** `netlify sites:list | grep -i <lastname>`.
-   If a site already exists for this couple, you're revising it — deploy to that
-   site ID, don't create a second one.
-2. **Build the pages** in a scratch folder (see the create-gig-sheet skill for what
-   goes in each page). Structure: `index.html`, `gig.html`, `band.html`, `mc.html`
-   (if there's a separate MC/DJ), `listen.html` (if there are practice tracks),
-   `manifest.json`, `sw.js`. `sw.js`'s `CORE` array must list every page you're
-   shipping, or that page breaks offline.
-3. **First deploy for a new couple** — creates the site:
-   ```bash
-   netlify deploy --prod --dir <scratch-folder> --site greenway-<lastname>
-   ```
-   Netlify will create the site with that name if it doesn't exist. Confirm the
-   name it actually gave you (Netlify may append characters if the exact name is
-   taken) and record the site ID for later revisions.
-4. **Revisions** — always deploy by site ID, not by name, once you know it:
-   ```bash
-   netlify deploy --prod --dir <scratch-folder> --site <site-id>
-   ```
-5. **Verify live.** `curl -s https://<site-name>.netlify.app/<page> | grep -c "<fact you just added>"`
-   for every page you touched. For anything visual (new player controls, layout),
-   open it in the Browser pane and check it directly — don't just curl.
-6. **Audio files.** If you're adding a practice track, convert it to MP3 first
-   (`ffmpeg -i input.wav -codec:a libmp3lame -b:a 192k output.mp3`) — raw WAVs from
-   Ableton are 50MB+ and slow to load on a phone at the venue. Only include songs
-   the band actually plays live (see the skill's LIVE vs TRACK rule) — never a
-   track a DJ/emcee vendor is covering.
-7. **After a meaningful build or revision**, pull the live pages back down into
-   `docs/gig-sheets/EXAMPLE/` if this one is now the most complete example (more
-   pages, a new feature like seek controls) — that keeps the reference current for
-   next time, since these sites aren't git-tracked anywhere else.
+Always deploy the complete permanent folder:
 
-## Naming and slugs
+```bash
+cd ~/Desktop/greenway-gigs
+netlify deploy --prod --dir . --site 8205364b-6929-454b-bfe0-51afaeb02636
+```
 
-Lowercase last name of the couple, or both if there's a collision
-(`greenway-lutz-provenza`). No date or venue in the name — the header inside the
-pages carries the date; the URL should stay simple.
+Before deploying, confirm every existing wedding folder is still present. After
+deploying, confirm the changed wedding and at least one older shared-hostname
+wedding both return HTTP 200. Matey is currently the only shared-hostname wedding,
+so the older-wedding check becomes applicable after the second wedding is added.
+
+## Subfolder path rules
+
+- Page links and the manifest link are relative: `gig.html`, `band.html`,
+  `manifest.json`.
+- Register the service worker as `sw.js`, not `/sw.js`.
+- In `sw.js`, every `CORE` entry and the offline fallback use absolute
+  `/<client-last-name>/<mm-dd-yy>/...` paths.
+- Netlify Pretty URLs rewrites internal `.html` links to extensionless paths in
+  production. Cache both versions of every page, such as `band` and `band.html`,
+  or a clicked production link will fall back to the hub when the phone is offline.
+- `manifest.json` uses the complete dated path for both `start_url` and `scope`.
+- Bump the service-worker cache name on every revision.
+- Cache pages atomically in `CORE`. Fetch every `CORE` path with
+  `{ cache: 'reload' }` before writing the new cache, so the browser's one-hour
+  HTML cache cannot seed a new service-worker version with stale pages. Cache
+  practice audio separately with `Promise.allSettled` so a failed MP3 cannot
+  block the sheet from installing.
+- Cache cleanup must only delete this wedding's older cache names. Cache Storage
+  is shared across the hostname, so never delete every cache except the current one.
+
+## Build and deploy
+
+1. Check `~/Desktop/greenway-gigs/` before creating anything. If the wedding
+   folder exists, revise it in place.
+2. Build the controlling formula: `index.html`, `gig.html`, `band.html`,
+   `listen.html`, optional `mc.html`, plus `manifest.json` and `sw.js`.
+   The landing hub links only to Band Sheet and Listening Room. Full Gig Sheet and
+   MC Cue Sheet are labeled Adrian Only and are available only by direct URL.
+   Listening Room stays present with a clear empty state until tracks are added.
+3. Preview the whole shared folder locally at
+   `/<client-last-name>/<mm-dd-yy>/`. Confirm every link stays inside that
+   wedding's folder and the landing page reports that it was saved for offline use.
+4. For a new wedding, show Adrian the couple, date, venue, pages, public URL, and
+   every visible `TBD` or `UNKNOWN`. Wait for his explicit `go`.
+5. Deploy the complete folder with the command above.
+6. Verify every changed page at the public hostname, the privacy headers, the
+   service-worker file list, phone-width layout, and browser console. After the
+   service worker installs, confirm an actual rewritten hub link still opens the
+   correct page with the network unavailable.
+
+## Audience and sharing rules
+
+- Send the landing URL or `band.html` to musicians.
+- Keep `gig.html` and `mc.html` for Adrian. They are deliberately unlinked from
+  the band hub.
+- The Band Sheet contains the couple's full names, musician call information,
+  attire in the top core block, broad performance blocks, live specials, a compact
+  title-only list of the couple's sourced song suggestions, do-not-play items, and
+  direct team notes.
+- Do not show money or package terms on any page. Do not show MC detail, DJ
+  identity, music direction, full contacts, or event minutiae on the Band Sheet.
+- Label non-performance coverage as `Break`; do not identify the DJ to the band.
+- `noindex` and unlinked URLs reduce discovery but are not authentication. Never
+  describe these pages as password protected unless real access control exists.
+
+## Naming
+
+Use the couple's lowercase client last-name slug, followed by the wedding date in
+`mm-dd-yy` format. Use both last names only to avoid a client-name collision.
+
+Example:
+
+`~/Desktop/greenway-gigs/matey/08-01-26/` becomes
+`https://gigs.greenwayband.com/matey/08-01-26/`.

@@ -62,7 +62,7 @@
     border-bottom: 1px solid rgba(212,208,200,0.5);
   }
   .timeline-row:last-child { border-bottom: none; }
-  .timeline-time { width: 85px; min-width: 85px; font-size: 14px; font-weight: 700; color: #0A0A09; }
+  .timeline-time { width: 100px; min-width: 100px; font-size: 14px; font-weight: 700; color: #0A0A09; white-space: nowrap; }
   .timeline-event { font-size: 14px; font-weight: 500; color: #0A0A09; flex: 1; }
   .timeline-tag {
     font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 2px 8px;
@@ -117,6 +117,10 @@
   <div class="two-col">
     <div>
       <div class="section">
+        <div class="section-label">Couple</div>
+        <div class="section-value">Macey Ditta &amp; Jake Johnson</div>
+      </div>
+      <div class="section">
         <div class="section-label">Location</div>
         <div class="section-value">The Arlo</div>
         <div class="section-sub">
@@ -126,7 +130,8 @@
       </div>
       <div class="section">
         <div class="section-label">Attire</div>
-        <div class="section-value">Wedding Attire</div>
+        <div class="section-value">Guys: black suit, black shoes, black tie, white shirt</div>
+        <div class="section-sub">Girls: black dress or jumpsuit</div>
       </div>
     </div>
     <div>
@@ -140,7 +145,7 @@
       </div>
       <div class="section">
         <div class="section-label">Meals</div>
-        <div class="section-value">12 meals at 6:00 PM</div>
+        <div class="section-value">6:00 PM</div>
         <div class="section-sub">During cocktail hour</div>
       </div>
     </div>
@@ -160,26 +165,16 @@
       <div class="timeline-event">Soundcheck (until 4:30)</div>
     </div>
     <div class="timeline-row">
-      <div class="timeline-time">5:30 PM</div>
-      <div class="timeline-event">Ceremony — Storie Hall (our sound, tracks only)</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="timeline-row">
       <div class="timeline-time">6:00 PM</div>
-      <div class="timeline-event">Cocktail hour — back lawn (our sound) / Band meals</div>
-      <span class="timeline-tag tag-track">TRACK</span>
+      <div class="timeline-event">Band meals</div>
     </div>
     <div class="timeline-row">
       <div class="timeline-time">7:00 PM</div>
-      <div class="timeline-event">Band Set 1 / Grand entrance + special dances (PRP runs tracks)</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">7:15 PM</div>
-      <div class="timeline-event">Dinner (we play through dinner)</div>
+      <div class="timeline-event">Band Set 1</div>
     </div>
     <div class="timeline-row">
       <div class="timeline-time">8:00 PM</div>
-      <div class="timeline-event">Break 1 — PRP DJs / Cake cutting 8:15 / Toasts 8:20</div>
+      <div class="timeline-event">Break</div>
       <span class="timeline-tag tag-break">BREAK</span>
     </div>
     <div class="timeline-row">
@@ -188,12 +183,12 @@
     </div>
     <div class="timeline-row">
       <div class="timeline-time">9:30 PM</div>
-      <div class="timeline-event">Break 2 — PRP DJs</div>
+      <div class="timeline-event">Break</div>
       <span class="timeline-tag tag-break">BREAK</span>
     </div>
     <div class="timeline-row">
       <div class="timeline-time">10:00 PM</div>
-      <div class="timeline-event">Band Set 3 — kicks off with bouquet toss</div>
+      <div class="timeline-event">Band Set 3</div>
     </div>
     <div class="timeline-row">
       <div class="timeline-time">10:45 PM</div>
@@ -201,13 +196,8 @@
       <span class="timeline-tag tag-live">LIVE</span>
     </div>
     <div class="timeline-row">
-      <div class="timeline-time">10:55 PM</div>
-      <div class="timeline-event">Private last dance</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="timeline-row">
       <div class="timeline-time">11:00 PM</div>
-      <div class="timeline-event">Send off (cold sparks)</div>
+      <div class="timeline-event">Send off</div>
     </div>
     <div class="timeline-row">
       <div class="timeline-time">12:30 AM</div>
@@ -218,96 +208,34 @@
   <div class="divider"></div>
 
   <div class="section">
-    <div class="section-label">Ceremony Music (tracks through our PA)</div>
-    <div class="special-row">
-      <div class="special-moment">Family Processional</div>
-      <div class="special-song">"Iris" &mdash; UNSECRET (String Quartet)</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">Wedding Party</div>
-      <div class="special-song">"Birds of a Feather" &mdash; Gemini Strings</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">Bride's Entrance</div>
-      <div class="special-song">"I Will Always Love You" &mdash; Vitamin String Quartet (walk at chorus)</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">Recessional</div>
-      <div class="special-song">"You're My Best Friend" &mdash; Queen</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section">
-    <div class="section-label">Specials (all tracks — PRP runs on their system)</div>
-
-    <div class="special-row">
-      <div class="special-moment">Grand Entrance</div>
-      <div class="special-song">"Don't Stop Me Now" &mdash; Queen</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">First Dance</div>
-      <div class="special-song">"Heaven Passing Through" &mdash; Turnpike Troubadours (custom cut)</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">Father / Daughter</div>
-      <div class="special-song">"Lullaby" &mdash; Billy Joel</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">Mother / Son</div>
-      <div class="special-song">"Don't Blink" &mdash; Kenny Chesney</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
+    <div class="section-label">Live Special</div>
     <div class="special-row">
       <div class="special-moment">Final Song (all guests)</div>
       <div class="special-song">"Closing Time" &mdash; Semisonic</div>
       <span class="timeline-tag tag-live">LIVE</span>
     </div>
-    <div class="special-row">
-      <div class="special-moment">Private Last Dance</div>
-      <div class="special-song">"Front Porch Looking In" &mdash; Lonestar</div>
-      <span class="timeline-tag tag-track">TRACK</span>
+    <div class="section-sub">
+      <a href="listen.html">Practice track in Listening Room</a>
     </div>
   </div>
 
   <div class="divider"></div>
 
   <div class="section">
-    <div class="section-label">Couple's Requests (top picks)</div>
+    <div class="section-label">Couple's Song Suggestions</div>
     <ul class="song-list">
-      <li>"Closing Time" — Semisonic (final song)</li>
-      <li>"Can't Hold Us" — Macklemore</li>
-      <li>Queen / Journey / Prince / Foreigner</li>
-      <li>Hall &amp; Oates / ABBA / Michael Jackson</li>
-      <li>"Mr. Brightside"</li>
-      <li>"Doses and Mimosas"</li>
-      <li>"Dancing Queen"</li>
-      <li>"No Hands"</li>
-      <li>"Cheap Thrills" — Sia</li>
-      <li>"Heads Will Roll"</li>
-      <li>"Take On Me"</li>
-      <li>"Uptown Girl"</li>
-      <li>"Kids" — MGMT</li>
-      <li>"Accidentally in Love"</li>
-      <li>"September"</li>
-      <li>"The Middle" — Jimmy Eat World</li>
-      <li>"A Sky Full of Stars" — Coldplay</li>
-      <li>"All the Small Things" — Blink-182</li>
-      <li>"Jessie's Girl"</li>
-      <li>"Hey Ya"</li>
-      <li>"The Days" (Notion remix)</li>
-      <li>"Fireball"</li>
-      <li>"Hotel Room Service"</li>
-      <li>"Temperature" — Sean Paul</li>
-      <li>"Time of Our Lives" — Pitbull</li>
+      <li>Closing Time</li>
+      <li>Can't Hold Us</li>
+      <li>Mr. Brightside</li>
+      <li>Dancing Queen</li>
+      <li>No Hands</li>
+      <li>Take On Me</li>
+      <li>September</li>
+      <li>The Middle</li>
+      <li>A Sky Full of Stars</li>
+      <li>All the Small Things</li>
+      <li>Hey Ya</li>
+      <li>Temperature</li>
     </ul>
   </div>
 
@@ -344,9 +272,8 @@
   <div class="divider"></div>
 
   <div class="section">
-    <div class="section-label">Emcee</div>
-    <div class="section-value">PRP Entertainment (Phil &amp; Damon) — not Greenway</div>
-    <div class="section-sub">Couple introduced as "Mr. and Mrs. Jake Johnson"</div>
+    <div class="section-label">Notes</div>
+    <div class="section-value">Band is not playing ceremony or cocktail hour.</div>
   </div>
 
 </div>

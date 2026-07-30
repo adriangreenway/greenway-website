@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="manifest" href="/manifest.json">
-<title>Greenway — Gig Day</title>
+<title>Greenway — Band Hub</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,7 +37,7 @@
     text-decoration: none;
     letter-spacing: 0.5px;
   }
-  .mc-link {
+  .band-link {
     background: #C4A35A;
     color: #0A0A09;
   }
@@ -62,15 +62,13 @@
 <body>
   <div class="brand">The Greenway Band</div>
   <div class="title">Ditta / Johnson Wedding</div>
-  <a class='gig-link' href='/gig'>Full Gig Sheet</a>
-  <a class='gig-link' href='/band'>Band Sheet</a>
-  <a class='mc-link' href='/mc'>MC Cue Sheet (PRP Reference)</a>
-  <a class='mc-link-alt' href='/listen'>Listening Room</a>
+  <a class='band-link' href='band.html'>Band Sheet</a>
+  <a class='mc-link-alt' href='listen.html'>Listening Room</a>
   <div class="status" id="status">Checking offline status...</div>
 
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').then(reg => {
+      navigator.serviceWorker.register('sw.js').then(reg => {
         document.getElementById('status').textContent = '✓ Saved for offline use';
         document.getElementById('status').classList.add('ready');
       }).catch(err => {
