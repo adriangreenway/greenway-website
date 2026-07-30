@@ -327,6 +327,13 @@ Format:
 - **Consequences:** Stage 1 builds and verifies a deny-by-default shell on an isolated origin with no private data. Stage 2 moves Matey Full/MC behind the lock, removes their public routes and service-worker entries, and makes old public URLs fail closed. Stage 3 creates a generated searchable registry and deployment automation; no database is added until browser-based editing or multiple administrators justify it. DNS, Access activation, and production deployment still require explicit approval. Full plan: `docs/gig-sheets/PRIVATE_ADMIN_PLAN.md`.
 - **Reconsider if:** Face ID/WebAuthn cannot pass a real-iPhone test, Cloudflare cannot prevent direct origin access, Adrian needs additional administrators, or browser-based editing makes a database worthwhile.
 
+### D20 v2 amendment: use a 1Password-managed login instead of Face ID
+- **Date:** 2026-07-30
+- **Decision:** Keep the isolated `gigadmin.greenwayband.com` portal, but replace Cloudflare Access and Face ID with one server-side Worker login for `adrian@greenwayband.com`. Store its random password in 1Password and as an encrypted Worker secret. Keep Adrian signed in with a signed, HTTP-only, Secure, SameSite Strict cookie for 12 hours.
+- **Why:** Adrian does not need a separate biometric gate for a one-person operations portal. The password manager already gives him a familiar autofill experience, while the Worker still blocks every private file before it is read.
+- **Consequences:** No Cloudflare Zero Trust subscription, billing checkout, identity provider, or email recovery flow is required. Losing the saved login requires 1Password account recovery or replacing the Worker password from the existing Cloudflare account. Rotating the session-signing secret signs every browser out. The rule against client-side password overlays remains unchanged.
+- **Reconsider if:** another administrator needs access, Adrian wants individual access logs or email recovery, repeated login attacks appear, or the portal grows beyond a one-person internal tool.
+
 ---
 ## Open decisions (not yet made — see `docs/ROADMAP.md`)
 - Reconcile `dev` vs `main` and decide the canonical deploy branch.

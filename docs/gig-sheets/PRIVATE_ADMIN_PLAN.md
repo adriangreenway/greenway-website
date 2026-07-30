@@ -21,9 +21,9 @@ Give Adrian one private home page where he can find every deployed wedding by co
 ## Approved architecture
 
 - Build the admin portal as a separate private static app, not inside the public marketing site and not inside the public gig hostname.
-- Serve it at `gigadmin.greenwayband.com` behind Cloudflare Access. Access must be checked before any private HTML or asset is served.
-- Allow only `adrian@greenwayband.com`.
-- Require a WebAuthn biometric check so Safari can use iPhone Face ID. Keep email-based account recovery and re-enrollment available. Do not use a shared password or a client-side password overlay.
+- Serve it at `gigadmin.greenwayband.com` behind a server-side Cloudflare Worker login. The Worker must authenticate Adrian before reading any private HTML, registry data, or asset.
+- Allow only the username `adrian@greenwayband.com` with one long, random password stored in 1Password and as an encrypted Cloudflare Worker secret. Never store the password in source code, configuration, generated output, or documentation.
+- Use a signed, HTTP-only, Secure, SameSite Strict browser cookie for a 12-hour session. Do not use a client-side password overlay.
 - Host the private static files on an isolated origin with its public fallback hostname disabled. Cloudflare Workers Static Assets is the recommended first implementation.
 - Use a generated wedding registry for version one. Do not add a database until Adrian wants browser-based editing or multiple administrators.
 - Keep public musician URLs unchanged. The public landing page continues to expose only Band Sheet and Listening Room.
@@ -38,15 +38,17 @@ The private home page is white/cream Greenway styling and includes:
 4. Reference links to the public Band Sheet and Listening Room.
 5. A clear sign-out control.
 
-Default access experience: Adrian unlocks once per browser session, then moves through the portal without repeated Face ID prompts. The exact session length is selected during Stage 1 verification.
+Default access experience: 1Password fills Adrian's username and password once, then a signed 12-hour browser session keeps the portal open until sign-out or expiry.
 
 ## Stage 1: protected shell
 
-Build the empty admin app and generated registry structure in a separate project. Configure the Adrian-only Cloudflare Access policy, Face ID/WebAuthn requirement, recovery path, custom hostname, and blocked origin fallback. Use sample records with no private wedding information for security testing.
+Build the empty admin app and generated registry structure in a separate project. Configure the Adrian-only Worker login, 1Password credential, password rotation path, custom hostname, and blocked origin fallback. Use sample records with no private wedding information for security testing.
 
-**Gate:** an unauthenticated request cannot fetch the shell, registry, HTML, or assets through either the custom hostname or an origin hostname. Adrian can unlock it with Face ID on iPhone and can recover access through his verified email.
+**Gate:** an unauthenticated request cannot fetch the shell, registry, private HTML, or private assets through either the custom hostname or an origin hostname. Adrian can sign in using the `Greenway Gig Admin` login saved in 1Password, sign out immediately, and rotate both the password and all active sessions through his existing Cloudflare account.
 
-Cloudflare DNS, Access policy activation, and the first production deployment remain explicit owner-approval actions.
+Cloudflare DNS, Worker-secret activation, and the first production deployment remain explicit owner-approval actions.
+
+**Stage 1 result, 2026-07-30:** PASS. The sample-only portal is deployed at `gigadmin.greenwayband.com`; HTTPS enforcement, anonymous blocking, the 1Password credential, 12-hour session, sign-out, response headers, unexpected-host rejection, generated search registry, desktop/phone layouts, and sample-only output passed. Active Worker version: `e06515d2-0c5c-4478-adf7-a1bdaf3818d0`. Matey's Full and MC pages remain public until Stage 2.
 
 ## Stage 2: move Matey private pages
 
@@ -72,8 +74,8 @@ After Stage 1 passes:
 ## Acceptance criteria
 
 - Anonymous visitors cannot fetch private HTML, registry data, or private assets.
-- Adrian can unlock the portal with Face ID on his iPhone.
-- Recovery works without a shared password.
+- Adrian can unlock the portal with the login saved in 1Password.
+- Password replacement and full-session revocation work through the existing Cloudflare account.
 - Search finds weddings by couple, date, and venue.
 - Each wedding exposes protected Full and MC pages plus public Band and Listening references.
 - New gig generation updates the archive automatically.
@@ -84,13 +86,12 @@ After Stage 1 passes:
 
 **Modify in the fresh session:** a new isolated admin project; Cloudflare configuration only after explicit approval; the public gig source only in Stage 2; gig-sheet generation instructions only in Stage 3.
 
-**Read only:** this plan, `docs/CURRENT_STATE.md`, D17-D20, the current public deployment configuration, and Cloudflare's current Access/WebAuthn documentation.
+**Read only:** this plan, `docs/CURRENT_STATE.md`, D17-D20, the current public deployment configuration, and Cloudflare's current Workers secrets and Web Crypto documentation.
 
 **Off limits:** the paused Astro marketing rebuild, `netlify.toml`, Growth Hour, Command Center CRM, proposal sites, older wedding sites before the Stage 3 inventory, and all unrelated working-tree changes.
 
 ## Security references
 
-- Apple passkeys and Face ID: `https://support.apple.com/en-ie/guide/iphone/iphf538ea8d0/ios`
-- Cloudflare Access independent MFA/WebAuthn: `https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/independent-mfa/`
-- Cloudflare Access request authorization: `https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/`
+- Cloudflare Workers secrets: `https://developers.cloudflare.com/workers/configuration/secrets/`
+- Cloudflare Workers Web Crypto: `https://developers.cloudflare.com/workers/runtime-apis/web-crypto/`
 - Cloudflare Workers Static Assets pricing: `https://developers.cloudflare.com/workers/platform/pricing/`
