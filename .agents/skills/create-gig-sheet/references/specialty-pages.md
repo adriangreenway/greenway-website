@@ -6,8 +6,14 @@ and fix every path for the wedding's dated subfolder.
 
 ## Shared design
 
-- Keep the existing inline tokens: `#0A0A09` background, `#F5F2ED` text,
-  `#C4A35A` accent, `#706D66` muted text, and Plus Jakarta Sans.
+- Use the locked Greenway band-facing tokens: black `#0A0A09`, cream
+  `#F5F2ED`, muted `#B8B4AC`, dim `#706D66`, and faint `#4A4740`.
+  The MC page is dark. The Listening Room uses a cream body with a dark header.
+  No gold, teal, blue utility links, translucent cards, gradients, pills, or
+  rounded rectangles.
+- Use Bodoni Moda for event names and editorial page titles. Keep Plus Jakarta
+  Sans for operational text and controls. Navigation rows, track rows, badges,
+  and buttons are square; all audio controls remain at least 44px.
 - Use relative page, manifest, service-worker, and audio links.
 - Cache every specialty page in `CORE`. Cache bundled audio in a separate `AUDIO`
   list with `Promise.allSettled`, so one missing MP3 cannot block the core offline
@@ -18,7 +24,7 @@ and fix every path for the wedding's dated subfolder.
 Build `mc.html` whenever Greenway runs reception announcements. If a separate
 emcee or DJ runs them, build it when a reference/backup is useful and name that
 vendor in a banner. Do not show a vendor banner when Greenway is the emcee. Label
-the page `ADRIAN ONLY` and never link it from the Band Hub.
+the page `ADRIAN ONLY` and never link it from the Gig Sheet landing page.
 
 Keep the interaction from `EXAMPLE/mc.html`:
 

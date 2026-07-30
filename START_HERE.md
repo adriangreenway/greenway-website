@@ -14,7 +14,7 @@ The public marketing website for The Greenway Band, your Houston premium live we
 **STATUS:** YELLOW
 **Last verified build:** 2026-07-30 (`npm run build` clean, 6 pages; no test suite exists in this repo, so that's the whole check)
 **Blockers:** None. Both site tracks are deliberately on hold by your own decision: the Astro rebuild waits for Growth Hour's M3, and the Squarespace form's go-live waits until both builds are entirely done (docs/DECISIONS.md D13).
-**Heads up:** the current Matey Band Hub and all three practice tracks are live and production-checked at `gigs.greenwayband.com/matey/08-01-26/`, but Adrian wants one final planning pass before sending it. The site still has the known branch split and preserved April changes; both repos have local commits not yet pushed.
+**Heads up:** the premium Matey Band Sheet and Listening Room are live, production-checked, and safe to send at `gigs.greenwayband.com/matey/08-01-26/`. The unlinked Full and MC URLs are not secure and remain in the public offline cache, so the approved private admin build starts by creating and verifying the lock before moving any private data. The site still has the known branch split and preserved April changes; both repos have local commits not yet pushed.
 
 GREEN means everything works and it's safe to build. YELLOW means something needs attention first. RED means stop and run a fix-bug or audit session before anything else.
 
@@ -29,7 +29,7 @@ Four separate things going, plus the song list which just wrapped. Only the Astr
 
 **Client proposals: the third track, never paused.** Brooks Kendall's Juneteenth proposal is live at `proposals.greenwayband.com/mckinney-juneteenth/`. Brooks corrected the production responsibility and gave a $10,000–$15,000 budget, so Adrian asked two follow-up questions before another revision. The new D19 gate now qualifies every lead before any pricing or proposal is prepared. In Codex, invoke that workflow with `$create-proposal`.
 
-**Gig sheets: Matey is live and stable, but the Band Sheet is not final.** The next pass keeps pre-dinner calls and logistics at the top, then makes the reception schedule reflect the planner timeline from dinner set onward, with song selections shown where they occur. The Full and MC pages remain unlinked and Adrian-only.
+**Gig sheets: Matey is live, premium, stable, and sendable; the private admin portal is approved next.** The band-facing pages use the locked Greenway system and the social-media restriction is visibly marked. Full and MC are currently unlinked, but that is not password protection. The approved three-stage plan creates a separate Face ID-protected archive at `gigadmin.greenwayband.com`, moves Matey's private pages only after the lock passes, then adds automatic historical indexing. The later Band Sheet information pass still follows the planner timeline and places songs where they occur.
 
 **Your song list: started and finished today, its own small track.** Your full song list, all 434 songs including the Bob Marley add, now lives at `proposals.greenwayband.com/song-list` — same look as your proposals, a genre row across the top with dividers like your homepage's venue line, search built in. A first pass came back green and got rejected on the spot ("our color scheme isn't green"); the rebuild matches your proposal design exactly instead. You tried it on Squarespace too, hit two real snags there (one was your site's own pre-existing footer-color bug, now fixed; the other was Squarespace mangling apostrophes on paste, also fixed at the source) and then decided to drop the Squarespace copy entirely and keep only the proposals page. Every new proposal now links to it, right under the video.
 
@@ -47,11 +47,11 @@ None of these affect your live site today, because your live site is still Squar
 ---
 
 ## Your next step
-**Plan the final Matey Band Sheet timeline before sending it to the musicians.**
+**Build Stage 1 of the protected gig admin portal.**
 
 Start the next session on Sol and paste:
 
-**Run the start-session skill. Context: the current Matey Band Sheet is live and stable at `gigs.greenwayband.com/matey/08-01-26/`, but it is not final. Then plan the next revision: keep pre-dinner calls and logistics in the top block, make the reception schedule reflect the planner timeline from dinner set onward, and place every selected song at the moment it occurs. Keep it informative and easy to read while preserving the band-versus-Adrian audience split.**
+**Run the start-session skill. Context: the Matey public Gig Sheet is live and production-verified at `gigs.greenwayband.com/matey/08-01-26/` on deploy `6a6bb7f36ebec601b6843a33`, but its unlinked Full and MC URLs are not secure and remain in the public offline cache. Then read `docs/gig-sheets/PRIVATE_ADMIN_PLAN.md` and run the build-feature skill for Stage 1 of the approved protected gig admin portal at `gigadmin.greenwayband.com`: build the separate deny-by-default Cloudflare Access shell for Adrian with Face ID/WebAuthn and verified-email recovery, using no private wedding data. Stop for explicit approval before DNS, Access activation, or production deployment, and do not move the private pages or change public gig URLs until Stage 1 passes its security gate.**
 
 Separately, the Astro rebuild still waits for Growth Hour's M3. The EPK is live; lifting `noindex` is optional whenever you want it searchable.
 

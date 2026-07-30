@@ -73,8 +73,9 @@ so the older-wedding check becomes applicable after the second wedding is added.
    folder exists, revise it in place.
 2. Build the controlling formula: `index.html`, `gig.html`, `band.html`,
    `listen.html`, optional `mc.html`, plus `manifest.json` and `sw.js`.
-   The landing hub links only to Band Sheet and Listening Room. Full Gig Sheet and
-   MC Cue Sheet are labeled Adrian Only and are available only by direct URL.
+   The Gig Sheet landing page links only to Band Sheet and Listening Room. Full
+   Gig Sheet and MC Cue Sheet are labeled Adrian Only and are available only by
+   direct URL.
    Listening Room stays present with a clear empty state until tracks are added.
 3. Preview the whole shared folder locally at
    `/<client-last-name>/<mm-dd-yy>/`. Confirm every link stays inside that
@@ -91,7 +92,7 @@ so the older-wedding check becomes applicable after the second wedding is added.
 
 - Send the landing URL or `band.html` to musicians.
 - Keep `gig.html` and `mc.html` for Adrian. They are deliberately unlinked from
-  the band hub.
+  the Gig Sheet landing page.
 - The Band Sheet contains the couple's full names, musician call information,
   attire in the top core block, broad performance blocks, live specials, a compact
   title-only list of the couple's sourced song suggestions, do-not-play items, and

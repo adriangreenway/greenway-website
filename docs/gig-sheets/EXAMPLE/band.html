@@ -8,7 +8,18 @@
 <title>Band Sheet — Ditta / Johnson</title>
 <link rel="manifest" href="/manifest.json">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+  :root {
+    --black: #0A0A09;
+    --charcoal: #111110;
+    --cream: #F5F2ED;
+    --muted: #B8B4AC;
+    --dim: #706D66;
+    --faint: #4A4740;
+    --warning: #8D2E2A;
+    --paper-rule: rgba(74, 71, 64, 0.22);
+  }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -28,28 +39,29 @@
     align-items: flex-end;
   }
   .header-left .the {
-    font-size: 9px; font-weight: 700; letter-spacing: 4px; color: #C4A35A; text-transform: uppercase;
+    font-size: 8px; font-weight: 600; letter-spacing: 0.42em; color: #F5F2ED; text-transform: uppercase;
   }
   .header-left .brand {
-    font-size: 22px; font-weight: 800; color: #F5F2ED; letter-spacing: 2px;
+    margin: 5px 0; font-size: 16px; font-weight: 600; color: #F5F2ED; letter-spacing: 0.18em;
   }
+  .header-left .band { font-size: 8px; font-weight: 600; letter-spacing: 0.42em; color: #F5F2ED; text-transform: uppercase; }
   .header-right { text-align: right; }
   .header-right .label {
-    font-size: 9px; font-weight: 700; letter-spacing: 3px; color: #C4A35A; text-transform: uppercase;
+    font-size: 9px; font-weight: 600; letter-spacing: 0.24em; color: #706D66; text-transform: uppercase;
   }
-  .header-right .event { font-size: 15px; font-weight: 700; color: #F5F2ED; }
-  .header-right .date { font-size: 11px; color: #706D66; margin-top: 2px; }
+  .header-right .event { margin-top: 8px; font-family: 'Bodoni Moda', 'Times New Roman', serif; font-size: clamp(24px, 3vw, 38px); font-weight: 400; line-height: 1; letter-spacing: -0.02em; color: #F5F2ED; }
+  .header-right .date { font-size: 11px; color: #B8B4AC; margin-top: 8px; }
 
   .body { padding: 24px 28px 40px; }
 
   .section { margin-bottom: 24px; }
   .section-label {
-    font-size: 9px; font-weight: 700; letter-spacing: 3px; color: #C4A35A; text-transform: uppercase; margin-bottom: 8px;
+    font-size: 9px; font-weight: 600; letter-spacing: 0.24em; color: #706D66; text-transform: uppercase; margin-bottom: 10px;
   }
-  .section-value { font-size: 17px; font-weight: 700; color: #0A0A09; }
+  .section-value { font-size: 16px; font-weight: 600; color: #0A0A09; }
   .section-sub { font-size: 13px; color: #706D66; margin-top: 2px; }
 
-  a { color: #1A5276; text-decoration: none; border-bottom: 1px solid rgba(26,82,118,0.3); }
+  a { color: #0A0A09; text-decoration: none; border-bottom: 1px solid #4A4740; }
   a:active { opacity: 0.7; }
 
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -65,12 +77,12 @@
   .timeline-time { width: 100px; min-width: 100px; font-size: 14px; font-weight: 700; color: #0A0A09; white-space: nowrap; }
   .timeline-event { font-size: 14px; font-weight: 500; color: #0A0A09; flex: 1; }
   .timeline-tag {
-    font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 2px 8px;
-    border-radius: 4px; margin-left: 10px; white-space: nowrap;
+    font-size: 9px; font-weight: 600; letter-spacing: 0.12em; padding: 3px 7px;
+    border: 1px solid rgba(74,71,64,0.22); border-radius: 0; margin-left: 10px; white-space: nowrap;
   }
-  .tag-live { background: rgba(196,163,90,0.15); color: #C4A35A; }
-  .tag-track { background: rgba(112,109,102,0.15); color: #706D66; }
-  .tag-break { background: rgba(112,109,102,0.1); color: #706D66; font-style: italic; }
+  .tag-live { background: transparent; color: #0A0A09; border-color: #4A4740; }
+  .tag-track { background: transparent; color: #706D66; }
+  .tag-break { background: transparent; color: #706D66; font-style: normal; }
 
   .special-row {
     display: grid; grid-template-columns: 1fr 1.5fr auto; align-items: center;
@@ -93,8 +105,109 @@
   .song-list li { padding: 2px 0; break-inside: avoid; }
 
   .footer {
-    border-top: 1px solid #C4A35A; padding: 12px 28px;
+    border-top: 1px solid rgba(74,71,64,0.22); padding: 12px 28px;
     display: flex; justify-content: space-between; font-size: 10px; color: #706D66;
+  }
+
+  .header {
+    min-height: 144px;
+    padding: 28px max(28px, calc((100vw - 1120px) / 2));
+    gap: 32px;
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .header-left {
+    display: grid;
+    width: max-content;
+    line-height: 0.92;
+  }
+
+  .header-right { max-width: 560px; }
+
+  .body {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    padding: 48px 28px 64px;
+  }
+
+  .section { margin-bottom: 30px; }
+  .two-col { gap: clamp(32px, 7vw, 96px); }
+  .divider { margin: 38px 0; background: var(--paper-rule); }
+
+  .timeline-row {
+    min-height: 42px;
+    padding: 9px 0;
+    border-bottom-color: var(--paper-rule);
+  }
+
+  .timeline-time {
+    width: 108px;
+    min-width: 108px;
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .timeline-event { font-size: 14px; font-weight: 400; }
+
+  .special-row {
+    min-height: 48px;
+    padding: 10px 0;
+    gap: 16px;
+    border-bottom-color: var(--paper-rule);
+  }
+
+  .special-moment { font-size: 14px; font-weight: 600; }
+
+  .song-list {
+    column-gap: 48px;
+    list-style: none;
+  }
+
+  .song-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid var(--paper-rule);
+  }
+
+  .warning-note {
+    padding: 12px 0 12px 16px;
+    border-left: 3px solid var(--warning);
+  }
+
+  .warning-label {
+    color: var(--warning);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .warning-text {
+    margin-top: 6px;
+    color: var(--black);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 600px) {
+    .header {
+      min-height: 132px;
+      padding: 22px 20px;
+      align-items: flex-start;
+    }
+    .header-right { max-width: 230px; }
+    .header-right .event { margin-top: 6px; font-size: 22px; line-height: 1.05; }
+    .body { padding: 36px 20px 52px; }
+    .two-col { gap: 4px; }
+    .divider { margin: 30px 0; }
+    .timeline-row { align-items: flex-start; }
+    .timeline-time { width: 94px; min-width: 94px; font-size: 12px; }
+    .timeline-event { font-size: 13px; }
+    .timeline-tag { margin-left: 8px; padding: 3px 5px; font-size: 8px; }
+    .special-row { grid-template-columns: 1fr auto; gap: 4px 12px; }
+    .special-song { grid-column: 1; grid-row: 2; }
+    .special-row .timeline-tag { grid-column: 2; grid-row: 1 / span 2; }
   }
 </style>
 </head>
@@ -103,7 +216,8 @@
 <div class="header">
   <div class="header-left">
     <div class="the">The</div>
-    <div class="brand">GREENWAY BAND</div>
+    <div class="brand">Greenway</div>
+    <div class="band">Band</div>
   </div>
   <div class="header-right">
     <div class="label">Band Sheet</div>

@@ -5,66 +5,237 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#F5F2ED">
 <link rel="manifest" href="/manifest.json">
-<title>Greenway — Band Hub</title>
+<title>Greenway — Gig Sheet</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+  :root {
+    --black: #0A0A09;
+    --charcoal: #111110;
+    --cream: #F5F2ED;
+    --muted: #B8B4AC;
+    --dim: #706D66;
+    --faint: #4A4740;
+    --paper-rule: rgba(74, 71, 64, 0.22);
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { background: var(--cream); }
+
   body {
-    background: #0A0A09;
-    color: #F5F2ED;
-    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
     min-height: 100vh;
+    min-height: 100svh;
+    background: var(--cream);
+    color: var(--black);
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .shell {
+    width: min(100%, 1120px);
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0 auto;
+    padding: clamp(24px, 5vw, 64px);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .masthead {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 40px;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--paper-rule);
   }
-  .brand { font-size: 10px; font-weight: 700; letter-spacing: 4px; color: #C4A35A; text-transform: uppercase; }
-  .title { font-size: 24px; font-weight: 800; margin-bottom: 30px; }
-  a {
-    display: block;
-    width: 100%;
-    max-width: 340px;
-    text-align: center;
-    padding: 20px;
-    border-radius: 12px;
-    font-family: inherit;
+
+  .wordmark {
+    display: grid;
+    width: max-content;
+    color: var(--black);
+    line-height: 0.92;
+    text-transform: uppercase;
+  }
+
+  .wordmark-the,
+  .wordmark-band {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.42em;
+  }
+
+  .wordmark-name {
+    margin: 5px 0;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+  }
+
+  .page-type,
+  .eyebrow {
+    color: var(--dim);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+
+  main {
+    width: 100%;
+    padding: clamp(56px, 9vw, 112px) 0;
+    align-self: center;
+  }
+
+  .eyebrow { margin-bottom: 18px; }
+
+  h1 {
+    max-width: 760px;
+    font-family: 'Bodoni Moda', 'Times New Roman', serif;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+  }
+
+  h1 span {
+    color: var(--dim);
+    font-style: italic;
+  }
+
+  .venue {
+    margin-top: 24px;
+    color: var(--dim);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .hub-nav {
+    margin-top: clamp(48px, 8vw, 88px);
+    border-top: 1px solid var(--paper-rule);
+  }
+
+  .hub-link {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    min-height: 72px;
+    align-items: center;
+    gap: 16px;
+    color: var(--black);
+    border-bottom: 1px solid var(--paper-rule);
     text-decoration: none;
-    letter-spacing: 0.5px;
+    transition: background-color 200ms ease-out, color 200ms ease-out;
   }
-  .band-link {
-    background: #C4A35A;
-    color: #0A0A09;
+
+  .hub-link:hover,
+  .hub-link:focus-visible {
+    background: var(--black);
+    color: var(--cream);
+    outline: none;
   }
-  .gig-link {
-    background: rgba(245,242,237,0.08);
-    color: #F5F2ED;
-    border: 1px solid rgba(245,242,237,0.15);
+
+  .hub-link:hover .item-number,
+  .hub-link:focus-visible .item-number {
+    color: var(--muted);
   }
-  .mc-link-alt {
-    background: rgba(196,163,90,0.2);
-    color: #C4A35A;
-    border: 1px solid rgba(196,163,90,0.4);
+
+  .item-number {
+    color: var(--dim);
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.14em;
   }
+
+  .item-label {
+    font-family: 'Bodoni Moda', 'Times New Roman', serif;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+
+  .item-arrow {
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  .footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--paper-rule);
+  }
+
+  .descriptor,
   .status {
-    margin-top: 20px;
-    font-size: 12px;
-    color: #706D66;
+    color: var(--dim);
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
   }
-  .status.ready { color: #4a9; }
+
+  .status { text-align: right; }
+  .status.ready { color: var(--dim); }
+
+  @media (max-width: 520px) {
+    .shell { padding: 22px 20px; }
+    .masthead { padding-bottom: 18px; }
+    main { padding: 52px 0; }
+    h1 { font-size: clamp(44px, 14vw, 64px); }
+    .hub-nav { margin-top: 48px; }
+    .hub-link {
+      grid-template-columns: 32px 1fr auto;
+      min-height: 68px;
+      gap: 10px;
+    }
+    .footer { align-items: flex-start; }
+    .descriptor { max-width: 120px; }
+    .status { max-width: 130px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hub-link { transition: none; }
+  }
 </style>
 </head>
 <body>
-  <div class="brand">The Greenway Band</div>
-  <div class="title">Ditta / Johnson Wedding</div>
-  <a class='band-link' href='band.html'>Band Sheet</a>
-  <a class='mc-link-alt' href='listen.html'>Listening Room</a>
-  <div class="status" id="status">Checking offline status...</div>
+  <div class="shell">
+    <header class="masthead">
+      <div class="wordmark" aria-label="The Greenway Band">
+        <span class="wordmark-the">The</span>
+        <span class="wordmark-name">Greenway</span>
+        <span class="wordmark-band">Band</span>
+      </div>
+      <div class="page-type">Gig Sheet</div>
+    </header>
+
+    <main>
+      <div class="eyebrow">Saturday, July 11, 2026</div>
+      <h1>Ditta <span>/</span><br>Johnson</h1>
+      <div class="venue">The Arlo</div>
+
+      <nav class="hub-nav" aria-label="Gig sheet resources">
+        <a class="hub-link" href="band.html">
+          <span class="item-number">01</span>
+          <span class="item-label">Band Sheet</span>
+          <span class="item-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a class="hub-link" href="listen.html">
+          <span class="item-number">02</span>
+          <span class="item-label">Listening Room</span>
+          <span class="item-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </nav>
+    </main>
+
+    <footer class="footer">
+      <div class="descriptor">The sound of a great night.</div>
+      <div class="status" id="status">Checking offline status...</div>
+    </footer>
+  </div>
 
   <script>
     if ('serviceWorker' in navigator) {

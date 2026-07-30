@@ -102,11 +102,11 @@ Room so those pages cannot contradict one another.
 
 Use the Freeman/Dass visual and information hierarchy defined in
 `references/final-formula.md`, adapting working code from
-`docs/gig-sheets/EXAMPLE/`. The landing, MC, and Listening Room pages are dark.
-The Full Gig Sheet and Band Sheet use a cream body with a dark header. Keep the
-same CSS variables and `.tag-live` / `.tag-track` pattern. Build into
-`~/Desktop/greenway-gigs/<client-last-name>/<mm-dd-yy>/`, then replace every fact
-page by page.
+`docs/gig-sheets/EXAMPLE/`. The MC page is dark. The Gig Sheet landing is cream.
+The Listening Room, Full Gig Sheet, and Band Sheet use a cream body with a dark
+header. Keep the same CSS variables and `.tag-live` / `.tag-track` pattern.
+Build into `~/Desktop/greenway-gigs/<client-last-name>/<mm-dd-yy>/`, then replace
+every fact page by page.
 
 **Fix the paths as you copy.** The EXAMPLE folder is from the old one-site-per-wedding
 era and uses absolute paths that break in a subfolder: links and the manifest must
@@ -123,14 +123,17 @@ Cache both versions of every page in `CORE`, such as `band` and `band.html`, so 
 clicked production link still opens the correct page offline.
 
 Pages:
-- `index.html` — Band Hub linking only to Band Sheet, then Listening Room.
-- `gig.html` — Adrian-only comprehensive operational sheet, unlinked from the hub.
+- `index.html` — Gig Sheet landing linking only to Band Sheet, then Listening
+  Room.
+- `gig.html` — Adrian-only comprehensive operational sheet, unlinked from the
+  landing page.
 - `band.html` — the minimal band-facing version from `final-formula.md`. Never show
   MC detail, DJ identity, money, package terms, configuration, full contacts,
   music direction, private moments, or exact special-dance microtiming. Keep the
   couple's full names and Attire in the top core block, and include a compact,
   title-only `Couple's Song Suggestions` section when sourced favorites exist.
-- `mc.html` — Adrian-only time-stamped cue script, unlinked from the hub.
+- `mc.html` — Adrian-only time-stamped cue script, unlinked from the landing
+  page.
 - `listen.html` — always build this page. With no practice files, show a simple
   empty state and no fake player or browser-only upload control. When tracks
   exist, use an audio player with rewind/fast-forward (±10s) and a tap-to-seek

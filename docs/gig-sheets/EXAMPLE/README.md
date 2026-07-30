@@ -8,7 +8,7 @@ Adrian's preferred Freeman/Dass build. When this example and the formula differ,
 the formula wins.
 
 Files:
-- `index.html` — band hub, links only to Band Sheet and Listening Room
+- `index.html` — Gig Sheet landing, links only to Band Sheet and Listening Room
 - `band.html` — minimal band-facing sheet: calls, performance blocks, live
   specials, attire, do-not-play items, and direct team rules
 - `gig.html` — Adrian-only full operational sheet, reached only by its direct URL
@@ -19,10 +19,11 @@ Files:
 - `sw.js` / `manifest.json` — offline PWA support; `sw.js`'s `CORE` array must list
   every page in the site or that page won't work offline
 
-Design tokens live inline in each file's `<style>` block: `#0A0A09` background,
-`#F5F2ED` text, `#C4A35A` gold accent, Plus Jakarta Sans font, `.tag-live` /
-`.tag-track` badges on every song. Keep these exact values — they're what makes a
-gig sheet instantly recognizable as a Greenway one.
+Design tokens live inline in each file's `<style>` block: black `#0A0A09`, cream
+`#F5F2ED`, muted `#B8B4AC`, dim `#706D66`, and faint `#4A4740`. Use Bodoni Moda
+for editorial titles and Plus Jakarta Sans for operational text. Keep square
+controls, hairline grouping, and `.tag-live` / `.tag-track` badges. No gold or
+rounded cards. The Gig Sheet landing and Listening Room bodies are cream.
 
 The band-facing pages never show money, package names, MC detail, DJ identity,
 music direction, planner or client contacts, or full event minutiae. The

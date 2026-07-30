@@ -5,107 +5,136 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="theme-color" content="#0A0A09">
+<meta name="theme-color" content="#F5F2ED">
 <title>Listening Room — Ditta / Johnson</title>
 <link rel="manifest" href="/manifest.json">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+  :root {
+    --black: #0A0A09;
+    --charcoal: #111110;
+    --cream: #F5F2ED;
+    --muted: #B8B4AC;
+    --dim: #706D66;
+    --faint: #4A4740;
+    --paper-rule: rgba(74, 71, 64, 0.22);
+  }
 
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
   html, body {
-    background: #0A0A09;
-    color: #F5F2ED;
+    background: var(--cream);
+    color: var(--black);
     font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
   }
 
   .header {
-    background: #0A0A09;
-    padding: 20px 28px;
+    background: var(--black);
+    color: var(--cream);
+    min-height: 144px;
+    padding: 28px max(28px, calc((100vw - 1120px) / 2));
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    border-bottom: 1px solid rgba(196,163,90,0.3);
+    gap: 32px;
+    border-bottom: 1px solid #4A4740;
   }
+  .header-left { display: grid; width: max-content; line-height: 0.92; text-transform: uppercase; }
   .header-left .the {
-    font-size: 9px; font-weight: 700; letter-spacing: 4px; color: #C4A35A; text-transform: uppercase;
+    font-size: 8px; font-weight: 600; letter-spacing: 0.42em; color: #F5F2ED;
   }
   .header-left .brand {
-    font-size: 22px; font-weight: 800; color: #F5F2ED; letter-spacing: 2px;
+    margin: 5px 0; font-size: 16px; font-weight: 600; color: #F5F2ED; letter-spacing: 0.18em;
   }
-  .header-right { text-align: right; }
+  .header-left .band { font-size: 8px; font-weight: 600; letter-spacing: 0.42em; color: #F5F2ED; }
+  .header-right { max-width: 560px; text-align: right; }
   .header-right .label {
-    font-size: 9px; font-weight: 700; letter-spacing: 3px; color: #C4A35A; text-transform: uppercase;
+    font-size: 9px; font-weight: 600; letter-spacing: 0.24em; color: #706D66; text-transform: uppercase;
   }
-  .header-right .event { font-size: 15px; font-weight: 700; color: #F5F2ED; }
-  .header-right .date { font-size: 11px; color: #706D66; margin-top: 2px; }
+  .header-right .event {
+    margin-top: 8px;
+    font-family: 'Bodoni Moda', 'Times New Roman', serif;
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #F5F2ED;
+  }
+  .header-right .date { font-size: 11px; color: #B8B4AC; margin-top: 8px; }
 
   .body {
-    padding: 28px;
-    max-width: 600px;
+    padding: clamp(48px, 7vw, 80px) 28px 64px;
+    max-width: 760px;
     margin: 0 auto;
   }
 
   .section-label {
-    font-size: 9px; font-weight: 700; letter-spacing: 3px; color: #C4A35A;
-    text-transform: uppercase; margin-bottom: 16px;
+    margin-bottom: 14px;
+    font-family: 'Bodoni Moda', 'Times New Roman', serif;
+    font-size: clamp(38px, 6vw, 58px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--black);
   }
   .section-note {
-    font-size: 13px; color: #706D66; margin-bottom: 24px; line-height: 1.6;
+    max-width: 520px; font-size: 13px; color: var(--dim); margin-bottom: 44px; line-height: 1.7;
   }
   .empty-state {
-    border: 1px solid rgba(245,242,237,0.08);
-    border-radius: 12px;
-    padding: 28px 20px;
-    color: #706D66;
+    border-top: 1px solid var(--paper-rule);
+    border-bottom: 1px solid var(--paper-rule);
+    border-radius: 0;
+    padding: 28px 0;
+    color: var(--dim);
     font-size: 14px;
     line-height: 1.6;
   }
 
+  #trackList { border-top: 1px solid var(--paper-rule); }
+
   .track-card {
-    background: rgba(245,242,237,0.04);
-    border: 1px solid rgba(245,242,237,0.08);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 12px;
-    transition: border-color 0.2s;
-  }
-  .track-card.playing {
-    border-color: rgba(196,163,90,0.4);
-    background: rgba(196,163,90,0.06);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--paper-rule);
+    border-radius: 0;
+    padding: 30px 0;
+    margin: 0;
   }
 
   .track-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 8px;
+    gap: 28px;
   }
-  .track-info { flex: 1; }
+  .track-info { min-width: 0; flex: 1; }
   .track-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #F5F2ED;
-    margin-bottom: 2px;
+    font-family: 'Bodoni Moda', 'Times New Roman', serif;
+    font-size: clamp(26px, 4vw, 34px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    margin-bottom: 4px;
   }
   .track-artist {
-    font-size: 14px;
-    color: #706D66;
-    font-weight: 500;
+    font-size: 13px;
+    color: var(--dim);
+    font-weight: 400;
   }
   .track-context {
-    display: inline-block;
-    margin-top: 6px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
+    margin-top: 14px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 4px;
-    background: rgba(196,163,90,0.15);
-    color: #C4A35A;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--black);
   }
 
   .transport {
@@ -113,18 +142,18 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-left: 16px;
+    margin-left: 0;
   }
 
   .play-btn {
     flex-shrink: 0;
     width: 48px;
     height: 48px;
-    border-radius: 50%;
-    border: 2px solid rgba(196,163,90,0.4);
-    background: transparent;
-    color: #C4A35A;
-    font-size: 18px;
+    border-radius: 0;
+    border: 1px solid var(--black);
+    background: var(--black);
+    color: var(--cream);
+    font-size: 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -133,21 +162,21 @@
   }
   .play-btn:active { transform: scale(0.93); }
   .play-btn.playing {
-    background: #C4A35A;
-    color: #0A0A09;
-    border-color: #C4A35A;
+    background: transparent;
+    color: var(--black);
+    border-color: var(--black);
   }
 
   .skip-btn {
     flex-shrink: 0;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: 1px solid rgba(245,242,237,0.15);
+    width: 44px;
+    height: 44px;
+    border-radius: 0;
+    border: 1px solid var(--paper-rule);
     background: transparent;
-    color: #706D66;
+    color: var(--dim);
     font-size: 10px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.3px;
     cursor: pointer;
     display: flex;
@@ -159,31 +188,31 @@
     transition: all 0.2s;
   }
   .skip-btn:active { transform: scale(0.9); }
-  .skip-btn:hover { color: #C4A35A; border-color: rgba(196,163,90,0.4); }
+  .skip-btn:hover { color: var(--black); border-color: var(--black); }
   .skip-btn .skip-icon { font-size: 13px; }
 
   .audio-controls {
-    margin-top: 12px;
-    display: none;
-  }
-  .track-card.playing .audio-controls,
-  .track-card.paused .audio-controls {
+    margin-top: 22px;
     display: block;
   }
 
   .progress-bar {
     width: 100%;
-    height: 4px;
-    background: rgba(245,242,237,0.1);
-    border-radius: 2px;
+    height: 20px;
+    padding: 9px 0;
+    background: linear-gradient(to bottom, transparent 9px, var(--paper-rule) 9px, var(--paper-rule) 11px, transparent 11px);
+    border-radius: 0;
     cursor: pointer;
     margin-bottom: 8px;
     position: relative;
   }
   .progress-fill {
-    height: 100%;
-    background: #C4A35A;
-    border-radius: 2px;
+    position: absolute;
+    top: 9px;
+    left: 0;
+    height: 2px;
+    background: var(--black);
+    border-radius: 0;
     width: 0%;
     transition: width 0.1s linear;
   }
@@ -191,61 +220,43 @@
     display: flex;
     justify-content: space-between;
     font-size: 11px;
-    color: #706D66;
+    color: var(--dim);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
   }
 
   .error-msg {
-    margin-top: 8px;
+    margin-top: 12px;
     font-size: 12px;
-    color: #cc4444;
+    color: var(--dim);
     display: none;
-  }
-
-  .upload-section {
-    margin-top: 32px;
-    padding-top: 24px;
-    border-top: 1px solid rgba(245,242,237,0.08);
-  }
-
-  .upload-zone {
-    border: 2px dashed rgba(196,163,90,0.3);
-    border-radius: 12px;
-    padding: 32px 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .upload-zone:hover,
-  .upload-zone.dragover {
-    border-color: #C4A35A;
-    background: rgba(196,163,90,0.04);
-  }
-  .upload-zone-text {
-    font-size: 14px;
-    color: #706D66;
-    font-weight: 500;
-  }
-  .upload-zone-text strong {
-    color: #C4A35A;
-  }
-  .upload-zone-sub {
-    font-size: 12px;
-    color: #504E49;
-    margin-top: 6px;
   }
 
   .back-link {
     display: inline-block;
-    margin-top: 32px;
-    font-size: 13px;
+    min-height: 44px;
+    margin-top: 40px;
+    border-bottom: 1px solid var(--paper-rule);
+    font-size: 10px;
     font-weight: 600;
-    color: #706D66;
+    line-height: 44px;
+    color: var(--dim);
     text-decoration: none;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
-  .back-link:hover { color: #C4A35A; }
+  .back-link:hover { color: var(--black); border-bottom-color: var(--black); }
+
+  @media (max-width: 520px) {
+    .header { min-height: 132px; padding: 22px 20px; align-items: flex-start; }
+    .header-right { max-width: 220px; }
+    .header-right .event { margin-top: 6px; font-size: 22px; line-height: 1.05; }
+    .body { padding: 44px 20px 52px; }
+    .section-note { margin-bottom: 34px; }
+    .track-card { padding: 26px 0; }
+    .track-top { flex-direction: column; gap: 22px; }
+    .transport { width: 100%; justify-content: flex-start; }
+  }
 </style>
 </head>
 <body>
@@ -253,7 +264,8 @@
 <div class="header">
   <div class="header-left">
     <div class="the">The</div>
-    <div class="brand">GREENWAY BAND</div>
+    <div class="brand">Greenway</div>
+    <div class="band">Band</div>
   </div>
   <div class="header-right">
     <div class="label">Listening Room</div>
@@ -271,16 +283,7 @@
     <!-- Tracks are rendered by JS -->
   </div>
 
-  <div class="upload-section">
-    <div class="section-label">Add Tracks</div>
-    <div class="upload-zone" id="uploadZone">
-      <div class="upload-zone-text">Drag MP3 files here or <strong>tap to browse</strong></div>
-      <div class="upload-zone-sub">Files play locally in your browser</div>
-    </div>
-    <input type="file" id="fileInput" accept="audio/*" multiple style="display:none;">
-  </div>
-
-  <a class='back-link' href='/'>&larr; Back to Band Hub</a>
+  <a class='back-link' href='index.html'>&larr; Back to Gig Sheet</a>
 </div>
 
 <script>
@@ -448,98 +451,6 @@ document.addEventListener('click', (e) => {
     currentAudio.currentTime = pct * currentAudio.duration;
   }
 });
-
-// Upload handling
-const uploadZone = document.getElementById('uploadZone');
-const fileInput = document.getElementById('fileInput');
-
-uploadZone.addEventListener('click', () => fileInput.click());
-
-uploadZone.addEventListener('dragover', (e) => {
-  e.preventDefault();
-  uploadZone.classList.add('dragover');
-});
-
-uploadZone.addEventListener('dragleave', () => {
-  uploadZone.classList.remove('dragover');
-});
-
-uploadZone.addEventListener('drop', (e) => {
-  e.preventDefault();
-  uploadZone.classList.remove('dragover');
-  handleFiles(e.dataTransfer.files);
-});
-
-fileInput.addEventListener('change', (e) => {
-  handleFiles(e.target.files);
-});
-
-function handleFiles(files) {
-  Array.from(files).forEach(file => {
-    if (!file.type.startsWith('audio/')) return;
-
-    const blobUrl = URL.createObjectURL(file);
-    const name = file.name.replace(/\.[^.]+$/, '');
-
-    // Check if it matches an existing track by fuzzy name match
-    let matched = false;
-    TRACKS.forEach((track, i) => {
-      const slug = track.file.split('/').pop().replace('.mp3', '');
-      const inputSlug = name.toLowerCase().replace(/[^a-z0-9]/g, '');
-      const trackSlug = slug.replace(/-/g, '');
-
-      if (inputSlug.includes(trackSlug) || trackSlug.includes(inputSlug) ||
-          name.toLowerCase().includes(track.artist.toLowerCase().split(' ')[0].toLowerCase())) {
-        track.blobUrl = blobUrl;
-        const errorEl = document.getElementById('error-' + i);
-        if (errorEl) errorEl.style.display = 'none';
-        matched = true;
-      }
-    });
-
-    // If no match, add as a new track
-    if (!matched) {
-      const newIndex = TRACKS.length;
-      TRACKS.push({
-        title: '"' + name + '"',
-        artist: 'Uploaded',
-        context: 'Custom',
-        file: '',
-        blobUrl: blobUrl
-      });
-
-      const list = document.getElementById('trackList');
-      const card = document.createElement('div');
-      card.className = 'track-card';
-      card.id = 'track-' + newIndex;
-      card.innerHTML = `
-        <div class="track-top">
-          <div class="track-info">
-            <div class="track-title">"${name}"</div>
-            <div class="track-artist">Uploaded</div>
-            <div class="track-context">Custom</div>
-          </div>
-          <div class="transport">
-            <button class="skip-btn" data-index="${newIndex}" data-skip="-10"><span class="skip-icon">&#8634;</span>10s</button>
-            <button class="play-btn" data-index="${newIndex}">&#9654;</button>
-            <button class="skip-btn" data-index="${newIndex}" data-skip="10"><span class="skip-icon">&#8635;</span>10s</button>
-          </div>
-        </div>
-        <div class="audio-controls">
-          <div class="progress-bar" data-index="${newIndex}">
-            <div class="progress-fill"></div>
-          </div>
-          <div class="time-display">
-            <span class="time-current">0:00</span>
-            <span class="time-total">0:00</span>
-          </div>
-        </div>
-        <div class="error-msg" id="error-${newIndex}" style="display:none;">File not found.</div>
-      `;
-      list.appendChild(card);
-    }
-  });
-}
 
 renderTracks();
 

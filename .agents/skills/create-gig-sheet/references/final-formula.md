@@ -57,14 +57,23 @@ player in Listening Room only when Greenway performs it and a practice file exis
 
 ## Visual system and landing order
 
-- `index.html`, `mc.html`, and `listen.html`: charcoal background, cream text,
-  muted gray support text, gold accent.
-- `gig.html` and `band.html`: cream body, charcoal text, charcoal header, gold
-  labels and rules.
-- Plus Jakarta Sans throughout. Keep the compact Freeman/Dass spacing, two-column
-  desktop grids, single-column phone layout, small uppercase section labels, and
+- Band-facing pages use the locked Greenway palette only: black `#0A0A09`,
+  charcoal `#111110`, cream `#F5F2ED`, muted `#B8B4AC`, dim `#706D66`, and
+  faint `#4A4740`. No gold, metallic, teal, blue utility links, translucent
+  cards, gradients, or decorative status colors.
+- `index.html`: cream background with black type and gray support text.
+  `listen.html` and `band.html`: cream body with a black header.
+- Use Bodoni Moda for event names and editorial page titles. Keep Plus Jakarta
+  Sans for every operational fact, label, schedule row, and control.
+- Navigation rows, cards, badges, and buttons have square corners. Use hairline
+  rules and spacing for grouping instead of rounded containers. Audio controls
+  remain at least 44px in both dimensions.
+- A sourced warning that prevents a gig-day mistake may use the restrained
+  oxblood token `#8D2E2A` as a label or rule. Do not use it as general decoration.
+- Keep the compact Freeman/Dass information hierarchy, two-column desktop grids,
+  single-column phone layout, small uppercase section labels, and
   LIVE/TRACK/BREAK badges.
-- The landing page is the Band Hub. Link only to Band Sheet, then Listening Room.
+- The landing page is labeled `Gig Sheet`. Link only to Band Sheet, then Listening Room.
   Full Gig Sheet and MC Cue Sheet remain unlinked and available only by direct URL.
 
 ## Full Gig Sheet
@@ -89,7 +98,7 @@ Keep this section order:
 The Full Gig Sheet is Adrian's operational view. It may carry guest count,
 contacts, MC detail, DJ information, music direction, and event minutiae that the
 band-facing sheet does not need. Its header and footer say `ADRIAN ONLY`, and it
-is never linked from the Band Hub. Never show money or package terms.
+is never linked from the Gig Sheet landing page. Never show money or package terms.
 
 ## Band Sheet
 
@@ -117,7 +126,7 @@ moments, or exact special-dance microtiming. Label outside coverage only as
 Build it whenever Greenway is responsible for announcements. If an outside
 emcee/DJ owns announcements, build it only when a reference/backup is useful and
 name that vendor in a banner. Label the page `ADRIAN ONLY` and never link it from
-the Band Hub. Include every actionable reception transition in
+the Gig Sheet landing page. Include every actionable reception transition in
 time order, exact spoken wording, LIVE/TRACK badges, pronunciations, and concise
 logistics. Use the interaction rules in `specialty-pages.md`.
 
