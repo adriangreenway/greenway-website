@@ -1,6 +1,6 @@
 # Private Gig Admin Portal
 
-**Status:** APPROVED 2026-07-30
+**Status:** STAGES 1-2 SHIPPED 2026-07-30; STAGE 3 PLANNED
 **Size:** Large, three stages
 **Owner:** Adrian
 **Public musician site:** `https://gigs.greenwayband.com/<last-name>/<mm-dd-yy>/`
@@ -13,8 +13,10 @@ Give Adrian one private home page where he can find every deployed wedding by co
 ## Current truth
 
 - Matey's Band Sheet and Listening Room are live and safe to send.
-- Matey's Full and MC pages are unlinked, but unlinked is not secure. Anyone with those URLs can currently fetch them.
-- The public service worker currently includes the Full and MC pages in its offline cache.
+- Matey's Full and MC pages are protected at `gigadmin.greenwayband.com`.
+- The old public Full and MC routes return `404`.
+- Public service-worker cache v22 excludes Full and MC and deletes the old
+  private cache after a device reconnects.
 - Matey is the only wedding on the shared dated-URL system. Older weddings remain on separate Netlify sites and need an inventory before migration.
 - The permanent public source is `/Users/adrianjoseph/Desktop/greenway-gigs/`.
 
@@ -30,7 +32,9 @@ Give Adrian one private home page where he can find every deployed wedding by co
 
 ## Visible product
 
-The private home page is white/cream Greenway styling and includes:
+The private home page uses the Apple-inspired Growth Hour motif: Apple system
+fonts, a soft iOS-gray canvas, white rounded cards, and cobalt actions. It
+includes:
 
 1. Search by couple, date, or venue.
 2. A newest-first list of weddings.
@@ -48,11 +52,11 @@ Build the empty admin app and generated registry structure in a separate project
 
 Cloudflare DNS, Worker-secret activation, and the first production deployment remain explicit owner-approval actions.
 
-**Stage 1 result, 2026-07-30:** PASS. The sample-only portal is deployed at `gigadmin.greenwayband.com`; HTTPS enforcement, anonymous blocking, the 1Password credential, 12-hour session, sign-out, response headers, unexpected-host rejection, generated search registry, desktop/phone layouts, and sample-only output passed. Active Worker version: `e06515d2-0c5c-4478-adf7-a1bdaf3818d0`. Matey's Full and MC pages remain public until Stage 2.
+**Stage 1 result, 2026-07-30:** PASS. The sample-only portal was deployed at `gigadmin.greenwayband.com`; HTTPS enforcement, anonymous blocking, the 1Password credential, 12-hour session, sign-out, response headers, unexpected-host rejection, generated search registry, desktop/phone layouts, and sample-only output passed. Worker version: `e06515d2-0c5c-4478-adf7-a1bdaf3818d0`. This gate cleared the separate Stage 2 migration.
 
 ## Stage 2: move Matey private pages
 
-After Stage 1 passes:
+After Stage 1 passed:
 
 - Copy Matey's Full and MC pages into the protected portal.
 - Remove Full and MC from the public deployment source.
@@ -61,6 +65,15 @@ After Stage 1 passes:
 - Keep the public landing, Band Sheet, Listening Room, audio, dated path, and old-link transitions working.
 
 **Gate:** private content is available only after authentication, old public URLs fail closed, and the musician link works exactly as before.
+
+**Stage 2 result, 2026-07-30:** PASS. Matey's Full and MC pages are protected
+behind the live login; authenticated page refresh and MC cue controls passed.
+All old public Full and MC routes return `404`, while Band, Listening, and all
+three audio tracks still return `200`. Cache v22 excludes private pages and
+retires the old cache after reconnect. The final local build and all 16 tests
+passed. Active Worker version:
+`fe4dbf64-e44b-4d45-84bd-4ade7e703e7e`; public deploy:
+`6a6bec25536cce7c40933fe7`; admin commit: `a123ad3`.
 
 ## Stage 3: archive and future workflow
 
@@ -84,7 +97,9 @@ After Stage 1 passes:
 
 ## Build scope
 
-**Modify in the fresh session:** a new isolated admin project; Cloudflare configuration only after explicit approval; the public gig source only in Stage 2; gig-sheet generation instructions only in Stage 3.
+**Modify in Stage 3:** gig-sheet generation instructions and the generated
+archive registry. Older wedding sites remain read-only until the inventory is
+reviewed and approved.
 
 **Read only:** this plan, `docs/CURRENT_STATE.md`, D17-D20, the current public deployment configuration, and Cloudflare's current Workers secrets and Web Crypto documentation.
 
