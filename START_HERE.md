@@ -29,7 +29,7 @@ Four separate things going, plus the song list which just wrapped. Only the Astr
 
 **Client proposals: the third track, never paused.** Brooks Kendall's Juneteenth proposal is live at `proposals.greenwayband.com/mckinney-juneteenth/`. Brooks corrected the production responsibility and gave a $10,000–$15,000 budget, so Adrian asked two follow-up questions before another revision. The new D19 gate now qualifies every lead before any pricing or proposal is prepared. In Codex, invoke that workflow with `$create-proposal`.
 
-**Gig sheets: Matey is live, premium, stable, and split by audience.** Band and Listening stay public. Full and MC now live behind the `Greenway Gig Admin` password saved in 1Password, with a signed 12-hour session. The private portal uses the Apple-inspired Growth Hour look. Stages 1 and 2 are complete; Stage 3 will inventory older gig sites and make future generation update both destinations safely.
+**Gig sheets: Matey is live, premium, stable, and split by audience.** Band and Listening stay public in the Greenway look. Full and MC live behind the `Greenway Gig Admin` password saved in 1Password. The Apple-inspired motif stays inside the private admin origin. Stage 3A is complete: seven historical weddings were found across nine Netlify sites without changing any of them. Three have usable local source; four need recovery or reconciliation. Stage 3B builds the tested dual-audience workflow next.
 
 **Your song list: started and finished today, its own small track.** Your full song list, all 434 songs including the Bob Marley add, now lives at `proposals.greenwayband.com/song-list` — same look as your proposals, a genre row across the top with dividers like your homepage's venue line, search built in. A first pass came back green and got rejected on the spot ("our color scheme isn't green"); the rebuild matches your proposal design exactly instead. You tried it on Squarespace too, hit two real snags there (one was your site's own pre-existing footer-color bug, now fixed; the other was Squarespace mangling apostrophes on paste, also fixed at the source) and then decided to drop the Squarespace copy entirely and keep only the proposals page. Every new proposal now links to it, right under the video.
 
@@ -47,11 +47,11 @@ None of these affect your live site today, because your live site is still Squar
 ---
 
 ## Your next step
-**Plan Stage 3 of the protected gig admin portal.**
+**Build Stage 3B of the protected gig admin portal.**
 
 Start the next session on Sol and paste:
 
-**Run the start-session skill. Context: Gig Admin Stages 1 and 2 are live and production-verified. Matey's Full and MC pages are protected at `gigadmin.greenwayband.com`; their old public routes return `404`; Band, Listening, and audio remain healthy on cache v22. Read `docs/gig-sheets/PRIVATE_ADMIN_PLAN.md` and run plan-feature for Stage 3: inventory older one-off gig sites without changing them, then plan the generator update that publishes public and private pages to the correct destinations. Do not migrate older sites or deploy anything without a separately approved build plan.**
+**Run the start-session skill. Context: Gig Admin Stages 1 and 2 are live and Stage 3A's read-only inventory is complete. Read `docs/gig-sheets/PRIVATE_ADMIN_PLAN.md` and run build-feature for Stage 3B only: correct the stale Gig Sheet workflow, split public Greenway pages from private admin pages, add duplicate, missing-file, privacy, and full-folder safety checks, then prove it with sample-only data. Do not migrate an older wedding or deploy anything.**
 
 Separately, the Astro rebuild still waits for Growth Hour's M3. The EPK is live; lifting `noindex` is optional whenever you want it searchable.
 

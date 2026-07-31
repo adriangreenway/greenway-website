@@ -1,6 +1,6 @@
 # Private Gig Admin Portal
 
-**Status:** STAGES 1-2 SHIPPED 2026-07-30; STAGE 3 PLANNED
+**Status:** STAGES 1-2 SHIPPED; STAGE 3A COMPLETE 2026-07-30; STAGE 3B APPROVED
 **Size:** Large, three stages
 **Owner:** Adrian
 **Public musician site:** `https://gigs.greenwayband.com/<last-name>/<mm-dd-yy>/`
@@ -17,7 +17,9 @@ Give Adrian one private home page where he can find every deployed wedding by co
 - The old public Full and MC routes return `404`.
 - Public service-worker cache v22 excludes Full and MC and deletes the old
   private cache after a device reconnects.
-- Matey is the only wedding on the shared dated-URL system. Older weddings remain on separate Netlify sites and need an inventory before migration.
+- Matey is the only wedding on the shared dated-URL system. The read-only
+  historical inventory found seven older weddings across nine Netlify sites.
+  None has been migrated or changed.
 - The permanent public source is `/Users/adrianjoseph/Desktop/greenway-gigs/`.
 
 ## Approved architecture
@@ -29,6 +31,9 @@ Give Adrian one private home page where he can find every deployed wedding by co
 - Host the private static files on an isolated origin with its public fallback hostname disabled. Cloudflare Workers Static Assets is the recommended first implementation.
 - Use a generated wedding registry for version one. Do not add a database until Adrian wants browser-based editing or multiple administrators.
 - Keep public musician URLs unchanged. The public landing page continues to expose only Band Sheet and Listening Room.
+- Keep the Apple-inspired motif inside the protected admin origin. Public Gig
+  Sheet, Band Sheet, and Listening Room pages remain on the locked Greenway
+  palette with Bodoni Moda titles and Plus Jakarta Sans operational text.
 
 ## Visible product
 
@@ -77,12 +82,64 @@ passed. Active Worker version:
 
 ## Stage 3: archive and future workflow
 
-- Inventory older one-off gig sites without changing them.
-- Add each approved historical wedding to the generated registry.
-- Update the gig-sheet generator so every new deployment publishes public pages to the musician site, private pages to the admin site, and one metadata record to the archive.
-- Add duplicate-path and missing-file checks before either deployment.
+**Size:** Large. Split into three independently verified parts.
 
-**Gate:** a new test wedding appears in search automatically, every link resolves to the correct audience, and a partial deploy cannot remove another wedding.
+**Planning finding:** the current `create-gig-sheet` skill and
+`GIG_SHEET_SYSTEM.md` still instruct future builds to place Full and MC files in
+the public folder and cache them offline. That documentation is now unsafe and
+must be corrected before the next new gig sheet. The public `netlify.toml`
+comment is also stale, but its behavior is unchanged and it remains off limits.
+
+### Stage 3A: read-only historical inventory
+
+- Inspect the Netlify account, live routes, and any matching local source
+  folders.
+- Record each likely gig site once, including its live URL, event date when
+  confirmed, page types, local-source location, and migration readiness.
+- Keep client contacts, timelines, and other private facts out of the inventory.
+- Do not edit, migrate, retire, or redeploy any older site.
+
+**Gate:** every likely historical gig is classified or explicitly marked
+uncertain, duplicate sites are grouped, and Adrian can approve migrations from
+one clear list without any live change.
+
+**Stage 3A result, 2026-07-30:** PASS. Seven historical weddings were confirmed
+across nine live Netlify sites. Velek / Reinders has two full-site deployments;
+Hawk / Clayton is split across Full and MC sites. Three weddings have usable
+local source, while four need source recovery or reconciliation. Proposal and
+unrelated event sites were excluded. No live site, source file, deployment, or
+DNS record changed. The private evidence record is
+`/Users/adrianjoseph/Desktop/greenway-gig-admin/docs/HISTORICAL_INVENTORY.md`.
+
+### Stage 3B: dual-audience build workflow
+
+- Update the Gig Sheet skill and system guide so public builds contain only the
+  Greenway-styled landing, Band Sheet, Listening Room, manifest, service worker,
+  and audio.
+- Send Full and MC pages only to the protected admin project and add one
+  generated archive record.
+- Add checks for duplicate wedding IDs and paths, missing public or private
+  pages, private files in the public folder, private service-worker entries, and
+  removal of an existing wedding from a full-folder deploy.
+- Prove the workflow with sample-only test data. Do not deploy the sample.
+
+**Gate:** one sample build appears in local admin search, its public and private
+links resolve to the correct local destination, the public output contains no
+Full or MC page, and every failure check stops before deployment.
+
+### Stage 3C: approved historical migrations
+
+- Migrate only weddings Adrian approves from the Stage 3A inventory.
+- Move one wedding at a time, deploy the protected copy first, then make the
+  public copy safe.
+- Verify the migrated wedding and every previously migrated wedding after each
+  full-folder deployment.
+- Retiring an old one-off Netlify site is a separate destructive action and
+  always needs Adrian's explicit approval.
+
+**Gate:** each approved wedding is searchable behind the admin login; its public
+musician pages keep the Greenway look; its private pages cannot be fetched
+anonymously; and no earlier wedding is removed or broken.
 
 ## Acceptance criteria
 
@@ -93,13 +150,22 @@ passed. Active Worker version:
 - Each wedding exposes protected Full and MC pages plus public Band and Listening references.
 - New gig generation updates the archive automatically.
 - `gigs.greenwayband.com/<last>/<date>/` remains the musician-facing address.
+- Public musician pages keep the locked Greenway visual system. The
+  Apple-inspired motif never reaches the public Gig Sheet, Band Sheet, or
+  Listening Room.
 - No Supabase, Stripe, Twilio, CRM, or marketing-site authentication code is introduced.
 
 ## Build scope
 
-**Modify in Stage 3:** gig-sheet generation instructions and the generated
-archive registry. Older wedding sites remain read-only until the inventory is
-reviewed and approved.
+**Modify in Stage 3A:** one private inventory record plus project status docs.
+
+**Modify in Stage 3B:** `.agents/skills/create-gig-sheet/SKILL.md`,
+`docs/gig-sheets/GIG_SHEET_SYSTEM.md`, the example audience instructions, admin
+registry/build validation and tests, and sample-only fixtures.
+
+**Modify in Stage 3C:** only the approved wedding's protected admin folder,
+archive record, and shared public source folder. Older wedding sites remain
+read-only until the inventory is reviewed and each migration is approved.
 
 **Read only:** this plan, `docs/CURRENT_STATE.md`, D17-D20, the current public deployment configuration, and Cloudflare's current Workers secrets and Web Crypto documentation.
 
