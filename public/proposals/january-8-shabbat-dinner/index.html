@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Greenway Band — Private Shabbat Dinner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A09;
+    --charcoal: #111110;
+    --cream: #F5F2ED;
+    --cream-muted: #D4D0C8;
+    --cream-dim: #8A867E;
+    --cream-faint: #5A5750;
+    --border: rgba(245,242,237,0.08);
+    --border-light: rgba(245,242,237,0.12);
+    --border-med: rgba(245,242,237,0.18);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--black);
+    color: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .page {
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 72px 32px 56px;
+  }
+  .logo-group { text-align: center; margin-bottom: 64px; }
+  .logo-rule { width: 48px; height: 0.5px; background: var(--cream-dim); margin: 0 auto; }
+  .logo-the { font-family: 'Bodoni Moda', serif; font-size: 10px; letter-spacing: 9px; text-transform: uppercase; color: var(--cream-dim); margin-top: 24px; text-indent: 9px; }
+  .logo-name { font-family: 'Bodoni Moda', serif; font-size: clamp(26px, 7vw, 36px); letter-spacing: 5px; text-transform: uppercase; color: var(--cream); font-weight: 400; margin: 4px 0; text-indent: 5px; }
+  .logo-band { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; letter-spacing: 13px; text-transform: uppercase; color: var(--cream-dim); font-weight: 400; text-indent: 13px; }
+  .logo-rule-bottom { margin-top: 14px; }
+  .content { width: 100%; max-width: 560px; }
+  .event-head { text-align: center; margin-bottom: 56px; }
+  .event-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--cream-faint); margin-bottom: 14px; }
+  .event-title { font-family: 'Bodoni Moda', serif; font-size: clamp(24px, 6vw, 32px); color: var(--cream); font-weight: 400; letter-spacing: 1px; }
+  .event-sub { margin-top: 16px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-dim); line-height: 2.2; }
+  .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 0.5px solid var(--border-light); margin-bottom: 48px; }
+  @media (max-width: 480px) { .details-grid { grid-template-columns: 1fr; } .detail-cell { border-right: none !important; } }
+  .detail-cell { padding: 22px 26px; border-bottom: 0.5px solid var(--border); border-right: 0.5px solid var(--border); }
+  .detail-cell:nth-child(even) { border-right: none; }
+  .detail-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-faint); margin-bottom: 8px; }
+  .detail-value { font-family: 'Bodoni Moda', serif; font-size: 15px; color: var(--cream); font-weight: 400; }
+  .price-row { display: flex; justify-content: space-between; align-items: baseline; padding: 26px 0; border-top: 0.5px solid var(--border-med); border-bottom: 0.5px solid var(--border-med); }
+  .price-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-dim); }
+  .price-amount { font-family: 'Bodoni Moda', serif; font-size: clamp(28px, 7vw, 36px); color: var(--cream); font-weight: 400; }
+  .price-note { font-size: 11px; color: var(--cream-faint); line-height: 1.8; margin-top: 18px; font-weight: 300; text-align: center; }
+  .footer { margin-top: auto; padding-top: 72px; text-align: center; }
+  .footer-contact p { font-size: 11px; color: var(--cream-dim); letter-spacing: 1.5px; line-height: 2.3; }
+  .footer-contact a { color: var(--cream-muted); text-decoration: none; }
+  .footer-website { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-muted); margin-top: 14px; }
+  .footer-validity { margin-top: 36px; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-faint); opacity: 0.5; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="logo-group reveal">
+    <div class="logo-rule"></div>
+    <div class="logo-the">THE</div>
+    <div class="logo-name">GREENWAY</div>
+    <div class="logo-band">BAND</div>
+    <div class="logo-rule logo-rule-bottom"></div>
+  </div>
+  <div class="content">
+    <div class="event-head reveal reveal-delay-1">
+      <div class="event-label">Pricing</div>
+      <div class="event-title">Private Shabbat Dinner</div>
+      <div class="event-sub">
+        January 8, 2027<br>
+        Congregation Beth Israel &middot; Margolis Gallery<br>
+        Houston, Texas
+      </div>
+    </div>
+    <div class="details-grid reveal reveal-delay-2">
+      <div class="detail-cell">
+        <div class="detail-label">Date</div>
+        <div class="detail-value">January 8, 2027</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Performance Time</div>
+        <div class="detail-value">7:15 PM to 9:30 PM</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Venue</div>
+        <div class="detail-value">Congregation Beth Israel</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Room</div>
+        <div class="detail-value">Margolis Gallery</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Configuration</div>
+        <div class="detail-value">Solo Performance</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Guests</div>
+        <div class="detail-value">Approximately 75</div>
+      </div>
+    </div>
+    <div class="price-row reveal reveal-delay-3">
+      <div class="price-label">Investment</div>
+      <div class="price-amount">$1,500</div>
+    </div>
+    <div class="price-note reveal reveal-delay-4">
+      Sound equipment included.
+    </div>
+  </div>
+  <div class="footer reveal reveal-delay-4">
+    <div class="footer-contact">
+      <p>Adrian Michael</p>
+      <p><a href="mailto:adrian@greenwayband.com">adrian@greenwayband.com</a></p>
+      <p>(281) 467-1226</p>
+    </div>
+    <div class="footer-website">greenwayband.com</div>
+    <div class="footer-validity">This proposal is valid for 30 days from the date of receipt</div>
+  </div>
+</div>
+<script>
+  document.querySelectorAll('.reveal').forEach(el => { setTimeout(() => el.classList.add('visible'), 200); });
+</script>
+</body>
+</html>
