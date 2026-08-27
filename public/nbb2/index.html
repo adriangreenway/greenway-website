@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Natural Bodybuilding Block II</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NBB2">
+<meta name="theme-color" content="#1A1A1A">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiTmF0dXJhbCBCb2R5YnVpbGRpbmcgQmxvY2sgSUkiLCJzaG9ydF9uYW1lIjoiTkJCMiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwic3RhcnRfdXJsIjoiLiIsImJhY2tncm91bmRfY29sb3IiOiIjMUExQTFBIiwidGhlbWVfY29sb3IiOiIjMUExQTFBIn0=">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231A1A1A' width='100' height='100' rx='20'/><text x='50' y='68' font-size='55' text-anchor='middle'>⚡</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700;6..96,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.9/babel.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#FFF;color:#1A1A1A;overscroll-behavior:none;-webkit-font-smoothing:antialiased}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+@keyframes plateIn{from{opacity:0;transform:scaleX(0.3)}to{opacity:1;transform:scaleX(1)}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
+// ─── STORAGE (localStorage, Block 2 namespace) ───────────────────────
+function loadLog(k) {
+  try {
+    const raw = localStorage.getItem("nbb2:" + k);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) return parsed;
+    return {};
+  } catch { return {}; }
+}
+function saveLog(k, v) {
+  try { localStorage.setItem("nbb2:" + k, JSON.stringify(v)); return true; }
+  catch(e) { console.error("save error", e); return false; }
+}
+function loadLoggedDates(m) {
+  try { const r = localStorage.getItem("nbb2-dates:" + m); return r ? JSON.parse(r) : []; }
+  catch { return []; }
+}
+function addLoggedDate(m, d) {
+  try { const e = loadLoggedDates(m); if (!e.includes(d)) { e.push(d); localStorage.setItem("nbb2-dates:" + m, JSON.stringify(e)); } }
+  catch(e) { console.error(e); }
+}
+
+// ─── DATA ────────────────────────────────────────────────────────────
+const DAYS = [
+  {
+    day: "Monday", title: "Push A: Heavy Bench / OHP / Triceps", tag: "PUSH", color: "#D97706",
+    mission: "New heavy anchors. Flat barbell power, standing press strength, triceps mass. Same armor, new stress.",
+    intensity: "Heavy compounds, new lifts, technical failure",
+    exercises: [
+      { name: "Flat Barbell Bench Press", setup: "Shoulder blades pinned. Feet planted. Bar to lower chest. Block 2's heavy anchor.", warmup: "50%×10, 65%×6, 80%×3 of 6RM", sets: ["6RM × 6","6RM × 5–6","6RM × 4–6","Back-off −15% → 8–10"], failure: "Technical failure only. Never true failure on a free barbell.", rest: "2–3 min" },
+      { name: "Incline DB Press", setup: "30–45°. Deep stretch at the bottom. Press up and slightly in.", warmup: "50%×10, 70%×5", sets: ["10RM × 10","8RM × 8","8RM × 7–8","Drop 15% → 8–10 to failure"], failure: "Chest fails. Stop when the DBs drift or wobble.", rest: "90–120s" },
+      { name: "Standing Barbell OHP or Machine Shoulder Press", setup: "Glutes tight, ribs down. Bar path close to the face. Machine if low back is cranky.", warmup: "50%×8, 70%×4", sets: ["8RM × 8","8RM × 6–8","Back-off −10% → 8–10"], failure: "No layback. Delts fail, low back stays quiet.", rest: "2 min" },
+      { name: "DB Lateral Raise — Rest-Pause", setup: "Seated or standing. Lead with elbows. Stop at shoulder height.", warmup: "Light×15", sets: ["12RM × 12","Rest 15s → max reps","Rest 15s → max reps","Drop 30% → 15–20"], failure: "Side delts scream. No swinging into it.", rest: "60–75s after the block" },
+      { name: "Close-Grip Bench Press", setup: "Grip just inside shoulder width. Elbows tucked. Bar to lower chest.", warmup: "50%×8, 70%×4", sets: ["10RM × 10","8RM × 8","8RM × max clean reps"], failure: "Triceps fail. Rack it before the bar path breaks.", rest: "90–120s" },
+      { name: "EZ Skull Crusher", setup: "Lower slightly behind the head for a longer stretch. Elbows stay in.", warmup: "Light×12", sets: ["12RM × 12","10RM × 10","10RM to failure"], failure: "Clean failure. Any elbow pain, switch to cables.", rest: "60–75s" },
+      { name: "Single-Arm Cross-Body Pushdown", setup: "Cable across the body. Lock the elbow position. Full lockout squeeze.", warmup: "Light×12/side", sets: ["15RM × 15/side","12RM × 12/side","12RM to failure + 5 partials/side"], failure: "Lateral head burn. No shoulder rolling.", rest: "45–60s both arms" },
+    ],
+    abs: [{ name: "Hanging Leg Raise", detail: "10–12 → 8–12 → max clean reps. Straight legs if possible." }]
+  },
+  {
+    day: "Tuesday", title: "Pull A: Heavy Rows / Traps / Biceps", tag: "PULL", color: "#D97706",
+    mission: "Barbell rows take over as the heavy anchor. Thickness, traps, and a new biceps stimulus.",
+    intensity: "Heavy pulls, strict standards, big squeezes",
+    exercises: [
+      { name: "Barbell Row", setup: "Hinge to 30–45°. Pull to lower ribs. Lats and elbows do the work, not momentum.", warmup: "50%×10, 65%×6, 80%×3", sets: ["8RM × 8","8RM × 6–8","8RM × 6–8","Back-off −15% → 10–12"], failure: "Stop when the torso starts heaving. This is a row, not a clean.", rest: "2–3 min" },
+      { name: "Weighted Chin-Up or Neutral-Grip Pulldown", setup: "Underhand or neutral grip. Full hang at the bottom. Chest up to the bar path.", warmup: "Easy×8, Mod×5", sets: ["8RM × 8","8RM × 6–8","8RM × max clean reps"], failure: "Depth stays the same every rep. Shorter reps means done.", rest: "2 min" },
+      { name: "Seated Cable Row — Close Grip", setup: "Chest tall. Pull to the belly button. 1-sec squeeze every rep.", warmup: "Light×12", sets: ["12RM × 12","10RM × 10","10RM × 8–10","Drop 15% → 10–12 to failure"], failure: "Ends when the squeeze disappears.", rest: "90s" },
+      { name: "Smith or Trap-Bar Shrug", setup: "Heavy. Full stretch at the bottom, 2-sec hold at the top. Straps welcome.", warmup: "Light×12", sets: ["10RM × 10","8RM × 8","8RM × 6–8","Drop 15% → 10–12"], failure: "Traps fail under control. No neck craning.", rest: "75–90s" },
+      { name: "Face Pull", setup: "Rope at upper-chest height. Pull to the forehead, elbows high, thumbs back.", warmup: "Light×15", sets: ["15RM × 15","15RM × 12–15","12RM to failure"], failure: "Rear delts and mid traps burn. No leaning back.", rest: "45–60s" },
+      { name: "Spider Curl", setup: "Chest on an incline bench. Arms hang straight down. Curl with zero swing.", warmup: "Light×12", sets: ["12RM × 12","10RM × 10","10RM to failure + 4 partials"], failure: "Peak squeeze dies, set is over.", rest: "60–75s" },
+      { name: "Zottman or Reverse EZ Curl", setup: "Curl up palms up, lower palms down. Or reverse grip the whole way. Forearm builder.", warmup: "Light×10", sets: ["12RM × 12","10RM × 10","10RM × max clean reps"], failure: "Grip and forearms fail. Keep wrists straight.", rest: "60s" },
+    ],
+    abs: [{ name: "Cable Crunch — Heavy", detail: "12RM×12 → 10RM×10 → 10RM to failure" }]
+  },
+  {
+    day: "Wednesday", title: "Legs A: Heavy Quad Volume", tag: "LEGS", color: "#D97706",
+    mission: "Leg press becomes the heavy anchor, hack squat goes to pause work, and quads finish with lengthened partials. New stress, same target.",
+    intensity: "Heavy, paused, controlled. One widowmaker.",
+    exercises: [
+      { name: "Leg Press — Heavy", setup: "Feet lower and shoulder-width for quads. Full depth, hips stay down.", warmup: "2 ramps ×8, then 80%×3", sets: ["8RM × 8","8RM × 6–8","8RM × 6–8","Widowmaker: −20% → 15–20"], failure: "Technical failure. The widowmaker should be miserable and clean.", rest: "2–3 min" },
+      { name: "Paused Hack Squat or Smith Squat", setup: "2-sec dead stop at the bottom. No bounce. Stand up through the whole foot.", warmup: "50%×8, 70%×5", sets: ["10RM × 8–10","10RM × 8","10RM × 6–8"], failure: "The pause kills momentum. When depth shrinks, stop.", rest: "2 min" },
+      { name: "Reverse Lunge or Walking Lunge", setup: "DBs at sides. Long enough stride to keep the front knee happy.", warmup: "BW×8/leg", sets: ["10RM × 10/leg","10RM × 8–10/leg","10RM to clean failure/leg"], failure: "Legs fail, balance holds.", rest: "90s both legs" },
+      { name: "Lying Leg Curl — Slow Negatives", setup: "4-sec lowering on every rep. Squeeze hard at the top.", warmup: "Light×12", sets: ["12RM × 10–12","10RM × 10","10RM to failure"], failure: "Hamstrings fail from the negatives. Hips stay down.", rest: "60–90s" },
+      { name: "Leg Extension — Lengthened Partials", setup: "Full reps first. When you fail, keep pumping the bottom half.", warmup: "Light×15", sets: ["15RM × 15","12RM × 12","12RM to failure + 8 bottom-half partials"], failure: "True failure plus the partials. This should be nasty.", rest: "60s" },
+      { name: "Leg Press Calf Raise", setup: "Balls of feet on the low edge. Deep stretch, 2-sec pause at the bottom.", warmup: "Light×15", sets: ["15RM × 15","12RM × 12","12RM × 10–12","Drop 15% → 12–15"], failure: "Stretch pause every rep. No bouncing, ever.", rest: "45–75s" },
+    ],
+    abs: [{ name: "Weighted Plank", detail: "3×30–45s, plate on back" },{ name: "Farmer's Carry", detail: "3×40 steps, heavy" }]
+  },
+  {
+    day: "Thursday", title: "Push B: Delts First / Chest Pump / Arms", tag: "PUSH", color: "#D97706",
+    mission: "Delts open the day for a change. Then chest pump work, stretch-loaded flys, and arm detail.",
+    intensity: "Pre-exhaust, rest-pause, high pump",
+    exercises: [
+      { name: "Machine Shoulder Press", setup: "Delts first while fresh. Back on the pad, no arch.", warmup: "50%×10, 70%×5", sets: ["12RM × 12","10RM × 10","10RM × 8–10","Drop 10–15% → 10–12"], failure: "Machine failure is fine. Grinders on a machine are allowed, ugly spine is not.", rest: "90–120s" },
+      { name: "Incline Smith or Machine Press", setup: "Low incline. Fixed path, so chase the pump, not the load.", warmup: "50%×10, 70%×5", sets: ["12RM × 12","10RM × 10","Rest-pause: 10RM × 10 → 15s → max → 15s → max"], failure: "Chest fails across the rest-pause. Blades stay pinned.", rest: "90s" },
+      { name: "High-to-Low Cable Fly", setup: "Cables set high. Sweep down and together. Lower-chest line.", warmup: "Light×15", sets: ["15RM × 15","12RM × 12","12RM to failure + 5 partials"], failure: "Chest fails in the stretch. Shoulders stay back.", rest: "60–75s" },
+      { name: "Machine or DB Fly — 3-Sec Negatives", setup: "3-sec lowering into a deep stretch. Smooth squeeze back up.", warmup: "Light×12", sets: ["12RM × 10–12","10RM × 10","10RM to failure"], failure: "The negative does the damage. Stop when the tempo breaks.", rest: "60–75s" },
+      { name: "Seated DB Lateral — Myo-Reps", setup: "Seated kills momentum. One activation set, then mini-sets with 15s rest.", warmup: "Light×15", sets: ["15RM × 15 (activation)","+3–5 reps × 4 mini-sets, 15s rest each","Drop 30% → 15–20"], failure: "Every mini-set ends 1 rep shy of collapse.", rest: "60s after the block" },
+      { name: "Seated Overhead DB Extension", setup: "Two hands, one DB. Deep stretch behind the head. Elbows point up.", warmup: "Light×12", sets: ["12RM × 12","10RM × 10","10RM to failure"], failure: "Long head fails in the stretch. Elbows stay in.", rest: "60–75s" },
+      { name: "Machine Preacher Curl + Single-Arm Pushdown (SS)", setup: "Curl first, pushdown second. Locked positions, zero swing.", warmup: "1 light round", sets: ["Curl 12RM×12 / Push 15RM×15","Curl 10RM×10 / Push 12RM×12","Both to clean failure 10–15"], failure: "Clean failure both. No elbow pain.", rest: "75–90s/round" },
+    ],
+    abs: [{ name: "Machine Crunch or Decline Sit-Up", detail: "3×12–15, add weight when easy" }]
+  },
+  {
+    day: "Friday", title: "Pull B: Width / Pullover / Detail", tag: "PULL", color: "#D97706",
+    mission: "Wide grips, big stretch pullovers, rear delts, and trap detail. The taper day.",
+    intensity: "Stretch-loaded, strict, high-quality volume",
+    exercises: [
+      { name: "Wide-Grip Pull-Up or Wide Pulldown", setup: "Hands outside shoulders. Drive elbows down and out. Chest up.", warmup: "Easy×8, Mod×6", sets: ["10RM × 10","8RM × 8","8RM × 6–8","Drop 15% → 8–10"], failure: "Width day. Half reps mean the set is over.", rest: "90–120s" },
+      { name: "Meadows Row or Single-Arm DB Row", setup: "Big stretch at the bottom, elbow sweeps back. Brace on the bench or rack.", warmup: "Light×10/side", sets: ["10RM × 10/side","10RM × 8–10/side","10RM × max clean/side"], failure: "Lat fails. Torso stays square.", rest: "75–90s both sides" },
+      { name: "Machine High Row or Wide Chest-Supported Row", setup: "Elbows flare toward shoulder height. Pull to the upper chest line.", warmup: "Light×12", sets: ["12RM × 12","10RM × 10","10RM to clean failure"], failure: "Upper back fails. No hips sliding.", rest: "75–90s" },
+      { name: "DB or Machine Pullover", setup: "Big stretch overhead. Ribs down. Pull with the lats, not the arms.", warmup: "Light×12", sets: ["12RM × 12","10RM × 10","10RM to failure"], failure: "Lats fail in the stretch. Low back stays glued to the bench.", rest: "60–90s" },
+      { name: "Reverse Pec Deck", setup: "Arms just below shoulder height. Lead with the pinkies. Pause the squeeze.", warmup: "Light×15", sets: ["20RM × 20","15RM × 15","15RM to failure + 6 partials"], failure: "Rear delts only. Traps stay quiet.", rest: "45–60s" },
+      { name: "Incline DB Shrug", setup: "Chest on an incline bench. Shrug up and back. Stretch focus, lighter than Tuesday.", warmup: "Light×12", sets: ["15RM × 15","12RM × 12","12RM to failure"], failure: "Mid and upper traps burn. No arm pulling.", rest: "60s" },
+      { name: "EZ-Bar 21s", setup: "7 bottom-half reps, 7 top-half reps, 7 full reps. That's one set.", warmup: "1 light round", sets: ["21s round 1 (12–15RM weight)","21s round 2","21s round 3"], failure: "The last 7 full reps should barely finish.", rest: "90s/round" },
+    ],
+    abs: [{ name: "Cable Woodchop", detail: "3×10–12/side, high to low" }]
+  },
+  {
+    day: "Saturday", title: "Legs B: Deep Stretch Posterior + Quad Detail", tag: "LEGS", color: "#D97706",
+    mission: "Deficit RDLs, glute-focused hyperextensions, step-ups, and single-leg quad work. Hamstrings and glutes get their new stress.",
+    intensity: "Deep stretch under load, unilateral, strict",
+    exercises: [
+      { name: "Deficit RDL or Stiff-Leg Deadlift", setup: "Stand on a plate or low block. Deeper stretch than a normal RDL. Lats locked, bar close.", warmup: "50%×8, 70%×5, 80%×3", sets: ["10RM × 10","8RM × 8","8RM × 6–8"], failure: "Hamstrings limit the set. The second your back rounds, it's over.", rest: "2–3 min" },
+      { name: "Seated Leg Curl", setup: "Lean forward slightly for more stretch. Control the negative.", warmup: "Light×15", sets: ["15RM × 15","12RM × 12","12RM to failure + 5 partials","Drop 15% → 12–15"], failure: "Hamstrings cramp-burn. Hips stay pinned.", rest: "60–90s" },
+      { name: "45° Hyperextension — Glute Bias or Cable Pull-Through", setup: "Round the upper back slightly, tuck the chin, squeeze glutes at the top. Hold a plate when ready.", warmup: "BW×12", sets: ["15RM × 15","12RM × 12","12RM to failure"], failure: "Glutes fail. Low back stays out of it.", rest: "75–90s" },
+      { name: "DB Step-Up", setup: "Knee-high box. Drive through the whole foot of the top leg. No pushing off the floor leg.", warmup: "BW×6/leg", sets: ["10RM × 10/leg","10RM × 8–10/leg","10RM to clean failure/leg"], failure: "Top leg does all the work. Wobble means stop.", rest: "90s both legs" },
+      { name: "Single-Leg Leg Extension", setup: "One leg at a time. Full lockout squeeze. Match reps on both sides.", warmup: "Light×12/leg", sets: ["15RM × 15/leg","12RM × 12/leg","12RM to failure/leg + 5 partials"], failure: "Each quad earns its own failure.", rest: "60s both legs" },
+      { name: "Standing Calf Raise", setup: "2-sec pause in the deep stretch. Hard squeeze at the top.", warmup: "Light×15", sets: ["15RM × 15","12RM × 12","12RM × 10–12","Drop 15% → 12–15"], failure: "Full range only. The stretch pause is the point.", rest: "45–75s" },
+      { name: "Hip Abduction Machine", setup: "Lean the torso slightly forward. Push out and slightly back. Glute med builder.", warmup: "Light×15", sets: ["15RM × 15","12RM × 12","12RM to failure"], failure: "Outer glutes burn. No rocking.", rest: "60s" },
+    ],
+    abs: [{ name: "V-Up or Hollow Hold", detail: "3×12–15 or 3×20–30s" },{ name: "Side Plank", detail: "3×30–45s/side" }]
+  },
+  {
+    day: "Sunday", title: "Off / Walk / Mobility", tag: "REST", color: "#9CA3AF",
+    mission: "Recover hard enough to make Monday heavy again. Growth happens here.",
+    intensity: "Easy",
+    rest: [
+      { item: "Walk", note: "20–45 min easy. Restorative." },
+      { item: "Mobility", note: "10 min: hips, hamstrings, pecs, lats, T-spine." },
+      { item: "Prep", note: "Meal prep protein and carbs for the week." },
+      { item: "Check-in", note: "Body weight, progress photos, training log review." },
+    ]
+  }
+];
+
+const PROGRESSION = [
+  { week: "Wks 1–2", label: "Re-Calibrate", detail: "New lifts mean new RMs. Find honest numbers on the flat bench, barbell row, heavy leg press, and deficit RDL. Log everything." },
+  { week: "Wks 3–5", label: "Overload", detail: "Add 1 rep first, then load. Free weights progress slower, machines faster. Own the pauses and tempos before adding weight." },
+  { week: "Wk 6", label: "Deload", detail: "Cut volume 35–45%. Keep the movements, drop the techniques. No failure. Leave the gym hungry." },
+  { week: "Wks 7–10", label: "Growth Block", detail: "Push the techniques hardest. Rest-pause, partials, 21s, and the widowmaker earn their keep here." },
+  { week: "Wks 11–12", label: "Refine", detail: "Keep strength high, trim junk volume, tighten nutrition, and compare photos to the start of the block." },
+];
+
+const RULES = [
+  { rule: "New block, new logbook", why: "Block 1 numbers don't transfer to new lifts. Chase Block 2 PRs against Block 2 weights." },
+  { rule: "Shock is planned, not random", why: "The rotations, pauses, and partials ARE the shock. No freestyle swaps mid-week." },
+  { rule: "Steps beat punishment cardio", why: "Use 8,000–12,000 daily steps for fat loss support without crushing recovery." },
+  { rule: "Legs get two real days", why: "One quad-dominant day and one hamstring/glute day build complete legs." },
+  { rule: "Failure is exercise-specific", why: "Machines and isolations can hit true failure. Barbell compounds stop at technical failure." },
+  { rule: "Sleep is programmed", why: "Bad sleep kills performance, hunger control, testosterone environment, and recovery." },
+  { rule: "Protein every day", why: "Muscle growth requires consistent protein, not just hard training." },
+];
+
+const VOLUME = [
+  { group: "Chest", sets: "18–22" },{ group: "Back", sets: "20–24" },{ group: "Delts", sets: "18–24" },
+  { group: "Quads", sets: "18–22" },{ group: "Hamstrings", sets: "12–16" },{ group: "Glutes", sets: "6–10" },
+  { group: "Biceps", sets: "12–16" },{ group: "Triceps", sets: "12–16" },{ group: "Traps", sets: "8–12" },
+  { group: "Calves", sets: "8–12" },{ group: "Core", sets: "6–10" },
+];
+
+const PLATES = [
+  { weight: 45, color: "#2563EB", label: "45", h: 82, w: 15 },
+  { weight: 35, color: "#CA8A04", label: "35", h: 72, w: 14 },
+  { weight: 25, color: "#16A34A", label: "25", h: 62, w: 13 },
+  { weight: 10, color: "#94A3B8", label: "10", h: 50, w: 11 },
+  { weight: 5, color: "#3B82F6", label: "5", h: 40, w: 9 },
+  { weight: 2.5, color: "#DC2626", label: "2.5", h: 32, w: 7 },
+];
+
+// ─── THEME ───────────────────────────────────────────────────────────
+const mono = "'JetBrains Mono', monospace";
+const sans = "'Plus Jakarta Sans', sans-serif";
+const serif = "'Bodoni Moda', serif";
+const amber = "#B45309";
+const amberLight = "#D97706";
+const amberBg = "#FFFBEB";
+const bg = "#FFFFFF";
+const bgSub = "#F8F8F7";
+const bgCard = "#FAFAF9";
+const border = "#E8E8E4";
+const borderLight = "#F0F0EC";
+const textPrimary = "#1A1A1A";
+const textSecondary = "#555";
+const textMuted = "#999";
+const textFaint = "#CCC";
+const lbl = { fontFamily: mono, fontSize: 9, fontWeight: 700, color: textMuted, letterSpacing: "0.1em", marginBottom: 4 };
+const inputStyle = { width: "100%", padding: "12px", background: bgSub, border: `1px solid ${border}`, borderRadius: 10, color: textPrimary, fontFamily: sans, fontSize: 14, boxSizing: "border-box", outline: "none" };
+const navBtn = { background: bgSub, border: `1px solid ${border}`, color: textSecondary, borderRadius: 10, padding: "10px 16px", cursor: "pointer", fontSize: 14 };
+const tagColors = { PUSH: "#D97706", PULL: "#2563EB", LEGS: "#16A34A", REST: "#9CA3AF" };
+
+// ─── EXERCISE CARD (Program Tab) ────────────────────────────────────
+function ExerciseCard({ ex, index }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ background: open ? amberBg : bgCard, border: `1px solid ${open ? "#FDE68A" : border}`, borderRadius: 12, marginBottom: 6, overflow: "hidden", transition: "all 0.15s" }}>
+      <button onClick={() => setOpen(!open)} style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "14px", background: "none", border: "none", cursor: "pointer", textAlign: "left" }}>
+        <span style={{ fontFamily: mono, fontSize: 11, color: amberLight, fontWeight: 700, minWidth: 16 }}>{index + 1}</span>
+        <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 600, color: textPrimary, flex: 1, lineHeight: 1.35 }}>{ex.name}</span>
+        <span style={{ fontSize: 9, color: textFaint, transform: open ? "rotate(180deg)" : "", transition: "transform 0.15s" }}>▼</span>
+      </button>
+      {open && (
+        <div style={{ padding: "0 14px 14px 40px" }}>
+          <Dd l="SETUP" v={ex.setup} />
+          <Dd l="WARM-UP" v={ex.warmup} />
+          <div style={{ marginBottom: 10 }}>
+            <div style={lbl}>WORKING SETS</div>
+            {ex.sets.map((s, i) => (
+              <div key={i} style={{ fontFamily: sans, fontSize: 12, color: textPrimary, padding: "7px 10px", background: bg, borderRadius: 7, marginBottom: 3, borderLeft: `3px solid ${amberLight}`, lineHeight: 1.4 }}>{s}</div>
+            ))}
+          </div>
+          <Dd l="FAILURE" v={ex.failure} c={amber} i />
+          <div style={{ fontFamily: mono, fontSize: 10, color: textMuted, marginTop: 8 }}>REST: {ex.rest}</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Dd({ l, v, c, i }) {
+  return <div style={{ marginBottom: 10 }}><div style={lbl}>{l}</div><div style={{ fontFamily: sans, fontSize: 12, color: c || textSecondary, fontStyle: i ? "italic" : "normal", lineHeight: 1.5 }}>{v}</div></div>;
+}
+
+// ─── PROGRAM TAB ─────────────────────────────────────────────────────
+function ProgramTab() {
+  const [activeDay, setActiveDay] = useState(() => { const d = new Date().getDay(); return d === 0 ? 6 : d - 1; });
+  const [showProg, setShowProg] = useState(false);
+  const [showVolume, setShowVolume] = useState(false);
+  const [showNotes, setShowNotes] = useState(false);
+  const day = DAYS[activeDay];
+  const tagColor = tagColors[day.tag] || day.color;
+
+  return (
+    <div>
+      <div style={{ display: "flex", borderBottom: `1px solid ${border}`, background: bgSub }}>
+        {DAYS.map((d, i) => {
+          const tc = tagColors[d.tag] || d.color;
+          return (
+            <button key={i} onClick={() => setActiveDay(i)} style={{ flex: 1, padding: "12px 0 9px", background: "none", border: "none", borderBottom: i === activeDay ? `3px solid ${tc}` : "3px solid transparent", cursor: "pointer" }}>
+              <div style={{ fontFamily: mono, fontSize: 9, fontWeight: 700, color: i === activeDay ? tc : textFaint }}>{d.day.slice(0, 2)}</div>
+            </button>
+          );
+        })}
+      </div>
+      <div style={{ padding: "16px 14px 100px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+          <span style={{ fontFamily: mono, fontSize: 8, fontWeight: 700, color: "#FFF", background: tagColor, padding: "3px 7px", borderRadius: 4, letterSpacing: "0.08em" }}>{day.tag}</span>
+          <span style={{ fontFamily: mono, fontSize: 9, color: textMuted }}>{day.intensity}</span>
+        </div>
+        <h2 style={{ fontFamily: serif, fontSize: 20, fontWeight: 700, color: textPrimary, margin: "0 0 4px", lineHeight: 1.25 }}>{day.title}</h2>
+        <p style={{ fontSize: 12, color: textSecondary, margin: "0 0 16px", lineHeight: 1.5, fontFamily: sans }}>{day.mission}</p>
+
+        {day.exercises && day.exercises.map((ex, i) => <ExerciseCard key={i} ex={ex} index={i} />)}
+
+        {day.abs && (
+          <div style={{ marginTop: 12, padding: 14, background: bgCard, borderRadius: 12, border: `1px solid ${border}` }}>
+            <div style={{ ...lbl, marginBottom: 8 }}>CORE</div>
+            {day.abs.map((a, i) => <div key={i} style={{ marginBottom: 6 }}><div style={{ fontWeight: 600, fontSize: 12, color: textPrimary }}>{a.name}</div><div style={{ fontSize: 11, color: textSecondary, marginTop: 2 }}>{a.detail}</div></div>)}
+          </div>
+        )}
+
+        {day.rest && day.rest.map((r, i) => (
+          <div key={i} style={{ padding: 14, background: bgCard, border: `1px solid ${border}`, borderRadius: 12, marginBottom: 6 }}>
+            <div style={{ fontFamily: mono, fontSize: 9, fontWeight: 700, color: "#9CA3AF", letterSpacing: "0.1em", marginBottom: 4 }}>{r.item.toUpperCase()}</div>
+            <div style={{ fontSize: 12, color: textPrimary, lineHeight: 1.5 }}>{r.note}</div>
+          </div>
+        ))}
+
+        <button onClick={() => setShowProg(!showProg)} style={{ width: "100%", marginTop: 14, padding: "13px", background: textPrimary, border: "none", color: "#FFF", borderRadius: 10, cursor: "pointer", fontFamily: sans, fontSize: 12, fontWeight: 600, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span>12-Week Progression</span><span style={{ transform: showProg ? "rotate(180deg)" : "", transition: "0.15s", fontSize: 10 }}>▼</span>
+        </button>
+        {showProg && (
+          <div style={{ marginTop: 8 }}>
+            {PROGRESSION.map((p, i) => (
+              <div key={i} style={{ padding: "10px 12px", background: amberBg, border: "1px solid #FDE68A", borderRadius: 8, marginBottom: 4 }}>
+                <span style={{ fontFamily: mono, fontSize: 9, color: amberLight, fontWeight: 700 }}>{p.week}</span>
+                <span style={{ fontSize: 12, fontWeight: 600, color: textPrimary, marginLeft: 8 }}>{p.label}</span>
+                <div style={{ fontSize: 11, color: textSecondary, marginTop: 2 }}>{p.detail}</div>
+              </div>
+            ))}
+            <div style={{ ...lbl, marginTop: 12, marginBottom: 6 }}>NON-NEGOTIABLES</div>
+            {RULES.map((r, i) => <div key={i} style={{ padding: "8px 12px", background: bgCard, border: `1px solid ${border}`, borderRadius: 8, marginBottom: 4 }}><div style={{ fontSize: 12, fontWeight: 600, color: textPrimary }}>{r.rule}</div><div style={{ fontSize: 11, color: textSecondary }}>{r.why}</div></div>)}
+          </div>
+        )}
+
+        <button onClick={() => setShowVolume(!showVolume)} style={{ width: "100%", marginTop: 8, padding: "13px", background: bgSub, border: `1px solid ${border}`, color: textPrimary, borderRadius: 10, cursor: "pointer", fontFamily: sans, fontSize: 12, fontWeight: 600, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span>Weekly Volume Targets</span><span style={{ transform: showVolume ? "rotate(180deg)" : "", transition: "0.15s", fontSize: 10 }}>▼</span>
+        </button>
+        {showVolume && (
+          <div style={{ marginTop: 8, padding: 14, background: bgCard, borderRadius: 12, border: `1px solid ${border}` }}>
+            <div style={{ ...lbl, marginBottom: 10 }}>HARD SETS / WEEK</div>
+            {VOLUME.map((v, i) => (
+              <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "6px 0", borderBottom: `1px solid ${borderLight}` }}>
+                <span style={{ fontFamily: sans, fontSize: 12, color: textSecondary }}>{v.group}</span>
+                <span style={{ fontFamily: mono, fontSize: 13, color: amberLight, fontWeight: 700 }}>{v.sets}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <button onClick={() => setShowNotes(!showNotes)} style={{ width: "100%", marginTop: 8, padding: "13px", background: bgSub, border: `1px solid ${border}`, color: textPrimary, borderRadius: 10, cursor: "pointer", fontFamily: sans, fontSize: 12, fontWeight: 600, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span>Conditioning & Nutrition</span><span style={{ transform: showNotes ? "rotate(180deg)" : "", transition: "0.15s", fontSize: 10 }}>▼</span>
+        </button>
+        {showNotes && (
+          <div style={{ marginTop: 8 }}>
+            <div style={{ padding: 14, background: bgCard, borderRadius: 12, border: `1px solid ${border}`, marginBottom: 6 }}>
+              <div style={{ ...lbl, marginBottom: 8 }}>CONDITIONING</div>
+              <div style={{ fontSize: 12, color: textSecondary, lineHeight: 1.6, fontFamily: sans }}>Steps and easy Zone 2 only. 8,000–12,000 daily steps for fat loss support. Optional Zone 2 cardio 1–2x/week, 20–30 min, easy pace. No HIIT inside the block.</div>
+            </div>
+            <div style={{ padding: 14, background: bgCard, borderRadius: 12, border: `1px solid ${border}` }}>
+              <div style={{ ...lbl, marginBottom: 8 }}>NUTRITION</div>
+              <div style={{ fontSize: 12, color: textSecondary, lineHeight: 1.6, fontFamily: sans }}>Recomp or slight deficit initially. Do not hard cut if the goal is to grow. Protein stays high every day. Carbs around training help performance and fullness.</div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─── EXERCISE LOG CARD (Log Tab) ────────────────────────────────────
+function ExerciseLogCard({ exKey, name, programSets, logData, onUpdate }) {
+  const [open, setOpen] = useState(false);
+  const [addingSet, setAddingSet] = useState(false);
+  const [editId, setEditId] = useState(null);
+  const [form, setForm] = useState({ w: "", r: "", notes: "" });
+  const sets = logData || [];
+  const logged = sets.length > 0;
+
+  const saveSet = () => {
+    if (!form.w && !form.r) return;
+    if (editId !== null) {
+      const updated = sets.map(s => s.id === editId ? { ...s, w: form.w, r: form.r, notes: form.notes } : s);
+      onUpdate(exKey, updated);
+      setEditId(null);
+    } else {
+      const entry = { id: Date.now(), w: form.w, r: form.r, notes: form.notes };
+      onUpdate(exKey, [...sets, entry]);
+    }
+    setForm({ w: "", r: "", notes: "" });
+    setAddingSet(false);
+  };
+
+  const delSet = (id) => { onUpdate(exKey, sets.filter(s => s.id !== id)); };
+  const startEdit = (s) => { setEditId(s.id); setForm({ w: s.w, r: s.r, notes: s.notes || "" }); setAddingSet(true); setOpen(true); };
+  const cancelAdd = () => { setAddingSet(false); setEditId(null); setForm({ w: "", r: "", notes: "" }); };
+
+  const smallInput = { padding: "10px", background: "#FFF", border: `1px solid ${border}`, borderRadius: 8, color: textPrimary, fontFamily: mono, fontSize: 14, boxSizing: "border-box", outline: "none", width: "100%", textAlign: "center" };
+
+  return (
+    <div style={{ background: logged ? "#F0FDF4" : bgCard, border: `1px solid ${logged ? "#BBF7D0" : border}`, borderRadius: 12, marginBottom: 6, overflow: "hidden", transition: "all 0.15s" }}>
+      <button onClick={() => setOpen(!open)} style={{ width: "100%", display: "flex", alignItems: "center", gap: 8, padding: "12px 14px", background: "none", border: "none", cursor: "pointer", textAlign: "left" }}>
+        {logged
+          ? <div style={{ width: 18, height: 18, borderRadius: 9, background: "#16A34A", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><span style={{ color: "#FFF", fontSize: 10, fontWeight: 900 }}>✓</span></div>
+          : <div style={{ width: 18, height: 18, borderRadius: 9, border: `2px solid ${borderLight}`, flexShrink: 0 }} />
+        }
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontFamily: sans, fontSize: 13, fontWeight: 600, color: textPrimary, lineHeight: 1.3 }}>{name}</div>
+          {logged && !open && <div style={{ fontFamily: mono, fontSize: 10, color: "#16A34A", marginTop: 2 }}>{sets.length} set{sets.length !== 1 ? "s" : ""} logged</div>}
+        </div>
+        <span style={{ fontSize: 9, color: textFaint, transform: open ? "rotate(180deg)" : "", transition: "transform 0.15s", flexShrink: 0 }}>▼</span>
+      </button>
+      {open && (
+        <div style={{ padding: "0 14px 14px" }}>
+          {programSets && programSets.length > 0 && (
+            <div style={{ marginBottom: 10, padding: "8px 10px", background: "rgba(0,0,0,0.02)", borderRadius: 8 }}>
+              <div style={{ fontFamily: mono, fontSize: 8, fontWeight: 700, color: textMuted, letterSpacing: "0.1em", marginBottom: 4 }}>PROGRAMMED</div>
+              {programSets.map((s, i) => <div key={i} style={{ fontFamily: mono, fontSize: 10, color: textMuted, lineHeight: 1.6 }}>{i + 1}. {s}</div>)}
+            </div>
+          )}
+          {sets.map((s, i) => (
+            <div key={s.id} style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 10px", background: bg, borderRadius: 8, marginBottom: 3, borderLeft: "3px solid #16A34A" }}>
+              <span style={{ fontFamily: mono, fontSize: 10, color: textMuted, minWidth: 14 }}>{i + 1}</span>
+              <div style={{ flex: 1 }}>
+                <span style={{ fontFamily: mono, fontSize: 13, fontWeight: 700, color: textPrimary }}>
+                  {s.w && `${s.w} lbs`}{s.w && s.r && " × "}{s.r && `${s.r} reps`}
+                </span>
+                {s.notes && <div style={{ fontFamily: sans, fontSize: 10, color: textMuted, marginTop: 1 }}>{s.notes}</div>}
+              </div>
+              <button onClick={() => startEdit(s)} style={{ background: "none", border: "none", color: textMuted, cursor: "pointer", fontSize: 12, padding: "2px 4px" }}>✎</button>
+              <button onClick={() => delSet(s.id)} style={{ background: "none", border: "none", color: textFaint, cursor: "pointer", fontSize: 16, padding: "0 2px" }}>×</button>
+            </div>
+          ))}
+          {addingSet ? (
+            <div style={{ marginTop: 6, padding: 10, background: amberBg, borderRadius: 10, border: "1px solid #FDE68A" }}>
+              <div style={{ fontFamily: mono, fontSize: 8, fontWeight: 700, color: amberLight, letterSpacing: "0.1em", marginBottom: 6 }}>{editId !== null ? "EDIT SET" : `SET ${sets.length + 1}`}</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 6 }}>
+                <input value={form.w} onChange={e => setForm({...form, w: e.target.value})} placeholder="Weight" type="number" style={smallInput} />
+                <input value={form.r} onChange={e => setForm({...form, r: e.target.value})} placeholder="Reps" type="number" style={smallInput} />
+              </div>
+              <input value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} placeholder="Notes (optional)" style={{ ...smallInput, textAlign: "left", marginBottom: 8, fontFamily: sans, fontSize: 12 }} />
+              <div style={{ display: "flex", gap: 6 }}>
+                <button onClick={saveSet} style={{ flex: 1, padding: "10px", background: amberLight, color: "#FFF", border: "none", borderRadius: 8, fontFamily: sans, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>{editId !== null ? "Update" : "Save"}</button>
+                <button onClick={cancelAdd} style={{ padding: "10px 14px", background: bgSub, color: textMuted, border: `1px solid ${border}`, borderRadius: 8, fontFamily: sans, fontSize: 13, cursor: "pointer" }}>X</button>
+              </div>
+            </div>
+          ) : (
+            <button onClick={() => { setAddingSet(true); setEditId(null); setForm({ w: "", r: "", notes: "" }); }} style={{ width: "100%", marginTop: 4, padding: "10px", background: "none", border: `1px dashed ${border}`, borderRadius: 8, color: textMuted, fontFamily: sans, fontSize: 12, cursor: "pointer" }}>+ Add Set</button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── TRACKER TAB ─────────────────────────────────────────────────────
+function TrackerTab() {
+  const today = new Date();
+  const [month, setMonth] = useState(today.getMonth());
+  const [year, setYear] = useState(today.getFullYear());
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [dayLog, setDayLog] = useState({});
+  const [loggedDays, setLoggedDays] = useState([]);
+  const [addingCustom, setAddingCustom] = useState(false);
+  const [customName, setCustomName] = useState("");
+
+  const dayLogRef = useRef(dayLog);
+  useEffect(() => { dayLogRef.current = dayLog; }, [dayLog]);
+  const selectedDateRef = useRef(selectedDate);
+  useEffect(() => { selectedDateRef.current = selectedDate; }, [selectedDate]);
+  const monthKey = `${year}-${String(month + 1).padStart(2, "0")}`;
+  const monthKeyRef = useRef(monthKey);
+  useEffect(() => { monthKeyRef.current = monthKey; }, [monthKey]);
+
+  const mNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const dNames = ["Su","Mo","Tu","We","Th","Fr","Sa"];
+
+  useEffect(() => { setLoggedDays(loadLoggedDates(monthKey)); }, [monthKey]);
+  useEffect(() => {
+    if (selectedDate) {
+      const d = loadLog(selectedDate);
+      setDayLog(d);
+      dayLogRef.current = d;
+    } else {
+      setDayLog({});
+      dayLogRef.current = {};
+    }
+  }, [selectedDate]);
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const dim = new Date(year, month + 1, 0).getDate();
+  const cells = [];
+  for (let i = 0; i < firstDay; i++) cells.push(null);
+  for (let d = 1; d <= dim; d++) cells.push(d);
+
+  const prev = () => { if (month === 0) { setMonth(11); setYear(y => y-1); } else setMonth(m => m-1); setSelectedDate(null); };
+  const next = () => { if (month === 11) { setMonth(0); setYear(y => y+1); } else setMonth(m => m+1); setSelectedDate(null); };
+
+  const getDayInfo = (ds) => {
+    if (!ds) return null;
+    const d = new Date(ds + "T12:00:00");
+    const labels = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    return DAYS.find(x => x.day === labels[d.getDay()]) || null;
+  };
+
+  const programDay = getDayInfo(selectedDate);
+
+  const getExerciseList = () => {
+    if (!programDay) return [];
+    const list = [];
+    if (programDay.exercises) {
+      programDay.exercises.forEach((ex, i) => {
+        list.push({ key: "ex_" + i, name: ex.name, programSets: ex.sets, type: "exercise" });
+      });
+    }
+    if (programDay.abs) {
+      programDay.abs.forEach((a, i) => {
+        list.push({ key: "core_" + i, name: a.name, programSets: [a.detail], type: "core" });
+      });
+    }
+    const customKeys = Object.keys(dayLog).filter(k => k.startsWith("custom_"));
+    customKeys.forEach(k => {
+      const data = dayLog[k];
+      if (data && data.length > 0 && data[0]._name) {
+        list.push({ key: k, name: data[0]._name, programSets: null, type: "custom" });
+      }
+    });
+    return list;
+  };
+
+  const persist = useCallback((newLog) => {
+    setDayLog(newLog);
+    dayLogRef.current = newLog;
+    const date = selectedDateRef.current;
+    if (!date) return;
+    saveLog(date, newLog);
+    const dayNum = parseInt(date.split("-")[2]);
+    const hasAny = Object.values(newLog).some(arr => Array.isArray(arr) && arr.filter(s => !s._name).length > 0);
+    if (hasAny) {
+      addLoggedDate(monthKeyRef.current, dayNum);
+      setLoggedDays(prev => prev.includes(dayNum) ? prev : [...prev, dayNum]);
+    }
+  }, []);
+
+  const handleUpdate = useCallback((exKey, sets) => {
+    const current = dayLogRef.current;
+    const newLog = { ...current, [exKey]: sets };
+    persist(newLog);
+  }, [persist]);
+
+  const addCustomExercise = () => {
+    if (!customName.trim()) return;
+    const current = dayLogRef.current;
+    const idx = Object.keys(current).filter(k => k.startsWith("custom_")).length;
+    const key = "custom_" + idx + "_" + Date.now();
+    const newLog = { ...current, [key]: [{ _name: customName.trim() }] };
+    persist(newLog);
+    setCustomName("");
+    setAddingCustom(false);
+  };
+
+  const removeCustom = (key) => {
+    const current = { ...dayLogRef.current };
+    delete current[key];
+    persist(current);
+  };
+
+  const todayStr = today.getFullYear() + "-" + String(today.getMonth()+1).padStart(2,"0") + "-" + String(today.getDate()).padStart(2,"0");
+  const exercises = selectedDate ? getExerciseList() : [];
+
+  const totalSets = Object.entries(dayLog).reduce((sum, [, arr]) => {
+    if (!Array.isArray(arr)) return sum;
+    return sum + arr.filter(s => !s._name && (s.w || s.r)).length;
+  }, 0);
+
+  return (
+    <div style={{ padding: "16px 14px 100px" }}>
+      <h2 style={{ fontFamily: serif, fontSize: 22, fontWeight: 700, color: textPrimary, margin: "0 0 14px" }}>Training Log</h2>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+        <button onClick={prev} style={navBtn}>◀</button>
+        <span style={{ fontFamily: sans, fontSize: 15, fontWeight: 700, color: textPrimary }}>{mNames[month]} {year}</span>
+        <button onClick={next} style={navBtn}>▶</button>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 3, marginBottom: 16 }}>
+        {dNames.map(d => <div key={d} style={{ textAlign: "center", fontFamily: mono, fontSize: 8, color: textMuted, padding: "4px 0", fontWeight: 700 }}>{d}</div>)}
+        {cells.map((d, i) => {
+          if (!d) return <div key={"e"+i} />;
+          const ds = year + "-" + String(month+1).padStart(2,"0") + "-" + String(d).padStart(2,"0");
+          const isTd = ds === todayStr;
+          const isSel = ds === selectedDate;
+          const has = loggedDays.includes(d);
+          return (
+            <button key={i} onClick={() => setSelectedDate(ds)} style={{ aspectRatio: "1", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: isSel ? amberLight : isTd ? bgSub : "transparent", border: isTd && !isSel ? `1.5px solid ${amberLight}` : "1.5px solid transparent", borderRadius: 10, cursor: "pointer" }}>
+              <span style={{ fontFamily: mono, fontSize: 12, fontWeight: isSel ? 800 : 500, color: isSel ? "#FFF" : isTd ? amberLight : textSecondary }}>{d}</span>
+              {has && <div style={{ width: 5, height: 5, borderRadius: "50%", background: isSel ? "#FFF" : "#16A34A", marginTop: 1 }} />}
+            </button>
+          );
+        })}
+      </div>
+      {selectedDate && programDay && (
+        <div>
+          <div style={{ marginBottom: 12 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+              <span style={{ fontFamily: mono, fontSize: 8, fontWeight: 700, color: "#FFF", background: tagColors[programDay.tag] || programDay.color, padding: "3px 7px", borderRadius: 4, letterSpacing: "0.08em" }}>{programDay.tag}</span>
+              <span style={{ fontFamily: mono, fontSize: 10, color: textMuted }}>{selectedDate}</span>
+            </div>
+            <div style={{ fontFamily: serif, fontSize: 18, fontWeight: 700, color: textPrimary, lineHeight: 1.25 }}>{programDay.title}</div>
+            {totalSets > 0 && <div style={{ fontFamily: mono, fontSize: 10, color: "#16A34A", marginTop: 4 }}>{totalSets} total set{totalSets !== 1 ? "s" : ""} logged</div>}
+          </div>
+          {programDay.tag === "REST" && (
+            <div style={{ padding: 20, background: bgCard, border: `1px solid ${border}`, borderRadius: 12, textAlign: "center" }}>
+              <div style={{ fontSize: 28, marginBottom: 8 }}>🧘</div>
+              <div style={{ fontFamily: sans, fontSize: 13, color: textSecondary }}>Rest day. Walk, mobility, recover.</div>
+            </div>
+          )}
+          {programDay.exercises && (
+            <React.Fragment>
+              <div style={{ ...lbl, marginBottom: 6, marginTop: 4 }}>EXERCISES</div>
+              {exercises.filter(e => e.type === "exercise").map(ex => (
+                <ExerciseLogCard key={ex.key} exKey={ex.key} name={ex.name} programSets={ex.programSets} logData={(dayLog[ex.key] || []).filter(s => !s._name)} onUpdate={handleUpdate} />
+              ))}
+            </React.Fragment>
+          )}
+          {exercises.filter(e => e.type === "core").length > 0 && (
+            <React.Fragment>
+              <div style={{ ...lbl, marginBottom: 6, marginTop: 12 }}>CORE</div>
+              {exercises.filter(e => e.type === "core").map(ex => (
+                <ExerciseLogCard key={ex.key} exKey={ex.key} name={ex.name} programSets={ex.programSets} logData={(dayLog[ex.key] || []).filter(s => !s._name)} onUpdate={handleUpdate} />
+              ))}
+            </React.Fragment>
+          )}
+          {exercises.filter(e => e.type === "custom").length > 0 && (
+            <React.Fragment>
+              <div style={{ ...lbl, marginBottom: 6, marginTop: 12 }}>CUSTOM</div>
+              {exercises.filter(e => e.type === "custom").map(ex => (
+                <div key={ex.key}>
+                  <ExerciseLogCard exKey={ex.key} name={ex.name} programSets={null} logData={(dayLog[ex.key] || []).filter(s => !s._name)} onUpdate={handleUpdate} />
+                  <button onClick={() => removeCustom(ex.key)} style={{ display: "block", margin: "-2px auto 8px", background: "none", border: "none", fontFamily: mono, fontSize: 9, color: textFaint, cursor: "pointer" }}>Remove custom exercise</button>
+                </div>
+              ))}
+            </React.Fragment>
+          )}
+          {programDay.tag !== "REST" && (
+            <div style={{ marginTop: 12 }}>
+              {addingCustom ? (
+                <div style={{ padding: 12, background: amberBg, border: "1px solid #FDE68A", borderRadius: 10 }}>
+                  <input value={customName} onChange={e => setCustomName(e.target.value)} placeholder="Exercise name" style={{ ...inputStyle, background: "#FFF", marginBottom: 8 }} />
+                  <div style={{ display: "flex", gap: 6 }}>
+                    <button onClick={addCustomExercise} style={{ flex: 1, padding: "10px", background: amberLight, color: "#FFF", border: "none", borderRadius: 8, fontFamily: sans, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>Add</button>
+                    <button onClick={() => { setAddingCustom(false); setCustomName(""); }} style={{ padding: "10px 14px", background: bgSub, color: textMuted, border: `1px solid ${border}`, borderRadius: 8, fontFamily: sans, fontSize: 13, cursor: "pointer" }}>X</button>
+                  </div>
+                </div>
+              ) : (
+                <button onClick={() => setAddingCustom(true)} style={{ width: "100%", padding: "12px", background: "none", border: `1px dashed ${border}`, borderRadius: 10, color: textMuted, fontFamily: sans, fontSize: 12, cursor: "pointer" }}>+ Add Custom Exercise</button>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+      {selectedDate && !programDay && <div style={{ padding: 20, textAlign: "center", color: textMuted, fontSize: 12 }}>No program data for this day.</div>}
+    </div>
+  );
+}
+
+// ─── BARBELL CALC TAB ────────────────────────────────────────────────
+function BarbellTab() {
+  const [perSide, setPerSide] = useState([]);
+  const total = 45 + perSide.reduce((s, p) => s + p * 2, 0);
+  const perSideTotal = perSide.reduce((s, p) => s + p, 0);
+  const add = (w) => setPerSide(p => [...p, w]);
+  const undo = () => setPerSide(p => p.slice(0, -1));
+  const clear = () => setPerSide([]);
+  const getPlate = (w) => PLATES.find(p => p.weight === w);
+
+  function renderSide(plates, startX, dir) {
+    let x = startX;
+    return plates.map((w, i) => {
+      const p = getPlate(w);
+      if (!p) return null;
+      const px = dir === 1 ? x : x - p.w;
+      x += dir * (p.w + 1.5);
+      return React.createElement("rect", { key: dir+"-"+i, x: px, y: 75 - p.h/2, width: p.w, height: p.h, rx: 2.5, fill: p.color, stroke: "rgba(0,0,0,0.1)", strokeWidth: 0.6, style: { animation: "plateIn 0.2s ease-out", transformOrigin: (px + p.w/2)+"px 75px" } });
+    });
+  }
+  const counts = {};
+  perSide.forEach(w => { counts[w] = (counts[w] || 0) + 1; });
+
+  return (
+    <div style={{ padding: "16px 14px 100px" }}>
+      <h2 style={{ fontFamily: serif, fontSize: 22, fontWeight: 700, color: textPrimary, margin: "0 0 4px" }}>Barbell Calculator</h2>
+      <div style={{ fontFamily: mono, fontSize: 9, color: textMuted, marginBottom: 16 }}>45 LB STANDARD BAR</div>
+      <div style={{ textAlign: "center", padding: "20px 0 16px", background: bgCard, borderRadius: 16, border: `1px solid ${border}`, marginBottom: 14 }}>
+        <div style={{ fontFamily: mono, fontSize: 9, color: textMuted, letterSpacing: "0.12em" }}>TOTAL</div>
+        <div style={{ fontFamily: serif, fontSize: 56, fontWeight: 900, color: amberLight, lineHeight: 1, marginTop: 4 }}>{total}</div>
+        <div style={{ fontFamily: mono, fontSize: 11, color: textMuted, marginTop: 4 }}>lbs{perSide.length > 0 && (" · " + perSideTotal + "/side")}</div>
+      </div>
+      <div style={{ background: "#F1F1EE", borderRadius: 14, padding: "8px 0", marginBottom: 14, border: `1px solid ${border}`, overflow: "hidden" }}>
+        <svg viewBox="0 0 340 150" style={{ width: "100%", height: 110, display: "block" }}>
+          <rect x={8} y={67} width={14} height={16} rx={3} fill="#AAA" />
+          <rect x={318} y={67} width={14} height={16} rx={3} fill="#AAA" />
+          <rect x={22} y={71} width={296} height={8} rx={3} fill="#BCBCBC" />
+          <rect x={155} y={69.5} width={30} height={11} rx={2} fill="#A0A0A0" />
+          <rect x={76} y={63} width={7} height={24} rx={2} fill="#AAA" />
+          <rect x={257} y={63} width={7} height={24} rx={2} fill="#AAA" />
+          {renderSide([...perSide].reverse(), 74, -1)}
+          {renderSide(perSide, 266, 1)}
+        </svg>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, marginBottom: 10 }}>
+        {PLATES.map(p => (
+          <button key={p.weight} onClick={() => add(p.weight)} style={{ padding: "14px 6px", background: "#FFF", border: `2px solid ${p.color}30`, borderRadius: 12, cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 2, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+            <span style={{ fontFamily: serif, fontSize: 22, fontWeight: 900, color: p.color }}>{p.label}</span>
+            <span style={{ fontFamily: mono, fontSize: 8, color: textMuted }}>per side</span>
+          </button>
+        ))}
+      </div>
+      <div style={{ display: "flex", gap: 8, marginBottom: 14 }}>
+        <button onClick={undo} disabled={!perSide.length} style={{ flex: 1, padding: "14px", background: bgSub, border: `1px solid ${border}`, color: perSide.length ? textSecondary : textFaint, borderRadius: 10, fontFamily: sans, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>Undo</button>
+        <button onClick={clear} disabled={!perSide.length} style={{ flex: 1, padding: "14px", background: perSide.length ? "#FEF2F2" : bgSub, border: `1px solid ${perSide.length ? "#FECACA" : border}`, color: perSide.length ? "#DC2626" : textFaint, borderRadius: 10, fontFamily: sans, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>Clear</button>
+      </div>
+      {perSide.length > 0 && (
+        <div style={{ padding: 12, background: bgCard, borderRadius: 10, border: `1px solid ${border}` }}>
+          <div style={{ ...lbl, marginBottom: 8 }}>PER SIDE</div>
+          {Object.entries(counts).sort((a,b) => Number(b[0])-Number(a[0])).map(([w, c]) => {
+            const p = getPlate(Number(w));
+            return (
+              <div key={w} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "5px 0" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ width: 10, height: 10, borderRadius: 2, background: p ? p.color : "#999" }} />
+                  <span style={{ fontFamily: mono, fontSize: 12, color: textSecondary }}>{w} lb</span>
+                </div>
+                <span style={{ fontFamily: mono, fontSize: 13, color: amberLight, fontWeight: 700 }}>× {c}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── DROP % CALC TAB ─────────────────────────────────────────────────
+function DropCalcTab() {
+  const [weight, setWeight] = useState("");
+  const [custom, setCustom] = useState("");
+  const drops = [5, 10, 12, 15, 20, 25, 30];
+  const w = parseFloat(weight) || 0;
+  const round5 = (v) => Math.round(v / 5) * 5;
+  const round2 = (v) => Math.round(v / 2.5) * 2.5;
+
+  return (
+    <div style={{ padding: "16px 14px 100px" }}>
+      <h2 style={{ fontFamily: serif, fontSize: 22, fontWeight: 700, color: textPrimary, margin: "0 0 4px" }}>Drop % Calculator</h2>
+      <div style={{ fontFamily: mono, fontSize: 9, color: textMuted, marginBottom: 20 }}>PERCENTAGE REDUCTION FROM WORKING WEIGHT</div>
+      <div style={{ marginBottom: 20 }}>
+        <div style={{ ...lbl, marginBottom: 6 }}>WORKING WEIGHT (LBS)</div>
+        <input type="number" value={weight} onChange={e => setWeight(e.target.value)} placeholder="0" style={{ ...inputStyle, fontSize: 32, fontFamily: serif, fontWeight: 900, textAlign: "center", padding: "18px", color: amberLight, background: "#FFF", border: `2px solid ${border}` }} />
+      </div>
+      {w > 0 && (
+        <React.Fragment>
+          <div style={{ ...lbl, marginBottom: 8 }}>DROP TARGETS</div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 16 }}>
+            {drops.map(d => {
+              const reduced = w * (1 - d / 100);
+              const r5 = round5(reduced);
+              const r2 = round2(reduced);
+              return (
+                <div key={d} style={{ padding: "14px 10px", background: bgCard, border: `1px solid ${border}`, borderRadius: 12, textAlign: "center", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+                  <div style={{ fontFamily: mono, fontSize: 10, color: "#DC2626", fontWeight: 700, marginBottom: 6 }}>−{d}%</div>
+                  <div style={{ fontFamily: serif, fontSize: 30, fontWeight: 900, color: textPrimary, lineHeight: 1 }}>{r5}</div>
+                  <div style={{ fontFamily: mono, fontSize: 9, color: textMuted, marginTop: 4 }}>nearest 5</div>
+                  {r2 !== r5 && <div style={{ fontFamily: mono, fontSize: 10, color: textSecondary, marginTop: 3 }}>or {r2}</div>}
+                </div>
+              );
+            })}
+          </div>
+          <div style={{ padding: 14, background: amberBg, borderRadius: 12, border: "1px solid #FDE68A", marginBottom: 16 }}>
+            <div style={{ ...lbl, marginBottom: 8 }}>CUSTOM DROP</div>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <span style={{ fontFamily: mono, fontSize: 16, color: "#DC2626", fontWeight: 700 }}>−</span>
+              <input type="number" value={custom} onChange={e => setCustom(e.target.value)} placeholder="%" style={{ ...inputStyle, flex: 1, textAlign: "center", marginBottom: 0, background: "#FFF" }} />
+              <span style={{ fontFamily: mono, fontSize: 14, color: textMuted }}>%</span>
+            </div>
+            {custom && parseFloat(custom) > 0 && (
+              <div style={{ textAlign: "center", marginTop: 14 }}>
+                <div style={{ fontFamily: serif, fontSize: 40, fontWeight: 900, color: amberLight }}>{round5(w * (1 - parseFloat(custom) / 100))}</div>
+                <div style={{ fontFamily: mono, fontSize: 10, color: textMuted }}>lbs (nearest 5)</div>
+              </div>
+            )}
+          </div>
+          <div style={{ padding: 14, background: bgCard, borderRadius: 12, border: `1px solid ${border}` }}>
+            <div style={{ ...lbl, marginBottom: 8 }}>WARM-UP RAMP FROM {w}</div>
+            {[50, 65, 70, 75, 80, 85].map(pct => (
+              <div key={pct} style={{ display: "flex", justifyContent: "space-between", padding: "6px 0", borderBottom: `1px solid ${borderLight}` }}>
+                <span style={{ fontFamily: mono, fontSize: 12, color: textMuted }}>{pct}%</span>
+                <span style={{ fontFamily: mono, fontSize: 13, color: textPrimary, fontWeight: 600 }}>{round5(w * pct / 100)}</span>
+              </div>
+            ))}
+          </div>
+        </React.Fragment>
+      )}
+    </div>
+  );
+}
+
+// ─── MAIN ────────────────────────────────────────────────────────────
+const TABS = [
+  { id: "program", label: "Program", icon: "📋" },
+  { id: "track", label: "Log", icon: "📊" },
+  { id: "bar", label: "Barbell", icon: "🏋️" },
+  { id: "drop", label: "Drop %", icon: "📉" },
+];
+
+function App() {
+  const [tab, setTab] = useState("program");
+  return (
+    <div style={{ fontFamily: sans, background: bg, minHeight: "100vh", maxWidth: 520, margin: "0 auto", color: textPrimary }}>
+      <div style={{ background: textPrimary, padding: "max(env(safe-area-inset-top, 12px), 22px) 16px 16px", textAlign: "center" }}>
+        <div style={{ fontFamily: mono, fontSize: 8, letterSpacing: "0.18em", color: amberLight, marginBottom: 4, fontWeight: 700 }}>ADRIAN'S BODYBUILDING BLOCK</div>
+        <h1 style={{ fontFamily: serif, fontSize: 22, fontWeight: 900, color: "#FFF", margin: 0 }}>Natural Bodybuilding Block II</h1>
+        <div style={{ fontFamily: mono, fontSize: 9, color: textMuted, marginTop: 4, letterSpacing: "0.08em" }}>SHOCK CYCLE · PUSH / PULL / LEGS × 2</div>
+      </div>
+      {tab === "program" && <ProgramTab />}
+      {tab === "track" && <TrackerTab />}
+      {tab === "bar" && <BarbellTab />}
+      {tab === "drop" && <DropCalcTab />}
+      <div style={{
+        position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)",
+        width: "100%", maxWidth: 520,
+        display: "flex", background: "rgba(255,255,255,0.96)", backdropFilter: "blur(20px)",
+        borderTop: `1px solid ${border}`, padding: "4px 0 max(env(safe-area-inset-bottom, 6px), 6px)", zIndex: 100
+      }}>
+        {TABS.map(t => (
+          <button key={t.id} onClick={() => setTab(t.id)} style={{
+            flex: 1, background: "none", border: "none", cursor: "pointer",
+            display: "flex", flexDirection: "column", alignItems: "center", gap: 1, padding: "8px 4px"
+          }}>
+            <span style={{ fontSize: 18, filter: tab === t.id ? "none" : "grayscale(1) opacity(0.35)" }}>{t.icon}</span>
+            <span style={{ fontFamily: mono, fontSize: 7, fontWeight: 700, color: tab === t.id ? amberLight : textFaint, letterSpacing: "0.06em" }}>{t.label.toUpperCase()}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+</script>
+</body>
+</html>
