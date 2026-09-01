@@ -5,10 +5,12 @@ gig-sheet site, upcoming first, with direct links to each site's pages (Full Gig
 Sheet, Band Sheet, MC Cue Sheet, Listening Room).
 
 `gigs.greenwayband.com` is the Netlify site **`greenway-gigs`** (same account as
-`greenway-proposals` and the per-wedding gig-sheet sites). This folder is its
-deploy source. The individual gig sheets still live on their own sites
-(`greenway-<lastname>.netlify.app`) exactly as `docs/gig-sheets/GIG_SHEET_SYSTEM.md`
-describes; this page only links to them.
+`greenway-proposals` and the per-wedding gig-sheet sites). That site is SHARED:
+newer weddings live on it as subfolders (`/<lastname>/<mm-dd-yy>/`), deployed
+whole-folder from `~/Desktop/greenway-gigs/` per `docs/gig-sheets/GIG_SHEET_SYSTEM.md`.
+This folder is the source of truth for the root `index.html` only. Older weddings
+still live on their own one-off sites (`greenway-<lastname>.netlify.app`); this
+page only links to them.
 
 ## Files
 
@@ -33,10 +35,15 @@ describes; this page only links to them.
    ```
    Order in the array does not matter — the page sorts by date and splits
    Upcoming / Past on load.
-2. Deploy from this folder:
+2. Copy `index.html` into `~/Desktop/greenway-gigs/index.html`, then deploy the
+   WHOLE shared folder (never this folder alone: `--prod` replaces the entire
+   site and would wipe every wedding subfolder):
    ```bash
-   netlify deploy --prod --dir docs/gig-sheets/hub --site greenway-gigs
+   cp docs/gig-sheets/hub/index.html ~/Desktop/greenway-gigs/index.html
+   cd ~/Desktop/greenway-gigs && netlify deploy --prod --dir . --site greenway-gigs
    ```
+   Run the live-vs-local hash diff from `GIG_SHEET_SYSTEM.md` first. The shared
+   folder's own `netlify.toml` stays; the one here is a reference copy.
 3. Verify: `curl -s https://gigs.greenwayband.com/ | grep -c "Last / Last"`
    should print `1`. Then open it on a phone.
 

@@ -201,6 +201,9 @@
   url     — the site root, https://greenway-<lastname>.netlify.app
   pages   — only the pages that exist on that site, in this order:
             gig, band, mc, listen. A one-page site lists just the page it has.
+            A page on a different site can be { label, href } instead.
+
+  Newer weddings live on the shared site: gigs.greenwayband.com/<lastname>/<mm-dd-yy>
 */
 const PAGE_LABELS = {
   gig:    'Full Gig Sheet',
@@ -210,6 +213,33 @@ const PAGE_LABELS = {
 };
 
 const GIGS = [
+  {
+    couple: 'Courtois / Blick',
+    type: 'Wedding',
+    date: '2026-09-05',
+    venue: 'The Houstonian Hotel',
+    city: 'Houston, TX',
+    url: 'https://gigs.greenwayband.com/blick/09-05-26/',
+    pages: ['gig', 'band', 'mc', 'listen'],
+  },
+  {
+    couple: 'Perugini / Shepard',
+    type: 'Wedding',
+    date: '2026-08-08',
+    venue: 'The Peach Orchard',
+    city: 'The Woodlands, TX',
+    url: 'https://gigs.greenwayband.com/shepard/08-08-26/',
+    pages: ['gig', 'band', 'mc', 'listen'],
+  },
+  {
+    couple: 'Matey / Sackschewsky',
+    type: 'Wedding',
+    date: '2026-08-01',
+    venue: 'The Houstonian Hotel',
+    city: 'Houston, TX',
+    url: 'https://gigs.greenwayband.com/matey/08-01-26/',
+    pages: ['band', 'listen'],
+  },
   {
     couple: 'Ditta / Johnson',
     type: 'Wedding',
@@ -229,6 +259,24 @@ const GIGS = [
     pages: ['gig', 'band', 'mc', 'listen'],
   },
   {
+    couple: 'Buller / Cook',
+    type: 'Wedding',
+    date: '2026-05-30',
+    venue: 'Aylin Acres',
+    city: 'Montgomery, TX',
+    url: 'https://may-30-aylin-acres.netlify.app',
+    pages: ['gig', 'band', 'mc'],
+  },
+  {
+    couple: 'Whaley / Gibson',
+    type: 'Wedding',
+    date: '2026-04-18',
+    venue: 'Lakeside Country Club',
+    city: 'Houston, TX',
+    url: 'https://apr-18-lakeside.netlify.app',
+    pages: ['gig', 'band', 'mc'],
+  },
+  {
     couple: 'Boulger / Neupauer',
     type: 'Wedding',
     date: '2026-04-11',
@@ -243,9 +291,24 @@ const GIGS = [
     date: '2026-03-21',
     venue: 'Grand Galvez',
     city: 'Galveston, TX',
-    url: 'https://mar-21-galvez.netlify.app',
-    // Single-page site: the band sheet is the home page.
-    pages: [{ label: 'Band Sheet', path: '/' }],
+    // Full gig-day site. The older mar-21-galvez.netlify.app is a
+    // single-page band sheet for the same wedding.
+    url: 'https://greenway-gig-saturday.netlify.app',
+    pages: ['gig', 'band', 'mc'],
+  },
+  {
+    couple: 'Hawk / Clayton',
+    type: 'Wedding',
+    date: '2026-03-14',
+    venue: 'Grand Galvez',
+    city: 'Galveston, TX',
+    // Two single-page sites: the gig sheet is the home page, the MC cue
+    // sheet lives on its own site.
+    url: 'https://hawk-clayton-gig-sheet.netlify.app',
+    pages: [
+      { label: 'Gig Sheet', path: '/' },
+      { label: 'MC Cue Sheet', href: 'https://hawk-clayton-mc-cue-sheet.netlify.app/' },
+    ],
   },
 ];
 
@@ -268,8 +331,9 @@ const GIGS = [
   function pageLink(gig, p) {
     const label = typeof p === 'string' ? PAGE_LABELS[p] : p.label;
     const path = typeof p === 'string' ? '/' + p : p.path;
+    const href = (typeof p !== 'string' && p.href) ? p.href : gig.url.replace(/\/$/, '') + path;
     const gold = (typeof p === 'string' && p === 'listen') ? ' class="gold"' : '';
-    return `<a${gold} href="${esc(gig.url.replace(/\/$/, '') + path)}">${esc(label)}</a>`;
+    return `<a${gold} href="${esc(href)}">${esc(label)}</a>`;
   }
 
   function card(gig) {
