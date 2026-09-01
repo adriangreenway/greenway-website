@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A0A09">
+<title>The Greenway Band — Gig Sheets</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+  /* Gig-sheet brand tokens (docs/gig-sheets/EXAMPLE/README.md). Keep exact. */
+  :root {
+    --black: #0A0A09;
+    --cream: #F5F2ED;
+    --gold: #C4A35A;
+    --dim: #706D66;
+    --line: rgba(245,242,237,0.12);
+    --line-soft: rgba(245,242,237,0.08);
+    --fill: rgba(245,242,237,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 64px 24px 72px;
+  }
+
+  /* ─── HEADER ─── */
+  .brand {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    margin-top: 6px;
+  }
+  .lede {
+    font-size: 13px;
+    color: var(--dim);
+    margin-top: 8px;
+    line-height: 1.7;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section { margin-top: 40px; }
+  .section-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-label .count { color: var(--dim); letter-spacing: 1px; }
+  .empty {
+    font-size: 13px;
+    color: var(--dim);
+    padding: 20px 0 4px;
+  }
+
+  /* ─── GIG CARD ─── */
+  .gig {
+    display: block;
+    padding: 18px 0 20px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .gig:last-child { border-bottom: none; }
+  .gig-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .gig-date {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--dim);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .gig-date .day { color: var(--cream); }
+  .gig-main {
+    display: block;
+    margin-top: 6px;
+  }
+  .gig-name {
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+  .gig-name .type { font-weight: 600; color: var(--dim); }
+  .gig-venue {
+    font-size: 13px;
+    color: var(--dim);
+    margin-top: 3px;
+  }
+  .gig-main:active .gig-name { opacity: 0.7; }
+
+  .pages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .pages a {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 9px 14px;
+    border-radius: 8px;
+    background: var(--fill);
+    border: 1px solid var(--line);
+    color: var(--cream);
+  }
+  .pages a.gold {
+    background: rgba(196,163,90,0.18);
+    border-color: rgba(196,163,90,0.4);
+    color: var(--gold);
+  }
+  .pages a:active { opacity: 0.7; }
+
+  /* Past gigs sit quieter on the page */
+  .past .gig-name { font-size: 16px; font-weight: 700; }
+  .past .pages a { padding: 7px 12px; font-size: 11px; }
+
+  /* ─── FOOTER ─── */
+  .foot {
+    margin-top: 56px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gold);
+    font-size: 10px;
+    color: var(--dim);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .wrap { padding-top: 88px; }
+    h1 { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brand">The Greenway Band</div>
+  <h1>Gig Sheets</h1>
+  <p class="lede">Every wedding's gig-day pages in one place. Tap a name to open its site, or jump straight to a sheet.</p>
+
+  <section class="section" id="upcoming">
+    <div class="section-label"><span>Upcoming</span><span class="count" id="upcoming-count"></span></div>
+    <div id="upcoming-list"></div>
+  </section>
+
+  <section class="section past" id="past">
+    <div class="section-label"><span>Past</span><span class="count" id="past-count"></span></div>
+    <div id="past-list"></div>
+  </section>
+
+  <noscript><p class="empty">Turn on JavaScript to see the list of gig sheets.</p></noscript>
+
+  <div class="foot">
+    <span>Each sheet is its own private link.</span>
+    <span>gigs.greenwayband.com</span>
+  </div>
+
+</div>
+
+<script>
+/*
+  ADD A GIG SHEET: one entry per site, then redeploy (see README.md).
+
+  couple  — as it reads on the sheet itself, e.g. "Ditta / Johnson"
+  type    — "Wedding" (or "Corporate", "Gala", ...)
+  date    — YYYY-MM-DD, the gig date
+  venue   — venue name; city optional
+  url     — the site root, https://greenway-<lastname>.netlify.app
+  pages   — only the pages that exist on that site, in this order:
+            gig, band, mc, listen. A one-page site lists just the page it has.
+*/
+const PAGE_LABELS = {
+  gig:    'Full Gig Sheet',
+  band:   'Band Sheet',
+  mc:     'MC Cue Sheet',
+  listen: 'Listening Room',
+};
+
+const GIGS = [
+  {
+    couple: 'Ditta / Johnson',
+    type: 'Wedding',
+    date: '2026-07-11',
+    venue: 'The Arlo',
+    city: 'Austin, TX',
+    url: 'https://greenway-ditta.netlify.app',
+    pages: ['gig', 'band', 'mc', 'listen'],
+  },
+  {
+    couple: 'Freeman / Dass',
+    type: 'Wedding',
+    date: '2026-06-26',
+    venue: 'The Blue Magnolia',
+    city: 'Magnolia, TX',
+    url: 'https://greenway-dass.netlify.app',
+    pages: ['gig', 'band', 'mc', 'listen'],
+  },
+  {
+    couple: 'Boulger / Neupauer',
+    type: 'Wedding',
+    date: '2026-04-11',
+    venue: 'Woodlands Country Club',
+    city: 'The Woodlands, TX',
+    url: 'https://apr-11-woodlands.netlify.app',
+    pages: ['gig', 'band', 'mc'],
+  },
+  {
+    couple: 'Velek / Reinders',
+    type: 'Wedding',
+    date: '2026-03-21',
+    venue: 'Grand Galvez',
+    city: 'Galveston, TX',
+    url: 'https://mar-21-galvez.netlify.app',
+    // Single-page site: the band sheet is the home page.
+    pages: [{ label: 'Band Sheet', path: '/' }],
+  },
+];
+
+(function () {
+  const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  // Parse as a local calendar date so the day never shifts across time zones.
+  function parseDate(s) {
+    const [y, m, d] = s.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  function pageLink(gig, p) {
+    const label = typeof p === 'string' ? PAGE_LABELS[p] : p.label;
+    const path = typeof p === 'string' ? '/' + p : p.path;
+    const gold = (typeof p === 'string' && p === 'listen') ? ' class="gold"' : '';
+    return `<a${gold} href="${esc(gig.url.replace(/\/$/, '') + path)}">${esc(label)}</a>`;
+  }
+
+  function card(gig) {
+    const d = parseDate(gig.date);
+    const where = gig.city ? `${gig.venue} &middot; ${gig.city}` : gig.venue;
+    return `
+      <article class="gig">
+        <div class="gig-top">
+          <div class="gig-date">${DAYS[d.getDay()]} &middot; <span class="day">${MONTHS[d.getMonth()]} ${d.getDate()}</span>, ${d.getFullYear()}</div>
+        </div>
+        <a class="gig-main" href="${esc(gig.url)}">
+          <div class="gig-name">${esc(gig.couple)} <span class="type">${esc(gig.type)}</span></div>
+          <div class="gig-venue">${where}</div>
+        </a>
+        <div class="pages">${(gig.pages || []).map(p => pageLink(gig, p)).join('')}</div>
+      </article>`;
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const upcoming = GIGS.filter(g => parseDate(g.date) >= today)
+    .sort((a, b) => parseDate(a.date) - parseDate(b.date));
+  const past = GIGS.filter(g => parseDate(g.date) < today)
+    .sort((a, b) => parseDate(b.date) - parseDate(a.date));
+
+  function render(id, list, emptyText) {
+    document.getElementById(id + '-list').innerHTML =
+      list.length ? list.map(card).join('') : `<p class="empty">${emptyText}</p>`;
+    document.getElementById(id + '-count').textContent = list.length ? String(list.length) : '';
+  }
+
+  render('upcoming', upcoming, 'No upcoming gig sheets yet.');
+  render('past', past, 'No past gig sheets.');
+  if (!past.length) document.getElementById('past').hidden = true;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+[build]
+  publish = "."
+
+# Same header set the individual gig-sheet sites ship with, plus noindex:
+# this is an internal index of private links, never a public page.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "public, max-age=300"
