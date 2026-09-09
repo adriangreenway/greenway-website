@@ -16,6 +16,12 @@ Statuses: PLANNED, APPROVED (plan exists), IN PROGRESS, SHIPPED, DEFERRED, PAUSE
 | Matey Band Sheet timeline and song placement | S | PLANNED for next session | Latest planner timeline and current live Band Sheet | Pre-dinner calls and logistics stay in the top block. The reception schedule reflects the planner timeline from dinner set onward, with each special song shown at its actual moment. It stays informative and easy to read while excluding money, packages, private contacts, and unnecessary MC/DJ detail. |
 | Protected historical gig-sheet admin library | L, 3 stages | STAGES 1-2 SHIPPED; STAGE 3A SHIPPED 2026-07-30; STAGE 3B APPROVED | Fresh build session for Stage 3B | `gigadmin.greenwayband.com` protects Matey's Full and MC pages. Stage 3A found seven historical weddings across nine Netlify sites without changing any of them; three have usable local source and four need recovery or reconciliation. Stage 3B builds and tests the dual-audience workflow with sample-only data. Stage 3C migrates only owner-approved weddings one at a time. Public musician pages stay Greenway-styled, while the Apple motif stays inside the private admin origin. See `docs/gig-sheets/PRIVATE_ADMIN_PLAN.md` and D20 v2. |
 
+## Song Selections track (independent of all holds; separate repo `~/greenway-music-priorities`)
+| Item | Size | Status | Depends on | Done means |
+|---|---|---|---|---|
+| Song Selections tool for Becca & Henry (10/3/26) | M | SHIPPED 2026-09-09 | — | Live at `selections.greenwayband.com/hess-cassiday/10-03-26` as an open link (no key, Adrian's call, D-record in that repo's DECISIONS_FOR_ADRIAN.md). Couple fills 2h45 of dance-floor time from their playlist, stars must-hears, sends; Adrian reads and exports from `/portal`. 32 tests. |
+| Apply ChatGPT audit findings | S/M | PLANNED for next session | Adrian pastes the audit | Findings applied most severe first, tests green after each, deployed on go; anything arguing against the open-link decision is skipped. Zip: `~/Desktop/song-selections-audit-2026-09-09.zip`. |
+
 ## Proposals track (independent of all holds)
 | Item | Size | Status | Depends on | Done means |
 |---|---|---|---|---|

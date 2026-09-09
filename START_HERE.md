@@ -14,7 +14,7 @@ The public marketing website for The Greenway Band, your Houston premium live we
 **STATUS:** YELLOW
 **Last verified build:** 2026-07-30 (`npm run build` clean, 6 pages; no test suite exists in this repo, so that's the whole check)
 **Blockers:** None. Both site tracks are deliberately on hold by your own decision: the Astro rebuild waits for Growth Hour's M3, and the Squarespace form's go-live waits until both builds are entirely done (docs/DECISIONS.md D13).
-**Heads up:** the premium Matey Band Sheet and Listening Room are live, production-checked, and safe to send at `gigs.greenwayband.com/matey/08-01-26/`. Full and MC are now protected at `gigadmin.greenwayband.com`; the old public routes return `404`, and cache v22 removes the old private cache after a device reconnects. The site still has the known branch split and preserved April changes; both repos have local commits not yet pushed. **New on 2026-08-05:** the Jones proposal is live and its intro email is sent; the same deploy repaired the proposals site after a stale drag-and-drop deploy the night before had silently broken photos, video, the song list, and two proposals. If anyone deploys to proposals.greenwayband.com outside the Claude runbook again, the same breakage can recur.
+**Heads up (2026-09-09):** Song Selections for Becca & Henry is live and blank at `selections.greenwayband.com/hess-cassiday/10-03-26`; send that link, then check `/portal` after they press Send (it does not notify you). Older: the premium Matey Band Sheet and Listening Room are live, production-checked, and safe to send at `gigs.greenwayband.com/matey/08-01-26/`. Full and MC are now protected at `gigadmin.greenwayband.com`; the old public routes return `404`, and cache v22 removes the old private cache after a device reconnects. The site still has the known branch split and preserved April changes; both repos have local commits not yet pushed. **New on 2026-08-05:** the Jones proposal is live and its intro email is sent; the same deploy repaired the proposals site after a stale drag-and-drop deploy the night before had silently broken photos, video, the song list, and two proposals. If anyone deploys to proposals.greenwayband.com outside the Claude runbook again, the same breakage can recur.
 
 GREEN means everything works and it's safe to build. YELLOW means something needs attention first. RED means stop and run a fix-bug or audit session before anything else.
 
@@ -47,6 +47,11 @@ None of these affect your live site today, because your live site is still Squar
 ---
 
 ## Your next step
+
+Run the start-session skill. Context: Song Selections for Becca & Henry is live and blank at https://selections.greenwayband.com/hess-cassiday/10-03-26 (open link, no key, Adrian's call); the app was zipped for a ChatGPT audit at /Users/adrianjoseph/Desktop/song-selections-audit-2026-09-09.zip (AUDIT_PROMPT.md inside). Then take the audit findings Adrian pastes and apply them in ~/greenway-music-priorities: one finding at a time from most severe, skip anything that argues against the open-link decision, `npm test` after each, deploy only on Adrian's go.
+
+<!-- previous next-step kept below for history -->
+
 **Build Stage 3B of the protected gig admin portal.**
 
 Start the next session on Sol and paste:
