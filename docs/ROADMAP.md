@@ -19,8 +19,9 @@ Statuses: PLANNED, APPROVED (plan exists), IN PROGRESS, SHIPPED, DEFERRED, PAUSE
 ## Song Selections track (independent of all holds; separate repo `~/greenway-music-priorities`)
 | Item | Size | Status | Depends on | Done means |
 |---|---|---|---|---|
-| Song Selections tool for Becca & Henry (10/3/26) | M | SHIPPED 2026-09-09 | — | Live at `selections.greenwayband.com/hess-cassiday/10-03-26` as an open link (no key, Adrian's call, D-record in that repo's DECISIONS_FOR_ADRIAN.md). Couple fills 2h45 of dance-floor time from their playlist, stars must-hears, sends; Adrian reads and exports from `/portal`. 32 tests. |
-| Apply ChatGPT audit findings | S/M | PLANNED for next session | Adrian pastes the audit | Findings applied most severe first, tests green after each, deployed on go; anything arguing against the open-link decision is skipped. Zip: `~/Desktop/song-selections-audit-2026-09-09.zip`. |
+| Song Selections tool for Becca & Henry (10/3/26) | M | SHIPPED 2026-09-09, link sent | — | Live at `selections.greenwayband.com/hess-cassiday/10-03-26` as an open link (no key, Adrian's call). Model v4.1: rank songs inside each genre, special-moment picker, one note, time goal shown not enforced; Adrian reads and exports from `/portal`. |
+| Apply ChatGPT audit findings | S/M | SHIPPED 2026-09-09 | — | All 11 findings applied and live (atomic writes, revision checks, idempotent send, snapshots, preview lockout, phone save state, atomic limits, CSV, link box, print, docs). |
+| Stale-tab dead end (Becca's Sep 13 email) | S | BUILT 2026-09-15, awaiting "go" to deploy | Adrian | App commit `94d3fad`: stale tab merges instead of blocking, foreground refresh, wider limits. Deploy, verify, reply to Becca. |
 
 ## Proposals track (independent of all holds)
 | Item | Size | Status | Depends on | Done means |
