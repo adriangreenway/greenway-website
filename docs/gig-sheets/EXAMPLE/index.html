@@ -6,246 +6,91 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="theme-color" content="#F5F2ED">
-<link rel="manifest" href="/manifest.json">
-<title>Greenway — Gig Sheet</title>
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Courtois / Blick Gig Sheet">
+<meta property="og:description" content="Saturday, September 5, 2026 · The Houstonian Hotel">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gigs.greenwayband.com/blick/09-05-26/">
+<meta property="og:image" content="https://gigs.greenwayband.com/blick/09-05-26/og-band-hub.png">
+<meta property="og:image:secure_url" content="https://gigs.greenwayband.com/blick/09-05-26/og-band-hub.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="The Greenway Band logo for the Courtois / Blick Gig Sheet">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Courtois / Blick Gig Sheet">
+<meta name="twitter:description" content="Saturday, September 5, 2026 · The Houstonian Hotel">
+<meta name="twitter:image" content="https://gigs.greenwayband.com/blick/09-05-26/og-band-hub.png">
+<meta name="twitter:image:alt" content="The Greenway Band logo for the Courtois / Blick Gig Sheet">
+<link rel="manifest" href="manifest.json">
+<title>Greenway Gig Sheet — Courtois / Blick</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
-
-  :root {
-    --black: #0A0A09;
-    --charcoal: #111110;
-    --cream: #F5F2ED;
-    --muted: #B8B4AC;
-    --dim: #706D66;
-    --faint: #4A4740;
-    --paper-rule: rgba(74, 71, 64, 0.22);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { background: var(--cream); }
-
-  body {
-    min-height: 100vh;
-    min-height: 100svh;
-    background: var(--cream);
-    color: var(--black);
-    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .shell {
-    width: min(100%, 1120px);
-    min-height: 100vh;
-    min-height: 100svh;
-    margin: 0 auto;
-    padding: clamp(24px, 5vw, 64px);
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-  }
-
-  .masthead {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--paper-rule);
-  }
-
-  .wordmark {
-    display: grid;
-    width: max-content;
-    color: var(--black);
-    line-height: 0.92;
-    text-transform: uppercase;
-  }
-
-  .wordmark-the,
-  .wordmark-band {
-    font-size: 8px;
-    font-weight: 600;
-    letter-spacing: 0.42em;
-  }
-
-  .wordmark-name {
-    margin: 5px 0;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-  }
-
-  .page-type,
-  .eyebrow {
-    color: var(--dim);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-  }
-
-  main {
-    width: 100%;
-    padding: clamp(56px, 9vw, 112px) 0;
-    align-self: center;
-  }
-
-  .eyebrow { margin-bottom: 18px; }
-
-  h1 {
-    max-width: 760px;
-    font-family: 'Bodoni Moda', 'Times New Roman', serif;
-    font-size: clamp(48px, 8vw, 96px);
-    font-weight: 400;
-    line-height: 0.92;
-    letter-spacing: -0.035em;
-  }
-
-  h1 span {
-    color: var(--dim);
-    font-style: italic;
-  }
-
-  .venue {
-    margin-top: 24px;
-    color: var(--dim);
-    font-size: 13px;
-    line-height: 1.7;
-  }
-
-  .hub-nav {
-    margin-top: clamp(48px, 8vw, 88px);
-    border-top: 1px solid var(--paper-rule);
-  }
-
-  .hub-link {
-    display: grid;
-    grid-template-columns: 48px 1fr auto;
-    min-height: 72px;
-    align-items: center;
-    gap: 16px;
-    color: var(--black);
-    border-bottom: 1px solid var(--paper-rule);
-    text-decoration: none;
-    transition: background-color 200ms ease-out, color 200ms ease-out;
-  }
-
-  .hub-link:hover,
-  .hub-link:focus-visible {
-    background: var(--black);
-    color: var(--cream);
-    outline: none;
-  }
-
-  .hub-link:hover .item-number,
-  .hub-link:focus-visible .item-number {
-    color: var(--muted);
-  }
-
-  .item-number {
-    color: var(--dim);
-    font-size: 10px;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.14em;
-  }
-
-  .item-label {
-    font-family: 'Bodoni Moda', 'Times New Roman', serif;
-    font-size: clamp(24px, 3vw, 34px);
-    font-weight: 400;
-    letter-spacing: -0.015em;
-  }
-
-  .item-arrow {
-    font-size: 22px;
-    font-weight: 400;
-  }
-
-  .footer {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 24px;
-    padding-top: 24px;
-    border-top: 1px solid var(--paper-rule);
-  }
-
-  .descriptor,
-  .status {
-    color: var(--dim);
-    font-size: 10px;
-    line-height: 1.5;
-    letter-spacing: 0.08em;
-  }
-
-  .status { text-align: right; }
-  .status.ready { color: var(--dim); }
-
-  @media (max-width: 520px) {
-    .shell { padding: 22px 20px; }
-    .masthead { padding-bottom: 18px; }
-    main { padding: 52px 0; }
-    h1 { font-size: clamp(44px, 14vw, 64px); }
-    .hub-nav { margin-top: 48px; }
-    .hub-link {
-      grid-template-columns: 32px 1fr auto;
-      min-height: 68px;
-      gap: 10px;
-    }
-    .footer { align-items: flex-start; }
-    .descriptor { max-width: 120px; }
-    .status { max-width: 130px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hub-link { transition: none; }
-  }
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+:root{--black:#0A0A09;--cream:#F5F2ED;--dim:#706D66;--faint:#4A4740;--rule:rgba(74,71,64,.22)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:var(--cream);color:var(--black)}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+.shell{width:min(100%,1120px);min-height:100vh;margin:auto;padding:clamp(24px,5vw,64px);display:grid;grid-template-rows:auto 1fr auto}
+.masthead,.footer{display:flex;justify-content:space-between;gap:24px}
+.masthead{align-items:flex-start;padding-bottom:24px;border-bottom:1px solid var(--rule)}
+.wordmark{display:grid;width:max-content;line-height:.92;text-transform:uppercase}
+.wordmark small{font-size:8px;font-weight:600;letter-spacing:.42em}
+.wordmark strong{margin:5px 0;font-size:16px;letter-spacing:.18em}
+.page-type,.eyebrow{color:var(--dim);font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase}
+main{align-self:center;padding:clamp(56px,9vw,112px) 0}
+.eyebrow{margin-bottom:18px}
+h1{max-width:820px;font-family:'Bodoni Moda','Times New Roman',serif;font-size:clamp(46px,8vw,94px);font-weight:400;line-height:.92;letter-spacing:-.035em}
+h1 span{color:var(--dim);font-style:italic}
+.venue{margin-top:24px;color:var(--dim);font-size:13px;line-height:1.7}
+.hub-nav{margin-top:clamp(48px,8vw,88px);border-top:1px solid var(--rule)}
+.hub-link{display:grid;grid-template-columns:48px 1fr auto;min-height:72px;align-items:center;gap:16px;color:var(--black);border-bottom:1px solid var(--rule);text-decoration:none}
+.hub-link:hover,.hub-link:focus-visible{background:var(--black);color:var(--cream);outline:none}
+.number{color:var(--dim);font-size:10px;letter-spacing:.14em}
+.label{font-family:'Bodoni Moda','Times New Roman',serif;font-size:clamp(24px,3vw,34px)}
+.arrow{font-size:22px}
+.footer{align-items:flex-end;padding-top:24px;border-top:1px solid var(--rule);color:var(--dim);font-size:10px;line-height:1.5;letter-spacing:.08em}
+.download{display:inline-block;margin-top:28px;padding-bottom:2px;color:var(--dim);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid var(--rule);text-decoration:none}
+.download:hover{color:var(--black);border-color:var(--black)}
+.status{text-align:right}
+@media(max-width:520px){.shell{padding:22px 20px}main{padding:52px 0}.eyebrow{font-size:9px;letter-spacing:.18em;line-height:1.5}h1{font-size:clamp(40px,11.5vw,46px);letter-spacing:-.045em}.hub-link{grid-template-columns:32px 1fr auto;min-height:68px;gap:10px}.footer{align-items:flex-start}}
 </style>
 </head>
 <body>
-  <div class="shell">
-    <header class="masthead">
-      <div class="wordmark" aria-label="The Greenway Band">
-        <span class="wordmark-the">The</span>
-        <span class="wordmark-name">Greenway</span>
-        <span class="wordmark-band">Band</span>
-      </div>
-      <div class="page-type">Gig Sheet</div>
-    </header>
-
-    <main>
-      <div class="eyebrow">Saturday, July 11, 2026</div>
-      <h1>Ditta <span>/</span><br>Johnson</h1>
-      <div class="venue">The Arlo</div>
-
-      <nav class="hub-nav" aria-label="Gig sheet resources">
-        <a class="hub-link" href="band.html">
-          <span class="item-number">01</span>
-          <span class="item-label">Band Sheet</span>
-          <span class="item-arrow" aria-hidden="true">&rarr;</span>
-        </a>
-        <a class="hub-link" href="listen.html">
-          <span class="item-number">02</span>
-          <span class="item-label">Listening Room</span>
-          <span class="item-arrow" aria-hidden="true">&rarr;</span>
-        </a>
-      </nav>
-    </main>
-
-    <footer class="footer">
-      <div class="descriptor">The sound of a great night.</div>
-      <div class="status" id="status">Checking offline status...</div>
-    </footer>
-  </div>
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').then(reg => {
-        document.getElementById('status').textContent = '✓ Saved for offline use';
-        document.getElementById('status').classList.add('ready');
-      }).catch(err => {
-        document.getElementById('status').textContent = 'Offline save failed — reload and try again';
-      });
-    }
-  </script>
+<div class="shell">
+  <header class="masthead">
+    <div class="wordmark" aria-label="The Greenway Band"><small>The</small><strong>Greenway</strong><small>Band</small></div>
+    <div class="page-type">Gig Sheet</div>
+  </header>
+  <main>
+    <div class="eyebrow">Saturday, September 5, 2026</div>
+    <h1>Courtois <span>/</span><br>Blick</h1>
+    <div class="venue">The Houstonian Hotel<br>Houston, Texas</div>
+    <nav class="hub-nav" aria-label="Gig sheet resources">
+      <a class="hub-link" href="/blick/09-05-26/band"><span class="number">01</span><span class="label">Band Sheet</span><span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="hub-link" href="/blick/09-05-26/mc"><span class="number">02</span><span class="label">MC Cue Sheet</span><span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="hub-link" href="/blick/09-05-26/listen"><span class="number">03</span><span class="label">Listening Room</span><span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </nav>
+    <a class="download" href="band-sheet.pdf" download="Courtois Blick Band Sheet 9-5-26.pdf">Download Band Sheet (PDF)</a>
+  </main>
+  <footer class="footer">
+    <div>The sound of a great night.</div>
+    <div class="status" id="status">Checking offline status...</div>
+  </footer>
+</div>
+<script>
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').then(()=>{
+    document.getElementById('status').textContent='Saved for offline use';
+  }).catch(()=>{
+    document.getElementById('status').textContent='Offline save failed. Reload and try again.';
+  });
+  let reloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(reloaded)return;
+    reloaded=true;
+    location.reload();
+  });
+}
+</script>
 </body>
 </html>

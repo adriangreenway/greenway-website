@@ -2,405 +2,141 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Band Sheet — Ditta / Johnson</title>
-<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0A0A09">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Courtois / Blick Band Sheet">
+<meta property="og:description" content="Saturday, September 5, 2026 · The Houstonian Hotel">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gigs.greenwayband.com/blick/09-05-26/band">
+<meta property="og:image" content="https://gigs.greenwayband.com/blick/09-05-26/og-band-hub.png">
+<meta property="og:image:secure_url" content="https://gigs.greenwayband.com/blick/09-05-26/og-band-hub.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="The Greenway Band logo for the Courtois / Blick Band Sheet">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Courtois / Blick Band Sheet">
+<meta name="twitter:description" content="Saturday, September 5, 2026 · The Houstonian Hotel">
+<meta name="twitter:image" content="https://gigs.greenwayband.com/blick/09-05-26/og-band-hub.png">
+<meta name="twitter:image:alt" content="The Greenway Band logo for the Courtois / Blick Band Sheet">
+<link rel="manifest" href="manifest.json">
+<title>Band Sheet — Courtois / Blick</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
-
-  :root {
-    --black: #0A0A09;
-    --charcoal: #111110;
-    --cream: #F5F2ED;
-    --muted: #B8B4AC;
-    --dim: #706D66;
-    --faint: #4A4740;
-    --warning: #8D2E2A;
-    --paper-rule: rgba(74, 71, 64, 0.22);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html, body {
-    background: #F5F2ED;
-    color: #0A0A09;
-    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.5;
-  }
-
-  .header {
-    background: #0A0A09;
-    padding: 20px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-  .header-left .the {
-    font-size: 8px; font-weight: 600; letter-spacing: 0.42em; color: #F5F2ED; text-transform: uppercase;
-  }
-  .header-left .brand {
-    margin: 5px 0; font-size: 16px; font-weight: 600; color: #F5F2ED; letter-spacing: 0.18em;
-  }
-  .header-left .band { font-size: 8px; font-weight: 600; letter-spacing: 0.42em; color: #F5F2ED; text-transform: uppercase; }
-  .header-right { text-align: right; }
-  .header-right .label {
-    font-size: 9px; font-weight: 600; letter-spacing: 0.24em; color: #706D66; text-transform: uppercase;
-  }
-  .header-right .event { margin-top: 8px; font-family: 'Bodoni Moda', 'Times New Roman', serif; font-size: clamp(24px, 3vw, 38px); font-weight: 400; line-height: 1; letter-spacing: -0.02em; color: #F5F2ED; }
-  .header-right .date { font-size: 11px; color: #B8B4AC; margin-top: 8px; }
-
-  .body { padding: 24px 28px 40px; }
-
-  .section { margin-bottom: 24px; }
-  .section-label {
-    font-size: 9px; font-weight: 600; letter-spacing: 0.24em; color: #706D66; text-transform: uppercase; margin-bottom: 10px;
-  }
-  .section-value { font-size: 16px; font-weight: 600; color: #0A0A09; }
-  .section-sub { font-size: 13px; color: #706D66; margin-top: 2px; }
-
-  a { color: #0A0A09; text-decoration: none; border-bottom: 1px solid #4A4740; }
-  a:active { opacity: 0.7; }
-
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; gap: 12px; } }
-
-  .divider { height: 1px; background: #D4D0C8; margin: 24px 0; }
-
-  .timeline-row {
-    display: flex; align-items: baseline; padding: 7px 0;
-    border-bottom: 1px solid rgba(212,208,200,0.5);
-  }
-  .timeline-row:last-child { border-bottom: none; }
-  .timeline-time { width: 100px; min-width: 100px; font-size: 14px; font-weight: 700; color: #0A0A09; white-space: nowrap; }
-  .timeline-event { font-size: 14px; font-weight: 500; color: #0A0A09; flex: 1; }
-  .timeline-tag {
-    font-size: 9px; font-weight: 600; letter-spacing: 0.12em; padding: 3px 7px;
-    border: 1px solid rgba(74,71,64,0.22); border-radius: 0; margin-left: 10px; white-space: nowrap;
-  }
-  .tag-live { background: transparent; color: #0A0A09; border-color: #4A4740; }
-  .tag-track { background: transparent; color: #706D66; }
-  .tag-break { background: transparent; color: #706D66; font-style: normal; }
-
-  .special-row {
-    display: grid; grid-template-columns: 1fr 1.5fr auto; align-items: center;
-    padding: 10px 0; border-bottom: 1px solid rgba(212,208,200,0.5); gap: 12px;
-  }
-  .special-row:last-child { border-bottom: none; }
-  .special-moment { font-size: 14px; font-weight: 700; color: #0A0A09; }
-  .special-song { font-size: 13px; color: #706D66; }
-
-  .song-list {
-    columns: 2;
-    column-gap: 24px;
-    font-size: 13px;
-    color: #706D66;
-    list-style-position: inside;
-  }
-  @media (max-width: 600px) {
-    .song-list { columns: 1; }
-  }
-  .song-list li { padding: 2px 0; break-inside: avoid; }
-
-  .footer {
-    border-top: 1px solid rgba(74,71,64,0.22); padding: 12px 28px;
-    display: flex; justify-content: space-between; font-size: 10px; color: #706D66;
-  }
-
-  .header {
-    min-height: 144px;
-    padding: 28px max(28px, calc((100vw - 1120px) / 2));
-    gap: 32px;
-    border-bottom: 1px solid var(--faint);
-  }
-
-  .header-left {
-    display: grid;
-    width: max-content;
-    line-height: 0.92;
-  }
-
-  .header-right { max-width: 560px; }
-
-  .body {
-    width: min(100%, 1120px);
-    margin: 0 auto;
-    padding: 48px 28px 64px;
-  }
-
-  .section { margin-bottom: 30px; }
-  .two-col { gap: clamp(32px, 7vw, 96px); }
-  .divider { margin: 38px 0; background: var(--paper-rule); }
-
-  .timeline-row {
-    min-height: 42px;
-    padding: 9px 0;
-    border-bottom-color: var(--paper-rule);
-  }
-
-  .timeline-time {
-    width: 108px;
-    min-width: 108px;
-    font-size: 13px;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .timeline-event { font-size: 14px; font-weight: 400; }
-
-  .special-row {
-    min-height: 48px;
-    padding: 10px 0;
-    gap: 16px;
-    border-bottom-color: var(--paper-rule);
-  }
-
-  .special-moment { font-size: 14px; font-weight: 600; }
-
-  .song-list {
-    column-gap: 48px;
-    list-style: none;
-  }
-
-  .song-list li {
-    padding: 5px 0;
-    border-bottom: 1px solid var(--paper-rule);
-  }
-
-  .warning-note {
-    padding: 12px 0 12px 16px;
-    border-left: 3px solid var(--warning);
-  }
-
-  .warning-label {
-    color: var(--warning);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
-  .warning-text {
-    margin-top: 6px;
-    color: var(--black);
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.55;
-  }
-
-  @media (max-width: 600px) {
-    .header {
-      min-height: 132px;
-      padding: 22px 20px;
-      align-items: flex-start;
-    }
-    .header-right { max-width: 230px; }
-    .header-right .event { margin-top: 6px; font-size: 22px; line-height: 1.05; }
-    .body { padding: 36px 20px 52px; }
-    .two-col { gap: 4px; }
-    .divider { margin: 30px 0; }
-    .timeline-row { align-items: flex-start; }
-    .timeline-time { width: 94px; min-width: 94px; font-size: 12px; }
-    .timeline-event { font-size: 13px; }
-    .timeline-tag { margin-left: 8px; padding: 3px 5px; font-size: 8px; }
-    .special-row { grid-template-columns: 1fr auto; gap: 4px 12px; }
-    .special-song { grid-column: 1; grid-row: 2; }
-    .special-row .timeline-tag { grid-column: 2; grid-row: 1 / span 2; }
-  }
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+:root{--black:#0A0A09;--charcoal:#111110;--cream:#F5F2ED;--muted:#B8B4AC;--dim:#706D66;--faint:#4A4740;--warning:#8D2E2A;--rule:rgba(74,71,64,.22)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--cream);color:var(--black)}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+.header{min-height:144px;padding:28px max(28px,calc((100vw - 1120px)/2));display:flex;justify-content:space-between;align-items:flex-end;gap:32px;background:var(--black);border-bottom:1px solid var(--faint);color:var(--cream)}
+.wordmark{display:grid;width:max-content;line-height:.92;text-transform:uppercase}.wordmark small{font-size:8px;font-weight:600;letter-spacing:.42em}.wordmark strong{margin:5px 0;font-size:16px;letter-spacing:.18em}
+.event{max-width:620px;text-align:right}.event small,.section-label{color:var(--dim);font-size:9px;font-weight:600;letter-spacing:.24em;text-transform:uppercase}
+.event h1{margin-top:8px;font-family:'Bodoni Moda','Times New Roman',serif;font-size:clamp(24px,3vw,38px);font-weight:400;line-height:1;letter-spacing:-.02em}.event p{margin-top:8px;color:var(--muted);font-size:11px}
+.body{width:min(100%,1120px);margin:auto;padding:48px 28px 64px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,7vw,96px)}.section{margin-bottom:30px}.section-label{margin-bottom:10px}.value{font-size:16px;font-weight:600}.sub{margin-top:2px;color:var(--dim);font-size:13px}
+a{color:var(--black);border-bottom:1px solid var(--faint);text-decoration:none}.divider{height:1px;margin:38px 0;background:var(--rule)}
+.row{display:flex;min-height:42px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--rule)}.row:last-child{border-bottom:0}.time{width:108px;min-width:108px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}.detail{flex:1;font-size:14px}.tag{margin-left:10px;padding:3px 7px;border:1px solid var(--rule);font-size:9px;font-weight:600;letter-spacing:.12em;white-space:nowrap}.tag-live{color:var(--black);border-color:var(--faint)}.tag-track,.tag-break{color:var(--dim)}
+.special{display:grid;grid-template-columns:1fr 1.5fr auto;min-height:48px;align-items:center;gap:16px;padding:10px 0;border-bottom:1px solid var(--rule)}.special:last-child{border-bottom:0}.moment{font-size:14px;font-weight:600}.song{color:var(--dim);font-size:13px}
+.vocal{display:inline-block;margin-left:8px;padding:2px 6px;border:1px solid var(--rule);color:var(--faint);font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.list li .vocal{margin-left:6px}
+.list{columns:2;column-gap:48px;list-style:none;color:var(--dim);font-size:13px}.list li{break-inside:avoid;padding:5px 0;border-bottom:1px solid var(--rule)}
+.note{padding:12px 0;border-bottom:1px solid var(--rule);font-size:14px}.note:last-child{border-bottom:0}.warning{padding:12px 0 12px 16px;border-left:3px solid var(--warning)}.warning strong{display:block;color:var(--warning);font-size:9px;letter-spacing:.18em;text-transform:uppercase}
+.footer{display:flex;justify-content:space-between;padding:12px max(28px,calc((100vw - 1120px)/2));border-top:1px solid var(--rule);color:var(--dim);font-size:10px}
+@media(max-width:600px){.header{min-height:132px;padding:22px 20px;align-items:flex-start;gap:12px}.event{max-width:210px;min-width:0}.event small{display:block;font-size:7px;letter-spacing:.12em;overflow-wrap:anywhere}.event h1{font-size:20px}.body{padding:36px 20px 52px}.two-col{grid-template-columns:1fr;gap:4px}.divider{margin:30px 0}.row{align-items:flex-start}.time{width:94px;min-width:94px;font-size:12px}.detail{font-size:13px}.tag{margin-left:8px;padding:3px 5px;font-size:8px}.special{grid-template-columns:1fr auto;gap:4px 12px}.song{grid-column:1;grid-row:2}.special .tag{grid-column:2;grid-row:1 / span 2}.list{columns:1}}
 </style>
 </head>
 <body>
-
-<div class="header">
-  <div class="header-left">
-    <div class="the">The</div>
-    <div class="brand">Greenway</div>
-    <div class="band">Band</div>
-  </div>
-  <div class="header-right">
-    <div class="label">Band Sheet</div>
-    <div class="event">Ditta / Johnson Wedding</div>
-    <div class="date">Saturday, July 11, 2026</div>
-  </div>
-</div>
-
-<div class="body">
-
+<header class="header">
+  <div class="wordmark" aria-label="The Greenway Band"><small>The</small><strong>Greenway</strong><small>Band</small></div>
+  <div class="event"><small>Band Sheet</small><h1>Courtois / Blick Wedding</h1><p>Saturday, September 5, 2026</p></div>
+</header>
+<main class="body">
   <div class="two-col">
     <div>
-      <div class="section">
-        <div class="section-label">Couple</div>
-        <div class="section-value">Macey Ditta &amp; Jake Johnson</div>
-      </div>
-      <div class="section">
-        <div class="section-label">Location</div>
-        <div class="section-value">The Arlo</div>
-        <div class="section-sub">
-          <a href="https://www.google.com/maps/search/?api=1&query=10700+Signal+Hill+Rd+Austin+TX+78737">10700 Signal Hill Rd, Austin, TX 78737</a>
-        </div>
-        <div class="section-sub">Out of town — traveling from Houston</div>
-      </div>
-      <div class="section">
-        <div class="section-label">Attire</div>
-        <div class="section-value">Guys: black suit, black shoes, black tie, white shirt</div>
-        <div class="section-sub">Girls: black dress or jumpsuit</div>
-      </div>
+      <section class="section"><div class="section-label">Couple</div><div class="value">Katherine Courtois &amp; Andrew Blick</div></section>
+      <section class="section"><div class="section-label">Location</div><div class="value">The Houstonian Hotel</div><div class="sub">Grand Ballroom</div><div class="sub"><a href="https://www.google.com/maps/search/?api=1&amp;query=111+N+Post+Oak+Ln+Houston+TX+77024">111 N Post Oak Ln, Houston, TX 77024</a></div></section>
+      <section class="section"><div class="section-label">Attire</div><div class="value">Guys: black suit, black shoes, black tie, white shirt</div><div class="value">Girls: black dress or jumpsuit</div></section>
     </div>
     <div>
-      <div class="section">
-        <div class="section-label">Band Arrival / Load In</div>
-        <div class="section-value">12:00 PM</div>
-      </div>
-      <div class="section">
-        <div class="section-label">Soundcheck</div>
-        <div class="section-value">3:30 &ndash; 4:30 PM</div>
-      </div>
-      <div class="section">
-        <div class="section-label">Meals</div>
-        <div class="section-value">6:00 PM</div>
-        <div class="section-sub">During cocktail hour</div>
-      </div>
+      <section class="section"><div class="section-label">Sound Load In</div><div class="value">11:30 AM</div></section>
+      <section class="section"><div class="section-label">Band Load In</div><div class="value">2:30 PM</div></section>
+      <section class="section"><div class="section-label">Soundcheck</div><div class="value">3:30 PM – 4:30 PM</div><div class="sub">Cocktail hour starts 5:00 PM · room set by 5:30 PM</div></section>
+      <section class="section"><div class="section-label">Meals</div><div class="value">5:00 PM</div><div class="sub">Green room: Cottonwood Room, main floor</div></section>
     </div>
   </div>
 
   <div class="divider"></div>
-
-  <div class="section">
+  <section class="section">
     <div class="section-label">Schedule</div>
-
-    <div class="timeline-row">
-      <div class="timeline-time">12:00 PM</div>
-      <div class="timeline-event">Load in</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">3:30 PM</div>
-      <div class="timeline-event">Soundcheck (until 4:30)</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">6:00 PM</div>
-      <div class="timeline-event">Band meals</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">7:00 PM</div>
-      <div class="timeline-event">Band Set 1</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">8:00 PM</div>
-      <div class="timeline-event">Break</div>
-      <span class="timeline-tag tag-break">BREAK</span>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">8:30 PM</div>
-      <div class="timeline-event">Band Set 2 — dance floor opens</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">9:30 PM</div>
-      <div class="timeline-event">Break</div>
-      <span class="timeline-tag tag-break">BREAK</span>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">10:00 PM</div>
-      <div class="timeline-event">Band Set 3</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">10:45 PM</div>
-      <div class="timeline-event">Last dance song (all guests) — "Closing Time" by Semisonic</div>
-      <span class="timeline-tag tag-live">LIVE</span>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">11:00 PM</div>
-      <div class="timeline-event">Send off</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">12:30 AM</div>
-      <div class="timeline-event">Breakdown complete, off property</div>
-    </div>
-  </div>
+    <div class="row"><div class="time">11:30 AM</div><div class="detail">Sound engineer load in</div></div>
+    <div class="row"><div class="time">2:30 PM</div><div class="detail">Band load in</div></div>
+    <div class="row"><div class="time">3:30 PM</div><div class="detail">Soundcheck until 4:30 PM</div></div>
+    <div class="row"><div class="time">5:00 PM</div><div class="detail">Band meals · Cottonwood Room</div></div>
+    <div class="row"><div class="time">6:00 PM</div><div class="detail">Reception doors open · guests seated</div></div>
+    <div class="row"><div class="time">6:00 PM</div><div class="detail">Set One · live specials and dinner set</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row"><div class="time">7:00 PM</div><div class="detail">Break · back on stage before 7:20 PM</div><span class="tag tag-break">BREAK</span></div>
+    <div class="row"><div class="time">7:20 PM</div><div class="detail">Parent dances · father/daughter live, then mother/son on track</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row"><div class="time">7:25 PM</div><div class="detail">Set Two · dance set one</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row"><div class="time">8:25 PM</div><div class="detail">Break</div><span class="tag tag-break">BREAK</span></div>
+    <div class="row"><div class="time">8:40 PM</div><div class="detail">Set Three · dance set two</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row"><div class="time">9:40 PM</div><div class="detail">Private last dance · recorded track</div><span class="tag tag-track">TRACK</span></div>
+    <div class="row"><div class="time">10:00 PM</div><div class="detail">Grand exit · service complete</div></div>
+  </section>
 
   <div class="divider"></div>
-
-  <div class="section">
-    <div class="section-label">Live Special</div>
-    <div class="special-row">
-      <div class="special-moment">Final Song (all guests)</div>
-      <div class="special-song">"Closing Time" &mdash; Semisonic</div>
-      <span class="timeline-tag tag-live">LIVE</span>
-    </div>
-    <div class="section-sub">
-      <a href="listen.html">Practice track in Listening Room</a>
-    </div>
-  </div>
+  <section class="section">
+    <div class="section-label">Specials</div>
+    <div class="special"><div class="moment">Grand Entrance</div><div class="song">“Can’t Take My Eyes Off You” — Frankie Valli</div><span class="tag tag-live">LIVE</span></div>
+    <div class="special"><div class="moment">First Dance</div><div class="song">“The Way I Love You” — Michal Leah<span class="vocal">Vocals · Nicoya</span></div><span class="tag tag-live">LIVE</span></div>
+    <div class="special"><div class="moment">Father / Daughter</div><div class="song">“Isn’t She Lovely” — Stevie Wonder</div><span class="tag tag-live">LIVE</span></div>
+    <div class="special"><div class="moment">Mother / Son</div><div class="song">“Edelweiss” — Bill Lee &amp; Charmian Carr</div><span class="tag tag-track">TRACK</span></div>
+    <div class="special"><div class="moment">Final Guest Song</div><div class="song">“Forever” — Chris Brown · closes Set Three</div><span class="tag tag-live">LIVE</span></div>
+    <div class="special"><div class="moment">Private Last Dance</div><div class="song">“Forever and Ever, Amen” — Randy Travis</div><span class="tag tag-track">TRACK</span></div>
+  </section>
 
   <div class="divider"></div>
+  <section class="section">
+    <div class="section-label">Songs to Learn</div>
+    <ul class="list">
+      <li>The Way I Love You — Michal Leah</li>
+      <li>9 to 5 — Dolly Parton<span class="vocal">Vocals · Rome</span></li>
+      <li>Dance Her Home — Cody Johnson</li>
+      <li>You Never Call Me By My Name — David Allan Coe</li>
+      <li>Me and My Kind — Cody Johnson</li>
+    </ul>
+  </section>
 
-  <div class="section">
+  <div class="divider"></div>
+  <section class="section">
     <div class="section-label">Couple's Song Suggestions</div>
-    <ul class="song-list">
-      <li>Closing Time</li>
-      <li>Can't Hold Us</li>
-      <li>Mr. Brightside</li>
-      <li>Dancing Queen</li>
-      <li>No Hands</li>
-      <li>Take On Me</li>
-      <li>September</li>
-      <li>The Middle</li>
-      <li>A Sky Full of Stars</li>
-      <li>All the Small Things</li>
-      <li>Hey Ya</li>
-      <li>Temperature</li>
+    <ul class="list">
+      <li>Mirrors</li><li>Dancing Queen</li><li>Rattlin' Bog</li><li>Gimme Gimme Gimme</li><li>Mr. Brightside</li>
     </ul>
-  </div>
+  </section>
 
   <div class="divider"></div>
-
-  <div class="section">
+  <section class="section">
     <div class="section-label">Do Not Play</div>
-    <ul class="song-list">
-      <li>Cupid Shuffle</li>
-      <li>Katy Perry</li>
-      <li>Single Ladies</li>
-      <li>Wobble</li>
-      <li>Party in the USA</li>
-      <li>WOP</li>
-      <li>Hips Don't Lie</li>
-      <li>Happy — Pharrell</li>
-      <li>Taylor Swift</li>
-      <li>Cotton Eyed Joe</li>
-      <li>Meghan Trainor</li>
-      <li>Cha Cha Slide</li>
-      <li>Gangnam Style</li>
-      <li>Barbie Girl</li>
-      <li>Macarena</li>
-      <li>Dance Monkey</li>
-      <li>One Direction</li>
-      <li>Gasolina</li>
-      <li>Who Let the Dogs Out</li>
-      <li>Electric Slide</li>
-      <li>Despacito</li>
-      <li>Call Me Maybe</li>
+    <ul class="list">
+      <li>Taylor Swift</li><li>Pharrell Williams</li><li>Meghan Trainor</li><li>Katy Perry</li>
     </ul>
-  </div>
+  </section>
 
   <div class="divider"></div>
-
-  <div class="section">
+  <section class="section">
     <div class="section-label">Notes</div>
-    <div class="section-value">Band is not playing ceremony or cocktail hour.</div>
-  </div>
+    <div class="note">No ceremony music and no live cocktail-hour music. Cocktail hour is a playlist over our speaker.</div>
+    <div class="note">“You Never Call Me By My Name” is a must-play for the couple.</div>
+    <div class="note">Couple would love the sax featured on “Gimme Gimme Gimme.”</div>
+    <div class="note">No bouquet or garter toss.</div>
+  </section>
 
-</div>
-
-<div class="footer">
-  <span>The Greenway Band</span>
-  <span>Ditta / Johnson &bull; 7.11.26</span>
-</div>
-
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').catch(() => {});
-}
-</script>
+  <div class="divider"></div>
+  <section class="section" style="margin-bottom:0">
+    <a href="band-sheet.pdf" download="Courtois Blick Band Sheet 9-5-26.pdf">Download this sheet as a PDF</a>
+  </section>
+</main>
+<footer class="footer"><span>The Greenway Band</span><span>Courtois / Blick 09.05.26</span></footer>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload();});}</script>
 </body>
 </html>

@@ -2,460 +2,449 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="theme-color" content="#F5F2ED">
-<title>Listening Room — Ditta / Johnson</title>
-<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0A0A09">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.json">
+<title>Listening Room — Courtois / Blick</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
-
-  :root {
-    --black: #0A0A09;
-    --charcoal: #111110;
-    --cream: #F5F2ED;
-    --muted: #B8B4AC;
-    --dim: #706D66;
-    --faint: #4A4740;
-    --paper-rule: rgba(74, 71, 64, 0.22);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-  html, body {
-    background: var(--cream);
-    color: var(--black);
-    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-  }
-
-  .header {
-    background: var(--black);
-    color: var(--cream);
-    min-height: 144px;
-    padding: 28px max(28px, calc((100vw - 1120px) / 2));
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 32px;
-    border-bottom: 1px solid #4A4740;
-  }
-  .header-left { display: grid; width: max-content; line-height: 0.92; text-transform: uppercase; }
-  .header-left .the {
-    font-size: 8px; font-weight: 600; letter-spacing: 0.42em; color: #F5F2ED;
-  }
-  .header-left .brand {
-    margin: 5px 0; font-size: 16px; font-weight: 600; color: #F5F2ED; letter-spacing: 0.18em;
-  }
-  .header-left .band { font-size: 8px; font-weight: 600; letter-spacing: 0.42em; color: #F5F2ED; }
-  .header-right { max-width: 560px; text-align: right; }
-  .header-right .label {
-    font-size: 9px; font-weight: 600; letter-spacing: 0.24em; color: #706D66; text-transform: uppercase;
-  }
-  .header-right .event {
-    margin-top: 8px;
-    font-family: 'Bodoni Moda', 'Times New Roman', serif;
-    font-size: clamp(24px, 3vw, 38px);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: #F5F2ED;
-  }
-  .header-right .date { font-size: 11px; color: #B8B4AC; margin-top: 8px; }
-
-  .body {
-    padding: clamp(48px, 7vw, 80px) 28px 64px;
-    max-width: 760px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    margin-bottom: 14px;
-    font-family: 'Bodoni Moda', 'Times New Roman', serif;
-    font-size: clamp(38px, 6vw, 58px);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: var(--black);
-  }
-  .section-note {
-    max-width: 520px; font-size: 13px; color: var(--dim); margin-bottom: 44px; line-height: 1.7;
-  }
-  .empty-state {
-    border-top: 1px solid var(--paper-rule);
-    border-bottom: 1px solid var(--paper-rule);
-    border-radius: 0;
-    padding: 28px 0;
-    color: var(--dim);
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-  #trackList { border-top: 1px solid var(--paper-rule); }
-
-  .track-card {
-    background: transparent;
-    border: 0;
-    border-bottom: 1px solid var(--paper-rule);
-    border-radius: 0;
-    padding: 30px 0;
-    margin: 0;
-  }
-
-  .track-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 28px;
-  }
-  .track-info { min-width: 0; flex: 1; }
-  .track-title {
-    font-family: 'Bodoni Moda', 'Times New Roman', serif;
-    font-size: clamp(26px, 4vw, 34px);
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--black);
-    margin-bottom: 4px;
-  }
-  .track-artist {
-    font-size: 13px;
-    color: var(--dim);
-    font-weight: 400;
-  }
-  .track-context {
-    margin-top: 14px;
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding: 0;
-    border-radius: 0;
-    background: transparent;
-    color: var(--black);
-  }
-
-  .transport {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: 0;
-  }
-
-  .play-btn {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    border-radius: 0;
-    border: 1px solid var(--black);
-    background: var(--black);
-    color: var(--cream);
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-  }
-  .play-btn:active { transform: scale(0.93); }
-  .play-btn.playing {
-    background: transparent;
-    color: var(--black);
-    border-color: var(--black);
-  }
-
-  .skip-btn {
-    flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    border-radius: 0;
-    border: 1px solid var(--paper-rule);
-    background: transparent;
-    color: var(--dim);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    gap: 2px;
-    transition: all 0.2s;
-  }
-  .skip-btn:active { transform: scale(0.9); }
-  .skip-btn:hover { color: var(--black); border-color: var(--black); }
-  .skip-btn .skip-icon { font-size: 13px; }
-
-  .audio-controls {
-    margin-top: 22px;
-    display: block;
-  }
-
-  .progress-bar {
-    width: 100%;
-    height: 20px;
-    padding: 9px 0;
-    background: linear-gradient(to bottom, transparent 9px, var(--paper-rule) 9px, var(--paper-rule) 11px, transparent 11px);
-    border-radius: 0;
-    cursor: pointer;
-    margin-bottom: 8px;
-    position: relative;
-  }
-  .progress-fill {
-    position: absolute;
-    top: 9px;
-    left: 0;
-    height: 2px;
-    background: var(--black);
-    border-radius: 0;
-    width: 0%;
-    transition: width 0.1s linear;
-  }
-  .time-display {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    color: var(--dim);
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .error-msg {
-    margin-top: 12px;
-    font-size: 12px;
-    color: var(--dim);
-    display: none;
-  }
-
-  .back-link {
-    display: inline-block;
-    min-height: 44px;
-    margin-top: 40px;
-    border-bottom: 1px solid var(--paper-rule);
-    font-size: 10px;
-    font-weight: 600;
-    line-height: 44px;
-    color: var(--dim);
-    text-decoration: none;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-  .back-link:hover { color: var(--black); border-bottom-color: var(--black); }
-
-  @media (max-width: 520px) {
-    .header { min-height: 132px; padding: 22px 20px; align-items: flex-start; }
-    .header-right { max-width: 220px; }
-    .header-right .event { margin-top: 6px; font-size: 22px; line-height: 1.05; }
-    .body { padding: 44px 20px 52px; }
-    .section-note { margin-bottom: 34px; }
-    .track-card { padding: 26px 0; }
-    .track-top { flex-direction: column; gap: 22px; }
-    .transport { width: 100%; justify-content: flex-start; }
-  }
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+:root{--black:#0A0A09;--cream:#F5F2ED;--muted:#B8B4AC;--dim:#706D66;--faint:#4A4740;--rule:rgba(74,71,64,.22)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%;background:var(--cream);color:var(--black)}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+.header{min-height:144px;padding:28px max(28px,calc((100vw - 1120px)/2));display:flex;justify-content:space-between;align-items:flex-end;gap:32px;background:var(--black);color:var(--cream);border-bottom:1px solid var(--faint)}
+.wordmark{display:grid;width:max-content;line-height:.92;text-transform:uppercase}
+.wordmark small{font-size:8px;font-weight:600;letter-spacing:.42em}
+.wordmark strong{margin:5px 0;font-size:16px;letter-spacing:.18em}
+.event{text-align:right}.event small{color:var(--dim);font-size:9px;font-weight:600;letter-spacing:.24em;text-transform:uppercase}
+.event h1{margin-top:8px;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;font-size:clamp(20px,2.6vw,30px);font-weight:600;line-height:1}
+.event p{margin-top:8px;color:var(--muted);font-size:11px}
+.body{width:min(100%,760px);margin:auto;padding:clamp(48px,7vw,80px) 28px 64px}
+.body h2{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;font-size:clamp(32px,5vw,48px);font-weight:600;line-height:1.02;letter-spacing:-.015em}
+#trackList:not(:empty){margin-top:36px;border-top:1px solid var(--rule)}
+.empty-state{margin-top:24px;color:var(--dim);font-size:13px}
+.track-card{padding:30px 0;border-bottom:1px solid var(--rule)}
+.track-top{display:flex;align-items:flex-start;justify-content:space-between;gap:28px}
+.track-info{min-width:0;flex:1}
+.track-title{margin-bottom:4px;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;font-size:clamp(20px,3vw,26px);font-weight:600;line-height:1.15;letter-spacing:-.01em}
+.track-artist{color:var(--dim);font-size:13px}
+.track-context{margin-top:14px;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.lyrics-btn{display:inline-block;margin-top:14px;padding:5px 9px;border:1px solid var(--rule);background:none;color:var(--dim);font-family:inherit;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;min-height:28px}
+.lyrics-btn:hover,.lyrics-btn.open{color:var(--black);border-color:var(--faint)}
+.lyrics-panel{display:none;margin-top:18px;padding-top:18px;border-top:1px solid var(--rule);color:var(--faint);font-size:14px;line-height:1.75;white-space:pre-line}
+.lyrics-panel.open{display:block}
+.lyrics-panel.timed{position:relative;max-height:min(46vh,420px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.lyric-line{display:block;padding:2px 0;cursor:pointer;transition:color 200ms ease-out}
+.lyric-line:hover{color:var(--dim)}
+.lyric-line.current{color:var(--black);font-weight:500}
+.track-details{display:flex;flex-wrap:wrap;margin-top:10px}
+.track-detail{display:inline-flex;align-items:center;color:var(--dim);font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.track-detail + .track-detail::before{width:1px;height:10px;margin:0 9px;background:var(--rule);content:''}
+.transport{display:flex;flex-shrink:0;align-items:center;gap:8px}
+.play-btn,.skip-btn{display:flex;flex-shrink:0;align-items:center;justify-content:center;border-radius:0;font-family:inherit;cursor:pointer;transition:background-color 200ms ease-out,color 200ms ease-out}
+.play-btn{width:48px;height:48px;color:var(--cream);background:var(--black);border:1px solid var(--black);font-size:16px}
+.play-btn.playing{color:var(--black);background:transparent;border-color:var(--black)}
+.skip-btn{width:44px;height:44px;color:var(--dim);background:transparent;border:1px solid var(--rule);font-size:9px;font-weight:600}
+.play-btn:active,.skip-btn:active{transform:scale(.96)}
+.play-btn:disabled,.skip-btn:disabled,.progress-bar:disabled{opacity:.4;cursor:default}
+.audio-controls{margin-top:22px}
+.progress-bar{position:relative;display:block;width:100%;height:20px;padding:9px 0;background:transparent;border:0;border-radius:0;cursor:pointer}
+.progress-track{display:block;width:100%;height:2px;overflow:hidden;background:var(--rule)}
+.progress-fill{width:0%;height:100%;background:var(--black)}
+.time-display{display:flex;justify-content:space-between;color:var(--dim);font-size:10px;font-variant-numeric:tabular-nums;font-weight:500}
+.track-status{display:none;margin-top:12px;color:var(--dim);font-size:12px;line-height:1.5}
+.upload-zone{margin-top:36px;border:1px dashed var(--faint);padding:28px 20px;text-align:center;cursor:pointer;transition:background-color 200ms ease-out}
+.upload-zone:hover,.upload-zone.dragover,.upload-zone:focus-visible{background:rgba(10,10,9,.04);outline:none}
+.plus{color:var(--dim);font-size:28px;font-weight:400;line-height:1}
+.upload-zone-text{margin-top:8px;color:var(--dim);font-size:9px;font-weight:600;letter-spacing:.24em;text-transform:uppercase}
+.back{display:inline-block;min-height:44px;margin-top:40px;border-bottom:1px solid var(--rule);color:var(--dim);font-size:10px;font-weight:600;line-height:44px;letter-spacing:.14em;text-decoration:none;text-transform:uppercase}
+.back:hover{color:var(--black);border-color:var(--black)}
+@media(max-width:520px){.header{min-height:132px;padding:22px 20px;align-items:flex-start}.event{max-width:230px}.event h1{font-size:22px}.body{padding:44px 20px 52px}#trackList:not(:empty){margin-top:30px}.upload-zone{margin-top:30px}.track-card{padding:26px 0}.track-top{flex-direction:column;gap:22px}.transport{width:100%;justify-content:flex-start}}
+@media(prefers-reduced-motion:reduce){.play-btn,.skip-btn,.lyric-line{transition:none}}
 </style>
 </head>
 <body>
-
-<div class="header">
-  <div class="header-left">
-    <div class="the">The</div>
-    <div class="brand">Greenway</div>
-    <div class="band">Band</div>
+<header class="header">
+  <div class="wordmark" aria-label="The Greenway Band"><small>The</small><strong>Greenway</strong><small>Band</small></div>
+  <div class="event"><small>Listening Room</small><h1>Courtois / Blick</h1><p>Saturday, September 5, 2026</p></div>
+</header>
+<main class="body">
+  <h2>Listening Room</h2>
+  <div class="empty-state" id="emptyState">No practice tracks have been added yet.</div>
+  <div id="trackList"></div>
+  <div class="upload-zone" id="uploadZone" role="button" aria-label="Add tracks" tabindex="0">
+    <div class="plus" aria-hidden="true">+</div>
+    <div class="upload-zone-text">Add Tracks</div>
   </div>
-  <div class="header-right">
-    <div class="label">Listening Room</div>
-    <div class="event">Ditta / Johnson</div>
-    <div class="date">Saturday, July 11, 2026</div>
-  </div>
-</div>
+  <input type="file" id="fileInput" accept="audio/*" multiple style="display:none;">
 
-<div class="body">
-
-  <div class="section-label">Songs to Learn</div>
-  <div class="section-note">Listen through each track before the gig. Closing Time is the final song, all guests, live.</div>
-
-  <div id="trackList">
-    <!-- Tracks are rendered by JS -->
-  </div>
-
-  <a class='back-link' href='index.html'>&larr; Back to Gig Sheet</a>
-</div>
-
+  <a class="back" href="/blick/09-05-26/">&larr; Back to Gig Sheet</a>
+</main>
 <script>
+// Registry of the LIVE songs (never a track that plays as a recording).
+// Nothing renders until a track's audio actually exists: deployed MP3s in
+// audio/ appear automatically; local drops match by filename and slot into
+// show order. To publish for the whole band: MP3 into audio/ (kebab-case
+// name below), bump sw.js CACHE, redeploy the whole greenway-gigs folder.
+// lyrics: a plain string, or timed lines [[seconds, 'line'], ...] exported from
+// the AbleSet .als with docs/gig-sheets/tools/als-lyrics.py (website repo).
+// Timed lines highlight as the track plays; tapping one jumps the track there.
 const TRACKS = [
   {
-    title: '"Closing Time"',
-    artist: 'Semisonic',
-    context: 'Final Song, All Guests — LIVE',
-    file: 'audio/closing-time-practice-track.mp3'
+    title: 'Can\'t Take My Eyes Off You',
+    artist: 'Frankie Valli',
+    context: 'Grand Entrance',
+    file: 'audio/cant-take-my-eyes-off-you.mp3'
+  },
+  {
+    title: 'The Way I Love You',
+    artist: 'Michal Leah',
+    context: 'First Dance',
+    file: 'audio/the-way-i-love-you.mp3',
+    lyrics: '[Chorus]\n\nWe don\'t fear the silence, you read like a book\nI last a decade on one of those looks\nI would give the ocean up to swim in your blues\nI don\'t love anyone the way I love you\nThe way I love you\nThe way I\n\nIf I know what love is it\'s because of you\nYou light my fire yeah that’s the whole truth\nI know it\'s easy to get lost in all of the issues'
+  },
+  {
+    title: 'Isn\'t She Lovely',
+    artist: 'Stevie Wonder',
+    context: 'Father / Daughter',
+    file: 'audio/isnt-she-lovely.mp3'
+  },
+  {
+    title: 'Forever',
+    artist: 'Chris Brown',
+    context: 'Final Guest Song',
+    file: 'audio/forever.mp3'
+  },
+  {
+    title: 'You Never Even Called Me by My Name',
+    artist: 'David Allan Coe',
+    context: 'Songs to Learn',
+    file: 'audio/you-never-even-called-me-by-my-name.mp3'
+  },
+  {
+    title: '9 to 5',
+    artist: 'Dolly Parton',
+    context: 'Songs to Learn',
+    file: 'audio/9-to-5.mp3',
+    lyrics: '[Verse 1]\n\nTumble out of bed and I stumble to the kitchen\nPour myself a cup of ambition\nAnd yawn and stretch and try to come to life\n\nJump in the shower and the blood starts pumpin\'\nOut on the street, the traffic starts jumpin\'\nWith folks like me on the job from 9 to 5\n\n[Chorus]\n\nWorkin\' 9 to 5, what a way to make a livin\'\nBarely gettin\' by, it\'s all takin\' and no givin\'\nThey just use your mind and they never give you credit\nIt\'s enough to drive you crazy if you let it\n\n9 to 5, for service and devotion\nYou would think that I would deserve a fair promotion\nWant to move ahead, but the boss won\'t seem to let me\nI swear sometimes that man is out to get me, mm\n\n[Verse 2]\nThey let you dream just to watch \'em shatter\nYou\'re just a step on the bossman\'s ladder\nBut you\'ve got dreams he\'ll never take away\n\nIn the same boat with a lot of your friends\nWaitin\' for the day your ship\'ll come in\nAnd the tide\'s gonna turn and it\'s all gonna roll your way\n\n[Chorus]\n\nWorkin\' 9 to 5, what a way to make a livin\'\nBarely gettin\' by, it\'s all takin\' and no givin\'\nThey just use your mind and you never get the credit\nIt\'s enough to drive you crazy if you let it\n\n9 to 5, yeah, they got you where they want you\nThere\'s a better life and you think about it, don\'t you?\nIt\'s a rich man\'s game no matter what they call it\nAnd you spend your life puttin\' money in his wallet\n\n9 to 5, oh, what a way to make a livin\'\nBarely gettin\' by, it\'s all takin\' and no givin\'\nThey just use your mind and they never give you credit\n\nIt\'s enough to drive you crazy if you let it\n9 to 5, yeah, they got you where they want you\nThere\'s a better life and you think about it, don\'t you?\n\nIt\'s a rich man\'s game no matter what they call it\nAnd you spend your life puttin\' money in his wallet\n9 to 5...'
+  },
+  {
+    title: 'Dance Her Home',
+    artist: 'Cody Johnson',
+    context: 'Songs to Learn',
+    file: 'audio/dance-her-home.mp3',
+    lyrics: '[Verse 1]\n\nHere she comes a-walkin\' in, cotton dress a-swishin\'\nThe smoke is thick and the lights are dim and she sure got me wishin\'\n\nFor a little bit of time out on that ol\' dance floor\nIf she gives me half a chance at romance, I\'m gonna dance her home\n\n[Verse 2]\n\nWell, hey, bartender, see that girl? Ask her what she\'s drinkin\'\nTell her if she looks this way I\'ll be the one a-winkin\'\n\'Cause I saw her light up when the DJ played a little George Jones\n\nIf she gives me half a chance at romance, I\'m gonna dance her home\n\n[Chorus]\n\n\'Cause if we got to two-steppin\', we could come up missin\'\nAnd find a corner booth of our own\nJust a-huggin\' and a-kissin\' like two lovers reminiscin\'\nMan, this feeling\'s comin\' on strong\nIf she gives me half a chance at romance, I\'m gonna dance her home (Get to dancin\', boy)\n\n[Bridge]\n\nWhat the hell is wrong with me? I feel like I\'m sinkin\'\nHow hard can it really be to tell her what I\'m thinkin\'?\n\n[Chorus]\n\nThat if we got to two-steppin\', we could come up missin\'\nAnd find a corner booth of our own\nJust a-huggin\' and a-kissin\' like two lovers reminiscin\'\nMan, this feeling\'s comin\' on strong\nIf she gives me half a chance at romance, I\'m gonna dance her home'
+  },
+  {
+    title: 'Me and My Kind',
+    artist: 'Cody Johnson',
+    context: 'Songs to Learn',
+    file: 'audio/me-and-my-kind.mp3',
+    lyrics: '[Verse 1]\n\nYeah, that\'s my old girlfriend\nI saw her when she walked in\nHer hair\'s a little longer but she\'s still lookin\' stronger than sin\nNo, I don\'t care if you buy her a drink\nBut she\'s not the kind of girl you\'d think\nOh \'cause back when we were lovin\'\nShe thought cowboys were something\nNow they ain\'t\n\n[Chorus]\n\n\'Cause she\'s over buckles\nShe\'s over spurs\nTo her, you\'re just a heartache in a pearl snap shirt\nBeen lassoed and let go for the last time\nNo, she ain\'t just over me\nShe\'s over me and my kind\n\n[Verse 2]\n\nI guess I ruined it for the rest of us\nWhen I left her standing in my dust\nOh and lately she\'s been hating rodeos and Copenhagen\nAnd trucks, ha\n\n[Chorus]\n\nYeah, she\'s over buckles\nShe\'s over spurs\nTo her, you\'re just a heartache in a pearl snap shirt\nBeen lassoed and let go for the last time\nNo, she ain\'t just over me\nShe\'s over me and my kind'
   }
 ];
 
-let currentAudio = null;
-let currentCard = null;
+const audios = [];
+let currentIndex = null;
 
-function formatTime(s) {
-  if (isNaN(s)) return '0:00';
-  const m = Math.floor(s / 60);
-  const sec = Math.floor(s % 60);
-  return m + ':' + (sec < 10 ? '0' : '') + sec;
+function formatTime(seconds) {
+  if (!Number.isFinite(seconds)) return '0:00';
+  const minutes = Math.floor(seconds / 60);
+  const remainder = Math.floor(seconds % 60);
+  return minutes + ':' + (remainder < 10 ? '0' : '') + remainder;
 }
 
-function renderTracks() {
-  const list = document.getElementById('trackList');
+function updateProgress(index) {
+  const audio = audios[index];
+  const card = document.getElementById('track-' + index);
+  if (!audio || !card) return;
+  const percent = Number.isFinite(audio.duration) && audio.duration > 0
+    ? (audio.currentTime / audio.duration) * 100
+    : 0;
+  card.querySelector('.progress-fill').style.width = percent + '%';
+  card.querySelector('.time-current').textContent = formatTime(audio.currentTime);
+  card.querySelector('.progress-bar').setAttribute('aria-valuenow', String(Math.floor(audio.currentTime)));
+  syncLyrics(index, audio.currentTime);
+}
 
-  if (TRACKS.length === 0) {
-    list.innerHTML = '<div class="empty-state">No practice tracks have been added yet.</div>';
-    return;
-  }
-
-  TRACKS.forEach((track, i) => {
-    const card = document.createElement('div');
-    card.className = 'track-card';
-    card.id = 'track-' + i;
-    card.innerHTML = `
-      <div class="track-top">
-        <div class="track-info">
-          <div class="track-title">${track.title}</div>
-          <div class="track-artist">${track.artist}</div>
-          <div class="track-context">${track.context}</div>
-        </div>
-        <div class="transport">
-          <button class="skip-btn" data-index="${i}" data-skip="-10"><span class="skip-icon">&#8634;</span>10s</button>
-          <button class="play-btn" data-index="${i}">&#9654;</button>
-          <button class="skip-btn" data-index="${i}" data-skip="10"><span class="skip-icon">&#8635;</span>10s</button>
-        </div>
-      </div>
-      <div class="audio-controls">
-        <div class="progress-bar" data-index="${i}">
-          <div class="progress-fill"></div>
-        </div>
-        <div class="time-display">
-          <span class="time-current">0:00</span>
-          <span class="time-total">0:00</span>
-        </div>
-      </div>
-      <div class="error-msg" id="error-${i}">File not found. Upload the MP3 or add it to the audio/ folder.</div>
-    `;
-    list.appendChild(card);
+function pauseOtherTracks(index) {
+  audios.forEach((audio, audioIndex) => {
+    if (audio && audioIndex !== index && !audio.paused) audio.pause();
   });
 }
 
 function togglePlay(index) {
+  const audio = audios[index];
+  if (!audio || !audio.src) return;
+  if (audio.paused) {
+    pauseOtherTracks(index);
+    currentIndex = index;
+    audio.play().catch(() => {});
+  } else {
+    audio.pause();
+  }
+}
+
+function skip(index, seconds) {
+  const audio = audios[index];
+  if (!audio || !audio.src) return;
+  const limit = Number.isFinite(audio.duration) ? audio.duration : Infinity;
+  audio.currentTime = Math.min(Math.max(audio.currentTime + seconds, 0), limit);
+  updateProgress(index);
+}
+
+function seek(index, event) {
+  const audio = audios[index];
+  if (!audio || !audio.src || !Number.isFinite(audio.duration)) return;
+  const bar = event.target.closest('.progress-bar');
+  if (!bar) return;
+  const rect = bar.getBoundingClientRect();
+  const percent = Math.min(Math.max((event.clientX - rect.left) / rect.width, 0), 1);
+  audio.currentTime = percent * audio.duration;
+  updateProgress(index);
+}
+
+// Renders a card for TRACKS[index], inserted in registry order among the
+// cards already on the page. Only called once audio for it actually exists.
+function escHtml(s) {
+  return String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+}
+
+// Timed lyrics: [[seconds, 'line'], ...]. The latest line whose time has passed
+// is highlighted as the track plays; tapping a line jumps the track to it.
+function renderLyrics(lyrics) {
+  if (!Array.isArray(lyrics)) return escHtml(lyrics);
+  return lyrics.map((entry, i) =>
+    '<span class="lyric-line" data-t="' + entry[0] + '" data-line="' + i + '">' + escHtml(entry[1]) + '</span>'
+  ).join('');
+}
+
+function scrollLyricsToCurrent(panel, smooth) {
+  const line = panel.querySelector('.lyric-line.current');
+  if (!line || !panel.classList.contains('open')) return;
+  const top = Math.max(0, line.offsetTop - panel.clientHeight * 0.35);
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  panel.scrollTo({ top: top, behavior: smooth && !reduce ? 'smooth' : 'auto' });
+}
+
+function syncLyrics(index, time) {
   const track = TRACKS[index];
-  const card = document.getElementById('track-' + index);
-  const btn = card.querySelector('.play-btn');
-  const errorEl = document.getElementById('error-' + index);
+  if (!track || !Array.isArray(track.lyrics)) return;
+  const panel = document.getElementById('lyrics-' + index);
+  if (!panel) return;
+  let current = -1;
+  for (let i = 0; i < track.lyrics.length; i++) {
+    if (track.lyrics[i][0] <= time + 0.15) current = i; else break;
+  }
+  const previous = panel.querySelector('.lyric-line.current');
+  if (previous && Number(previous.dataset.line) === current) return;
+  if (previous) previous.classList.remove('current');
+  if (current < 0) return;
+  const line = panel.querySelector('.lyric-line[data-line="' + current + '"]');
+  if (!line) return;
+  line.classList.add('current');
+  scrollLyricsToCurrent(panel, true);
+}
 
-  // If clicking the currently playing track, pause/resume
-  if (currentAudio && currentCard === card) {
-    if (currentAudio.paused) {
-      currentAudio.play();
-      card.className = 'track-card playing';
-      btn.innerHTML = '&#9646;&#9646;';
-      btn.classList.add('playing');
-    } else {
-      currentAudio.pause();
-      card.className = 'track-card paused';
-      btn.innerHTML = '&#9654;';
-      btn.classList.remove('playing');
-    }
-    return;
+function ensureCard(index) {
+  let card = document.getElementById('track-' + index);
+  if (card) return card;
+  document.getElementById('emptyState').style.display = 'none';
+  const track = TRACKS[index];
+  card = document.createElement('article');
+  card.className = 'track-card';
+  card.id = 'track-' + index;
+  card.dataset.order = index;
+  const details = [];
+  if (track.context) details.push('<span class="track-detail">Live</span>');
+  if (track.key) details.push('<span class="track-detail">' + track.key + '</span>');
+  if (track.bpm) details.push('<span class="track-detail">' + track.bpm + '</span>');
+  card.innerHTML =
+    '<div class="track-top">' +
+      '<div class="track-info">' +
+        '<div class="track-title">' + track.title + '</div>' +
+        (track.artist ? '<div class="track-artist">' + track.artist + '</div>' : '') +
+        (track.context ? '<div class="track-context">' + track.context + '</div>' : '') +
+        (details.length ? '<div class="track-details">' + details.join('') + '</div>' : '') +
+        (track.lyrics ? '<button class="lyrics-btn" type="button" data-index="' + index + '" aria-expanded="false">Lyrics</button>' : '') +
+      '</div>' +
+      '<div class="transport">' +
+        '<button class="skip-btn" type="button" data-index="' + index + '" data-skip="-10" aria-label="Rewind ' + track.title + ' 10 seconds" disabled>&#8634; 10</button>' +
+        '<button class="play-btn" type="button" data-index="' + index + '" aria-label="Play ' + track.title + '" disabled>&#9654;</button>' +
+        '<button class="skip-btn" type="button" data-index="' + index + '" data-skip="10" aria-label="Forward ' + track.title + ' 10 seconds" disabled>10 &#8635;</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="audio-controls">' +
+      '<button class="progress-bar" type="button" data-index="' + index + '" role="slider" aria-label="Seek through ' + track.title + '" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" disabled>' +
+        '<span class="progress-track"><span class="progress-fill"></span></span>' +
+      '</button>' +
+      '<div class="time-display"><span class="time-current">0:00</span><span class="time-total">0:00</span></div>' +
+    '</div>' +
+    (track.lyrics ? '<div class="lyrics-panel' + (Array.isArray(track.lyrics) ? ' timed' : '') + '" id="lyrics-' + index + '">' + renderLyrics(track.lyrics) + '</div>' : '') +
+    '<div class="track-status"></div>';
+
+  if (track.lyrics) {
+    card.querySelector('.lyrics-btn').addEventListener('click', () => {
+      const btn = card.querySelector('.lyrics-btn');
+      const panel = card.querySelector('.lyrics-panel');
+      const open = panel.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      if (open) scrollLyricsToCurrent(panel, false);
+    });
   }
 
-  // Stop current
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-    if (currentCard) {
-      currentCard.className = 'track-card';
-      currentCard.querySelector('.play-btn').innerHTML = '&#9654;';
-      currentCard.querySelector('.play-btn').classList.remove('playing');
-    }
-  }
+  const list = document.getElementById('trackList');
+  const siblings = [...list.children];
+  const next = siblings.find(el => Number(el.dataset.order) > index);
+  list.insertBefore(card, next || null);
 
-  // Use blob URL if available (uploaded file), otherwise use file path
-  const src = track.blobUrl || track.file;
-  const audio = new Audio(src);
-
-  audio.addEventListener('error', () => {
-    errorEl.style.display = 'block';
-    card.className = 'track-card';
-    btn.innerHTML = '&#9654;';
-    btn.classList.remove('playing');
-  });
+  const audio = new Audio();
+  audio.preload = 'metadata';
+  audios[index] = audio;
 
   audio.addEventListener('loadedmetadata', () => {
-    errorEl.style.display = 'none';
     card.querySelector('.time-total').textContent = formatTime(audio.duration);
+    card.querySelector('.progress-bar').setAttribute('aria-valuemax', String(Math.floor(audio.duration)));
+    card.querySelector('.track-status').style.display = 'none';
+    card.querySelectorAll('button').forEach(button => { button.disabled = false; });
   });
-
-  audio.addEventListener('timeupdate', () => {
-    const pct = (audio.currentTime / audio.duration) * 100;
-    card.querySelector('.progress-fill').style.width = pct + '%';
-    card.querySelector('.time-current').textContent = formatTime(audio.currentTime);
+  audio.addEventListener('timeupdate', () => updateProgress(index));
+  audio.addEventListener('play', () => {
+    card.classList.add('playing');
+    const button = card.querySelector('.play-btn');
+    button.classList.add('playing');
+    button.innerHTML = '&#9646;&#9646;';
+    button.setAttribute('aria-label', 'Pause ' + track.title);
   });
-
+  audio.addEventListener('pause', () => {
+    card.classList.remove('playing');
+    const button = card.querySelector('.play-btn');
+    button.classList.remove('playing');
+    button.innerHTML = '&#9654;';
+    button.setAttribute('aria-label', 'Play ' + track.title);
+  });
   audio.addEventListener('ended', () => {
-    card.className = 'track-card';
-    btn.innerHTML = '&#9654;';
-    btn.classList.remove('playing');
-    currentAudio = null;
-    currentCard = null;
+    audio.currentTime = 0;
+    updateProgress(index);
+    if (currentIndex === index) currentIndex = null;
   });
+  audio.addEventListener('error', () => {
+    const status = card.querySelector('.track-status');
+    status.textContent = 'Track unavailable.';
+    status.style.display = 'block';
+  });
+  return card;
+}
 
-  audio.play().then(() => {
-    card.className = 'track-card playing';
-    btn.innerHTML = '&#9646;&#9646;';
-    btn.classList.add('playing');
-    currentAudio = audio;
-    currentCard = card;
-  }).catch(() => {
-    errorEl.style.display = 'block';
+function attachSource(index, src) {
+  ensureCard(index);
+  const audio = audios[index];
+  audio.src = src;
+  audio.load();
+}
+
+function compact(text) {
+  return text.toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+function loadDeployedTracks() {
+  TRACKS.forEach((track, index) => {
+    if (!track.file) return;
+    fetch(track.file)
+      .then(response => {
+        if (!response.ok) throw new Error('missing');
+        return response.blob();
+      })
+      .then(blob => attachSource(index, URL.createObjectURL(blob)))
+      .catch(() => {});
   });
 }
 
-// Event delegation for play buttons and progress bars
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.play-btn');
-  if (btn) {
-    togglePlay(parseInt(btn.dataset.index));
-    return;
-  }
+function handleFiles(files) {
+  Array.from(files).forEach(file => {
+    if (!file.type.startsWith('audio/') && !/\.mp3$/i.test(file.name)) return;
+    const blobUrl = URL.createObjectURL(file);
+    const name = file.name.replace(/\.[^.]+$/, '');
+    const inputSlug = compact(name);
 
-  const skipBtn = e.target.closest('.skip-btn');
-  if (skipBtn) {
-    const index = parseInt(skipBtn.dataset.index);
-    const card = document.getElementById('track-' + index);
-    if (currentAudio && currentCard === card) {
-      const delta = parseInt(skipBtn.dataset.skip);
-      currentAudio.currentTime = Math.min(
-        Math.max(currentAudio.currentTime + delta, 0),
-        currentAudio.duration || Infinity
-      );
-    } else {
-      togglePlay(index);
+    let matchedIndex = -1;
+    TRACKS.forEach((track, i) => {
+      if (matchedIndex !== -1) return;
+      const trackSlug = compact(track.file ? track.file.split('/').pop().replace('.mp3', '') : track.title);
+      const titleSlug = compact(track.title);
+      if (inputSlug.includes(trackSlug) || trackSlug.includes(inputSlug) ||
+          inputSlug.includes(titleSlug) || titleSlug.includes(inputSlug)) {
+        matchedIndex = i;
+      }
+    });
+
+    if (matchedIndex === -1) {
+      matchedIndex = TRACKS.length;
+      TRACKS.push({ title: name, artist: '', context: '', file: '' });
+    }
+    attachSource(matchedIndex, blobUrl);
+  });
+}
+
+document.addEventListener('click', event => {
+  const lyricLine = event.target.closest('.lyric-line');
+  if (lyricLine) {
+    const index = Number(lyricLine.closest('.lyrics-panel').id.replace('lyrics-', ''));
+    const audio = audios[index];
+    if (audio && audio.src && audio.readyState > 0) {
+      audio.currentTime = Number(lyricLine.dataset.t);
+      updateProgress(index);
     }
     return;
   }
-
-  const bar = e.target.closest('.progress-bar');
-  if (bar && currentAudio && currentCard === document.getElementById('track-' + bar.dataset.index)) {
-    const rect = bar.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
-    currentAudio.currentTime = pct * currentAudio.duration;
-  }
+  const playButton = event.target.closest('.play-btn');
+  if (playButton) { togglePlay(Number(playButton.dataset.index)); return; }
+  const skipButton = event.target.closest('.skip-btn');
+  if (skipButton) { skip(Number(skipButton.dataset.index), Number(skipButton.dataset.skip)); return; }
+  const progressBar = event.target.closest('.progress-bar');
+  if (progressBar) seek(Number(progressBar.dataset.index), event);
 });
 
-renderTracks();
+document.addEventListener('keydown', event => {
+  const progressBar = event.target.closest('.progress-bar');
+  if (!progressBar) return;
+  const index = Number(progressBar.dataset.index);
+  if (event.key === 'ArrowLeft') { event.preventDefault(); skip(index, -10); }
+  if (event.key === 'ArrowRight') { event.preventDefault(); skip(index, 10); }
+});
 
+const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+uploadZone.addEventListener('click', () => fileInput.click());
+uploadZone.addEventListener('keydown', event => {
+  if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); fileInput.click(); }
+});
+fileInput.addEventListener('change', event => { handleFiles(event.target.files); fileInput.value = ''; });
+['dragover', 'dragenter'].forEach(type => document.addEventListener(type, event => {
+  event.preventDefault();
+  uploadZone.classList.add('dragover');
+}));
+['dragleave', 'dragend'].forEach(type => document.addEventListener(type, event => {
+  if (!event.relatedTarget) uploadZone.classList.remove('dragover');
+}));
+document.addEventListener('drop', event => {
+  event.preventDefault();
+  uploadZone.classList.remove('dragover');
+  if (event.dataTransfer && event.dataTransfer.files.length) handleFiles(event.dataTransfer.files);
+});
+
+loadDeployedTracks();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (reloaded) return;
+    reloaded = true;
+    location.reload();
+  });
 }
 </script>
 </body>

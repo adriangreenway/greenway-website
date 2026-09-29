@@ -1,8 +1,9 @@
 {
-  "name": "Ditta/Johnson — Greenway",
-  "short_name": "Gig Day",
-  "start_url": "/",
+  "name": "Courtois / Blick — Greenway Gig Sheet",
+  "short_name": "Gig Sheet",
+  "start_url": "/blick/09-05-26/",
+  "scope": "/blick/09-05-26/",
   "display": "standalone",
-  "background_color": "#0A0A09",
+  "background_color": "#F5F2ED",
   "theme_color": "#0A0A09"
 }

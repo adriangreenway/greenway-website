@@ -2,644 +2,143 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Adrian Only — Full Gig Sheet — Ditta / Johnson</title>
-<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0A0A09">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.json">
+<title>Adrian Only — Full Gig Sheet — Courtois / Blick</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html, body {
-    background: #F5F2ED;
-    color: #0A0A09;
-    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.5;
-  }
-
-  /* ─── HEADER ─── */
-  .header {
-    background: #0A0A09;
-    padding: 20px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-  .header-left .the {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    color: #C4A35A;
-    text-transform: uppercase;
-  }
-  .header-left .brand {
-    font-size: 22px;
-    font-weight: 800;
-    color: #F5F2ED;
-    letter-spacing: 2px;
-  }
-  .header-right {
-    text-align: right;
-  }
-  .header-right .label {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: #C4A35A;
-    text-transform: uppercase;
-  }
-  .header-right .event {
-    font-size: 15px;
-    font-weight: 700;
-    color: #F5F2ED;
-  }
-  .header-right .date {
-    font-size: 11px;
-    color: #706D66;
-    margin-top: 2px;
-  }
-
-  /* ─── BODY ─── */
-  .body {
-    padding: 24px 28px 40px;
-  }
-
-  /* ─── SECTIONS ─── */
-  .section {
-    margin-bottom: 24px;
-  }
-  .section-label {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: #C4A35A;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .section-value {
-    font-size: 17px;
-    font-weight: 700;
-    color: #0A0A09;
-  }
-  .section-sub {
-    font-size: 13px;
-    color: #706D66;
-    margin-top: 2px;
-  }
-
-  a {
-    color: #1A5276;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(26,82,118,0.3);
-  }
-  a:active { opacity: 0.7; }
-
-  /* ─── TWO COLUMN ─── */
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  @media (max-width: 600px) {
-    .two-col { grid-template-columns: 1fr; gap: 12px; }
-  }
-
-  /* ─── DIVIDER ─── */
-  .divider {
-    height: 1px;
-    background: #D4D0C8;
-    margin: 24px 0;
-  }
-
-  /* ─── TIMELINE ─── */
-  .timeline-row {
-    display: flex;
-    align-items: baseline;
-    padding: 7px 0;
-    border-bottom: 1px solid rgba(212,208,200,0.5);
-  }
-  .timeline-row:last-child { border-bottom: none; }
-  .timeline-time {
-    width: 85px;
-    min-width: 85px;
-    font-size: 14px;
-    font-weight: 700;
-    color: #0A0A09;
-  }
-  .timeline-event {
-    font-size: 14px;
-    font-weight: 500;
-    color: #0A0A09;
-    flex: 1;
-  }
-  .timeline-tag {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-left: 10px;
-    white-space: nowrap;
-  }
-  .tag-live {
-    background: rgba(196,163,90,0.15);
-    color: #C4A35A;
-  }
-  .tag-track {
-    background: rgba(112,109,102,0.15);
-    color: #706D66;
-  }
-  .tag-break {
-    background: rgba(112,109,102,0.1);
-    color: #706D66;
-    font-style: italic;
-  }
-
-  /* ─── SPECIALS TABLE ─── */
-  .special-row {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr auto;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(212,208,200,0.5);
-    gap: 12px;
-  }
-  .special-row:last-child { border-bottom: none; }
-  .special-moment {
-    font-size: 14px;
-    font-weight: 700;
-    color: #0A0A09;
-  }
-  .special-song {
-    font-size: 13px;
-    color: #706D66;
-  }
-
-  /* ─── LIST COLUMNS ─── */
-  .song-list {
-    columns: 2;
-    column-gap: 24px;
-    font-size: 13px;
-    color: #706D66;
-    list-style-position: inside;
-  }
-  @media (max-width: 600px) {
-    .song-list { columns: 1; }
-  }
-  .song-list li { padding: 2px 0; break-inside: avoid; }
-
-  /* ─── CONTACTS ─── */
-  .contact-card {
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(212,208,200,0.4);
-  }
-  .contact-card:last-child { border-bottom: none; }
-  .contact-role {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: #C4A35A;
-    text-transform: uppercase;
-    margin-bottom: 3px;
-  }
-  .contact-name {
-    font-size: 14px;
-    font-weight: 700;
-  }
-  .contact-info {
-    font-size: 12px;
-    color: #706D66;
-    margin-top: 2px;
-  }
-  .contact-info a { font-size: 12px; }
-
-  /* ─── NOTES ─── */
-  .note-box {
-    background: rgba(196,163,90,0.06);
-    border: 1px solid rgba(196,163,90,0.15);
-    border-radius: 8px;
-    padding: 12px 16px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #706D66;
-    line-height: 1.7;
-  }
-  .note-box strong { color: #0A0A09; }
-
-  /* ─── FOOTER ─── */
-  .footer {
-    border-top: 1px solid #C4A35A;
-    padding: 12px 28px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 10px;
-    color: #706D66;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+:root{--black:#0A0A09;--charcoal:#111110;--cream:#F5F2ED;--muted:#B8B4AC;--dim:#706D66;--faint:#4A4740;--warning:#8D2E2A;--rule:rgba(74,71,64,.22)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--cream);color:var(--black)}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+.header{min-height:144px;padding:28px max(28px,calc((100vw - 1120px)/2));display:flex;justify-content:space-between;align-items:flex-end;gap:32px;background:var(--black);border-bottom:1px solid var(--faint);color:var(--cream)}
+.wordmark{display:grid;width:max-content;line-height:.92;text-transform:uppercase}.wordmark small{font-size:8px;font-weight:600;letter-spacing:.42em}.wordmark strong{margin:5px 0;font-size:16px;letter-spacing:.18em}
+.event{max-width:680px;text-align:right}.event small,.section-label{color:var(--dim);font-size:9px;font-weight:600;letter-spacing:.24em;text-transform:uppercase}
+.event h1{margin-top:8px;font-family:'Bodoni Moda','Times New Roman',serif;font-size:clamp(24px,3vw,38px);font-weight:400;line-height:1;letter-spacing:-.02em}.event p{margin-top:8px;color:var(--muted);font-size:11px}
+.body{width:min(100%,1120px);margin:auto;padding:48px 28px 64px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,7vw,96px)}.section{margin-bottom:30px}.section-label{margin-bottom:10px}.value{font-size:16px;font-weight:600}.sub{margin-top:2px;color:var(--dim);font-size:13px}
+a{color:inherit;border-bottom:1px solid var(--faint);text-decoration:none}.divider{height:1px;margin:38px 0;background:var(--rule)}
+.row{display:flex;min-height:42px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--rule)}.row:last-child{border-bottom:0}.time{width:108px;min-width:108px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}.detail{flex:1;font-size:14px}.tag{margin-left:10px;padding:3px 7px;border:1px solid var(--rule);font-size:9px;font-weight:600;letter-spacing:.12em;white-space:nowrap}.tag-live{color:var(--black);border-color:var(--faint)}.tag-track,.tag-break{color:var(--dim)}
+.special{display:grid;grid-template-columns:1fr 1.5fr auto;min-height:48px;align-items:center;gap:16px;padding:10px 0;border-bottom:1px solid var(--rule)}.special:last-child{border-bottom:0}.moment{font-size:14px;font-weight:600}.song{color:var(--dim);font-size:13px}
+.vocal{display:inline-block;margin-left:8px;padding:2px 6px;border:1px solid var(--rule);color:var(--faint);font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.list li .vocal{margin-left:6px}
+.list{columns:2;column-gap:48px;list-style:none;color:var(--dim);font-size:13px}.list li{break-inside:avoid;padding:5px 0;border-bottom:1px solid var(--rule)}
+.contact{padding:10px 0;border-bottom:1px solid var(--rule)}.contact:last-child{border-bottom:0}.role{color:var(--dim);font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}.name{margin-top:2px;font-size:14px;font-weight:600}.info{margin-top:2px;color:var(--dim);font-size:12px}
+.note{padding:12px 0;border-bottom:1px solid var(--rule);font-size:14px}.note:last-child{border-bottom:0}.warning{padding-left:14px;border-left:3px solid var(--warning)}.warning strong{display:block;color:var(--warning);font-size:9px;letter-spacing:.18em;text-transform:uppercase}
+.footer{display:flex;justify-content:space-between;padding:12px max(28px,calc((100vw - 1120px)/2));border-top:1px solid var(--rule);color:var(--dim);font-size:10px}
+@media(max-width:600px){.header{min-height:132px;padding:22px 20px;align-items:flex-start;gap:12px}.event{max-width:210px;min-width:0}.event small{display:block;font-size:7px;letter-spacing:.12em;overflow-wrap:anywhere}.event h1{font-size:20px}.body{padding:36px 20px 52px}.two-col{grid-template-columns:1fr;gap:4px}.divider{margin:30px 0}.row{align-items:flex-start}.time{width:94px;min-width:94px;font-size:12px}.detail{font-size:13px}.tag{margin-left:8px;padding:3px 5px;font-size:8px}.special{grid-template-columns:1fr auto;gap:4px 12px}.song{grid-column:1;grid-row:2}.special .tag{grid-column:2;grid-row:1 / span 2}.list{columns:1}}
 </style>
 </head>
 <body>
-
-<!-- ═══ HEADER ═══ -->
-<div class="header">
-  <div class="header-left">
-    <div class="the">The</div>
-    <div class="brand">GREENWAY BAND</div>
-  </div>
-  <div class="header-right">
-    <div class="label">Adrian Only &bull; Full Gig Sheet</div>
-    <div class="event">Ditta / Johnson Wedding</div>
-    <div class="date">Saturday, July 11, 2026</div>
-  </div>
-</div>
-
-<div class="body">
-
-  <!-- ═══ CORE INFO ═══ -->
+<header class="header">
+  <div class="wordmark" aria-label="The Greenway Band"><small>The</small><strong>Greenway</strong><small>Band</small></div>
+  <div class="event"><small>Adrian Only · Full Gig Sheet</small><h1>Courtois / Blick Wedding</h1><p>Saturday, September 5, 2026</p></div>
+</header>
+<main class="body">
   <div class="two-col">
     <div>
-      <div class="section">
-        <div class="section-label">Location</div>
-        <div class="section-value">The Arlo</div>
-        <div class="section-sub">
-          <a href="https://www.google.com/maps/search/?api=1&query=10700+Signal+Hill+Rd+Austin+TX+78737">10700 Signal Hill Rd, Austin, TX 78737</a>
-        </div>
-        <div class="section-sub">Between Austin &amp; Dripping Springs. Ceremony in Storie Hall, cocktail hour on the back lawn.</div>
-      </div>
-      <div class="section">
-        <div class="section-label">Guests</div>
-        <div class="section-value">~226</div>
-        <div class="section-sub">Black tie preferred (guests)</div>
-      </div>
-      <div class="section">
-        <div class="section-label">Attire</div>
-        <div class="section-value">Guys: black suit, black shoes, black tie, white shirt</div>
-        <div class="section-sub">Girls: black dress or jumpsuit</div>
-      </div>
+      <section class="section"><div class="section-label">Location</div><div class="value">The Houstonian Hotel</div><div class="sub">Grand Ballroom · cocktail hour in the lobby</div><div class="sub"><a href="https://www.google.com/maps/search/?api=1&amp;query=111+N+Post+Oak+Ln+Houston+TX+77024">111 N Post Oak Ln, Houston, TX 77024</a></div></section>
+      <section class="section"><div class="section-label">Performance Team</div><div class="value">10-piece band + sound engineer</div></section>
+      <section class="section"><div class="section-label">Attire</div><div class="value">Guys: black suit, black shoes, black tie, white shirt</div><div class="value">Girls: black dress or jumpsuit</div></section>
+      <section class="section"><div class="section-label">Guests</div><div class="value">164</div></section>
     </div>
     <div>
-      <div class="section">
-        <div class="section-label">Band Arrival / Load In</div>
-        <div class="section-value">12:00 PM</div>
-        <div class="section-sub">Out of town — traveling from Houston. Leave margin for traffic.</div>
-      </div>
-      <div class="section">
-        <div class="section-label">Soundcheck</div>
-        <div class="section-value">3:30 &ndash; 4:30 PM</div>
-      </div>
-      <div class="section">
-        <div class="section-label">Meals</div>
-        <div class="section-value">6:00 PM</div>
-        <div class="section-sub">Served during cocktail hour.</div>
-      </div>
+      <section class="section"><div class="section-label">Sound Load In</div><div class="value">11:30 AM</div></section>
+      <section class="section"><div class="section-label">Band Load In</div><div class="value">2:30 PM</div></section>
+      <section class="section"><div class="section-label">Soundcheck</div><div class="value">3:30 PM – 4:30 PM</div><div class="sub">Cocktail hour 5:00 PM · room fully set by 5:30 PM</div></section>
+      <section class="section"><div class="section-label">Meals</div><div class="value">5:00 PM</div><div class="sub">Green room: Cottonwood Room, main floor</div></section>
     </div>
   </div>
 
   <div class="divider"></div>
+  <section class="section">
+    <div class="section-label">Full Timeline</div>
+    <div class="row"><div class="time">11:30 AM</div><div class="detail">Sound engineer arrives · sets up for reception</div></div>
+    <div class="row"><div class="time">1:50 PM</div><div class="detail">Wedding party arrives at Co-Cathedral of the Sacred Heart</div></div>
+    <div class="row"><div class="time">2:30 PM</div><div class="detail">Band load in at The Houstonian</div></div>
+    <div class="row"><div class="time">2:30 PM</div><div class="detail">Ceremony begins · full mass · Co-Cathedral organist plays</div></div>
+    <div class="row"><div class="time">3:30 PM</div><div class="detail">Ceremony ends · altar photos, then buses back to hotel</div></div>
+    <div class="row"><div class="time">3:30 PM</div><div class="detail">Soundcheck until 4:30 PM</div></div>
+    <div class="row"><div class="time">5:00 PM</div><div class="detail">Cocktail hour in lobby · Greenway playlist over our speaker</div><span class="tag tag-track">TRACK</span></div>
+    <div class="row"><div class="time">5:00 PM</div><div class="detail">Band meals · Cottonwood Room</div></div>
+    <div class="row"><div class="time">5:30 PM</div><div class="detail">Reception room fully prepared</div></div>
+    <div class="row"><div class="time">6:00 PM</div><div class="detail">Doors open · guests seated · Set One dinner set begins</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row"><div class="time">6:15 PM</div><div class="detail">Grand entrance, bride + groom only · “Can’t Take My Eyes Off You”</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row"><div class="time">6:20 PM</div><div class="detail">First dance · “The Way I Love You” · 0:43–1:33 cut</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row"><div class="time">6:25 PM</div><div class="detail">Welcome by Mark Courtois (father of the bride) · blessing by Deacon Millhouse</div></div>
+    <div class="row"><div class="time">6:30 PM</div><div class="detail">Salads served</div></div>
+    <div class="row"><div class="time">7:00 PM</div><div class="detail">Toasts: Avery Ciancone (matron of honor), Alex Sickafoose (best man), then couple's thank-you · champagne</div></div>
+    <div class="row"><div class="time">7:00 PM</div><div class="detail">Band break until 7:25 PM · back on stage before 7:20 PM</div><span class="tag tag-break">BREAK</span></div>
+    <div class="row"><div class="time">7:20 PM</div><div class="detail">Father / daughter dance · “Isn’t She Lovely” · 0:37–1:42</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row"><div class="time">7:20 PM</div><div class="detail">Mother / son dance · “Edelweiss” · 0:09–1:07</div><span class="tag tag-track">TRACK</span></div>
+    <div class="row"><div class="time">7:25 PM</div><div class="detail">Set Two · dance set one</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row"><div class="time">7:25 PM</div><div class="detail">Cake cutting · not saving top tier</div></div>
+    <div class="row"><div class="time">8:25 PM</div><div class="detail">Band break until 8:40 PM · couple outside for photos at lit-up tree</div><span class="tag tag-break">BREAK</span></div>
+    <div class="row"><div class="time">8:40 PM</div><div class="detail">Set Three · dance set two</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row"><div class="time">9:40 PM</div><div class="detail">Private last dance · “Forever and Ever, Amen”</div><span class="tag tag-track">TRACK</span></div>
+    <div class="row"><div class="time">10:00 PM</div><div class="detail">Grand exit</div></div>
+    <div class="row"><div class="time">10:30 PM</div><div class="detail">Planner collects personal items · breakdown</div></div>
+  </section>
 
-  <!-- ═══ SOUND RESPONSIBILITY ═══ -->
-  <div class="section">
-    <div class="section-label">Ceremony + Cocktail Hour Sound</div>
-    <div class="note-box">
-      <strong>Greenway provides ceremony and cocktail hour sound, with no live instrumentation.</strong> All ceremony and cocktail hour music is recorded tracks through our PA. Ceremony at 5:30 PM in Storie Hall, cocktail hour at 6:00 PM on the back lawn.
-    </div>
-  </div>
+  <div class="divider"></div>
+  <section class="section">
+    <div class="section-label">Special Music</div>
+    <div class="special"><div class="moment">Cocktail Hour</div><div class="song">Greenway playlist over our speaker · light jazz + acoustic-pop love songs/covers</div><span class="tag tag-track">TRACK</span></div>
+    <div class="special"><div class="moment">Grand Entrance</div><div class="song">“Can’t Take My Eyes Off You” — Frankie Valli · couple enters on the “I love you baby” chorus · guests on their feet swinging napkins</div><span class="tag tag-live">LIVE</span></div>
+    <div class="special"><div class="moment">First Dance</div><div class="song">“The Way I Love You” — Michal Leah · 0:43–1:33 (~50 sec)<span class="vocal">Vocals · Nicoya</span></div><span class="tag tag-live">LIVE</span></div>
+    <div class="special"><div class="moment">Father / Daughter</div><div class="song">“Isn’t She Lovely” — Stevie Wonder · 0:37–1:42</div><span class="tag tag-live">LIVE</span></div>
+    <div class="special"><div class="moment">Mother / Son</div><div class="song">“Edelweiss” — Bill Lee &amp; Charmian Carr, The Sound of Music 50th Anniversary recording · 0:09–1:07</div><span class="tag tag-track">TRACK</span></div>
+    <div class="special"><div class="moment">Final Guest Song</div><div class="song">“Forever” — Chris Brown · closes Set Three, last song of the night</div><span class="tag tag-live">LIVE</span></div>
+    <div class="special"><div class="moment">Private Last Dance</div><div class="song">“Forever and Ever, Amen” — Randy Travis</div><span class="tag tag-track">TRACK</span></div>
+  </section>
 
-  <!-- ═══ CEREMONY MUSIC ═══ -->
-  <div class="section">
-    <div class="section-label">Ceremony Music (all tracks)</div>
-    <div class="special-row">
-      <div class="special-moment">Family Processional</div>
-      <div class="special-song">"Iris" &mdash; UNSECRET (String Quartet) &bull; 4 pairs</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">Wedding Party</div>
-      <div class="special-song">"Birds of a Feather" &mdash; Gemini Strings &bull; 10 pairs + flower girl</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">Bride's Entrance</div>
-      <div class="special-song">"I Will Always Love You" &mdash; Vitamin String Quartet &bull; Macey walks at the chorus</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">Recessional</div>
-      <div class="special-song">"You're My Best Friend" &mdash; Queen</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
+  <div class="divider"></div>
+  <section class="section">
+    <div class="section-label">Songs to Learn</div>
+    <ul class="list"><li>The Way I Love You — Michal Leah · <a href="https://www.youtube.com/watch?v=D6cKEXa6jCo">reference video</a></li><li>9 to 5 — Dolly Parton<span class="vocal">Vocals · Rome</span></li><li>Dance Her Home — Cody Johnson</li><li>Me and My Kind — Cody Johnson</li></ul>
+  </section>
+
+  <div class="divider"></div>
+  <div class="two-col">
+    <section class="section">
+      <div class="section-label">Emcee</div>
+      <div class="value">Adrian / The Greenway Band</div>
+      <div class="sub">Couple introduction: “Mr. and Mrs. Blick”</div>
+      <div class="sub">Laced with Grace cues the toast speakers</div>
+    </section>
+    <section class="section">
+      <div class="section-label">Key Contacts</div>
+      <div class="contact"><div class="role">Day-Of Coordinator · Laced with Grace</div><div class="name">Janie Lopez</div><div class="info"><a href="tel:+19364001984">936-400-1984</a></div></div>
+      <div class="contact"><div class="role">Planner · Laced with Grace</div><div class="name">Brandi Urbanik</div><div class="info"><a href="tel:+18329953685">832-995-3685</a> · <a href="mailto:info@lacedwithgraceevents.com">info@lacedwithgraceevents.com</a></div></div>
+      <div class="contact"><div class="role">Venue · The Houstonian</div><div class="name">Joan McKnight</div><div class="info"><a href="tel:+17138126953">713-812-6953</a> · main <a href="tel:+17136802626">713-680-2626</a></div></div>
+      <div class="contact"><div class="role">Groom</div><div class="name">Andrew Blick</div><div class="info"><a href="tel:+12819797069">281-979-7069</a> · <a href="mailto:a.k.blick@outlook.com">a.k.blick@outlook.com</a></div></div>
+      <div class="contact"><div class="role">Bride</div><div class="name">Katherine Courtois</div><div class="info"><a href="tel:+18327768357">832-776-8357</a></div></div>
+      <div class="contact"><div class="role">Photographer</div><div class="name">Ally Bechtold · Ally Joe Photography</div><div class="info"><a href="mailto:hello@allyjoephotography.com">hello@allyjoephotography.com</a></div></div>
+    </section>
   </div>
 
   <div class="divider"></div>
-
-  <!-- ═══ TIMELINE ═══ -->
-  <div class="section">
-    <div class="section-label">Timeline</div>
-
-    <div class="timeline-row">
-      <div class="timeline-time">11:00 AM</div>
-      <div class="timeline-event">Vendor access begins (stage set first)</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">12:00 PM</div>
-      <div class="timeline-event">Band arrives for load in</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">3:30 PM</div>
-      <div class="timeline-event">Soundcheck (until 4:30 PM)</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">5:00 PM</div>
-      <div class="timeline-event">Guests begin arriving</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">5:30 PM</div>
-      <div class="timeline-event">Ceremony — Storie Hall (Greenway sound, tracks)</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">6:00 PM</div>
-      <div class="timeline-event">Cocktail hour — back lawn (Greenway sound) / Band meals served</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">6:45 PM</div>
-      <div class="timeline-event">Guests seated for dinner</div>
-    </div>
-
-    <div class="timeline-row">
-      <div class="timeline-time">7:00 PM</div>
-      <div class="timeline-event">Band Set 1 begins / Grand entrance (PRP announces)</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">7:05 PM</div>
-      <div class="timeline-event">First dance, then father/daughter, then mother/son (all shortened)</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">7:10 PM</div>
-      <div class="timeline-event">Welcome &amp; blessing (father of the bride, Louie)</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">7:15 PM</div>
-      <div class="timeline-event">Dinner service (plated, 2 courses)</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">8:00 PM</div>
-      <div class="timeline-event">Band Break 1 — PRP DJs / Photobooth opens (8&ndash;11)</div>
-      <span class="timeline-tag tag-break">BREAK</span>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">8:15 PM</div>
-      <div class="timeline-event">Cake cutting (formal, announced)</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">8:20 PM</div>
-      <div class="timeline-event">Toasts (3): Louie, Maid of Honor Lauren, Best Man Ben</div>
-    </div>
-
-    <div class="timeline-row">
-      <div class="timeline-time">8:30 PM</div>
-      <div class="timeline-event">Band Set 2 — dance floor opens / Slushies (8:30&ndash;10:30)</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">9:30 PM</div>
-      <div class="timeline-event">Band Break 2 — PRP DJs</div>
-      <span class="timeline-tag tag-break">BREAK</span>
-    </div>
-
-    <div class="timeline-row">
-      <div class="timeline-time">10:00 PM</div>
-      <div class="timeline-event">Band Set 3 — kicks off with bouquet toss / Whataburger late-night snack out</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">10:30 PM</div>
-      <div class="timeline-event">Bar closes</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">10:45 PM</div>
-      <div class="timeline-event">Last dance song (all guests) — "Closing Time" by Semisonic</div>
-      <span class="timeline-tag tag-live">LIVE</span>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">10:50 PM</div>
-      <div class="timeline-event">Guests sent outside for send off</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">10:55 PM</div>
-      <div class="timeline-event">Private last dance</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">11:00 PM</div>
-      <div class="timeline-event">Send off — cold sparks down the stairs</div>
-    </div>
-    <div class="timeline-row">
-      <div class="timeline-time">12:30 AM</div>
-      <div class="timeline-event">All breakdown complete, vendors off property</div>
-    </div>
-  </div>
+  <section class="section">
+    <div class="section-label">Operational Notes</div>
+    <div class="note">No ceremony music. The Co-Cathedral organist covers the church; the band is not at the ceremony.</div>
+    <div class="note">Cocktail hour has no live musicians. Greenway provides a speaker in the cocktail-hour lobby and Adrian builds the playlist: simple, light background music — jazz and acoustic-pop love songs/covers.</div>
+    <div class="note">All recorded specials run through the Greenway PA. There is no outside DJ or emcee.</div>
+    <div class="note">Edelweiss must be the exact recording: Bill Lee &amp; Charmian Carr, The Sound of Music 50th Anniversary — the groom's mother's specific request.</div>
+    <div class="note">Couple's must-play: “You Never Call Me By My Name” — David Allan Coe. Their requests not in our catalog go on the break playlist (their instruction): Mirrors, Dancing Queen, Rattlin' Bog, Gimme Gimme Gimme (sax feature), Mr. Brightside.</div>
+    <div class="note">First dance, father/daughter, and mother/son are each only 45 sec to 1 min — use the cut times listed above.</div>
+    <div class="note">No bouquet or garter toss. Cake cutting 7:25 PM, top tier not saved.</div>
+    <div class="note">Artists they love — Andrew: Foo Fighters, Green Day, Ian Munsick, Shane Smith &amp; the Saints, Billy Joel, Bruce Springsteen, Cody Johnson. Katherine: Justin Bieber, Brett Eldredge, Chris Young, Cody Johnson, Zac Brown Band, trending pop &amp; R&amp;B.</div>
+    <div class="warning"><strong>Break Overlap</strong>The 7:20 PM parent dances sit inside the listed 7:00–7:25 band break. Father/daughter is live — band must be back on stage before 7:20 PM.</div>
+  </section>
 
   <div class="divider"></div>
-
-  <!-- ═══ SPECIALS ═══ -->
-  <div class="section">
-    <div class="section-label">Specials (all tracks, all dances shortened)</div>
-
-    <div class="special-row">
-      <div class="special-moment">Grand Entrance</div>
-      <div class="special-song">"Don't Stop Me Now" &mdash; Queen</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">First Dance</div>
-      <div class="special-song">"Heaven Passing Through" &mdash; Turnpike Troubadours (custom cut)</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">Father / Daughter</div>
-      <div class="special-song">"Lullaby" &mdash; Billy Joel &bull; Macey &amp; Louie</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">Mother / Son</div>
-      <div class="special-song">"Don't Blink" &mdash; Kenny Chesney &bull; Jake &amp; Debbie</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">Final Song (all guests)</div>
-      <div class="special-song">"Closing Time" &mdash; Semisonic</div>
-      <span class="timeline-tag tag-live">LIVE</span>
-    </div>
-    <div class="special-row">
-      <div class="special-moment">Private Last Dance</div>
-      <div class="special-song">"Front Porch Looking In" &mdash; Lonestar</div>
-      <span class="timeline-tag tag-track">TRACK</span>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ═══ EMCEE ═══ -->
-  <div class="section">
-    <div class="section-label">Emcee</div>
-    <div class="section-value">Phil &amp; Damon Pampolina (PRP Entertainment)</div>
-    <div class="section-sub">PRP handles all announcements and transitions, runs the special-dance tracks on their own sound system, and DJs during band breaks. Greenway does not MC this one. Couple is introduced as <strong>"Mr. and Mrs. Jake Johnson."</strong></div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ═══ REQUESTS ═══ -->
-  <div class="section">
-    <div class="section-label">Couple's Song Requests (not all-inclusive — top requests)</div>
-    <ul class="song-list">
-      <li>"Closing Time" — Semisonic (final song)</li>
-      <li>"Can't Hold Us" — Macklemore</li>
-      <li>Queen</li>
-      <li>Journey</li>
-      <li>Hall &amp; Oates</li>
-      <li>Prince</li>
-      <li>Foreigner</li>
-      <li>"Mr. Brightside"</li>
-      <li>"Doses and Mimosas"</li>
-      <li>"Dancing Queen"</li>
-      <li>"No Hands"</li>
-      <li>"Cheap Thrills" — Sia</li>
-      <li>"Heads Will Roll"</li>
-      <li>"Take On Me"</li>
-      <li>"Uptown Girl"</li>
-      <li>"Kids" — MGMT</li>
-      <li>"Accidentally in Love"</li>
-      <li>"September"</li>
-      <li>"The Middle" — Jimmy Eat World</li>
-      <li>Macklemore</li>
-      <li>Michael Jackson</li>
-      <li>"A Sky Full of Stars" — Coldplay</li>
-      <li>ABBA</li>
-      <li>"All the Small Things" — Blink-182</li>
-      <li>"Jessie's Girl"</li>
-      <li>"Hey Ya"</li>
-      <li>"The Days" (Notion remix)</li>
-      <li>"Fireball"</li>
-      <li>"Hotel Room Service"</li>
-      <li>"Temperature" — Sean Paul</li>
-      <li>"Time of Our Lives" — Pitbull</li>
-    </ul>
-    <div class="section-sub" style="margin-top:8px;">"If there are songs that y'all love to sing and are usually hits, we are open to suggestions!"</div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ═══ DO NOT PLAY ═══ -->
-  <div class="section">
-    <div class="section-label">Do Not Play</div>
-    <ul class="song-list">
-      <li>Cupid Shuffle</li>
-      <li>Katy Perry</li>
-      <li>Single Ladies</li>
-      <li>Wobble</li>
-      <li>Party in the USA</li>
-      <li>WOP</li>
-      <li>Hips Don't Lie</li>
-      <li>Happy — Pharrell</li>
-      <li>Taylor Swift</li>
-      <li>Cotton Eyed Joe</li>
-      <li>Meghan Trainor</li>
-      <li>Cha Cha Slide</li>
-      <li>Gangnam Style</li>
-      <li>Barbie Girl</li>
-      <li>Macarena</li>
-      <li>Dance Monkey</li>
-      <li>One Direction</li>
-      <li>Gasolina</li>
-      <li>Who Let the Dogs Out</li>
-      <li>Electric Slide</li>
-      <li>Despacito</li>
-      <li>Call Me Maybe</li>
-    </ul>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ═══ KEY CONTACTS ═══ -->
-  <div class="section">
-    <div class="section-label">Key Contacts</div>
-    <div class="two-col">
-      <div>
-        <div class="contact-card">
-          <div class="contact-role">Planner / Day-Of POC</div>
-          <div class="contact-name">Jordyn Zanin</div>
-          <div class="contact-info">Simply XO Events</div>
-          <div class="contact-info"><a href="tel:+18585681516">(858) 568-1516</a></div>
-          <div class="contact-info"><a href="mailto:hello@simplyxoevents.com">hello@simplyxoevents.com</a></div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-role">MC / DJ</div>
-          <div class="contact-name">Phil &amp; Damon Pampolina</div>
-          <div class="contact-info">PRP Entertainment</div>
-          <div class="contact-info"><a href="mailto:prpentertainment@yahoo.com">prpentertainment@yahoo.com</a></div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-role">Venue</div>
-          <div class="contact-name">The Arlo</div>
-          <div class="contact-info"><a href="tel:+15129104606">(512) 910-4606</a></div>
-          <div class="contact-info"><a href="mailto:info@thearloevents.com">info@thearloevents.com</a></div>
-        </div>
-      </div>
-      <div>
-        <div class="contact-card">
-          <div class="contact-role">Bride</div>
-          <div class="contact-name">Macey Ditta</div>
-          <div class="contact-info"><a href="tel:+12819040407">(281) 904-0407</a></div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-role">Groom</div>
-          <div class="contact-name">Jake Johnson</div>
-          <div class="contact-info"><a href="tel:+17138550275">(713) 855-0275</a></div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-role">Photographer</div>
-          <div class="contact-name">Paige Vaughn Photo</div>
-          <div class="contact-info"><a href="mailto:hello@paigevaughnphoto.com">hello@paigevaughnphoto.com</a></div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-role">Videographer</div>
-          <div class="contact-name">EP Films</div>
-          <div class="contact-info"><a href="mailto:info@epfilmsweddings.com">info@epfilmsweddings.com</a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ═══ NOTES ═══ -->
-  <div class="section">
-    <div class="section-label">Notes</div>
-    <div class="note-box">
-      <strong>Ceremony and cocktail hour sound.</strong> No live players. Recorded tracks run through our PA. Ceremony 5:30 in Storie Hall, cocktail hour 6:00 on the back lawn.<br><br>
-      <strong>PRP runs the reception moments.</strong> Phil &amp; Damon announce everything, play the special-dance tracks on their own system, and DJ our breaks. We play our three sets as usual.<br><br>
-      <strong>First dance custom cut:</strong> Macey emailed the cut version of "Heaven Passing Through" (cut by their dance instructor) on 7/7. Have it loaded and ready as backup.<br><br>
-      <strong>Bouquet toss</strong> kicks off Set 3 at 10:00 PM.<br><br>
-      <strong>Send off flow:</strong> 10:45 last dance song with guests, 10:50 guests outside, 10:55 private last dance (track), 11:00 cold sparks send off down the stairs.<br><br>
-      <strong>Guests</strong> arrive by bus (2 Around Austin buses) from the AC Hotel Hill Country.
-    </div>
-  </div>
-
-</div>
-
-<div class="footer">
-  <span>The Greenway Band</span>
-  <span>ADRIAN ONLY</span>
-</div>
-
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').catch(() => {});
-}
-</script>
+  <section class="section" style="margin-bottom:0">
+    <a href="gig-sheet.pdf" download="Courtois Blick Full Gig Sheet 9-5-26.pdf">Download this sheet as a PDF</a>
+  </section>
+</main>
+<footer class="footer"><span>The Greenway Band</span><span>Courtois / Blick 09.05.26</span></footer>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload();});}</script>
 </body>
 </html>
