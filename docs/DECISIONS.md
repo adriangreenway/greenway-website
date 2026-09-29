@@ -334,6 +334,13 @@ Format:
 - **Consequences:** No Cloudflare Zero Trust subscription, billing checkout, identity provider, or email recovery flow is required. Losing the saved login requires 1Password account recovery or replacing the Worker password from the existing Cloudflare account. Rotating the session-signing secret signs every browser out. The rule against client-side password overlays remains unchanged.
 - **Reconsider if:** another administrator needs access, Adrian wants individual access logs or email recovery, repeated login attacks appear, or the portal grows beyond a one-person internal tool.
 
+### D20 v3 amendment: the MC Cue Sheet is band-visible again (Matey)
+- **Date:** 2026-08-01
+- **Decision:** Adrian directed on gig day that the band see MC timing, so a static PDF copy of the MC Cue Sheet (relabeled, no "Adrian Only" marking, no progress counter) is published on the public Matey hub as item 04. The interactive MC page, the Full Gig Sheet, and everything else behind `gigadmin.greenwayband.com` stay Adrian-only. The old public `/mc` routes stay dead.
+- **Why:** the band needs to line up set timing with the MC's announcements, and the public hub is the page they already have.
+- **Consequences:** MC cue content (including the DJ's first name in one note) is on the unlisted, noindex public site for this wedding. Future gig sheets should ask Adrian per wedding whether the MC PDF is band-visible.
+- **Reconsider if:** a couple's planner objects, or a future wedding's MC sheet carries anything sensitive.
+
 ---
 ## Open decisions (not yet made — see `docs/ROADMAP.md`)
 - Reconcile `dev` vs `main` and decide the canonical deploy branch.

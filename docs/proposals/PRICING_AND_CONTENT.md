@@ -67,6 +67,73 @@ hergenrether/bielitz).
 Package note (standard): *Additional instrumentation available upon request. Travel
 fee may apply for events over 50 miles from Houston.*
 
+## Corporate gigs + travel formula (Adrian, 2026-07-27, Ken-Ran/Juneteenth build)
+
+Corporate base prices = the same configuration baselines above (Houston baseline;
+the-united-way shipped the 10-Piece at $14,375 with venue-provided production).
+
+**Travel formula (Adrian's own words, 2026-07-27):**
+
+```
+travel = round-trip driving miles from Houston × $0.87 × (config size + 1)
+total  = config base price + travel
+```
+
+The `+1` is the sound engineer traveling with the band — a 10-Piece prices 11
+travelers. Compute round-trip miles from a real driving route (Houston base to
+the venue address), show Adrian the math, and let him confirm miles and the
+final number — both are pay decisions. Default presentation: travel folded into
+ONE Investment figure (matches the observed Dallas pattern of single higher
+prices), no separate travel line item unless Adrian asks for one.
+
+Corporate pages carry no Cocktail Hour block and no wedding copy; production/
+staging lines mirror the inquiry (drop Sound/Lighting from included services
+when the band isn't providing them). Page conventions live in the Corporate
+proposals section of the create-proposal skill.
+
+**Production scope check, BEFORE pricing (2026-07-29, Ken-Ran/Juneteenth
+lesson):** pin down who provides sound and lights and for what audience size
+before any number goes out. "Band provides sound and lights" at festival scale
+(1,000+ outdoors) is a production-rental job: the band's own rig covers a few
+hundred people, the travel formula covers mileage only (no rented PA, no
+lodging for late finishes far from Houston), and talent buyers' $10-15K all-in
+expectation at that scale assumes a band that owns festival production.
+Greenway passed on exactly this rather than shrink the band to force the
+number (McKinney, 3,000-capacity park, purchaser provided stage + 65KW power,
+band was to provide sound/lights/backline/engineers for ~1,500 plus a DJ
+tie-in and a drone show after). A near-miss preceded the pass: a revised page
+briefly went live promising sound and lights at a 6-piece price before the
+scope was known; Adrian caught it and it was reverted same day.
+
+Two operational facts from Adrian on the pass email (2026-07-29): the band
+runs its OWN production on all its events, and even at a venue that provides
+production the band still hires its own sound engineer. So a pass is never
+framed as "keep us in mind for events where the venue has production" — that
+framing is wrong twice over. When the budget is the problem, the reason given
+is simply the budget.
+
+Also 2026-07-29: **prior email threads with a buyer are not a booking.**
+Ken-Ran inquired in 2022 twice and never booked, so "we'd love to work with
+you again" was wrong and Adrian caught it. Check for an actual booking, not
+just correspondence, before any copy implies a past working relationship.
+Same spirit as the no-fabricated-experience rule.
+
+**No intro section (Adrian, 2026-07-28):** corporate proposals follow the same
+no-intro standard as weddings (the-united-way's original "A note for you"
+greeting section is RETIRED, do not copy it into new corporate builds). Page
+runs cover straight into the package section. Any personal note goes in the
+email, never the page.
+
+**"Prepared for" is the client/company name, never the event name (Adrian,
+2026-07-28):** the cover's "Prepared for" line names who is buying the band
+(the company, or the individual booking contact if there's no company name in
+the inquiry), matching the-united-way's "United Way of Greater Houston."
+"Prepared for [Event Name]" reads wrong ("that makes no sense") even when the
+event itself has no separate host org named in the inquiry, e.g. an inquiry
+that only names a talent-buying agency (Ken-Ran Productions) still gets that
+agency's name on the cover, not the event title. The event name/date/venue
+still appear in the Event Details grid as their own row.
+
 ## Locked lineups (never invent an instrumentation)
 
 | Config | Rows exactly as shipped |

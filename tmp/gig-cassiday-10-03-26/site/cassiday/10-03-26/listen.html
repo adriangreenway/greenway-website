@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0A0A09">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="manifest" href="manifest.json">
+  <title>Listening Room · Hess / Cassiday</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+    :root{--black:#0A0A09;--cream:#F5F2ED;--muted:#B8B4AC;--dim:#706D66;--faint:#4A4740;--rule:rgba(74,71,64,.22)}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{min-height:100%;background:var(--cream);color:var(--black)}
+    body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased}
+    .header{display:flex;min-height:144px;align-items:flex-end;justify-content:space-between;gap:32px;padding:28px max(28px,calc((100vw - 1120px)/2));background:var(--black);color:var(--cream);border-bottom:1px solid var(--faint)}
+    .wordmark{display:grid;width:max-content;line-height:.92;text-transform:uppercase}.wordmark small{font-size:8px;font-weight:600;letter-spacing:.42em}.wordmark strong{margin:5px 0;font-size:16px;letter-spacing:.18em}
+    .event{text-align:right}.event small{color:var(--dim);font-size:9px;font-weight:600;letter-spacing:.24em;text-transform:uppercase}.event h1{margin-top:8px;font-family:'Bodoni Moda','Times New Roman',serif;font-size:clamp(24px,3vw,38px);font-weight:400;line-height:1}.event p{margin-top:8px;color:var(--muted);font-size:11px}
+    .body{width:min(100%,760px);margin:auto;padding:clamp(48px,7vw,80px) 28px 64px}.body h2{font-family:'Bodoni Moda','Times New Roman',serif;font-size:clamp(36px,6vw,54px);font-weight:400;line-height:1}.empty-state{margin-top:26px;padding:24px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);color:var(--dim);font-size:13px}.back{display:inline-block;min-height:44px;margin-top:40px;border-bottom:1px solid var(--rule);color:var(--dim);font-size:10px;font-weight:600;line-height:44px;letter-spacing:.14em;text-decoration:none;text-transform:uppercase}.back:hover{color:var(--black);border-color:var(--black)}
+    @media(max-width:520px){.header{min-height:132px;padding:22px 20px;align-items:flex-start}.event{max-width:230px}.event h1{font-size:22px}.body{padding:44px 20px 52px}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="wordmark" aria-label="The Greenway Band"><small>The</small><strong>Greenway</strong><small>Band</small></div>
+    <div class="event"><small>Listening Room</small><h1>Hess / Cassiday</h1><p>Saturday, October 3, 2026<br>Mountain Time</p></div>
+  </header>
+  <main class="body">
+    <h2>Listening Room</h2>
+    <div class="empty-state">No practice tracks have been added yet.</div>
+    <a class="back" href="index.html">&larr; Back to Gig Sheet</a>
+  </main>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload();});}</script>
+</body>
+</html>

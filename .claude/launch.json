@@ -79,6 +79,18 @@
       "port": 8896
     },
     {
+      "name": "gigs-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8894",
+        "--directory",
+        "/Users/adrianjoseph/Desktop/greenway-gigs"
+      ],
+      "port": 8894
+    },
+    {
       "name": "adrian-epk",
       "runtimeExecutable": "python3",
       "runtimeArgs": [

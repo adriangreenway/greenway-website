@@ -27,13 +27,13 @@ export const pages: PageConfig[] = [
   {
     title: 'Reviews',
     slug: '/reviews',
-    published: false,
+    published: true,
     description: 'What our couples and planners say'
   },
   {
     title: 'FAQ',
     slug: '/faq',
-    published: false,
+    published: true,
     description: 'Common questions about booking The Greenway Band'
   },
   {

@@ -1,0 +1,9 @@
+{
+  "name": "Hess / Cassiday — Greenway Gig Sheet",
+  "short_name": "Gig Sheet",
+  "start_url": "/cassiday/10-03-26/",
+  "scope": "/cassiday/10-03-26/",
+  "display": "standalone",
+  "background_color": "#F5F2ED",
+  "theme_color": "#0A0A09"
+}

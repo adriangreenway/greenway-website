@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#F5F2ED">
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:title" content="Hess / Cassiday Gig Sheet">
+  <meta property="og:description" content="Saturday, October 3, 2026 · Flathead Lake Lodge">
+  <meta property="og:type" content="website">
+  <link rel="manifest" href="manifest.json">
+  <title>Greenway Gig Sheet · Hess / Cassiday</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+    :root{--black:#0A0A09;--cream:#F5F2ED;--dim:#706D66;--faint:#4A4740;--rule:rgba(74,71,64,.22)}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{min-height:100%;background:var(--cream);color:var(--black)}
+    body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased}
+    .shell{display:grid;grid-template-rows:auto 1fr auto;width:min(100%,1120px);min-height:100vh;margin:auto;padding:clamp(24px,5vw,64px)}
+    .masthead,.footer{display:flex;justify-content:space-between;gap:24px}
+    .masthead{align-items:flex-start;padding-bottom:24px;border-bottom:1px solid var(--rule)}
+    .wordmark{display:grid;width:max-content;line-height:.92;text-transform:uppercase}
+    .wordmark small{font-size:8px;font-weight:600;letter-spacing:.42em}
+    .wordmark strong{margin:5px 0;font-size:16px;letter-spacing:.18em}
+    .page-type,.eyebrow{color:var(--dim);font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase}
+    main{align-self:center;padding:clamp(56px,9vw,112px) 0}
+    .eyebrow{margin-bottom:18px;line-height:1.6}
+    h1{max-width:820px;font-family:'Bodoni Moda','Times New Roman',serif;font-size:clamp(46px,8vw,94px);font-weight:400;line-height:.92;letter-spacing:-.035em}
+    h1 span{color:var(--dim);font-style:italic}
+    .venue{margin-top:24px;color:var(--dim);font-size:13px;line-height:1.7}
+    .hub-nav{margin-top:clamp(48px,8vw,88px);border-top:1px solid var(--rule)}
+    .hub-link{display:grid;grid-template-columns:48px 1fr auto;min-height:72px;align-items:center;gap:16px;color:var(--black);border-bottom:1px solid var(--rule);text-decoration:none}
+    .hub-link:hover,.hub-link:focus-visible{background:var(--black);color:var(--cream);outline:none}
+    .number{color:var(--dim);font-size:10px;letter-spacing:.14em}
+    .label{font-family:'Bodoni Moda','Times New Roman',serif;font-size:clamp(24px,3vw,34px)}
+    .arrow{font-size:22px}
+    .footer{align-items:flex-end;padding-top:24px;border-top:1px solid var(--rule);color:var(--dim);font-size:10px;line-height:1.5;letter-spacing:.08em}
+    .status{text-align:right}
+    @media(max-width:520px){.shell{padding:22px 20px}main{padding:52px 0}.eyebrow{font-size:9px;letter-spacing:.18em}h1{font-size:clamp(40px,11.5vw,46px)}.hub-link{grid-template-columns:32px 1fr auto;min-height:68px;gap:10px}.footer{align-items:flex-start}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead">
+      <div class="wordmark" aria-label="The Greenway Band"><small>The</small><strong>Greenway</strong><small>Band</small></div>
+      <div class="page-type">Gig Sheet</div>
+    </header>
+    <main>
+      <div class="eyebrow">Saturday, October 3, 2026<br>Mountain Time</div>
+      <h1>Hess <span>/</span><br>Cassiday</h1>
+      <div class="venue">Flathead Lake Lodge<br>Bigfork, Montana</div>
+      <nav class="hub-nav" aria-label="Gig sheet resources">
+        <a class="hub-link" href="band.html"><span class="number">01</span><span class="label">Band Sheet</span><span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="hub-link" href="listen.html"><span class="number">02</span><span class="label">Listening Room</span><span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </nav>
+    </main>
+    <footer class="footer">
+      <div>The sound of a great night.</div>
+      <div class="status" id="status">Checking offline status...</div>
+    </footer>
+  </div>
+  <script>
+    if('serviceWorker' in navigator){
+      function waitForActivation(registration){
+        if(registration.active && registration.active.state==='activated')return Promise.resolve();
+        const worker=registration.installing||registration.waiting;
+        if(!worker)return Promise.reject(new Error('No service worker found'));
+        return new Promise((resolve,reject)=>{
+          function check(){
+            if(worker.state==='activated')resolve();
+            if(worker.state==='redundant')reject(new Error('Service worker install failed'));
+          }
+          worker.addEventListener('statechange',check);
+          check();
+        });
+      }
+      navigator.serviceWorker.register('sw.js').then(waitForActivation).then(()=>{
+        document.getElementById('status').textContent='Saved for offline use';
+      }).catch(()=>{
+        document.getElementById('status').textContent='Offline save failed. Reload and try again.';
+      });
+      let reloaded=false;
+      navigator.serviceWorker.addEventListener('controllerchange',()=>{
+        if(reloaded)return;
+        reloaded=true;
+        location.reload();
+      });
+    }else{
+      document.getElementById('status').textContent='Offline save is not available in this browser.';
+    }
+  </script>
+</body>
+</html>

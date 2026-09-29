@@ -81,7 +81,7 @@ it, whether a practice MP3 exists, the announcement wording, and the newest sour
 This single ledger feeds Timeline, Specials, MC cues, Songs to Learn, and Listening
 Room so those pages cannot contradict one another.
 
-**Two things you never have to look up, because they are standing rules:**
+**Standing rules:**
 
 - **Attire.** The attire on a gig sheet is always **the band's**, never the guests'.
   The questionnaire's attire answer ("Black Tie Optional") describes the guests —
@@ -90,6 +90,8 @@ Room so those pages cannot contradict one another.
   Guys - Black suit, black shoes, black tie, white shirt
   Girls - Black dress or jumpsuit
   ```
+  Render both attire lines with identical typography and font weight. Neither
+  line should look secondary to the other.
   On the Full Gig Sheet, place Attire directly beneath Performance Team in the core
   information. Do not repeat it as a later standalone section.
 - **Meal count** is always **the number of musicians + 1** for the sound engineer:
@@ -97,6 +99,13 @@ Room so those pages cannot contradict one another.
   count in the private fact ledger when it is useful for vendor coordination, but
   never show the count on the gig sheet. Show the meal time and, when known, the
   room.
+- **Load-in planning.** Read every relevant Gmail thread in full before deriving
+  times, and use the newest explicit arrival or load-in commitment Adrian gave the
+  vendor. Never silently contradict it. When no event-specific schedule overrides
+  the standard, work backward from quiet time and the meal window: band load-in is
+  one hour before soundcheck, sound load-in is three hours before band load-in, and
+  soundcheck normally coincides with quiet time. Keep an earlier load-in when
+  Adrian wants extra buffer. Leave an unconfirmed meal time or room as `TBD`.
 
 ## Step 3 — Build the site
 
@@ -106,7 +115,11 @@ Use the Freeman/Dass visual and information hierarchy defined in
 The Listening Room, Full Gig Sheet, and Band Sheet use a cream body with a dark
 header. Keep the same CSS variables and `.tag-live` / `.tag-track` pattern.
 Build into `~/Desktop/greenway-gigs/<client-last-name>/<mm-dd-yy>/`, then replace
-every fact page by page.
+every fact page by page. Before creating or overwriting anything outside the
+active project, tell Adrian the exact folder, whether it already exists, what
+will change, the overwrite risk, and how it can be undone. Wait for explicit
+approval to modify that folder. File-write approval does not authorize a
+production deployment.
 
 **Fix the paths as you copy.** The EXAMPLE folder is from the old one-site-per-wedding
 era and uses absolute paths that break in a subfolder: links and the manifest must
@@ -165,6 +178,9 @@ The band reads this on a phone, at a venue, mid-gig. Every extra word costs.
   Cut defensive explanations such as "not a must-play list."
 - **No explaining why.** "The DJ add-on exists so the energy never drops" is a
   sentence for Adrian, not for the sheet.
+- **Omit empty optional sections.** If the couple did not provide a do-not-play
+  list, leave the Do Not Play section off entirely. Never render `Do Not Play:
+  TBD`.
 - **Unsettled fields are one word.** `TBD`, not "Conflict — questionnaire says no,
   run of show has one at 10:50, planner to confirm." Put the real open questions in
   a short Open Items / Notes block, one line each.
@@ -193,20 +209,22 @@ wedding's pages return the facts you just wrote **and** that a past wedding stil
 returns 200, plus a Browser pane check for anything visual (new player controls,
 layout).
 
-**A brand-new gig sheet going live for the first time needs Adrian's "go"** — same
-rule as a proposal deploy, it's a real public URL even if unlisted. Present a short
-status card first: couple, date, venue, what pages you built, the URL it will get,
-and anything you marked UNKNOWN. Once it's live, further changes Adrian asks for in
-the same conversation (a new song, a time change, a new feature) redeploy directly
-without re-asking — that's already the working pattern.
+**Every production deployment needs Adrian's explicit "go", including a
+revision.** It is a real public change, and the full-directory deployment can
+replace other weddings. Present a short status card first: couple, date, venue,
+what pages changed, the exact site and URL, anything marked UNKNOWN, the
+full-folder replacement risk, and the rollback point. Approval to build, edit,
+or make an earlier deployment never carries forward to another deployment.
 
 ## Revisions
 
 "Add X to the gig sheet" / "change the arrival time" / "add the Listening Room" →
-edit the pages in
-`~/Desktop/greenway-gigs/<client-last-name>/<mm-dd-yy>/`, redeploy the whole
-directory, verify the specific fact changed live. That folder is permanent, so
-unlike the old scratch-folder workflow your copy is still there next session. If
-this build is now more complete than what's in `docs/gig-sheets/EXAMPLE/` (a new
-feature, a page combination not seen before), pull it into that folder so it's the
-reference for the next wedding.
+explain the exact external folder and wait for file-write approval, then edit
+the pages in `~/Desktop/greenway-gigs/<client-last-name>/<mm-dd-yy>/`. Verify
+locally and present the deployment status card. Redeploy the whole directory
+only after a separate explicit deployment approval, then verify the specific
+fact changed live. That folder is permanent, so unlike the old scratch-folder
+workflow your copy is still there next session. If this build is now more
+complete than what's in `docs/gig-sheets/EXAMPLE/` (a new feature, a page
+combination not seen before), updating that project reference is another
+project-file change and must stay within the approved scope.

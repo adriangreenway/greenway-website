@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0A0A09">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="manifest" href="manifest.json">
+  <title>Adrian Only · Full Gig Sheet · Hess / Cassiday</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+    :root{--black:#0A0A09;--charcoal:#111110;--cream:#F5F2ED;--muted:#B8B4AC;--dim:#706D66;--faint:#4A4740;--warning:#8D2E2A;--rule:rgba(74,71,64,.22)}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{background:var(--cream);color:var(--black)}
+    body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+    .header{display:flex;min-height:144px;align-items:flex-end;justify-content:space-between;gap:32px;padding:28px max(28px,calc((100vw - 1120px)/2));background:var(--black);color:var(--cream);border-bottom:1px solid var(--faint)}
+    .wordmark{display:grid;width:max-content;line-height:.92;text-transform:uppercase}.wordmark small{font-size:8px;font-weight:600;letter-spacing:.42em}.wordmark strong{margin:5px 0;font-size:16px;letter-spacing:.18em}
+    .event{max-width:680px;text-align:right}.event small,.section-label{color:var(--dim);font-size:9px;font-weight:600;letter-spacing:.24em;text-transform:uppercase}.event h1{margin-top:8px;font-family:'Bodoni Moda','Times New Roman',serif;font-size:clamp(24px,3vw,38px);font-weight:400;line-height:1}.event p{margin-top:8px;color:var(--muted);font-size:11px}
+    .body{width:min(100%,1120px);margin:auto;padding:48px 28px 64px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,7vw,96px)}.section{margin-bottom:30px}.section-label{margin-bottom:10px}.value{font-size:16px;font-weight:600}.sub{margin-top:2px;color:var(--dim);font-size:13px}
+    a{color:inherit;border-bottom:1px solid var(--faint);text-decoration:none}.divider{height:1px;margin:38px 0;background:var(--rule)}
+    .row{display:flex;min-height:42px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--rule)}.row:last-child{border-bottom:0}.time{width:122px;min-width:122px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}.detail{flex:1;font-size:14px}.tag{margin-left:10px;padding:3px 7px;border:1px solid var(--rule);font-size:9px;font-weight:600;letter-spacing:.12em;white-space:nowrap}.tag-live{color:var(--black);border-color:var(--faint)}.tag-track,.tag-break,.tag-tbd{color:var(--dim)}.tag-tbd{border-color:var(--warning)}
+    .special{display:grid;grid-template-columns:1fr 1.65fr auto;min-height:48px;align-items:center;gap:16px;padding:10px 0;border-bottom:1px solid var(--rule)}.special:last-child{border-bottom:0}.moment{font-size:14px;font-weight:600}.song{color:var(--dim);font-size:13px}
+    .list{columns:2;column-gap:48px;list-style:none;color:var(--dim);font-size:13px}.list li{break-inside:avoid;padding:5px 0;border-bottom:1px solid var(--rule)}
+    .contact{padding:10px 0;border-bottom:1px solid var(--rule)}.contact:last-child{border-bottom:0}.role{color:var(--dim);font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}.name{margin-top:2px;font-size:14px;font-weight:600}.info{margin-top:2px;color:var(--dim);font-size:12px}
+    .note{padding:12px 0;border-bottom:1px solid var(--rule);font-size:14px}.note:last-child{border-bottom:0}.warning{padding-left:14px;border-left:3px solid var(--warning)}.warning strong{display:block;color:var(--warning);font-size:9px;letter-spacing:.18em;text-transform:uppercase}
+    .footer{display:flex;justify-content:space-between;padding:12px max(28px,calc((100vw - 1120px)/2));border-top:1px solid var(--rule);color:var(--dim);font-size:10px}
+    @media(max-width:600px){.header{min-height:132px;padding:22px 20px;align-items:flex-start;gap:12px}.event{max-width:210px}.event small{display:block;font-size:7px}.event h1{font-size:20px}.body{padding:36px 20px 52px}.two-col{grid-template-columns:1fr;gap:4px}.divider{margin:30px 0}.row{align-items:flex-start}.time{width:104px;min-width:104px;font-size:12px}.detail{font-size:13px}.tag{margin-left:8px;padding:3px 5px;font-size:8px}.special{grid-template-columns:1fr auto;gap:4px 12px}.song{grid-column:1;grid-row:2}.special .tag{grid-column:2;grid-row:1 / span 2}.list{columns:1}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="wordmark" aria-label="The Greenway Band"><small>The</small><strong>Greenway</strong><small>Band</small></div>
+    <div class="event"><small>Adrian Only · Full Gig Sheet</small><h1>Hess / Cassiday Wedding</h1><p>Saturday, October 3, 2026<br>Mountain Time</p></div>
+  </header>
+  <main class="body">
+    <div class="two-col">
+      <div>
+        <section class="section"><div class="section-label">Location</div><div class="value">Flathead Lake Lodge</div><div class="sub">Ceremony: Island</div><div class="sub">Cocktail hour: Saddlesore Patio</div><div class="sub">Reception: Tent</div><div class="sub"><a href="https://www.google.com/maps/search/?api=1&amp;query=150+Flathead+Lodge+Rd+Bigfork+MT+59911">150 Flathead Lodge Rd<br>Bigfork, MT 59911</a></div></section>
+        <section class="section"><div class="section-label">Performance Team</div><div class="value">10-piece band + sound engineer</div></section>
+        <section class="section"><div class="section-label">Attire</div><div class="value">Guys: black suit, black shoes, black tie, white shirt</div><div class="value">Girls: black dress or jumpsuit</div></section>
+        <section class="section"><div class="section-label">Guests</div><div class="value">130</div></section>
+      </div>
+      <div>
+        <section class="section"><div class="section-label">Sound Load In</div><div class="value">TBD</div><div class="sub">Local rental provider or Greenway gear: TBD</div></section>
+        <section class="section"><div class="section-label">Band Load In</div><div class="value">12:00 PM</div></section>
+        <section class="section"><div class="section-label">Soundcheck</div><div class="value">3:00 PM–4:00 PM</div><div class="sub">Quiet time begins 4:15 PM</div></section>
+        <section class="section"><div class="section-label">Meals</div><div class="value">7:00 PM</div><div class="sub">Small Dining Room</div></section>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <section class="section">
+      <div class="section-label">Timeline</div>
+      <div class="row"><div class="time">12:00 PM</div><div class="detail">Band arrival</div></div>
+      <div class="row"><div class="time">3:00–4:00 PM</div><div class="detail">Soundcheck</div></div>
+      <div class="row"><div class="time">4:15 PM</div><div class="detail">Prelude begins at the Island</div><span class="tag tag-track">TRACK</span></div>
+      <div class="row"><div class="time">4:45 PM</div><div class="detail">Ceremony begins</div></div>
+      <div class="row"><div class="time">5:15 PM</div><div class="detail">Recessional, then cocktail hour at Saddlesore Patio</div><span class="tag tag-track">TRACK</span></div>
+      <div class="row"><div class="time">5:15–6:15 PM</div><div class="detail">Cocktail-hour duo</div><span class="tag tag-live">LIVE</span></div>
+      <div class="row"><div class="time">6:15 PM</div><div class="detail">Tent doors open</div></div>
+      <div class="row"><div class="time">6:30 PM</div><div class="detail">Grand introduction, then first dance</div></div>
+      <div class="row"><div class="time">6:40 PM</div><div class="detail">Dinner served. Band announces plated meal and plays dinner set.</div><span class="tag tag-live">LIVE</span></div>
+      <div class="row"><div class="time">7:00 PM</div><div class="detail">Vendor meal in Small Dining Room</div></div>
+      <div class="row"><div class="time">7:30–8:00 PM</div><div class="detail">Band break</div><span class="tag tag-break">BREAK</span></div>
+      <div class="row"><div class="time">7:45 PM</div><div class="detail">Cake cutting, then toasts and parent dances</div></div>
+      <div class="row"><div class="time">8:00 PM</div><div class="detail">Dance set resumes</div><span class="tag tag-live">LIVE</span></div>
+      <div class="row"><div class="time">TBD</div><div class="detail">Hora</div><span class="tag tag-live">LIVE</span></div>
+      <div class="row"><div class="time">9:30–9:45 PM</div><div class="detail">Band break. DJ plays.</div><span class="tag tag-break">BREAK</span></div>
+      <div class="row"><div class="time">9:45 PM</div><div class="detail">Dance set resumes</div><span class="tag tag-live">LIVE</span></div>
+      <div class="row"><div class="time">10:50 PM</div><div class="detail">Final guest dance</div></div>
+      <div class="row"><div class="time">10:55 PM</div><div class="detail">Private last dance</div><span class="tag tag-track">TRACK</span></div>
+      <div class="row"><div class="time">11:00 PM</div><div class="detail">Band-led second line and grand exit</div><span class="tag tag-live">LIVE</span></div>
+    </section>
+
+    <div class="divider"></div>
+    <section class="section">
+      <div class="section-label">Specials</div>
+      <div class="special"><div class="moment">Wedding Party Processional</div><div class="song">“You Should Probably Leave” — instrumental guitar version<br>Operator TBD</div><span class="tag tag-track">TRACK</span></div>
+      <div class="special"><div class="moment">Bride Entrance</div><div class="song">“Better Together” — instrumental guitar version<br>Operator TBD</div><span class="tag tag-track">TRACK</span></div>
+      <div class="special"><div class="moment">Recessional</div><div class="song">“Hypnotized” — Purple Disco Machine<br>Final 45 seconds, start approximately 2:30</div><span class="tag tag-track">TRACK</span></div>
+      <div class="special"><div class="moment">Grand Introduction</div><div class="song">“Levels” — Avicii<br>Operator and format TBD</div><span class="tag tag-tbd">TBD</span></div>
+      <div class="special"><div class="moment">First Dance</div><div class="song">“Joy of My Life” — Chris Stapleton</div><span class="tag tag-track">TRACK</span></div>
+      <div class="special"><div class="moment">Father / Daughter</div><div class="song">“Front Door Famous” — Luke Combs<br>First 1:20</div><span class="tag tag-track">TRACK</span></div>
+      <div class="special"><div class="moment">Mother / Son</div><div class="song">“Bailamos” — Enrique Iglesias<br>First 1:15, original guitar and shaker opening</div><span class="tag tag-live">LIVE</span></div>
+      <div class="special"><div class="moment">Hora</div><div class="song">“Hava Nagila”<br>Timing TBD</div><span class="tag tag-live">LIVE</span></div>
+      <div class="special"><div class="moment">Final Guest Dance</div><div class="song">“Levels” — Avicii<br>Operator and format TBD</div><span class="tag tag-tbd">TBD</span></div>
+      <div class="special"><div class="moment">Private Last Dance</div><div class="song">“Do You Remember” — Jack Johnson</div><span class="tag tag-track">TRACK</span></div>
+      <div class="special"><div class="moment">Grand Exit</div><div class="song">Second line<br>Song TBD</div><span class="tag tag-live">LIVE</span></div>
+    </section>
+
+    <div class="divider"></div>
+    <section class="section">
+      <div class="section-label">Songs to Learn</div>
+      <ul class="list"><li>Bailamos — Enrique Iglesias<br>First 1:15, original arrangement</li></ul>
+    </section>
+
+    <div class="divider"></div>
+    <div class="two-col">
+      <section class="section">
+        <div class="section-label">Emcee</div>
+        <div class="value">Reception lead: TBD</div>
+        <div class="sub">Couple introduction: “Mr. and Mrs. Cassiday”</div>
+        <div class="sub">Greenway announces dinner at 6:40 PM.</div>
+        <div class="sub">Officiant Jimmy Klein announces cocktail hour.</div>
+      </section>
+      <section class="section">
+        <div class="section-label">Key Contacts</div>
+        <div class="contact"><div class="role">Day-Of Planner</div><div class="name">Heather</div><div class="info"><a href="tel:+18177606466">817-760-6466</a></div></div>
+        <div class="contact"><div class="role">Planner · Shannon Rose Events</div><div class="name">Shannon Ducker</div><div class="info"><a href="tel:+12147280991">214-728-0991</a></div></div>
+        <div class="contact"><div class="role">Venue · Flathead Lake Lodge</div><div class="name">Laura Trettel</div><div class="info"><a href="tel:+14068374391">406-837-4391</a></div></div>
+        <div class="contact"><div class="role">Bride</div><div class="name">Becca Hess</div><div class="info"><a href="tel:+13109245506">310-924-5506</a></div></div>
+        <div class="contact"><div class="role">Groom</div><div class="name">Henry Cassiday</div><div class="info"><a href="tel:+18082912509">808-291-2509</a></div></div>
+        <div class="contact"><div class="role">Officiant</div><div class="name">Jimmy Klein</div><div class="info"><a href="tel:+13106254930">310-625-4930</a></div></div>
+      </section>
+    </div>
+
+    <div class="divider"></div>
+    <section class="section">
+      <div class="section-label">Notes</div>
+      <div class="note warning"><strong>Sound Plan</strong>Sound provider, gear source, and load-in time: TBD.</div>
+      <div class="note warning"><strong>Meal Coverage</strong>Meal coverage during the dinner set is TBD.</div>
+      <div class="note warning"><strong>Reception Emcee</strong>Couple introduction, toasts, and parent-dance cue owner: TBD.</div>
+      <div class="note warning"><strong>Hora</strong>Timing: TBD.</div>
+      <div class="note warning"><strong>Second Line</strong>Song: TBD.</div>
+      <div class="note">Ceremony seating music: instrumental country.</div>
+      <div class="note">Cocktail-hour music: country.</div>
+      <div class="note">Do not play: Taylor Swift, Bruno Mars, Pink Pony Club.</div>
+      <div class="note">Stage: 16 by 20 feet. Keep rear side openings clear for band access and bar service.</div>
+      <div class="note">Friday group flight arrives at FCA at 1:25 PM. Airport pickup and local transportation are TBD.</div>
+      <div class="note">Hotel: SpringHill Suites Kalispell, 250 Old Reserve Dr. Rooms October 2–4.</div>
+      <div class="note">Gear with Primo is due Tuesday, September 29.</div>
+    </section>
+  </main>
+  <footer class="footer"><span>ADRIAN ONLY</span><span>Hess / Cassiday 10.03.26</span></footer>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload();});}</script>
+</body>
+</html>

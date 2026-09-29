@@ -23,6 +23,20 @@ The deploy folder also holds non-proposal pages (`brand-guide`, `brand-guide-v2`
 `social-direction`, …). **Every deploy publishes the entire folder**, so anything new
 sitting in it rides along. Always list ride-alongs in the pre-deploy summary to Adrian.
 
+## Cloud sessions (added 2026-08-20)
+
+The proposals repo is on GitHub (`adriangreenway/greenway-proposals`) and carries its
+own cloud-adapted skill + docs under `.agents/` so Adrian can run create-proposal from
+claude.ai/code on his phone (auth: `NETLIFY_AUTH_TOKEN` in that repo's cloud
+environment settings; dot-folders don't upload, and `netlify.toml` force-404s
+`/CLAUDE.md` and `/.agents/*`). Consequences for Mac sessions:
+
+- **`git pull` in `~/Desktop/greenway-proposals` before any local work or deploy** —
+  cloud sessions commit and push to `main`.
+- If `PRICING_AND_CONTENT.md`, `EMAIL_TEMPLATES.md`, `TEMPLATE.html`, or
+  `LEAD_VETTING_GATE.md` change in this repo, re-copy them into the proposals repo's
+  `.agents/docs/` (see the README there).
+
 ## Netlify facts
 
 - Site name `greenway-proposals`, production URL `https://proposals.greenwayband.com`

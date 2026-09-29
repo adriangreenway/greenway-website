@@ -3,6 +3,44 @@
 Adrian-supplied, locked wording. Source: Adrian in chat, 2026-07-14 (first used for the
 turner draft). Use with the create-proposal skill's draft step. Drafts only, never send.
 
+## GOTCHA: update_draft can silently destroy the draft (2026-07-29)
+
+On the Ken-Ran pass email, `update_draft` was called four times to revise
+wording. Every call returned success with the draft ID. The draft was then
+**absent from Gmail entirely** — Adrian couldn't find it and had to ask for it
+again. Recreating with `create_draft` worked fine.
+
+Rules:
+- After ANY `update_draft`, call `list_drafts` to confirm the draft still
+  exists. Never report "the draft is updated" on the tool's return value alone.
+- For more than a one-word tweak, prefer deleting the approach entirely and
+  calling `create_draft` fresh.
+- `create_draft` needs `subject` AND `replyToMessageId` to land on the right
+  thread. `update_draft` calls that omit `subject` are a suspected contributor
+  to the loss.
+
+## Voice for ad-hoc replies (2026-07-29, Ken-Ran pass draft correction)
+
+Template 4.1 covers new inquiries only. Every OTHER client email (negotiation,
+clarification, passing on a gig) is written in Adrian's own sent style, which
+is much barer than composed prose. A relationship-managing 3-paragraph pass
+draft got rejected flat: "this sounds nothing like my voice."
+
+Model on his real sent emails, verbatim examples from the Ken-Ran and
+Juneteenth threads:
+- "Hi, our corporate rate for a 4pc band is $5000. This includes lights and
+  sound. Please let me know if you have any questions or concerns. We'd love
+  to work with you!"
+- "We can go as low as $4000 for the 4pc since it's a Monday. Is that closer
+  to your budget?"
+- "No problem. What is your max budget for something like this?"
+
+The pattern: 2 to 4 short sentences, states the fact or number plainly, one
+warm closer at most ("We'd love to work with you!"), then done. No "I'm going
+to be straight with you," no advice about what the buyer should do instead,
+no relationship speeches. Numbers stated bare ($5000, not "five thousand").
+Sign-off "Best," + "Adrian" for drafts he'll send from adrian@.
+
 # Template 4.1 — New Inquiry Response (The Greenway Band)
 First touch email for a new wedding inquiry that includes a date and venue. Working version with embedded links. Both links live inside anchor text. No raw URLs visible, no colon before a link.
 
