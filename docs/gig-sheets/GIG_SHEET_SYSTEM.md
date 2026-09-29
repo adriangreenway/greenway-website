@@ -158,3 +158,13 @@ Example:
 
 `~/Desktop/greenway-gigs/matey/08-01-26/` becomes
 `https://gigs.greenwayband.com/matey/08-01-26/`.
+
+## Auto-refresh for open pages (Hess, 2026-09-29)
+
+Gig sheets are cache-first so they work offline, which used to leave band members on
+stale copies. Every page now polls `registration.update()` when the tab regains focus,
+when the phone comes back online, and every 5 minutes, and reloads on
+`controllerchange`. `sw.js` also navigates open pages on an upgrade (old cache
+existed). Always bump `CACHE` on any change; that bump is what triggers all of this.
+Nobody should ever be told to refresh or clear cache. A tab sitting in the background
+updates the moment it is opened or woken.

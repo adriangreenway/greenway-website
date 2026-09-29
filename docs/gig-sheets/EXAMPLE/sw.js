@@ -54,10 +54,17 @@ self.addEventListener('install',event => {
 });
 
 self.addEventListener('activate',event => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(
-    keys.filter(key => key.startsWith(PREFIX) && key !== CACHE).map(key => caches.delete(key))
-  )));
-  self.clients.claim();
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    const old = keys.filter(key => key.startsWith(PREFIX) && key !== CACHE);
+    await Promise.all(old.map(key => caches.delete(key)));
+    await self.clients.claim();
+    // An upgrade from an older version: refresh any open pages so nobody sees stale content.
+    if(old.length){
+      const open = await self.clients.matchAll({type:'window'});
+      open.forEach(client => client.navigate(client.url).catch(() => {}));
+    }
+  })());
 });
 
 self.addEventListener('fetch',event => {

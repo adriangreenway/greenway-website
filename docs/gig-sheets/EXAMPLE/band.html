@@ -138,5 +138,6 @@ a{color:var(--black);border-bottom:1px solid var(--faint);text-decoration:none}.
 </main>
 <footer class="footer"><span>The Greenway Band</span><span>Courtois / Blick 09.05.26</span></footer>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload();});}</script>
+<script>if('serviceWorker' in navigator){const u=()=>navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});document.addEventListener('visibilitychange',()=>{if(!document.hidden)u();});window.addEventListener('online',u);setInterval(u,300000);}</script>
 </body>
 </html>

@@ -72,5 +72,6 @@ function show(index){current=Math.max(0,Math.min(index,cueEls.length-1));cueEls.
 cueEls.forEach((cue,i)=>cue.addEventListener('click',()=>show(i)));document.getElementById('prev').addEventListener('click',()=>show(current-1));document.getElementById('next').addEventListener('click',()=>show(current+1));document.addEventListener('keydown',event=>{if(event.key==='ArrowUp'||event.key==='ArrowLeft')show(current-1);if(event.key==='ArrowDown'||event.key==='ArrowRight'||event.key===' ')show(current+1);});
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload();});}
 </script>
+<script>if('serviceWorker' in navigator){const u=()=>navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});document.addEventListener('visibilitychange',()=>{if(!document.hidden)u();});window.addEventListener('online',u);setInterval(u,300000);}</script>
 </body>
 </html>

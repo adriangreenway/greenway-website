@@ -447,5 +447,6 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+<script>if('serviceWorker' in navigator){const u=()=>navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});document.addEventListener('visibilitychange',()=>{if(!document.hidden)u();});window.addEventListener('online',u);setInterval(u,300000);}</script>
 </body>
 </html>
