@@ -88,6 +88,9 @@ replace every fact page by page:
   rewind/fast-forward (±10s) and a tap-to-seek progress bar, one track card per
   LIVE song. Convert any WAV to MP3 first (`ffmpeg -codec:a libmp3lame -b:a 192k`)
   — a raw Ableton export is too large for a phone to load smoothly at the venue.
+  Lyrics: timed lines from Adrian's AbleSet `.als` via
+  `docs/gig-sheets/tools/als-lyrics.py` (see GIG_SHEET_SYSTEM.md, Practice tracks
+  and lyrics); a plain string also works.
 - `sw.js` / `manifest.json` — update `sw.js`'s `CORE` array to list every page
   you're actually shipping
 

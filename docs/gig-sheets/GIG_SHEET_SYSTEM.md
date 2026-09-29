@@ -3,7 +3,7 @@
 Per-wedding, offline-capable microsites with separate band and Adrian views.
 This is separate from proposals, the Astro rebuild, and the Squarespace embed.
 
-Last verified: 2026-07-30.
+Last verified: 2026-09-28.
 
 ## Where things live
 
@@ -26,7 +26,7 @@ Last verified: 2026-07-30.
 - Cloudflare record: DNS-only CNAME `gigs.greenwayband.com` to
   `greenway-gigs.netlify.app`
 - Privacy: `noindex, nofollow` on every path
-- Matey/Sackschewsky is the first wedding on the shared hostname.
+- Shared-hostname weddings so far: Matey/Sackschewsky (08-01-26), Shepard/Perugini (08-08-26, deployed 2026-08-05), Blick/Courtois (09-05-26, deployed 2026-08-31), Hess/Cassiday (10-03-26, deployed 2026-09-28; first out-of-town sheet, adds a Travel section).
 - Older weddings remain on their original one-off Netlify sites. Do not migrate,
   delete, or redeploy them unless Adrian asks.
 
@@ -42,15 +42,23 @@ cd ~/Desktop/greenway-gigs
 netlify deploy --prod --dir . --site 8205364b-6929-454b-bfe0-51afaeb02636
 ```
 
-Before deploying, confirm every existing wedding folder is still present. After
-deploying, confirm the changed wedding and at least one older shared-hostname
-wedding both return HTTP 200. Matey is currently the only shared-hostname wedding,
-so the older-wedding check becomes applicable after the second wedding is added.
+Before deploying, confirm every existing wedding folder is still present, then
+run a live-vs-local hash diff over every file in every OTHER wedding folder plus
+the root `index.html` (`shasum` local vs `curl` live). If live differs, live wins
+for weddings this session is not editing: pull the live copy into the local
+folder before deploying. This is mandatory — proven 2026-08-31, when six
+matey/shepard files were newer on live (another tool's absolute-link pass) and a
+presence-check-only deploy would have silently reverted them. After deploying,
+confirm the changed wedding and at least one older shared-hostname wedding both
+return HTTP 200, and re-hash one previously-drifted file to prove it survived.
 
 ## Subfolder path rules
 
-- Page links and the manifest link are relative: `gig.html`, `band.html`,
-  `manifest.json`.
+- Internal page-to-page nav links (hub links, Listening Room back link) are
+  absolute extensionless: `/<client-last-name>/<mm-dd-yy>/band`. This is the
+  live-site convention since a 2026-08 pass across matey/shepard; Blick follows
+  it. The manifest link, sw registration, PDF download links, and audio paths
+  in pages stay relative: `manifest.json`, `sw.js`, `band-sheet.pdf`.
 - Register the service worker as `sw.js`, not `/sw.js`.
 - In `sw.js`, every `CORE` entry and the offline fallback use absolute
   `/<client-last-name>/<mm-dd-yy>/...` paths.
@@ -78,8 +86,12 @@ so the older-wedding check becomes applicable after the second wedding is added.
    direct URL.
    Listening Room stays present with a clear empty state until tracks are added.
 3. Preview the whole shared folder locally at
-   `/<client-last-name>/<mm-dd-yy>/`. Confirm every link stays inside that
-   wedding's folder and the landing page reports that it was saved for offline use.
+   `/<client-last-name>/<mm-dd-yy>/`. Serve with `npx serve` (clean URLs), NOT
+   `python3 -m http.server` — python 404s the extensionless `CORE` paths so the
+   service worker can never install locally. Confirm every link stays inside
+   that wedding's folder. The Claude in-app browser pane cannot run service
+   workers on localhost at all; the real offline check is step 6, live:
+   headless Chrome `--dump-dom` on the live hub must show `Saved for offline use`.
 4. For a new wedding, show Adrian the couple, date, venue, pages, public URL, and
    every visible `TBD` or `UNKNOWN`. Wait for his explicit `go`.
 5. Deploy the complete folder with the command above.
@@ -87,6 +99,33 @@ so the older-wedding check becomes applicable after the second wedding is added.
    service-worker file list, phone-width layout, and browser console. After the
    service worker installs, confirm an actual rewritten hub link still opens the
    correct page with the network unavailable.
+
+## Practice tracks and lyrics
+
+- Convert every WAV to MP3 first (`ffmpeg -i in.wav -codec:a libmp3lame -b:a 192k
+  out.mp3`) into the wedding's `audio/`, kebab-case, matching the `file:` in
+  `listen.html`'s `TRACKS`. A card only renders once its MP3 exists, so a registry
+  entry for a track that is still coming is harmless. Check each WAV's length with
+  `afinfo` before converting: a bad export can be a fraction of a second long
+  (Ain't Nobody, 2026-09-28).
+- Add each MP3 to `sw.js` `AUDIO`, bump `CACHE`, then the usual live diff and
+  whole-folder deploy.
+- Lyrics come from Adrian's AbleSet sets (`<Song> - Synced Lyrics for AbleSet.als`,
+  GWB Show SSD, `Ableton/_Trax/<Song>/`): every lyric line is a MIDI clip on the
+  `Vocals +LYRICS` track, placed in beats. Run
+  `docs/gig-sheets/tools/als-lyrics.py <file.als> --bpm <tempo from the
+  practice-track filename> --duration <MP3 seconds>` and paste the printed
+  `[[seconds, 'line'], ...]` array as that track's `lyrics:`. Always pass the
+  song's real tempo: the standalone lyric set's master tempo is a throwaway (Hot
+  Stuff's said 200 for a 120 BPM song). The script's duration check must say OK.
+  When the practice-track filename has no tempo, the song's main project file
+  in the same folder is named `<Key>_<bpm> bpm_<Song>.als` (`Dm_120.45 bpm_Bad
+  Girls.als`, `Ebm_104 bpm_Ain't Nobody.als`); use that, and cross-check with
+  `docs/gig-sheets/tools/tempo-estimate.py <mp3>` (audio beat analysis, needs
+  numpy + ffmpeg; validated on all five Hess tracks).
+- Timed lyrics highlight the current line while the track plays and jump the
+  track when a line is tapped; a plain string still works for untimed lyrics.
+  First shipped on Hess, 2026-09-28; the code lives in `EXAMPLE/listen.html`.
 
 ## Audience and sharing rules
 
