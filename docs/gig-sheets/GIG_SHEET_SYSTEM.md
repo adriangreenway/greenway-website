@@ -123,6 +123,13 @@ return HTTP 200, and re-hash one previously-drifted file to prove it survived.
   Girls.als`, `Ebm_104 bpm_Ain't Nobody.als`); use that, and cross-check with
   `docs/gig-sheets/tools/tempo-estimate.py <mp3>` (audio beat analysis, needs
   numpy + ffmpeg; validated on all five Hess tracks).
+- Prefer the lyric track inside the SHOW project (`<Key>_<bpm> bpm_<Song>.als`,
+  pass `--track "vocals +lyrics"` so the older `LYRICS` track is skipped) over a
+  standalone `Synced Lyrics for AbleSet.als`: the standalone can be stale. Ain't
+  Nobody's standalone file was a 144-bar layout (90 lines) while the show
+  arrangement and every export are 96 bars (67 lines); only the show project's
+  track ended at the MP3's end. If the duration check says CHECK BPM and the
+  tempo is confirmed, the lyric file is the wrong length, not the tempo.
 - Timed lyrics highlight the current line while the track plays and jump the
   track when a line is tapped; a plain string still works for untimed lyrics.
   First shipped on Hess, 2026-09-28; the code lives in `EXAMPLE/listen.html`.
