@@ -223,8 +223,8 @@ Attire means the band's clothing, not the guests' dress code. Do not transfer a 
 Use:
 
 ```text
-Guys - Black suit, black shoes, black tie, white shirt
-Girls - Black dress or jumpsuit
+Men: black suit, black shoes, black tie, white shirt
+Women: black dress or jumpsuit
 ```
 
 Give both lines identical typography and font weight. Keep Attire in the top core information block. On the Full Gig Sheet, place it directly beneath Performance Team. Do not repeat it later as a separate section.
