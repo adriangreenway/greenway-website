@@ -1,6 +1,6 @@
 # CURRENT STATE: The Greenway Band Website
 
-**Last updated:** 2026-09-28
+**Last updated:** 2026-10-01
 **Last verified build:** PASS on 2026-07-30 (`npm run build`, 6 pages, clean; no test/typecheck scripts exist in this repo to run).
 
 Rules for this file (Claude Code, obey these):
