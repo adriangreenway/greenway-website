@@ -49,7 +49,9 @@ async function cacheAudio(){
 }
 
 self.addEventListener('install',event => {
-  event.waitUntil(Promise.all([cacheFreshCore(),cacheAudio()]));
+  // Only the small core files block the upgrade; big MP3s download in the background.
+  event.waitUntil(cacheFreshCore());
+  cacheAudio();
   self.skipWaiting();
 });
 
