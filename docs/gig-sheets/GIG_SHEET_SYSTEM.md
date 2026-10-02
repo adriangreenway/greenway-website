@@ -130,6 +130,11 @@ return HTTP 200, and re-hash one previously-drifted file to prove it survived.
   arrangement and every export are 96 bars (67 lines); only the show project's
   track ended at the MP3's end. If the duration check says CHECK BPM and the
   tempo is confirmed, the lyric file is the wrong length, not the tempo.
+- Some lyric sets are chord-annotated: the clip names carry ChordPro marks inside
+  the words (`[Am]Feeling m[F]y way`) and some clips are chords only (Wake Me Up,
+  2026-10-02). The script prints them as-is. Strip `\[[^\]]*\]`, collapse the
+  extra spaces, and drop any line that ends up empty before pasting; chords never
+  belong in a Listening Room card.
 - Timed lyrics highlight the current line while the track plays and jump the
   track when a line is tapped; a plain string still works for untimed lyrics.
   First shipped on Hess, 2026-09-28; the code lives in `EXAMPLE/listen.html`.
