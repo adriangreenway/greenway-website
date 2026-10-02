@@ -134,6 +134,14 @@ return HTTP 200, and re-hash one previously-drifted file to prove it survived.
   track when a line is tapped; a plain string still works for untimed lyrics.
   First shipped on Hess, 2026-09-28; the code lives in `EXAMPLE/listen.html`.
 
+## MC Slides deck
+
+`mc-cue-slides.pdf` (the landscape one-cue-per-page deck Adrian loads into forScore)
+is generated from the finished `mc.html` by `docs/gig-sheets/tools/mc-slides.py
+<wedding-folder> "<Couple>" <mm.dd.yy>`. Re-run it whenever a cue changes, re-render
+`mc-cue-sheet.pdf` (headless Chrome `--print-to-pdf` of `mc.html` off a local
+server), keep both listed in `sw.js` `CORE`, and bump `CACHE`.
+
 ## Audience and sharing rules
 
 - Send the landing URL or `band.html` to musicians.
