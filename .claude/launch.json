@@ -91,6 +91,18 @@
       "port": 8894
     },
     {
+      "name": "clock-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8892",
+        "--directory",
+        "/private/tmp/claude-501/-Users-adrianjoseph-greenway-website/55adea83-1f51-4115-8da1-603b4191cefd/scratchpad/site"
+      ],
+      "port": 8892
+    },
+    {
       "name": "adrian-epk",
       "runtimeExecutable": "python3",
       "runtimeArgs": [

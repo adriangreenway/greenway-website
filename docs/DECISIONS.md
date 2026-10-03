@@ -341,6 +341,13 @@ Format:
 - **Consequences:** MC cue content (including the DJ's first name in one note) is on the unlisted, noindex public site for this wedding. Future gig sheets should ask Adrian per wedding whether the MC PDF is band-visible.
 - **Reconsider if:** a couple's planner objects, or a future wedding's MC sheet carries anything sensitive.
 
+### D21: gig sheets get a live clock, and the gigs site gets its first (tiny) dynamic piece
+- **Date:** 2026-10-02
+- **Decision:** The Band Sheet and Full Gig Sheet follow the venue clock on the wedding day (current block highlighted, bottom bar with minutes in/left and what is next), and Adrian alone can mark a row as "started now" so the rest of the night shifts on every phone within 30 s. Adrian's phone learns a private key once from a `#clock=<key>` link; the band's phones have no controls. The shared memory is one Netlify Function + Blobs store on the existing `greenway-gigs` site, same origin as the sheets. The key lives only in the Netlify secret env var `GIG_CLOCK_KEY` and 1Password `Greenway Gig Clock Key`.
+- **Why:** Adrian asked for a "press play" timer that moves with the schedule and can be reset when the night runs behind. He rejected a per-phone version as confusing ("just do it for everyone"), which needs one shared record and a rule for who may write it.
+- **Consequences:** The gigs site is no longer purely static: `.functions/` (a dot-folder, so the CLI never uploads its source or `node_modules`) plus a `[functions]` block in its `netlify.toml` ship with the next wedding. The feature fails safe: if the function is missing or offline, every phone still follows the clock. Printed times never change; projected times appear beneath them. Pages and PDFs are unchanged off the wedding day. Rotating the key needs a redeploy. Plan: `docs/gig-sheets/LIVE_CLOCK_PLAN.md`; runbook: `docs/gig-sheets/functions/README.md`.
+- **Reconsider if:** anyone besides Adrian needs to tap, a planner objects to the band seeing shifted times, or Netlify's free function allowance becomes a cost.
+
 ---
 ## Open decisions (not yet made — see `docs/ROADMAP.md`)
 - Reconcile `dev` vs `main` and decide the canonical deploy branch.

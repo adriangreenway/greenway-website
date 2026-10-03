@@ -82,6 +82,12 @@ replace every fact page by page:
   timeline, all specials
 - `band.html` — the same facts reorganized for the band: timeline, specials,
   couple's requests, do-not-play, who's emceeing
+- Live clock (both `gig.html` and `band.html`): keep the EXAMPLE's clock CSS, the
+  `<div class="clock">` bar, and the clock script; set the schedule section's
+  `data-date` (wedding date) and `data-tz` (venue zone, `America/Chicago` or
+  `America/Denver`), and give every row with a real clock time
+  `data-at="HH:MM"` in 24-hour venue time (`6:30 PM` → `18:30`). Rows like
+  `After toasts` get no `data-at`. See GIG_SHEET_SYSTEM.md, Live clock.
 - `mc.html` — only if a separate emcee/DJ runs the reception; a time-stamped cue
   script mirroring the timeline
 - `listen.html` — only if there's at least one practice track; audio player with

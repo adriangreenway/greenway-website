@@ -29,6 +29,22 @@ a{color:inherit;border-bottom:1px solid var(--faint);text-decoration:none}.divid
 .note{padding:12px 0;border-bottom:1px solid var(--rule);font-size:14px}.note:last-child{border-bottom:0}.warning{padding-left:14px;border-left:3px solid var(--warning)}.warning strong{display:block;color:var(--warning);font-size:9px;letter-spacing:.18em;text-transform:uppercase}
 .footer{display:flex;justify-content:space-between;padding:12px max(28px,calc((100vw - 1120px)/2));border-top:1px solid var(--rule);color:var(--dim);font-size:10px}
 @media(max-width:600px){.header{min-height:132px;padding:22px 20px;align-items:flex-start;gap:12px}.event{max-width:210px;min-width:0}.event small{display:block;font-size:7px;letter-spacing:.12em;overflow-wrap:anywhere}.event h1{font-size:20px}.body{padding:36px 20px 52px}.two-col{grid-template-columns:1fr;gap:4px}.divider{margin:30px 0}.row{align-items:flex-start}.time{width:94px;min-width:94px;font-size:12px}.detail{font-size:13px}.tag{margin-left:8px;padding:3px 5px;font-size:8px}.special{grid-template-columns:1fr auto;gap:4px 12px}.song{grid-column:1;grid-row:2}.special .tag{grid-column:2;grid-row:1 / span 2}.list{columns:1}}
+/* Live clock (see docs/gig-sheets/LIVE_CLOCK_PLAN.md). Dormant off the wedding day. */
+.body{--gutter:28px}
+.row[data-at] .time{position:relative}.has-key .row[data-at] .time{cursor:pointer}.has-key .row[data-at] .time::after{content:'';position:absolute;top:-9px;right:0;bottom:-9px;left:0}
+.row.is-past{color:var(--dim)}
+.row.is-now{margin:0 calc(var(--gutter) * -1);padding-left:var(--gutter);padding-right:var(--gutter);background:var(--black);color:var(--cream)}
+.row.is-now .tag{color:var(--muted);border-color:var(--faint)}.row.is-now .tag-live{color:var(--cream)}.row.is-now a{color:var(--cream);border-color:var(--muted)}
+.proj{display:block;color:var(--dim);font-size:11px;font-weight:500}.row.is-now .proj{color:var(--muted)}
+.clock{position:fixed;z-index:20;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:10px max(28px,calc((100vw - 1120px)/2));border-top:1px solid var(--faint);background:var(--black);color:var(--cream);font-size:13px}
+.clock[hidden]{display:none}.clock-main,.clock-side{display:flex;align-items:center;gap:12px;min-width:0}.clock-main{flex:1}
+.clock-label{color:var(--dim);font-size:9px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;white-space:nowrap}
+.clock-block{min-width:0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.clock-meta,.clock-next{color:var(--muted);white-space:nowrap}
+.clock-drift{font-weight:600;color:var(--muted);white-space:nowrap}.clock-drift.behind{padding-left:8px;border-left:3px solid var(--warning);color:var(--cream)}
+.clock-reset{min-height:40px;padding:0 12px;border:1px solid var(--faint);background:var(--charcoal);color:var(--cream);font:600 10px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}.clock-reset[hidden]{display:none}.clock-reset:active{background:var(--faint)}
+body.clock-on{padding-bottom:72px}
+@media(max-width:600px){.body{--gutter:20px}.clock{flex-direction:column;align-items:flex-start;gap:6px;padding:10px 20px}.clock-main,.clock-side{width:100%}.clock-side{justify-content:space-between}.clock-meta,.clock-next{white-space:normal}body.clock-on{padding-bottom:104px}}
+@media print{.clock,.proj{display:none!important}.row.is-now{margin:0;padding-left:0;padding-right:0;background:none;color:inherit}.row.is-past{color:inherit}.row.is-now .tag{color:var(--dim);border-color:var(--rule)}.row.is-now .tag-live{color:var(--black)}.row.is-now a{color:var(--black);border-color:var(--faint)}}
 </style>
 </head>
 <body>
@@ -53,33 +69,33 @@ a{color:inherit;border-bottom:1px solid var(--faint);text-decoration:none}.divid
   </div>
 
   <div class="divider"></div>
-  <section class="section">
+  <section class="section" data-schedule data-date="2026-09-05" data-tz="America/Chicago">
     <div class="section-label">Full Timeline</div>
-    <div class="row"><div class="time">11:30 AM</div><div class="detail">Sound engineer arrives · sets up for reception</div></div>
-    <div class="row"><div class="time">1:50 PM</div><div class="detail">Wedding party arrives at Co-Cathedral of the Sacred Heart</div></div>
-    <div class="row"><div class="time">2:30 PM</div><div class="detail">Band load in at The Houstonian</div></div>
-    <div class="row"><div class="time">2:30 PM</div><div class="detail">Ceremony begins · full mass · Co-Cathedral organist plays</div></div>
-    <div class="row"><div class="time">3:30 PM</div><div class="detail">Ceremony ends · altar photos, then buses back to hotel</div></div>
-    <div class="row"><div class="time">3:30 PM</div><div class="detail">Soundcheck until 4:30 PM</div></div>
-    <div class="row"><div class="time">5:00 PM</div><div class="detail">Cocktail hour in lobby · Greenway playlist over our speaker</div><span class="tag tag-track">TRACK</span></div>
-    <div class="row"><div class="time">5:00 PM</div><div class="detail">Band meals · Cottonwood Room</div></div>
-    <div class="row"><div class="time">5:30 PM</div><div class="detail">Reception room fully prepared</div></div>
-    <div class="row"><div class="time">6:00 PM</div><div class="detail">Doors open · guests seated · Set One dinner set begins</div><span class="tag tag-live">LIVE</span></div>
-    <div class="row"><div class="time">6:15 PM</div><div class="detail">Grand entrance, bride + groom only · “Can’t Take My Eyes Off You”</div><span class="tag tag-live">LIVE</span></div>
-    <div class="row"><div class="time">6:20 PM</div><div class="detail">First dance · “The Way I Love You” · 0:43–1:33 cut</div><span class="tag tag-live">LIVE</span></div>
-    <div class="row"><div class="time">6:25 PM</div><div class="detail">Welcome by Mark Courtois (father of the bride) · blessing by Deacon Millhouse</div></div>
-    <div class="row"><div class="time">6:30 PM</div><div class="detail">Salads served</div></div>
-    <div class="row"><div class="time">7:00 PM</div><div class="detail">Toasts: Avery Ciancone (matron of honor), Alex Sickafoose (best man), then couple's thank-you · champagne</div></div>
-    <div class="row"><div class="time">7:00 PM</div><div class="detail">Band break until 7:25 PM · back on stage before 7:20 PM</div><span class="tag tag-break">BREAK</span></div>
-    <div class="row"><div class="time">7:20 PM</div><div class="detail">Father / daughter dance · “Isn’t She Lovely” · 0:37–1:42</div><span class="tag tag-live">LIVE</span></div>
-    <div class="row"><div class="time">7:20 PM</div><div class="detail">Mother / son dance · “Edelweiss” · 0:09–1:07</div><span class="tag tag-track">TRACK</span></div>
-    <div class="row"><div class="time">7:25 PM</div><div class="detail">Set Two · dance set one</div><span class="tag tag-live">LIVE</span></div>
-    <div class="row"><div class="time">7:25 PM</div><div class="detail">Cake cutting · not saving top tier</div></div>
-    <div class="row"><div class="time">8:25 PM</div><div class="detail">Band break until 8:40 PM · couple outside for photos at lit-up tree</div><span class="tag tag-break">BREAK</span></div>
-    <div class="row"><div class="time">8:40 PM</div><div class="detail">Set Three · dance set two</div><span class="tag tag-live">LIVE</span></div>
-    <div class="row"><div class="time">9:40 PM</div><div class="detail">Private last dance · “Forever and Ever, Amen”</div><span class="tag tag-track">TRACK</span></div>
-    <div class="row"><div class="time">10:00 PM</div><div class="detail">Grand exit</div></div>
-    <div class="row"><div class="time">10:30 PM</div><div class="detail">Planner collects personal items · breakdown</div></div>
+    <div class="row" data-at="11:30"><div class="time">11:30 AM</div><div class="detail">Sound engineer arrives · sets up for reception</div></div>
+    <div class="row" data-at="13:50"><div class="time">1:50 PM</div><div class="detail">Wedding party arrives at Co-Cathedral of the Sacred Heart</div></div>
+    <div class="row" data-at="14:30"><div class="time">2:30 PM</div><div class="detail">Band load in at The Houstonian</div></div>
+    <div class="row" data-at="14:30"><div class="time">2:30 PM</div><div class="detail">Ceremony begins · full mass · Co-Cathedral organist plays</div></div>
+    <div class="row" data-at="15:30"><div class="time">3:30 PM</div><div class="detail">Ceremony ends · altar photos, then buses back to hotel</div></div>
+    <div class="row" data-at="15:30"><div class="time">3:30 PM</div><div class="detail">Soundcheck until 4:30 PM</div></div>
+    <div class="row" data-at="17:00"><div class="time">5:00 PM</div><div class="detail">Cocktail hour in lobby · Greenway playlist over our speaker</div><span class="tag tag-track">TRACK</span></div>
+    <div class="row" data-at="17:00"><div class="time">5:00 PM</div><div class="detail">Band meals · Cottonwood Room</div></div>
+    <div class="row" data-at="17:30"><div class="time">5:30 PM</div><div class="detail">Reception room fully prepared</div></div>
+    <div class="row" data-at="18:00"><div class="time">6:00 PM</div><div class="detail">Doors open · guests seated · Set One dinner set begins</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row" data-at="18:15"><div class="time">6:15 PM</div><div class="detail">Grand entrance, bride + groom only · “Can’t Take My Eyes Off You”</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row" data-at="18:20"><div class="time">6:20 PM</div><div class="detail">First dance · “The Way I Love You” · 0:43–1:33 cut</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row" data-at="18:25"><div class="time">6:25 PM</div><div class="detail">Welcome by Mark Courtois (father of the bride) · blessing by Deacon Millhouse</div></div>
+    <div class="row" data-at="18:30"><div class="time">6:30 PM</div><div class="detail">Salads served</div></div>
+    <div class="row" data-at="19:00"><div class="time">7:00 PM</div><div class="detail">Toasts: Avery Ciancone (matron of honor), Alex Sickafoose (best man), then couple's thank-you · champagne</div></div>
+    <div class="row" data-at="19:00"><div class="time">7:00 PM</div><div class="detail">Band break until 7:25 PM · back on stage before 7:20 PM</div><span class="tag tag-break">BREAK</span></div>
+    <div class="row" data-at="19:20"><div class="time">7:20 PM</div><div class="detail">Father / daughter dance · “Isn’t She Lovely” · 0:37–1:42</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row" data-at="19:20"><div class="time">7:20 PM</div><div class="detail">Mother / son dance · “Edelweiss” · 0:09–1:07</div><span class="tag tag-track">TRACK</span></div>
+    <div class="row" data-at="19:25"><div class="time">7:25 PM</div><div class="detail">Set Two · dance set one</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row" data-at="19:25"><div class="time">7:25 PM</div><div class="detail">Cake cutting · not saving top tier</div></div>
+    <div class="row" data-at="20:25"><div class="time">8:25 PM</div><div class="detail">Band break until 8:40 PM · couple outside for photos at lit-up tree</div><span class="tag tag-break">BREAK</span></div>
+    <div class="row" data-at="20:40"><div class="time">8:40 PM</div><div class="detail">Set Three · dance set two</div><span class="tag tag-live">LIVE</span></div>
+    <div class="row" data-at="21:40"><div class="time">9:40 PM</div><div class="detail">Private last dance · “Forever and Ever, Amen”</div><span class="tag tag-track">TRACK</span></div>
+    <div class="row" data-at="22:00"><div class="time">10:00 PM</div><div class="detail">Grand exit</div></div>
+    <div class="row" data-at="22:30"><div class="time">10:30 PM</div><div class="detail">Planner collects personal items · breakdown</div></div>
   </section>
 
   <div class="divider"></div>
@@ -139,7 +155,69 @@ a{color:inherit;border-bottom:1px solid var(--faint);text-decoration:none}.divid
   </section>
 </main>
 <footer class="footer"><span>The Greenway Band</span><span>Courtois / Blick 09.05.26</span></footer>
+<div class="clock" id="clock" hidden><div class="clock-main"><span class="clock-label" id="clock-label">Now</span><span class="clock-block" id="clock-block"></span><span class="clock-meta" id="clock-meta"></span></div><div class="clock-side"><span class="clock-next" id="clock-next"></span><span class="clock-drift" id="clock-drift"></span><button type="button" class="clock-reset" id="clock-reset" hidden>Reset</button></div></div>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload();});}</script>
 <script>if('serviceWorker' in navigator){const u=()=>navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});document.addEventListener('visibilitychange',()=>{if(!document.hidden)u();});window.addEventListener('online',u);setInterval(u,300000);}</script>
+<script>
+/* Live clock. Follows the venue clock on the wedding day; Adrian's phone (opened once via #clock=<key>) can mark a row as "now" and every phone follows within 30 s. See docs/gig-sheets/LIVE_CLOCK_PLAN.md. */
+(function(){
+var sec=document.querySelector('[data-schedule]');if(!sec)return;
+var DATE=sec.getAttribute('data-date')||'',TZ=sec.getAttribute('data-tz')||'America/Chicago';
+var rows=[].slice.call(sec.querySelectorAll('.row[data-at]'));
+if(!/^\d{4}-\d\d-\d\d$/.test(DATE)||!rows.length)return;
+var bar=document.getElementById('clock');if(!bar)return;
+var elLabel=document.getElementById('clock-label'),elBlock=document.getElementById('clock-block'),elMeta=document.getElementById('clock-meta'),elNext=document.getElementById('clock-next'),elDrift=document.getElementById('clock-drift'),btnReset=document.getElementById('clock-reset');
+var BASE=location.pathname.replace(/[^\/]*$/,''),KEY='gig-clock:'+BASE,KKEY='gig-clock-key',API='/.netlify/functions/clock?w='+encodeURIComponent(BASE);
+function offsetAt(ms){ms=Math.floor(ms/1000)*1000;var o={};new Intl.DateTimeFormat('en-US',{timeZone:TZ,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(new Date(ms)).forEach(function(x){o[x.type]=x.value;});return Date.UTC(+o.year,+o.month-1,+o.day,(+o.hour)%24,+o.minute,+o.second)-ms;}
+function zoned(y,m,d,h,mi){var g=Date.UTC(y,m-1,d,h,mi),t=g-offsetAt(g),o2=offsetAt(t);if(g-o2!==t)t=g-o2;return t;}
+var D=DATE.split('-').map(Number);
+var times=rows.map(function(r){var t=r.getAttribute('data-at').split(':').map(Number);return zoned(D[0],D[1],D[2]+(t[0]<6?1:0),t[0],t[1]);});
+var dayStart=zoned(D[0],D[1],D[2],0,0),last=times.length-1;
+function fmt(ms){return new Intl.DateTimeFormat('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit'}).format(new Date(ms));}
+function dur(ms){var m=Math.max(0,Math.round(ms/60000));if(m<60)return m+' min';var h=Math.floor(m/60),r=m%60;return r?h+' h '+r+' min':h+' h';}
+function name(i){var d=rows[i].querySelector('.detail');return (d?d.textContent:'').trim().split(' · ')[0];}
+function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s.row==='number'&&s.row>=0&&s.row<rows.length&&typeof s.at==='number'&&Date.now()-(s.set||s.at)<86400000)return s;if(s)localStorage.removeItem(KEY);}catch(e){}return null;}
+function save(s){try{if(s)localStorage.setItem(KEY,JSON.stringify(s));else localStorage.removeItem(KEY);}catch(e){}}
+var key=null;
+function readKey(){try{var m=location.hash.match(/[#&]clock=([A-Za-z0-9_-]+)/);if(m){if(m[1]==='off')localStorage.removeItem(KKEY);else localStorage.setItem(KKEY,m[1]);history.replaceState(null,'',location.pathname+location.search);}key=localStorage.getItem(KKEY);}catch(e){}document.body.classList.toggle('has-key',!!key);}
+readKey();window.addEventListener('hashchange',function(){readKey();render();});
+var state=load(),isLive=false,pending=null,lastWrite=0;
+function render(){
+  var now=Date.now(),s=state,from=s?s.row:-1,off=s?s.at-times[s.row]:0;
+  var eff=times.map(function(t,i){return i>=from?t+off:t;});
+  var cur=-1;for(var i=0;i<eff.length;i++){if(eff[i]<=now)cur=i;}
+  isLive=now>=dayStart&&now<=eff[last]+3600000+7200000;
+  var shifted=isLive&&!!s&&Math.abs(off)>=60000;
+  rows.forEach(function(r,i){
+    r.classList.toggle('is-now',isLive&&i===cur);r.classList.toggle('is-past',isLive&&i<cur);
+    var p=r.querySelector('.proj');
+    if(shifted&&i>=from){if(!p){p=document.createElement('span');p.className='proj';r.querySelector('.time').appendChild(p);}p.textContent=fmt(eff[i]);}
+    else if(p){p.parentNode.removeChild(p);}
+  });
+  bar.hidden=!isLive;document.body.classList.toggle('clock-on',isLive);
+  if(!isLive)return;
+  if(cur<0){elLabel.textContent='Starts';elBlock.textContent=name(0);elMeta.textContent=fmt(eff[0])+' · in '+dur(eff[0]-now);elNext.textContent='';}
+  else{var end=cur<last?eff[cur+1]:eff[cur]+3600000;
+    if(cur===last&&now>end){elLabel.textContent='Done';elBlock.textContent=name(cur);elMeta.textContent=fmt(eff[cur]);elNext.textContent='';}
+    else{elLabel.textContent='Now';elBlock.textContent=name(cur);elMeta.textContent=dur(now-eff[cur])+' in · '+dur(end-now)+' left';elNext.textContent=cur<last?'Next · '+name(cur+1)+' · '+fmt(eff[cur+1]):'Last block';}}
+  var behind=false;if(!s)elDrift.textContent='On schedule';else if(off>=60000){elDrift.textContent=dur(off)+' behind';behind=true;}else if(off<=-60000)elDrift.textContent=dur(-off)+' ahead';else elDrift.textContent='On time';
+  elDrift.className='clock-drift'+(behind?' behind':'');
+  btnReset.hidden=!(key&&s);
+}
+function setState(s){state=s;save(s);lastWrite=Date.now();render();if(key){pending={s:s};flush();}}
+function flush(){if(!pending||!key||navigator.onLine===false)return;var p=pending,body=p.s?{row:p.s.row,at:p.s.at}:{reset:true};
+  fetch(API,{method:'POST',headers:{'Authorization':'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify(body),cache:'no-store'}).then(function(r){if(r.ok&&pending===p)pending=null;}).catch(function(){});}
+function poll(){if(!isLive||document.hidden||navigator.onLine===false)return;if(pending){flush();return;}var started=Date.now();
+  fetch(API,{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||pending||started<lastWrite)return;
+    if(typeof d.row==='number'&&typeof d.at==='number'&&d.row>=0&&d.row<rows.length){if(!state||(d.set||0)>(state.set||0)||d.row!==state.row||d.at!==state.at){state=d;save(d);render();}}
+    else if(state){state=null;save(null);render();}
+  }).catch(function(){});}
+rows.forEach(function(r,i){r.querySelector('.time').addEventListener('click',function(){readKey();if(!key||!isLive)return;var n=Date.now();setState({row:i,at:n,set:n});});});
+btnReset.addEventListener('click',function(){setState(null);});
+render();poll();setInterval(render,15000);setInterval(poll,30000);
+document.addEventListener('visibilitychange',function(){if(!document.hidden){render();poll();}});
+window.addEventListener('online',function(){render();poll();});
+})();
+</script>
 </body>
 </html>

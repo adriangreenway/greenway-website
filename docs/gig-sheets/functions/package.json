@@ -1,0 +1,9 @@
+{
+  "name": "greenway-gigs-functions",
+  "private": true,
+  "type": "module",
+  "description": "Netlify Function for the gig-sheet live clock. Lives at ~/Desktop/greenway-gigs/.functions/ when deployed.",
+  "dependencies": {
+    "@netlify/blobs": "^11"
+  }
+}

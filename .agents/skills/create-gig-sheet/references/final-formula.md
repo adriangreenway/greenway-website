@@ -108,7 +108,11 @@ Keep this section order:
    Band Load In, Soundcheck/quiet time, and Meals with time and room, never a
    count. Keep Attire in this top block rather than repeating it later.
 2. `Schedule`: broad performance blocks, musician calls, breaks, and only
-   transitions that require band action.
+   transitions that require band action. The section carries `data-schedule`,
+   `data-date` (wedding date) and `data-tz` (venue IANA zone); every row with a
+   real clock time carries `data-at="HH:MM"` in 24-hour venue time so the live
+   clock can follow the night (same rule for the Full Gig Sheet's timeline).
+   Rows without a clock time (`After toasts`, `TBD`) carry no `data-at`.
 3. `Live Specials`: only songs Greenway performs live.
 4. `Songs to Learn`: same preparation list as Listening Room.
 5. `Couple's Song Suggestions`: a concise, title-only list of sourced favorites.

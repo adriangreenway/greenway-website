@@ -134,7 +134,9 @@ return HTTP 200, and re-hash one previously-drifted file to prove it survived.
   the words (`[Am]Feeling m[F]y way`) and some clips are chords only (Wake Me Up,
   2026-10-02). The script prints them as-is. Strip `\[[^\]]*\]`, collapse the
   extra spaces, and drop any line that ends up empty before pasting; chords never
-  belong in a Listening Room card.
+  belong in a Listening Room card. The same goes for set-list plugin tags such as
+  `[red]` on a clip name (Ain't Nobody, caught live 2026-10-02): strip every
+  `[...]` tag, not just chord marks.
 - Timed lyrics highlight the current line while the track plays and jump the
   track when a line is tapped; a plain string still works for untimed lyrics.
   First shipped on Hess, 2026-09-28; the code lives in `EXAMPLE/listen.html`.
@@ -181,3 +183,28 @@ when the phone comes back online, and every 5 minutes, and reloads on
 existed). Always bump `CACHE` on any change; that bump is what triggers all of this.
 Nobody should ever be told to refresh or clear cache. A tab sitting in the background
 updates the moment it is opened or woken.
+
+## Live clock (Band Sheet + Full Gig Sheet, 2026-10-02)
+
+On the wedding day the Schedule highlights the block happening now and a fixed
+bottom bar reads the block, minutes in and left, and what is next. Adrian's phone
+(opened once via `band#clock=<key>`) can tap a row's time to mark it "now"; every
+phone follows within 30 s through the Netlify Function in
+`docs/gig-sheets/functions/`. Plan and spec: `docs/gig-sheets/LIVE_CLOCK_PLAN.md`.
+
+- Markup: the schedule `<section>` carries `data-schedule data-date="YYYY-MM-DD"
+  data-tz="America/Chicago"` (Montana: `America/Denver`), and every row with a
+  real clock time carries `data-at="HH:MM"` in 24-hour venue time. Rows like
+  `After toasts` or `TBD` get no `data-at` and are never highlighted. Times
+  before `06:00` mean the morning after. `docs/gig-sheets/EXAMPLE/band.html` and
+  `gig.html` carry the CSS, the bar markup, and the script; copy all three parts.
+- Off the wedding day the pages are byte-for-byte the same to look at and to print.
+  The bar, projected times, and highlights are all hidden in print.
+- State is `localStorage` `gig-clock:<wedding path>` on each phone (per wedding,
+  because storage is shared across the hostname) and expires after 24 h; the key
+  is `gig-clock-key` (hostname-wide). Nothing is cached by the service worker.
+- The pages call `/.netlify/functions/clock?w=<wedding path>`. Until the function
+  is deployed (ships with the next wedding, see `functions/README.md`), those
+  calls 404 harmlessly and every phone simply follows the clock.
+- Never put the key in a page, a doc, a commit, or chat. It lives in the Netlify
+  env var `GIG_CLOCK_KEY` and 1Password `Greenway Gig Clock Key` only.
