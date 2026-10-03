@@ -198,13 +198,30 @@ phone follows within 30 s through the Netlify Function in
   `After toasts` or `TBD` get no `data-at` and are never highlighted. Times
   before `06:00` mean the morning after. `docs/gig-sheets/EXAMPLE/band.html` and
   `gig.html` carry the CSS, the bar markup, and the script; copy all three parts.
+- `Stage` in the bar (or `#stage` on the URL) opens a full-screen display for a mounted
+  phone or iPad: block name, mm:ss countdown, next block, behind/ahead, venue clock,
+  wake-lock, the whole timeline (past dimmed, current highlighted, projected times),
+  `Full screen` where the browser allows it (iPad Safari, not iPhone), and `Unlock
+  taps` (a password field for the key, meant for 1Password autofill inside a
+  home-screen app, which has its own storage). Key holders get per-block tap
+  buttons, a confirm guard on taps more than 90 min from the scheduled time, and a
+  permanent `Reset` (top-right of Stage and in the bar). The bar and Stage always
+  say which mode is running: `Auto · on schedule` (no stored tap, the default: the
+  whole night follows the clock untouched) or `Manual · 12 min behind` (a tap is
+  stored; it still follows the clock with that adjustment). Every tap means "this
+  block starts right now"; Reset returns everyone to Auto. Sized for iPhone landscape (`max-height:460px` rules) and
+  iPad portrait (wrapped timeline grid); checked 2026-10-03.
 - Off the wedding day the pages are byte-for-byte the same to look at and to print.
   The bar, projected times, and highlights are all hidden in print.
 - State is `localStorage` `gig-clock:<wedding path>` on each phone (per wedding,
   because storage is shared across the hostname) and expires after 24 h; the key
   is `gig-clock-key` (hostname-wide). Nothing is cached by the service worker.
-- The pages call `/.netlify/functions/clock?w=<wedding path>`. Until the function
-  is deployed (ships with the next wedding, see `functions/README.md`), those
-  calls 404 harmlessly and every phone simply follows the clock.
+- The pages call `/.netlify/functions/clock?w=<wedding path>`. The function is live
+  on the gigs site since 2026-10-02 (`~/Desktop/greenway-gigs/.functions/` plus the
+  `[functions]` block in its `netlify.toml`; canonical copy and runbook in
+  `docs/gig-sheets/functions/`). It is shared by every wedding, so a new sheet needs
+  only the page markup. If it were ever missing, the calls 404 harmlessly and every
+  phone simply follows the clock. Adrian's private `#clock=` link is the website
+  field of the 1Password item.
 - Never put the key in a page, a doc, a commit, or chat. It lives in the Netlify
   env var `GIG_CLOCK_KEY` and 1Password `Greenway Gig Clock Key` only.

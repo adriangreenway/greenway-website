@@ -165,6 +165,29 @@ phone width.
 MC Cue Sheet header shows the bar's one-line readout from the same shared value.
 No change to its cue flow.
 
+## Stage D (scoped 2026-10-03, not built): a proper home-screen app
+
+Already true today: every wedding's `manifest.json` has `display: standalone`, so
+Safari's **Add to Home Screen** on the Band Sheet gives a full-screen app with no
+browser bars on iPhone and iPad. A home-screen app has its own storage, so the
+`#clock=` link does not carry the key into it; the Stage view's **Unlock taps**
+field (1Password autofill) covers that. iPad Safari also has the **Full screen**
+button; iPhone Safari cannot go full screen, so the home-screen route is the iPhone
+answer.
+
+What a proper app still needs (Small, no special risks):
+1. A square icon: `apple-touch-icon` 180x180 plus manifest icons 192/512, the
+   wordmark on `--black`, locked palette only (today iOS uses a page screenshot).
+2. A Stage start page: either `start_url` pointing at `band#stage` for a dedicated
+   "Stage" app, or a tiny `stage.html` that redirects there, so one tap opens the
+   countdown. The hub app and the Stage app can coexist as two home-screen icons.
+3. `apple-mobile-web-app-status-bar-style: black-translucent` so Stage bleeds to
+   the edges, with the safe-area padding already in the CSS.
+4. Optional: an "Add to Home Screen" hint line on the hub for the band.
+
+Done means: a home-screen icon opens straight into Stage, the key sticks after
+Unlock, offline works inside the app, and the icon is the wordmark.
+
 ## Stages
 
 | Stage | What | Size | Model |

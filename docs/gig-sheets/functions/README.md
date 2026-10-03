@@ -17,7 +17,9 @@ site, also saved in 1Password as `Greenway Gig Clock Key`. It is never written
 into any file. Adrian's phone learns it once by opening any sheet with
 `#clock=<key>` on the end of the address (the page stores it and strips it).
 
-## Ship steps (first time, with the next wedding)
+## Ship steps (done 2026-10-02 with Hess, prod deploy `6ac055e08a5287db91f91756`; kept for a rebuild of the folder)
+
+The function is site-wide: a new wedding needs only the page markup (GIG_SHEET_SYSTEM.md, Live clock). Nothing here repeats per wedding.
 
 1. Copy `clock.mjs` and `package.json` to `~/Desktop/greenway-gigs/.functions/`
    and run `npm install` there. The dot in `.functions` matters: the Netlify
