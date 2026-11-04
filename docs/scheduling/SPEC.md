@@ -134,7 +134,7 @@ Adrian: dotted lines and per-row MD boxes made no sense; Musicians ran out of sl
 - 2026-11-04, from Adrian's pasted ChatGPT research handoff: CONFIRMED and applied: 1/17 Cranfield / Porter (Ryan Cranfield & Bryan Porter; GCE final vendor timeline PDF), 2/14 McLean / Powers (Riley McLean & Lynden Powers; 17hats questionnaire 10137980). NOT applied, unconfirmed: 1/3 possibly King / Gehm (wedding website matches date and Junior League, no booking link), 1/10 possibly McNamara / Hansen (only a ZaZa hotel block). Claude's Gmail search found neither name. Both still read 'Wedding' until Adrian confirms.
 - Adrian 2026-11-04: keep 1/3 and 1/10 as 'Wedding' for now (couples unconfirmed); a deliberate exception to the client-name rule until a booking record proves them. No push authorized.
 
-## v3 plan: schedule from the wedding page (APPROVED 2026-11-04 "build it"; Stage A LIVE, Stage B next)
+## v3 plan: schedule from the wedding page (APPROVED 2026-11-04 "build it"; Stages A and B LIVE)
 **Why (Adrian):** the site replaces Planning Center, so booking a wedding should never mean clicking over to Musicians to see who plays bass. As a second tab, Musicians should do more than hold a list.
 **Today:** each lineup slot in Edit mode is a free-text field with a hidden suggestion list (`<datalist>` of that instrument's players). Nothing on screen shows it, and on a phone it only appears after typing.
 **Size:** Medium, two stages. Front end only (`public/index.html`); the server, the saved data shape, and sign-in do not change.
@@ -151,3 +151,8 @@ Adrian: dotted lines and per-row MD boxes made no sense; Musicians ran out of sl
 - Edit mode: each slot is a button ("Choose" when empty); tap opens that instrument's roster. Notes: "Booked · <client>" (another wedding same date), "In lineup · <position>" (same wedding). Clear; "Someone new" + Add (matches an existing roster name case-insensitively). Save writes the wedding, then adds new names to Musicians; if that second save fails the page says so.
 - Local check on a mocked copy of the real export at 375px and desktop: pick, booked, in-lineup, clear, someone new, MD list follows, save payloads correct, no console errors, no sideways scroll.
 - Found for Stage B: Shelton lineup says "Adrian", roster says "Adrian Michael", so he does not show as booked. Stage B starts with a lineup-vs-roster name audit.
+
+## v3 Stage B (LIVE 2026-11-04)
+- **Name audit + fix (Adrian picked "Full names"):** Adrian had switched the Musicians list to full names (v2, 22:21Z) while 23 weddings still used first names, 137 slots, 10 people, each with exactly one full-name match per instrument. Rewrote those slots to the full name (kept "(unconfirmed)"), via `saveChecked`, saved by "renamed to full names by Claude". Verified against the backup: 0 other field changes, 0 unmatched names left, Musicians unchanged. Backups `backups/export-2026-11-04-pre-full-names.json` / `-post-`. Wedding pages now read full names (e.g. "Sersh Garza (MD)").
+- **Musicians view:** each name shows its upcoming gig count (number only on phones); tap opens their upcoming gigs then Past (dimmed), each linking to the wedding. Edit mode unchanged. Counts are matched by name within the instrument group.
+- Scheduling commit `4ae00a1`, prod `6aebb27e9e19784744e933e7` (rollback `6aebb1a47cf5265f8561cdd6`). Live page hash matches local; `/api/roster` 401 signed out. Local check on the post-rename export at 375px: every count equals a direct count from the data, gig link opens the wedding, no console errors, no sideways scroll.
