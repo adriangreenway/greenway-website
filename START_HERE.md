@@ -51,7 +51,7 @@ None of these affect your live site today, because your live site is still Squar
 
 ## Your next step
 
-**Scheduling site, next session (2026-11-04):** paste `Run the start-session skill. Context: scheduling.greenwayband.com is live with the Planning Center import (56 musicians, all 2026 weddings with lineups) and a classic login card; records in docs/scheduling/SPEC.md + ROSTER_IMPORT_PLAN.md. Then draft the Gmail to Sersh (sershkeys@gmail.com) with the link, and ask whether to add the 8 researched 2027 weddings.`
+**Scheduling site, next session (2026-11-04):** paste `Run the start-session skill. Context: scheduling.greenwayband.com is live with all 2026 gigs (client names, Planning Center lineups), 56 musicians, and a login card; everything committed and pushed; records in docs/scheduling/SPEC.md. Then draft the Gmail to Sersh (sershkeys@gmail.com) with the link, and ask whether to add the 8 researched 2027 weddings.`
 
 <!-- older next steps kept below for history -->
 
