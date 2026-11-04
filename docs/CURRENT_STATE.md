@@ -55,5 +55,5 @@ Working tree on branch `docs/build-context`, **pushed to `origin` through `f19ef
 - `PROJECT_STATE.md`, `ARCHITECTURE.md`, and `INTEGRATIONS.md` hold the deep, evidence-backed detail behind every line above; this file is the quick truth only.
 
 ## Next recommended action
-When Siegel / Dubel (11/14/26, Le Tesserae) needs its gig sheet, run create-gig-sheet starting with `gig-kickoff.py siegel-11-14-26` (Sonnet 5). Pipeline Stage 2 ("needs a gig sheet" tag on scheduling) is unplanned.
+Clemans / Walsh (11/14/26, Le Tesserae) gig sheet is being built by ChatGPT/Codex (intake in `tmp/gig-intake-2026-11-14/`); one tool per wedding, so Claude stays off it unless Adrian hands it over. Scheduling title fixed 2026-11-04 (was wrongly 'Siegel / Dubel'). Pipeline Stage 2 ("needs a gig sheet" tag on scheduling) is unplanned.
 Also open: Adrian sends the drafted Gmail to Sersh; Adrian phone-checks scheduling v3; 8 researched 2027 weddings held; Adrian decides when to lift `noindex` on `epk.greenwayband.com`; the proposals repo still has unpushed commits; Gate 3 remains frozen under D13; the Astro rebuild remains paused.
