@@ -167,3 +167,4 @@ Adrian: dotted lines and per-row MD boxes made no sense; Musicians ran out of sl
 - New sheets: the create-gig-sheet skill's Step 4 now sets the link after a sheet goes live.
 - Not built on purpose: embedding the sheet inside scheduling or copying its times (two copies drift).
 - 2026-11-04: new sheets now start FROM scheduling via `docs/gig-sheets/tools/gig-kickoff.py` (couple, date, venue, band size in; `--link` sets the link back). See `GIG_PIPELINE_PLAN.md`.
+- 2026-11-04 (Adrian): Amanda Funes added to Musicians under Singers and to Hardaway 10/17/26 as Singer 3 (she covered for Helen; Adrian confirmed she sang). Export diff: only `musicians` and that wedding changed. Backups `export-2026-11-04-pre-amanda-funes.json` / `-post-`.
