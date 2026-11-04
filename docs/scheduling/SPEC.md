@@ -166,3 +166,4 @@ Adrian: dotted lines and per-row MD boxes made no sense; Musicians ran out of sl
 - The 12 sheets from the gigs.greenwayband.com hub (`~/Desktop/greenway-gigs/index.html` GIGS) written to their weddings (matched by date + client, one each), saved by "gig sheet link added by Claude". Export diff: 12 weddings gained `sheet`, 0 other changes, Musicians unchanged; all 12 URLs return 200. Backups `export-2026-11-04-pre-sheet-links.json` / `-post-`.
 - New sheets: the create-gig-sheet skill's Step 4 now sets the link after a sheet goes live.
 - Not built on purpose: embedding the sheet inside scheduling or copying its times (two copies drift).
+- 2026-11-04: new sheets now start FROM scheduling via `docs/gig-sheets/tools/gig-kickoff.py` (couple, date, venue, band size in; `--link` sets the link back). See `GIG_PIPELINE_PLAN.md`.

@@ -78,7 +78,15 @@ return HTTP 200, and re-hash one previously-drifted file to prove it survived.
 ## Build and deploy
 
 1. Check `~/Desktop/greenway-gigs/` before creating anything. If the wedding
-   folder exists, revise it in place.
+   folder exists, revise it in place. For a NEW wedding, start it from
+   scheduling.greenwayband.com: `python3 docs/gig-sheets/tools/gig-kickoff.py <slug>`
+   (slug = the scheduling wedding's `<last>-<mm-dd-yy>`). It creates the dated
+   folder from `EXAMPLE/` with couple, date, venue, and band size (counted from
+   the lineup, sound tech excluded) filled in, every other fact a
+   `<!-- PLACEHOLDER: ... -->`, and adds the hub `GIGS` row. It refuses a
+   missing, removed, past, Kirby, already-linked, or already-built wedding, and
+   it never deploys. `--out <scratch>` dry-runs without touching this folder.
+   Plan: `docs/scheduling/GIG_PIPELINE_PLAN.md`.
 2. Build the controlling formula: `index.html`, `gig.html`, `band.html`,
    `listen.html`, optional `mc.html`, plus `manifest.json` and `sw.js`.
    The Gig Sheet landing page links only to Band Sheet and Listening Room. Full
@@ -94,11 +102,16 @@ return HTTP 200, and re-hash one previously-drifted file to prove it survived.
    headless Chrome `--dump-dom` on the live hub must show `Saved for offline use`.
 4. For a new wedding, show Adrian the couple, date, venue, pages, public URL, and
    every visible `TBD` or `UNKNOWN`. Wait for his explicit `go`.
+   `gig-kickoff.py --check <folder>` must say READY first (no placeholders, no
+   `TBD`, nothing left from the EXAMPLE wedding, every cached file present).
 5. Deploy the complete folder with the command above.
 6. Verify every changed page at the public hostname, the privacy headers, the
    service-worker file list, phone-width layout, and browser console. After the
    service worker installs, confirm an actual rewritten hub link still opens the
    correct page with the network unavailable.
+7. Link it back: `gig-kickoff.py --link <slug>` checks the sheet returns 200,
+   exports scheduling, sets only that wedding's `sheet` field, exports again,
+   and fails unless the diff is exactly that one field.
 
 ## Practice tracks and lyrics
 

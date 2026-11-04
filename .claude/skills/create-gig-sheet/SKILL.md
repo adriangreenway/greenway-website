@@ -13,6 +13,18 @@ deploy runbook) and `docs/gig-sheets/EXAMPLE/` (the most recent full build — c
 structure, don't reinvent the page layout or CSS). Model: Sonnet 5 is fine for this
 workflow (this is building, not planning).
 
+## Step 0 — Kick off from scheduling (new weddings)
+
+The wedding should already be on scheduling.greenwayband.com. Start the folder
+from it instead of a blank copy:
+`python3 docs/gig-sheets/tools/gig-kickoff.py <last>-<mm-dd-yy>`. It fills the
+couple, date, venue, and band size from scheduling, marks everything else
+`<!-- PLACEHOLDER -->`, and adds the hub row. If it stops (not on scheduling,
+no client name, Kirby, past, already built), tell Adrian what it said; don't
+work around it. The band size it prints is counted from the lineup: if it
+differs from the contract or Adrian's word, ask him which is right. Steps 1-3
+then replace every placeholder with sourced facts.
+
 ## Step 1 — Gather every source, don't guess from one
 
 A gig sheet is only as good as its facts. Pull from all three sources that exist for
@@ -118,13 +130,13 @@ and anything you marked UNKNOWN. Once the site exists, further changes Adrian as
 for in the same conversation (a new song, a time change, a new feature) redeploy
 directly without re-asking — that's already the working pattern.
 
-**Then link it from scheduling.greenwayband.com.** Once the sheet is live, set that
-wedding's `sheet` field to the hub URL (`https://gigs.greenwayband.com/<lastname>/<mm-dd-yy>/`)
-so its "Gig sheet →" link appears for Adrian and Sersh. Take an admin export first,
-write with the site's own `cleanWedding` + `saveChecked` (see `docs/scheduling/SPEC.md`,
-"Gig sheet links"), then export again and confirm only that wedding changed. If the
-wedding isn't on the scheduling site yet, tell Adrian rather than adding it. The link is
-one-way: never link from gig sheets back to scheduling.
+Before showing that status card, `gig-kickoff.py --check <folder>` must say READY.
+
+**Then link it from scheduling.greenwayband.com:** `gig-kickoff.py --link <slug>`.
+It confirms the sheet is live, exports, sets only that wedding's `sheet` field with the
+site's own `cleanWedding` + `saveChecked`, exports again, and fails unless only that
+field changed. If the wedding isn't on the scheduling site yet, tell Adrian rather than
+adding it. The link is one-way: never link from gig sheets back to scheduling.
 
 ## Revisions
 

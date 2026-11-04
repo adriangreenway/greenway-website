@@ -182,6 +182,18 @@
         "/Users/adrianjoseph/Desktop/greenway-scheduling/public"
       ],
       "port": 8897
+    },
+    {
+      "name": "gig-kickoff-draft",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8831",
+        "--directory",
+        "/private/tmp/claude-501/gig-kickoff-preview"
+      ],
+      "port": 8831
     }
   ]
 }
