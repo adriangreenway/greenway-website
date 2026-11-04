@@ -77,3 +77,42 @@ Other dates, more users (Joe), email alerts, change history, availability status
 - Adrian confirmed a real Google sign-in reached the roster.
 - Adrian's redesign (same day): home is a portal listing every wedding (date, client, venue, brand); click opens that wedding; Musicians link at the bottom. No big headers anywhere ("January 9, 2027 Staffing" removed, sign-in page = wordmark + Google button only). "Staffing" renamed "Scheduling" (page title "Greenway Scheduling"). MD shown as "Sersh (MD)" in the same font. Brand toggle and fake spreadsheet tab strip removed; each wedding shows its own brand mark. Links: `#/shelton-01-09-27`, `#/hinson-01-09-27`, `#/musicians`.
 - Adding a future wedding = add it to `netlify/lib/seed.json` (id, slug, date, brand, client, venue) and deploy.
+
+## Tweaks round (2026-11-04, LIVE)
+Adrian: dotted lines and per-row MD boxes made no sense; Musicians ran out of slots; sign-in was "a random cream square." Shipped: every page uses the gigs.greenwayband.com shell (masthead wordmark, rules, gig-hub rows); one grey field style for lineups and Musicians; one MD dropdown per wedding (server keeps only one MD); each instrument always has an empty "Add name" field (cap 60). Scheduling commits `760dadf` + footer fix; prod `6aeb86353efe3e5755e43d34`, rollback `6aeb5d74ffa53e33c78bc105`. Live page hash matches local; signed-out visitors see no names; Google button renders live.
+
+## v2 plan: living scheduling site (APPROVED 2026-11-04 "build it"; Stage 1 LIVE, Stage 2 next)
+**Goal:** Adrian and Sersh keep adding weddings as they book, without Claude, and old ones drop to a Past list.
+**Size:** Large (changes how saved data is stored). Two stages, each verified on its own.
+- **Stage 1, storage:** one saved record per wedding plus one for the Musicians list, instead of one record fixed to Jan 9. Existing Jan 9 data copied over exactly (diffed before/after; the old record kept as a backup). Saves are checked per wedding, so Adrian editing Shelton never collides with Sersh editing Hinson. Portal splits into Upcoming and Past by date, like the gig hub. Fixes the trap where adding a wedding to `seed.json` would have broken the page.
+- **Stage 2, add/remove:** "Add wedding" (date, client, venue, brand: Greenway or Kirby Collective) creates an empty lineup. "Remove wedding" asks to confirm, then hides it; nothing is truly deleted, Claude can restore it.
+**Risks:** moving live data (mitigated by backup + exact diff before switching); one more write path on a signed-in-only API (same allowlist and size checks). Sign-in itself unchanged.
+**Done means:** (1) Jan 9 lineups and Musicians identical after the move; (2) a new wedding added from a phone appears for the other person after reload; (3) removing one asks first and is restorable; (4) a wedding after its date shows under Past; (5) signed-out visitors still get no data; (6) two people saving different weddings at once both succeed.
+**Files:** modify `~/Desktop/greenway-scheduling/{public/index.html, netlify/functions/roster.mjs, netlify/lib/roster.mjs, netlify/lib/seed.json}`, maybe one new function; read `netlify/lib/session.mjs`; off limits: `auth-google.mjs`, `session.mjs`, Netlify env vars, Google Cloud settings, DNS, this repo's `src/`.
+**Model:** strongest available (Opus 5.5) for Stage 1 data move; Sonnet fine for Stage 2.
+**Out of scope:** email alerts, more users, availability/money, change history.
+
+## v2 Stage 1 (LIVE 2026-11-04)
+- Scheduling commit `3dfcdd6`, prod `6aeb873d705474c32047c1cb` (rollback `6aeb86353efe3e5755e43d34`).
+- Before deploy the live store was EMPTY: nobody had ever saved on the live site (the "test" singer in Adrian's screenshot was typed in edit mode, never saved). So the move is seed -> new records, no real edits at stake.
+- Records: `w:gw`, `w:kc`, `musicians`; daily `backup:<key>:<date>`. The first signed-in page load creates them (copies v1 `jan-9-2027` if it exists, else seed). API: GET `/api/roster`, PUT `/api/wedding/:id`, PUT `/api/musicians`.
+- Local tests PASS: lock (no cookie, tampered), migration of an old v1 record exact, two people saving different weddings at once, stale save 409, one MD, date/brand fixed, 404/415/400/405, musicians save/stale. Page: lineup + musicians save, Upcoming shows, Past hidden when empty, day-after cutoff (Houston time).
+- Live: page hash matches local; all API routes 401 signed out. Migration on live confirmed only after Adrian's next sign-in.
+- `seed.json` now only seeds a brand-new store; adding a wedding = Stage 2's Add button (not seed + deploy).
+- Adrian signed in after deploy and saw both weddings under Upcoming. v2 lists only weddings that exist as saved `w:` records, so this confirms the move ran on live.
+- **Open issue for Stage 2:** Claude's Netlify CLI and the blobs API both show the `scheduling` store as EMPTY even though the live function reads and writes it (same for v1). So Claude cannot read live data or backups directly today. Stage 2 must add a signed-in way to read or restore it (for example an export of every record plus backups), or "Claude can restore a removed wedding" is not true.
+- Tabs fix (Adrian: the Musicians row "looks like a client name"): the row is gone; the toolbar now has `Weddings | Musicians` tabs (open tab underlined), Edit / Sign out right-aligned on one line on phones; repeated "Musicians" label removed. Commit `adfc6ad`, prod `6aeb88612a665f631207140c`, live hash matches.
+
+## v2 Stage 2 (LIVE 2026-11-04)
+- Scheduling commit `63a64d3` (+ `.gitignore` for `backups/`); prod `6aeb8ce55b802324d6b20152`.
+- **Add wedding** (home toolbar) opens a form: date, client, venue, brand. Slug = last name + mm-dd-yy, made unique (`-2`, `-3`; removed weddings keep their slug). **Remove wedding** sits at the bottom of a wedding in Edit mode, asks to confirm, hides it (record kept, `removed: true`).
+- **Claude's maintenance door:** `GET /api/admin/export` (every record incl. removed + daily backups), `POST /api/admin/restore {id}`. Key `ADMIN_KEY` = Netlify secret env + gitignored `~/Desktop/greenway-scheduling/.env.admin` (mode 600). Never printed. Unset key = 404. Export copies land in gitignored `backups/export-<date>.json`.
+- **Data finding (resolved):** before Stage 2 the live store held NO records, even after Adrian's sign-in, so his load had not saved anything (cause not determined). A live write test showed the store works and the CLI sees it. Running the move step on live created `w:gw`, `w:kc`, `musicians`; after a further redeploy all three were still there and matched seed exactly. Use the admin export after any change to confirm, never assume.
+- Local tests: 19 Stage 2 checks + 14 Stage 1 checks PASS (add validation, slug collisions, remove + stale remove, removed hidden and not editable, export locked to the key, restore). Page: add form and remove clicked through; signed-out POSTs 401; live page hash matches.
+- Not yet tested: Adrian or Sersh adding a wedding from a phone and the other seeing it.
+
+## Phone test + "Added" message (2026-11-04, LIVE)
+- First phone add never reached the site (likely the black Add wedding button was not tapped; the keyboard's Done key does not submit). Server path re-proven live; local phone-size add works.
+- Second try PASS: Adrian added Cade, 2026-11-20, Houstonian, Greenway from his phone; admin export shows `w:f26cd1c125` saved by adrian@greenwayband.com.
+- Adrian asked for a confirmation: after adding, the wedding page shows "Added" in the toolbar for 4 seconds; "Removed" fades the same way. Scheduling commit `782bf29`, prod `6aeba28c2e20c7ff85197105`; live page carries the change, live data unchanged.
+- Still open: Sersh has not been sent the link.
