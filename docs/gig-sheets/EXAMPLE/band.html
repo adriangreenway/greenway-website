@@ -200,6 +200,7 @@ function offsetAt(ms){ms=Math.floor(ms/1000)*1000;var o={};new Intl.DateTimeForm
 function zoned(y,m,d,h,mi){var g=Date.UTC(y,m-1,d,h,mi),t=g-offsetAt(g),o2=offsetAt(t);if(g-o2!==t)t=g-o2;return t;}
 var D=DATE.split('-').map(Number);
 var times=rows.map(function(r){var t=r.getAttribute('data-at').split(':').map(Number);return zoned(D[0],D[1],D[2]+(t[0]<6?1:0),t[0],t[1]);});
+var ends=rows.map(function(r,i){var e=r.getAttribute('data-end');if(!e)return null;var t=e.split(':').map(Number);return zoned(D[0],D[1],D[2]+(t[0]<6?1:0),t[0],t[1]);});
 var dayStart=zoned(D[0],D[1],D[2],0,0),last=times.length-1;
 function fmt(ms){return new Intl.DateTimeFormat('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit'}).format(new Date(ms));}
 function dur(ms){var m=Math.max(0,Math.round(ms/60000));if(m<60)return m+' min';var h=Math.floor(m/60),r=m%60;return r?h+' h '+r+' min':h+' h';}
@@ -215,6 +216,9 @@ function render(){
   var now=Date.now(),s=state,from=s?s.row:-1,off=s?s.at-times[s.row]:0;
   var eff=times.map(function(t,i){return i>=from?t+off:t;});
   var cur=-1;for(var i=0;i<eff.length;i++){if(eff[i]<=now)cur=i;}
+  var effEnd=ends.map(function(e,i){return e===null?null:(i>=from?e+off:e);});
+  var gap=cur>=0&&cur<last&&effEnd[cur]!==null&&effEnd[cur]<eff[cur+1]&&now>=effEnd[cur];
+  var tgt=cur<0?0:cur+1;
   isLive=now>=dayStart&&now<=eff[last]+3600000+7200000;
   var shifted=isLive&&!!s&&Math.abs(off)>=60000;
   rows.forEach(function(r,i){
@@ -225,8 +229,8 @@ function render(){
   });
   bar.hidden=!isLive;document.body.classList.toggle('clock-on',isLive);
   if(!isLive)return;
-  if(cur<0){elLabel.textContent='Starts';elBlock.textContent=name(0);elMeta.textContent=fmt(eff[0])+' · in '+dur(eff[0]-now);elNext.textContent='';}
-  else{var end=cur<last?eff[cur+1]:eff[cur]+3600000;
+  if(cur<0||gap){var ti=cur<0?0:cur+1;elLabel.textContent=gap?'Up next':'Starts';elBlock.textContent=name(ti);elMeta.textContent=fmt(eff[ti])+' · in '+dur(eff[ti]-now);elNext.textContent=gap?name(cur)+' ended '+fmt(effEnd[cur]):'';}
+  else{var end=cur<last?(effEnd[cur]!==null&&effEnd[cur]<eff[cur+1]?effEnd[cur]:eff[cur+1]):eff[cur]+3600000;
     if(cur===last&&now>end){elLabel.textContent='Done';elBlock.textContent=name(cur);elMeta.textContent=fmt(eff[cur]);elNext.textContent='';}
     else{elLabel.textContent='Now';elBlock.textContent=name(cur);elMeta.textContent=dur(now-eff[cur])+' in · '+dur(end-now)+' left';elNext.textContent=cur<last?'Next · '+name(cur+1)+' · '+fmt(eff[cur+1]):'Last block';}}
   var behind=false,mode=s?'Manual · ':'Auto · ';if(!s)elDrift.textContent=mode+'on schedule';else if(off>=60000){elDrift.textContent=mode+dur(off)+' behind';behind=true;}else if(off<=-60000)elDrift.textContent=mode+dur(-off)+' ahead';else elDrift.textContent=mode+'on time';
@@ -234,10 +238,10 @@ function render(){
   btnReset.hidden=!key;
   if(stage&&!stage.hidden){
     stTime.textContent=fmt(now);stDrift.textContent=elDrift.textContent;stDrift.className='stage-drift'+(behind?' behind':'');
-    if(cur<0){stEyebrow.textContent='Starts';stBlock.textContent=name(0);stCount.textContent=cd(eff[0]-now);stSub.textContent='until '+name(0)+' · scheduled '+fmt(times[0])+(s&&Math.abs(off)>=60000?' · now expected '+fmt(eff[0]):'');stNext.textContent='';}
-    else{var e2=cur<last?eff[cur+1]:eff[cur]+3600000;
+    if(cur<0||gap){var ti2=cur<0?0:cur+1;stEyebrow.textContent=gap?'Up next':'Starts';stBlock.textContent=name(ti2);stCount.textContent=cd(eff[ti2]-now);stSub.textContent='until '+name(ti2)+' · scheduled '+fmt(times[ti2])+(s&&Math.abs(off)>=60000?' · now expected '+fmt(eff[ti2]):'');stNext.textContent=gap?name(cur)+' ended '+fmt(effEnd[cur]):'';}
+    else{var e2=cur<last?(effEnd[cur]!==null&&effEnd[cur]<eff[cur+1]?effEnd[cur]:eff[cur+1]):eff[cur]+3600000;
       if(cur===last&&now>e2){stEyebrow.textContent='Done';stBlock.textContent=name(cur);stCount.textContent='0:00';stSub.textContent='scheduled '+fmt(times[cur]);stNext.textContent='';}
-      else{stEyebrow.textContent='Now';stBlock.textContent=name(cur);stCount.textContent=cd(e2-now);stSub.textContent='left · '+dur(now-eff[cur])+' in · scheduled '+fmt(times[cur])+(s&&cur>=from?' · marked '+fmt(eff[cur]):'');stNext.textContent=cur<last?'Next · '+name(cur+1)+' · '+fmt(eff[cur+1]):'Last block';}}
+      else{stEyebrow.textContent='Now';stBlock.textContent=name(cur);stCount.textContent=cd(e2-now);stSub.textContent=(e2<(cur<last?eff[cur+1]:e2+1)?'until '+fmt(e2)+' · ':'')+'left · '+dur(now-eff[cur])+' in · scheduled '+fmt(times[cur])+(s&&cur>=from?' · marked '+fmt(eff[cur]):'');stNext.textContent=cur<last?'Next · '+name(cur+1)+' · '+fmt(eff[cur+1]):'Last block';}}
     stReset.hidden=!key;stUnlock.hidden=!!key||!stKey.hidden;stHint.textContent=key?(s?'Manual · tap another block if it drifts again · Reset returns to auto':'Auto · following the clock · tap a block only if the night drifts'):(s?'Timeline · adjusted':'Timeline · auto, following the clock');
     var bs=stRows.querySelectorAll('.stage-row[data-i]');for(var k=0;k<bs.length;k++){var bi=+bs[k].getAttribute('data-i');bs[k].classList.toggle('is-cur',bi===cur);bs[k].classList.toggle('is-past',bi<cur);var pj=bs[k].querySelector('i');if(pj)pj.textContent=(s&&bi>=from&&Math.abs(off)>=60000)?' → '+fmt(eff[bi]):'';}
   }

@@ -113,6 +113,28 @@
       "port": 8893
     },
     {
+      "name": "planner-alpha01",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "-y",
+        "serve",
+        "-l",
+        "8811",
+        "--no-clipboard",
+        "/Users/adrianjoseph/Documents/Codex/2026-11-03/i-ne/outputs"
+      ],
+      "port": 8811
+    },
+    {
+      "name": "planner-cloud-mock",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "/private/tmp/claude-501/-Users-adrianjoseph-greenway-website/030946dd-0571-4e29-8bfa-096f904b1b5d/scratchpad/mockserver.mjs",
+        "/Users/adrianjoseph/Documents/Codex/2026-11-03/i-ne/outputs/Weekly-Planner-Alpha-01.html"
+      ],
+      "port": 8812
+    },
+    {
       "name": "montreal",
       "runtimeExecutable": "npx",
       "runtimeArgs": [
@@ -124,6 +146,42 @@
         "/Users/adrianjoseph/Desktop/montreal-trip/site"
       ],
       "port": 8810
+    },
+    {
+      "name": "scheduling",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "-y",
+        "serve",
+        "-l",
+        "8813",
+        "--no-clipboard",
+        "/Users/adrianjoseph/Desktop/greenway-scheduling/public"
+      ],
+      "port": 8813
+    },
+    {
+      "name": "brand-guide",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8891",
+        "--directory",
+        "/private/tmp/claude-501/-Users-adrianjoseph-greenway-website/3893cc4c-488a-4b2e-aaf6-bf0c20c43357/scratchpad/guide"
+      ],
+      "port": 8891
+    },
+    {
+      "name": "scheduling-static",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "serve",
+        "-l",
+        "8897",
+        "/Users/adrianjoseph/Desktop/greenway-scheduling/public"
+      ],
+      "port": 8897
     }
   ]
 }

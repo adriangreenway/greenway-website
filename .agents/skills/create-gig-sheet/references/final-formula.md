@@ -31,9 +31,12 @@ Use this priority:
 5. Older messages only when nothing newer addresses the field.
 
 The newest final timeline controls scheduled times unless a later direct message
-changes one. After writing the pages, compare every displayed time, song, and
-operator back to the ledger. Never let an older questionnaire time survive because
-it was already in copied HTML.
+changes one. Track vendor-meal start/end, room/access, ready-to-eat availability,
+soundcheck or duty end, next call, ready-by time, and private deduplicated count
+using `vendor-meals.md`; guest dinner is not evidence of a vendor meal. After
+writing the pages, compare every displayed time, song, and operator back to the
+ledger. Never let an older questionnaire time survive because it was already in
+copied HTML.
 
 ## Music ledger
 
@@ -82,7 +85,7 @@ Keep this section order:
 
 1. Core two-column information: Location with map link, Performance Team when
    operationally useful, Attire directly beneath it, Guests, Sound Load In, Band Load In,
-   Soundcheck plus quiet time, Meals with time and room. Attire always means the
+   Soundcheck plus quiet time, Meals with verified time and room or `TBD`. Attire always means the
    band's standing wedding attire, never the guests':
    `Guys: black suit, black shoes, black tie, white shirt` and
    `Girls: black dress or jumpsuit`. Never show the meal count.
@@ -105,7 +108,7 @@ is never linked from the Gig Sheet landing page. Never show money or package ter
 Keep this section order:
 
 1. Core call information: Couple's full names, Location, Attire, Sound Load In,
-   Band Load In, Soundcheck/quiet time, and Meals with time and room, never a
+   Band Load In, Soundcheck/quiet time, and Meals with verified time and room or `TBD`, never a
    count. Keep Attire in this top block rather than repeating it later.
 2. `Schedule`: broad performance blocks, musician calls, breaks, and only
    transitions that require band action. The section carries `data-schedule`,
@@ -161,6 +164,8 @@ Apply the approved shared-host changes even though Freeman/Dass predates them:
 
 ## Definition of done
 
-Every fact traces to a source. All pages agree with the ledger. Phone layout,
-MC navigation, player controls, missing-audio behavior, offline pages, best-effort
-offline audio, privacy headers, and at least one older wedding all pass.
+Every fact traces to a source. All pages agree with the ledger. Vendor meals are
+`PASS`, `UNCONFIRMED`, or `CONFLICT` under `vendor-meals.md`; a known overlap blocks
+release, and an unconfirmed window remains `TBD` without a final-readiness claim.
+Phone layout, MC navigation, player controls, missing-audio behavior, offline pages,
+best-effort offline audio, privacy headers, and at least one older wedding all pass.

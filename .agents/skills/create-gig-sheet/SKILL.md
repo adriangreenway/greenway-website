@@ -18,6 +18,14 @@ this workflow.
 Always read `references/specialty-pages.md` before editing `listen.html` or
 `mc.html`; every sheet now includes Listening Room.
 
+Always read `references/vendor-meals.md` while building or revising a wedding.
+Vendor-meal readiness is a schedule check across every Greenway role, not a copy
+field inferred from the guest dinner.
+
+**Standing rule (Adrian, 2026-10-15): never print `TBD` or any placeholder on a sheet, PDF, or MC slide.** Wherever this skill or its references say `TBD`, read it as: leave that field or line off the sheet entirely. Ask Adrian in chat for the missing fact, flagged with a red emoji (🔴, max 3 questions, with a recommended default), and keep the open item in the private notes only. Before any release, `grep -c TBD` across every page, `sw.js` and `pdftotext` of every PDF must return 0.
+
+**Link thumbnail.** Each wedding's `og-band-hub.png` (2400x1260) must carry that wedding's own title and date. Hardaway shipped a copy of Hess's image and the band saw "Hess / Cassiday" in iMessage. Regenerate the two text lines in the Greenway design; never copy another wedding's file.
+
 ## Step 1 — Gather every source, don't guess from one
 
 A gig sheet is only as good as its facts. Pull from all three sources that exist for
@@ -70,7 +78,7 @@ Pull out, per wedding:
   emcee/DJ (e.g. a family friend's company)? Build `mc.html` for Greenway when
   Greenway announces, or as a clearly labeled reference copy when an outside vendor
   announces.
-- Dinner time and location, do-not-play list, couple's open song requests, any
+- Vendor-meal start and end, room, ready-by time, do-not-play list, couple's open song requests, any
   vendor contacts worth noting (photographer, videographer, planner)
 - Anything that reads as a planning conflict between sources — flag it to Adrian,
   don't silently pick one.
@@ -94,11 +102,14 @@ Room so those pages cannot contradict one another.
   line should look secondary to the other.
   On the Full Gig Sheet, place Attire directly beneath Performance Team in the core
   information. Do not repeat it as a later standalone section.
-- **Meal count** is always **the number of musicians + 1** for the sound engineer:
-  a 10-piece needs 11 meals, a 6-piece needs 7, and an 8-piece needs 9. Keep that
-  count in the private fact ledger when it is useful for vendor coordination, but
-  never show the count on the gig sheet. Show the meal time and, when known, the
-  room.
+- **Vendor meals.** The core band baseline is the number of band musicians + 1
+  for the sound engineer: a 10-piece needs 11 meals, a 6-piece needs 7, and an
+  8-piece needs 9. Ceremony, cocktail-hour, guest, or other specialty performers
+  are not automatically included in that baseline. Ask whether each needs a meal,
+  count only confirmed needs, and deduplicate anyone serving more than one role.
+  Keep every count in the private fact ledger; never show it on the gig sheet.
+  Show only the verified meal time and room, or `TBD`. Follow the sequence and
+  release rules in `references/vendor-meals.md`.
 - **Load-in planning.** Read every relevant Gmail thread in full before deriving
   times, and use the newest explicit arrival or load-in commitment Adrian gave the
   vendor. Never silently contradict it. When no event-specific schedule overrides
@@ -171,7 +182,7 @@ The band reads this on a phone, at a venue, mid-gig. Every extra word costs.
   ```
 - **Never say who confirmed what, or when.** No "confirmed with Courtney 7/10," no
   "approved by the planner," no "per the questionnaire," no dates of agreement. The
-  fact is the fact. If something isn't settled, the value is just `TBD`.
+  fact is the fact. If something isn't settled, leave it off the sheet and ask Adrian (see the standing rule above).
 - **No money, ever.** No fees, no add-on prices, no "paid on." The band sees this.
 - **Negative scope only when it prevents a gig-day mistake.** A direct line such as
   "Band is not playing ceremony" belongs in Notes when operationally necessary.

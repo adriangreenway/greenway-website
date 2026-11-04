@@ -1,193 +1,160 @@
 ---
 name: create-proposal
-description: Vet inbound booking leads, then create and deploy a branded client proposal at proposals.greenwayband.com from a Gmail inquiry, wedding or corporate. Use whenever Adrian asks whether a lead is qualified or suspicious, gives a client name and wants a proposal ("make a proposal for X", "she filled out the form", "send the Smiths a proposal", "quote this corporate gig"), or wants an existing proposal revised. Corporate events follow the Corporate proposals section.
+description: Vet inbound booking leads, then create or revise branded wedding and corporate proposals at proposals.greenwayband.com from Gmail inquiries. Use for lead qualification, proposal creation, proposal revisions, pricing offers, or suspicious booking inquiries.
 ---
 
 # Create Proposal
 
-Turn a client inquiry in Adrian's Gmail into a live branded proposal at
-`https://proposals.greenwayband.com/<slug>`.
+Turn a qualified inquiry into a verified proposal without fabricating content, re-reading evidence, or expanding the user's requested external actions. Use Sol throughout.
 
-Read first: `docs/LEAD_VETTING_GATE.md` (mandatory qualification gate),
-`docs/proposals/PROPOSAL_SYSTEM.md` (where things live, deploy runbook),
-`docs/proposals/PRICING_AND_CONTENT.md` (real prices, locked lineups, testimonial
-pool, copy rules), `docs/proposals/TEMPLATE.html` (the page to fill in).
-Model: Use Sol for research, building, verification, and deployment.
+## Operating rules
 
-## Lead vetting gate (D19, 2026-07-29)
+- One agent owns the proposal through closeout. A read-only delegate may handle one
+  bounded check, but must not repeat full research or edit the proposal source.
+- Treat an explicit **NO EMAIL** instruction as sticky. Do not read the email
+  template, draft, send, or ask for email approval unless Adrian later changes it.
+  Proposal creation never implies permission to draft or send email.
+- Keep separate approvals for: business choices plus exact external file write;
+  publishing plus exact credential read; post-verification commit. Push, email,
+  and unrelated repairs each need their own authorization.
+- Never re-ask for an approved action or same-scope retry, even after a process
+  ends, unless Adrian limited or revoked it. Never transfer approval across phases.
 
-No proposal, pricing sheet, or package list goes to a lead until it passes
-**2 of 3**:
+## Read references only when needed
 
-1. **Place:** a named venue, or at least a named city. A state or region alone
-   does not count.
-2. **Phone:** a phone number for the couple or their planner.
-3. **Source:** a stated referral source, or arrival through the 17hats capture
-   form. Form arrival satisfies this check by itself.
+Do not load every proposal document at the start.
 
-**Auto-fail regardless of score** when any of these appear:
+1. Before scoring a lead, read `docs/LEAD_VETTING_GATE.md` once in full.
+2. After a PASS, read only the relevant sections of
+   `docs/proposals/PRICING_AND_CONTENT.md`: requested configurations, add-ons,
+   locked lineups, approved copy/testimonials, and copy-integrity rules. Read its
+   corporate/travel section only for a corporate event or out-of-town pricing.
+3. For a wedding build, use `docs/proposals/TEMPLATE.html` as an immutable source.
+   Inspect its token list and editable body sections with focused searches and
+   line ranges; do not dump the 1,974-line CSS and JavaScript into context.
+4. Read `docs/proposals/PROPOSAL_SYSTEM.md` slug and canonical-location sections
+   when choosing the path. Read its deploy runbook only when the local draft is
+   review-ready and publishing is in scope. Do not read the PDF section unless
+   Adrian asks for a PDF.
+5. Read `docs/proposals/EMAIL_TEMPLATES.md` only after explicit authorization for
+   an email draft and only when NO EMAIL is not active.
 
-- Overseas, international-travel, or email-only framing used to refuse a call.
-- Hearing-impaired or deaf framing used to refuse phone contact.
-- An unverified third party, coordinator, agent, or relative handling payment.
-- Any overpayment, check-plus-refund, or request to forward the difference.
-- Instant agreement to book without questions about music, the band, or
-  availability.
-- Pressure to move fast, or a date that keeps changing.
+## Phase 1: inquiry and gate
 
-For a score of 0 or 1, or any auto-fail marker, stop before drafting pricing.
-Report the score and markers to Adrian with one recommended action: a short
-vetting reply asking for venue, phone, and a call, or ignore the inquiry. Never
-guess in the lead's favor.
+Use the Gmail connector. If it is unavailable, stop rather than guessing.
 
-Blind requests for a standard package or pricing sheet also fail when they have
-no venue, no date detail beyond a month, and no personal detail.
+- For the newest 17hats inquiry, query `17hatsmail.com`; add a name only if already
+  known. Batch justified related queries when the connector allows.
+- Search results are metadata, not facts. Filter them for the same people, date,
+  planner, or event before fetching content. Do not read a venue's unrelated
+  inquiry history merely because the venue name matches.
+- Deduplicate thread IDs, then read every truly related thread once in FULL,
+  including every message and quoted reply trail. Never build from snippets.
+  The newest message controls changing requirements.
+- Build one fact sheet: names, email, phone, date, venue/city, event type, planner,
+  referral, band size, add-ons, timing, budget, notes, score, markers, PASS/FAIL.
+  Mark unknowns UNKNOWN.
+- Apply the full gate policy. A failed score or any auto-fail marker stops all
+  pricing and proposal work. Report the evidence and one recommended response.
 
-**Money rule with no exceptions:** never refund or forward an overpayment. Treat
-the transaction as void, return the original instrument uncashed, or let the bank
-reverse it. Never send a partial refund or forward money to another party.
+## Phase 2: offer and file approval
 
-Any future lead-intake or proposal automation must hard-stop failed leads, queue
-the score and markers for Adrian, and never auto-send pricing. Full policy and
-precedent: `docs/LEAD_VETTING_GATE.md`.
+Only a PASS reaches pricing. Never invent a price, lineup, claim, venue history,
+schedule, or relationship.
 
-## Steps
+- Wedding default: 10-Piece first with the Recommended badge. Put a requested size
+  other than 10-Piece second; otherwise use 6-Piece. If that size lacks an approved price or locked
+  lineup, obtain both before building; never infer either.
+- Cocktail Hour Solo/Duo/Trio cards are the wedding default and stay outside
+  totals. If the lead already chose one option, make it a priced row in each
+  package instead. Add DJ or extra hours only when requested or approved.
+- Houston uses the observed baseline as the recommendation. Outside Houston,
+  flag travel and obtain Adrian's confirmation. Exact supplied prices override
+  the need to review irrelevant historical price examples.
+- Ask at most three see/pay/risk questions. In one approval request, present the
+  recommended packages, prices, add-ons, and the exact canonical target
+  `~/Desktop/greenway-proposals/<slug>/index.html`. State whether it is new or
+  will be overwritten, what changes, the risk, and how to undo it. This approval
+  authorizes only that local file write.
 
-1. **Find the inquiry in Gmail.** Load the connected Gmail search and full-thread
-   reading tools with tool search. If the Gmail connector isn't connected, stop and
-   tell Adrian to connect Gmail in the Codex app's connector settings — never guess
-   inquiry content.
-   Search recipes, in order:
-   - `from:17hatsmail.com "<client name>"` — the 17hats lead form is the primary
-     inquiry source. Fields: Name, Email, Phone, Date of the event, Venue, Band size,
-     Type of Event, How did you hear about us, Anything else.
-   - `"<last name>"` broadly, and the venue name — clients and planners often send
-     richer follow-ups (e.g. a fiancé's requirements email, a planner negotiating).
-   Read every related thread IN FULL. `search_threads` returns truncated
-   snippets — NEVER build facts from a snippet. Call `get_thread`
-   (FULL_CONTENT, the default) on every related thread and read every message
-   in it, including quoted reply trails, before writing the fact sheet.
-   **The newest message wins** — requirements evolve (band size, add-ons,
-   budget) after the first form.
+## Phase 3: build and local verification
 
-2. **Build a fact sheet and score the lead** from the emails only: couple/client full names, date,
-   venue + city, event type, planner/coordinator, referral, band size requested,
-   add-ons mentioned (cocktail hour, DJ, ceremony), timeline hints, budget signals,
-   special notes, gate score, markers, and PASS/FAIL. Mark every unknown as
-   UNKNOWN — never fill a gap by invention.
+Canonical deploy folder: `~/Desktop/greenway-proposals/`. Never use
+`~/greenway-proposals/` or this repo's `public/proposals/`.
 
-3. **Only after PASS, draft the offer.** Default: the 10-Piece leads with the Recommended badge
-   regardless of the size they asked for (Adrian, 2026-07-23, campbell build);
-   the size they requested rides as the second card (else the 6-piece).
-   Prices from PRICING_AND_CONTENT.md (Houston baseline; outside Houston expect
-   higher and flag travel). The Cocktail Hour options block (Solo/Duo/Trio cards,
-   no totals) is included by DEFAULT on every wedding proposal (Adrian,
-   2026-07-23); if the client already chose a cocktail add-on, show it as a
-   priced row inside each package instead. Other add-ons (DJ, extra hour) only
-   if they asked or Adrian says so.
+- Before writing, inspect destination/repo status and compare local HEAD/origin
+  with remote main once, read-only. Never auto-pull or merge; stop on newer work.
+  Preserve unrelated work. Create new pages exclusively; read a revision's full destination before overwriting it.
+- Copy and fill the wedding template programmatically. Change tokens and the
+  required editable markup only; keep CSS, JavaScript, media, scheduler links,
+  song-list link, hybrid palette, and CTA structure unchanged. Strip instructional
+  HTML comments. No intro, venue strip, payment terms, or invented filler.
+- Include a timeline only when it is known. Omit unknown cells or replace them
+  with known facts. Use the locked lineup and approved testimonial text exactly.
+- Confirm all template tokens are gone; names, date, venue, descriptions, prices,
+  totals, lineups, slug links, and validity date match the fact sheet; and all six
+  shared image/video assets exist. Review the final changed-file list.
+- Run one focused browser pass covering desktop and mobile layout, cover, details,
+  packages, media playback, both call links, song list, email CTA when present,
+  and closing. Repeat checks only after a new change or a failure.
 
-4. **Ask Adrian at most 3 questions** — see/pay/risk only, each with a recommended
-   default. Typically: (a) packages + prices, (b) add-ons, (c) anything odd in the
-   thread. Skip anything the inquiry already answers. Technical choices are yours.
+Present the client, date, venue, packages, totals, add-ons, intended URL, and
+deploy-folder ride-alongs for review. Do not publish yet.
 
-5. **Build the page.** Copy `docs/proposals/TEMPLATE.html` to
-   `~/Desktop/greenway-proposals/<slug>/index.html` (slug rules in
-   PROPOSAL_SYSTEM.md). Before creating or overwriting anything outside the
-   active project, tell Adrian the exact target folder, what will change, the
-   overwrite risk, and how it can be undone, then wait for explicit approval to
-   modify that folder. This file approval does not authorize deployment,
-   commit, or Gmail changes. Fill every `{{TOKEN}}`; NO intro section — the Template 4.1
-   email carries the greeting (Adrian, 2026-07-14; see PRICING_AND_CONTENT.md);
-   timeline section only if the schedule is known — else delete it; lineups exactly
-   per PRICING_AND_CONTENT.md. Corporate event → follow **Corporate proposals**
-   below instead of the wedding template.
-   **Media + CTA are on by default (D14, 2026-07-23 + v2 same day, see
-   PRICING_AND_CONTENT.md "Approved media pool" + "Palette (v2)"):** the two
-   photo bands, the click-to-load self-hosted video, the hours line, and both
-   Schedule-a-Call CTAs all come with the template unchanged — nothing to fill
-   in, they reference the shared `~/Desktop/greenway-proposals/assets/` files
-   by fixed relative path. Confirm that folder exists in the deploy directory
-   before building (it should already be there from the 2026-07-23 build; if
-   missing, stop and tell Adrian rather than recreating it from guesswork).
-   Never change the video file without Adrian supplying a new source. **No
-   venue strip** — it was built then removed same day (Adrian: "doesn't add
-   much value"); don't re-add it without him asking. **Palette is the hybrid**
-   (dark cover + dark closing, cream document body) — never flatten it back to
-   all-dark or all-cream without Adrian raising it again.
+## Phase 4: publish once approved
 
-6. **Verify locally.**
-   - `grep -c '{{' index.html` must output 0
-   - names, date, venue, prices correct against the fact sheet; totals = sum of rows
-   - open the file in a browser and eyeball cover, packages, closing
-   - `assets/band-stage-2026a.webp`, `assets/crowd-2026a.webp`,
-     `assets/uptown-funk-poster-2026a.jpg`, and `assets/uptown-funk-2026a.mp4`
-     all exist in the deploy folder (shared, sit one level up from `<slug>/`,
-     not per-client — don't recreate them)
+Publishing changes production. After local review, ask separately and name the
+site, full-folder risk, rollback, and credential `Greenway Dev/Netlify Personal
+Access Token`. Approval covers that task, normally one read; same-scope retries
+retain approval unless Adrian explicitly limited or revoked it.
 
-7. **Present the draft and WAIT.** Status card: client, date, venue, packages with
-   prices and totals, add-ons, the URL it will get, plus anything else in the deploy
-   folder that will ride along. Deploying is production — needs Adrian's explicit
-   "go" (AGENTS.md destructive-actions rule).
+Use `~/Desktop/greenway-proposals/` and site ID
+`c6041c94-c26c-4ab8-ae5f-96c43addb081`; run preflight, API comparison, deploy, and authenticated checks inside one continuous exec process:
 
-8. **Deploy + verify** exactly per the PROPOSAL_SYSTEM.md runbook (pre-deploy live
-   diff, deploy from the folder, "CDN requesting N files" sanity check, curl the new
-   URL + spot-check two existing ones). Report the live URL.
+- Call `op read` once. Let the same process wait for Touch ID. Do not launch a
+  duplicate command while it waits, and do not run auth probes such as
+  `op whoami`. If a successful read is empty, retry once unless Adrian explicitly
+  authorized only one read. For any other authorization failure, stop.
+- Keep the token only in process memory and a child process environment. Never
+  print it, write it to a file, put it in command arguments, enable `set -x`, or
+  expose it through debug output. API code must construct auth headers internally
+  from the environment.
+- Compare live/local manifests and hashes for every publishable file in both
+  directions; the delta must exactly match the approved scope. Record the current
+  deploy ID as rollback. Normalize known Netlify path case or generated-config
+  serialization only after proving equivalent redirects/headers. Generated config
+  may count as one additional requested file only after that proof. Never blanket-
+  ignore differences. Stop on an unexpected real difference; its repair and republish are changed
+  scope and need separate approval before modifying anything.
+- Deploy the entire canonical folder and check that the reported requested-file
+  count matches the intended changes.
 
-9. **After.** Ask for Adrian's explicit approval before committing in
-   `~/Desktop/greenway-proposals` ("Add proposal: <slug>"). Creating or updating
-   a Gmail draft changes connected cloud data and needs its own explicit
-   approval. After that approval, create the Gmail **draft** to the client after
-   live verification, but never send it; sending is Adrian's. Follow Template 4.1 in
-   `docs/proposals/EMAIL_TEMPLATES.md` exactly: the proposal link embedded on the
-   word "proposal" (`https://proposals.greenwayband.com/<slug>/`, trailing slash),
-   the 17hats scheduling link on the word "here", raw URLs only in hrefs, no other
-   links. The draft sitting in Gmail is the source of truth for what gets sent.
-   Report that it's in Drafts and tell Adrian to click-test both links before
-   sending (see the Google "Redirect Notice" gotcha noted there).
+Public postchecks require no token: verify the new URL and two existing proposals
+return 200, title/media are correct, and both `/CLAUDE.md` and `/claude.md` return
+404. Report the live URL and rollback ID.
 
-## Corporate proposals (Adrian, 2026-07-27, Ken-Ran build)
+## Phase 5: closeout
 
-Same pipeline as the steps above — Gmail fact sheet, verify, present, wait for
-the file-write approval, then separate deployment and Gmail-draft approvals.
-Where this section is silent, wedding rules apply.
+After production verification, show the exact changed files and ask separately
+before a local commit. Use `Add proposal: <slug>` for a proposal-only commit;
+name any additional approved repair explicitly and keep it separately traceable.
+A commit does not authorize a push.
 
-- **Base page:** copy `~/Desktop/greenway-proposals/the-united-way/index.html`
-  (the approved corporate layout), NOT the wedding TEMPLATE.html. `opengroup` is
-  a second shipped corporate reference. **Delete the intro section** ("A note
-  for you" / greeting / body / signature) when you copy it — corporate follows
-  the same no-intro standard as weddings (Adrian, 2026-07-28); the page runs
-  cover straight into the package. Any personal note belongs in the email only.
-- **Cover "Prepared for" = the client or company name, never the event name**
-  (Adrian, 2026-07-28). If the inquiry only names a talent-buying agency
-  (e.g. Ken-Ran Productions) and no separate host org, the agency's name still
-  goes there — not the event title. The event name/date/venue belong in the
-  Event Details grid as their own row, not the cover.
-- **Slug:** hyphenated org name per PROPOSAL_SYSTEM.md (`the-united-way`). If an
-  agency inquires on behalf of an end client, ask Adrian which name the slug
-  should carry (agencies shop proposals to their client).
-- **Tone:** no "Congratulations" greeting, no wedding words (reception, first
-  dance, big day). It's "your event", "your program", "your guests".
-- **One package by default** — the configuration that fits the event (10-Piece
-  unless the inquiry says otherwise). A second config card only if Adrian asks.
-  No Cocktail Hour block — that default is wedding-only.
-- **Production lines mirror the inquiry.** If production/staging is provided by
-  the purchaser or venue, the page says so (`Production: Provided by Purchaser`)
-  and Sound/Lighting Equipment come OUT of the included-services list. Backline,
-  stage specs, and set times come from the inquiry, never invented.
-- **Travel pricing:** use the corporate travel formula in
-  PRICING_AND_CONTENT.md. Show Adrian the math (miles, rate, headcount) in the
-  pre-build questions; fold the result into a single Investment figure on the
-  page. Miles and the final price are pay decisions — his confirm required.
-- **Testimonials:** same approved pool of 3, nothing new.
-- **Email draft:** adapt Template 4.1 — strip congratulations and wedding lines,
-  keep the proposal-link-on-"proposal" and scheduler-link mechanics exactly.
-- **Agencies are repeat buyers.** Search Gmail for prior threads from the same
-  domain (e.g. kenran.com goes back to 2022). Prior quotes and negotiation
-  history inform Adrian's pricing but NEVER appear on the page.
+If email is explicitly authorized and NO EMAIL is not active, read the email
+template then create a Gmail draft only after live verification. Never send it;
+sending is Adrian's action unless separately and explicitly authorized.
 
-## Revisions
+## Conditional corporate and revision rules
 
-"Update X's proposal" → first explain the exact external file that will be
-overwritten and wait for explicit file-write approval. The URL stays valid for
-the client. Verify locally, then obtain separate deployment, commit, and Gmail
-draft approvals as applicable. Note the prior deploy ID as the rollback point.
+For corporate work, follow the same phases but use approved layout
+`~/Desktop/greenway-proposals/the-united-way/index.html`, never the wedding template.
+Remove its intro. “Prepared for” names the buyer/company; event facts stay in details.
+Use a hyphenated organization slug; if an agency represents an
+end client, ask which visible name and slug Adrian wants. Use corporate language,
+one package by default (10-Piece unless requested otherwise), no Cocktail Hour, and production lines that
+mirror the inquiry. Remove Sound/Lighting when the purchaser provides them.
+Confirm travel miles and final price with Adrian. For agencies, search related
+buyer-domain threads; correspondence informs price but does not prove a booking.
+
+For revisions, read the existing page, name the exact overwrite and rollback point,
+preserve the URL, and obtain the same separate approvals that apply to the scope.

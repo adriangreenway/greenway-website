@@ -21,7 +21,9 @@ Statuses: PLANNED, APPROVED (plan exists), IN PROGRESS, SHIPPED, DEFERRED, PAUSE
 ## Scheduling track (independent of all holds; own folder `~/Desktop/greenway-scheduling`)
 | Item | Size | Status | Depends on | Done means |
 |---|---|---|---|---|
-| scheduling.greenwayband.com, Jan 9 2027 staffing (replaces the Google Sheet) | L, 3 stages | SHIPPED 2026-11-04, live and production-verified (real Google sign-in by Adrian); portal redesign live same day | — | Spec `docs/scheduling/SPEC.md`. Page matches mockup v4; Adrian + Sersh Sign in with Google (2-address allowlist) and edit; live at the subdomain. No email alerts in v1. |
+| scheduling.greenwayband.com, Jan 9 2027 staffing (replaces the Google Sheet) | L, 3 stages | SHIPPED 2026-11-04, live and production-verified (real Google sign-in by Adrian); portal redesign live same day; Adrian's tweaks (gig-hub look, one MD picker, open musician lists) live same day, deploy `6aeb86353efe3e5755e43d34` | — | Spec `docs/scheduling/SPEC.md`. Page matches mockup v4; Adrian + Sersh Sign in with Google (2-address allowlist) and edit; live at the subdomain. No email alerts in v1. |
+| Living scheduling site (v2): add/remove weddings on the site, Upcoming/Past | L, 2 stages | SHIPPED 2026-11-04, both stages live; phone add by Adrian PASS; "Added" confirmation live (prod `6aeba28c2e20c7ff85197105`); Sersh not yet sent the link | — | See SPEC.md "v2 plan". Stage 1: one saved record per wedding, Jan 9 data moved over unchanged, Upcoming/Past lists. Stage 2: Add wedding + Remove wedding buttons for Adrian and Sersh. |
+| Planning Center data import + login card | M | SHIPPED 2026-11-04: 56 musicians, 21 Planning Center 2026 weddings/parties with lineups, Cade test hidden, Jan 9 kept as the site has it (Adrian); classic login card live (commit `495827d`) | — | `docs/scheduling/ROSTER_IMPORT_PLAN.md` + SPEC.md. 2027 weddings researched (8 with real names) but held until Adrian says go. |
 
 ## Song Selections track (independent of all holds; separate repo `~/greenway-music-priorities`)
 | Item | Size | Status | Depends on | Done means |
