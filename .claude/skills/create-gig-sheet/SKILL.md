@@ -118,6 +118,14 @@ and anything you marked UNKNOWN. Once the site exists, further changes Adrian as
 for in the same conversation (a new song, a time change, a new feature) redeploy
 directly without re-asking — that's already the working pattern.
 
+**Then link it from scheduling.greenwayband.com.** Once the sheet is live, set that
+wedding's `sheet` field to the hub URL (`https://gigs.greenwayband.com/<lastname>/<mm-dd-yy>/`)
+so its "Gig sheet →" link appears for Adrian and Sersh. Take an admin export first,
+write with the site's own `cleanWedding` + `saveChecked` (see `docs/scheduling/SPEC.md`,
+"Gig sheet links"), then export again and confirm only that wedding changed. If the
+wedding isn't on the scheduling site yet, tell Adrian rather than adding it. The link is
+one-way: never link from gig sheets back to scheduling.
+
 ## Revisions
 
 "Add X to the gig sheet" / "change the arrival time" / "add the Listening Room" →
