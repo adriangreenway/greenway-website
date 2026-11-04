@@ -1,6 +1,6 @@
 # CURRENT STATE: The Greenway Band Website
 
-**Last updated:** 2026-11-04 (evening)
+**Last updated:** 2026-11-04 (late evening)
 **Last verified build:** PASS on 2026-10-15 (`npm run build`, 6 pages; one dependency-only Vite unused-import warning; no test/typecheck scripts exist in this repo to run).
 
 Rules for this file (Claude Code, obey these):
@@ -55,5 +55,5 @@ Working tree on branch `docs/build-context`, **pushed to `origin` through `f19ef
 - `PROJECT_STATE.md`, `ARCHITECTURE.md`, and `INTEGRATIONS.md` hold the deep, evidence-backed detail behind every line above; this file is the quick truth only.
 
 ## Next recommended action
-Share the now-live Hardaway hub with the band, then close the remaining readiness facts separately: meal room/catering availability, MC ownership/operators, mother/son performance/arrangement, other special arrangements, later sets/breaks and final band end, closing cues, and load-out. Older Hess maintenance remains pending when its missing travel and specials files arrive; its records also remain uncommitted, followed later by Stage C or Gig Admin Stage 3B.
+Plan (plan-feature, Fable 5) the scheduling to gig sheets pipeline: a booked wedding with its lineup on scheduling.greenwayband.com should drive its gig sheet. Adrian sends Sersh the Gmail draft first. Hardaway readiness facts, Hess maintenance, Gig Admin Stage 3B remain as before.
 Also open: Adrian sends the drafted Gmail to Sersh; Adrian phone-checks scheduling v3; 8 researched 2027 weddings held; Adrian decides when to lift `noindex` on `epk.greenwayband.com`; the proposals repo still has unpushed commits; Gate 3 remains frozen under D13; the Astro rebuild remains paused.
