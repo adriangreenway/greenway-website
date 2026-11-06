@@ -13,6 +13,15 @@ Read first: `docs/proposals/PROPOSAL_SYSTEM.md` (where things live, deploy runbo
 pool, copy rules), `docs/proposals/TEMPLATE.html` (the page to fill in).
 Model: Sonnet 5 is fine for this workflow.
 
+**Brand reference (v4, approved 2026-11-05).** For any logo, thumbnail, favicon,
+avatar, color, or type choice, follow `~/Desktop/Greenway_Brand_Guide_v4.html`
+(sections 02 to 05 and the Digital Marks page). Thumbnail or avatar = the nameplate
+(Greenway: rich black `#0A0A09` lettering on a warm cream `#F5F2ED` circle). Favicon =
+the editorial pair, GB, both letters on one line. Staggered initials, single-letter
+icons and outlined avatar badges are retired. No gold, metallic, pure white, or
+invented colors; teal belongs to Kirby only. The page template still controls layout.
+Never read anything in an `_ARCHIVE_OLD_VERSIONS_DO_NOT_USE` folder.
+
 ## Lead vetting gate (D19, 2026-07-29 — run before ANY pricing leaves the building)
 
 No proposal, pricing sheet, or package list goes out until the lead passes

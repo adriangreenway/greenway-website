@@ -15,6 +15,15 @@ formula), and `docs/gig-sheets/EXAMPLE/` (working page code to adapt, not the
 authority for section choice or fact priority). Model: Sol. Adrian uses ChatGPT for
 this workflow.
 
+**Brand reference (v4, approved 2026-11-05).** For any logo, thumbnail, favicon,
+avatar, color, or type choice, follow `~/Desktop/Greenway_Brand_Guide_v4.html`
+(sections 02 to 05 and the Digital Marks page). Thumbnail or avatar = the nameplate
+(Greenway: rich black `#0A0A09` lettering on a warm cream `#F5F2ED` circle). Favicon =
+the editorial pair, GB, both letters on one line. Staggered initials, single-letter
+icons and outlined avatar badges are retired. No gold, metallic, pure white, or
+invented colors; teal belongs to Kirby only. The page template still controls layout.
+Never read anything in an `_ARCHIVE_OLD_VERSIONS_DO_NOT_USE` folder.
+
 Always read `references/specialty-pages.md` before editing `listen.html` or
 `mc.html`; every sheet now includes Listening Room.
 
@@ -110,13 +119,25 @@ Room so those pages cannot contradict one another.
   Keep every count in the private fact ledger; never show it on the gig sheet.
   Show only the verified meal time and room, or `TBD`. Follow the sequence and
   release rules in `references/vendor-meals.md`.
-- **Load-in planning.** Read every relevant Gmail thread in full before deriving
-  times, and use the newest explicit arrival or load-in commitment Adrian gave the
-  vendor. Never silently contradict it. When no event-specific schedule overrides
-  the standard, work backward from quiet time and the meal window: band load-in is
-  one hour before soundcheck, sound load-in is three hours before band load-in, and
-  soundcheck normally coincides with quiet time. Keep an earlier load-in when
-  Adrian wants extra buffer. Leave an unconfirmed meal time or room as `TBD`.
+- **Backward planning formula (Adrian, 2026-11-04).** Read the full relevant
+  threads first and preserve the newest event-specific commitments. Normally the
+  band eats during cocktail hour, after soundcheck and before reception. Work
+  backward from the meal start or an earlier required soundcheck hard stop:
+  allow one hour for soundcheck, then one hour for band load-in/setup, then three
+  hours for sound setup. Thus band call is two hours before the hard stop and
+  sound call is five hours before it. Soundcheck must finish by the quiet-time
+  deadline; it does not coincide with a period when sound is prohibited.
+  Example only: cocktail/meal 5–6 PM and reception 6 PM means sound call noon,
+  band call 3 PM, band setup 3–4 PM, soundcheck 4–5 PM with a 5 PM hard stop,
+  then meal 5–6 PM. Calculate these defaults without asking Adrian to supply
+  each time. Record their derivation privately. Keep an explicitly earlier call
+  as buffer; flag a later confirmed call that leaves too little setup time.
+  Round derived band call and soundcheck times EARLIER to a clean hour or half
+  hour (Adrian, 2026-11-05: Clemans 3:10 / 4:10–5:10 became 3:00 / 4:00–5:00,
+  "sounds cleaner"). Never round later past a hard stop.
+  Explicit planner meal starts and separate-role duties override the example.
+  Never infer catering availability or a meal room from this formula. Omit
+  unknown fields from performer pages and track them privately.
 
 ## Step 3 — Build the site
 

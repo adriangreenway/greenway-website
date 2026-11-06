@@ -12,7 +12,8 @@ The public marketing website for The Greenway Band, your Houston premium live we
 ## Health
 
 **STATUS:** YELLOW
-**Last verified build:** PASS on 2026-10-15 (`npm run build`, 6 pages; one dependency-only Vite unused-import warning; no test suite exists in this repo)
+**Clemans / Walsh gig sheet (2026-11-05):** LIVE + VERIFIED by Claude 2026-11-05: published deploy confirmed `6aece93f0e57d081860a88a6`; 10 of 12 files byte-match approved hashes, index/listen differ only by Netlify's intended absolute-link rewrite; all 135 prior files unchanged (only homepage edited, +1 Clemans row vs backup); clock read OK; headless Chrome (isolated profile) shows `Saved for offline use`, and OFFLINE the clicked hub links, back link, all pages and PDFs load. No rollback needed. Evidence: `tmp/gig-intake-2026-11-14/verify-live/`.
+**Last verified build:** PASS on 2026-11-05 (`npm run build`, 6 pages; one dependency-only Vite unused-import warning; no test suite exists in this repo)
 **Blockers:** None. Both site tracks are deliberately on hold by your own decision: the Astro rebuild waits for Growth Hour's M3, and the Squarespace form's go-live waits until both builds are entirely done (docs/DECISIONS.md D13).
 **Scheduling site (2026-11-04, LIVE):** `https://scheduling.greenwayband.com`, you and Sersh only (Google sign-in, 30-day stay-signed-in, every other Google account refused). Tap a lineup slot to pick a player ("Booked" if they're on another wedding that date, "Someone new" adds to Musicians); Musicians shows each person's upcoming gigs; all lineups use full names; each wedding with a gig sheet links to it (12 linked, all past; one-way, the band never sees scheduling). Code in private GitHub repo `adriangreenway/greenway-scheduling`; records `docs/scheduling/SPEC.md`. Open: send Sersh the Gmail draft in your Drafts; tip for both of you: open it from a Safari Add to Home Screen icon, not from links inside Gmail; 2027 weddings held.
 **Proposal closeout (2026-10-12):** Hannah Marlowe's proposal is live at `https://proposals.greenwayband.com/marlowe/`; Adrian reported sending the verified Template 4.1 draft. The proposals repo is clean on `main`, ahead 7 and unpushed. The streamlined 160-line `create-proposal` skill is locally verified and uncommitted. On resume, review and approve a commit containing that skill plus only this session's added record hunks; preserve all other pre-existing changes.
@@ -51,7 +52,7 @@ None of these affect your live site today, because your live site is still Squar
 
 ## Your next step
 
-**Scheduling to gig sheets pipeline, next session (planning, Fable 5):** paste `Run the start-session skill. Context: scheduling.greenwayband.com is live with tap-to-pick lineups, Musicians booked-when, full names, and one-way gig sheet links (12 past weddings linked); both repos committed and pushed; records in docs/scheduling/SPEC.md. Then run plan-feature for a pipeline where a booked wedding on the scheduling site drives its gig sheet (staffing in, gig sheet out), starting with what Adrian does by hand today and which step to automate first.`
+**Clemans / Walsh:** done and verified live; nothing outstanding.
 
 <!-- older next steps kept below for history -->
 

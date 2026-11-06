@@ -194,6 +194,26 @@
         "/private/tmp/claude-501/gig-kickoff-preview"
       ],
       "port": 8831
+    },
+    {
+      "name": "commandcenter",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-lc",
+        "cd /Users/adrianjoseph/Desktop/greenway-commandcenter && SESSION_SECRET=local-test-only ALLOWED_EMAILS=adrian@greenwayband.com exec netlify dev --offline --port 8815"
+      ],
+      "port": 8815
+    },
+    {
+      "name": "sched-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "serve",
+        "-l",
+        "8931",
+        "/private/tmp/claude-501/-Users-adrianjoseph-greenway-website/b9d8720d-0913-4bf8-9dc1-8777bae823a1/scratchpad/schedprev"
+      ],
+      "port": 8931
     }
   ]
 }

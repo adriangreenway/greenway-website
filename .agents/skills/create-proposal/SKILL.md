@@ -7,6 +7,15 @@ description: Vet inbound booking leads, then create or revise branded wedding an
 
 Turn a qualified inquiry into a verified proposal without fabricating content, re-reading evidence, or expanding the user's requested external actions. Use Sol throughout.
 
+**Brand reference (v4, approved 2026-11-05).** For any logo, thumbnail, favicon,
+avatar, color, or type choice, follow `~/Desktop/Greenway_Brand_Guide_v4.html`
+(sections 02 to 05 and the Digital Marks page). Thumbnail or avatar = the nameplate
+(Greenway: rich black `#0A0A09` lettering on a warm cream `#F5F2ED` circle). Favicon =
+the editorial pair, GB, both letters on one line. Staggered initials, single-letter
+icons and outlined avatar badges are retired. No gold, metallic, pure white, or
+invented colors; teal belongs to Kirby only. The page template still controls layout.
+Never read anything in an `_ARCHIVE_OLD_VERSIONS_DO_NOT_USE` folder.
+
 ## Operating rules
 
 - One agent owns the proposal through closeout. A read-only delegate may handle one

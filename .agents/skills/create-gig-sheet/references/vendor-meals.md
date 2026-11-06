@@ -4,6 +4,15 @@ Use this private coordination check for every wedding, including revisions after
 a timeline change. The goal is to prove that every Greenway performer and crew
 member who needs a meal can eat without missing a required duty.
 
+Use the backward-planning formula in `../SKILL.md` for default band call,
+setup, soundcheck, and the usual cocktail-hour meal. These are Adrian-authorized
+planning defaults, not evidence of catering availability. Event-specific times
+take precedence. When Adrian requests meal starts only, display the confirmed
+starts and room without requiring or printing finish times. Keep unresolved
+role assignments and availability private; do not hide those confirmed meal
+starts just because coordination is incomplete. A known duty overlap still
+needs resolution.
+
 ## Non-negotiable sequence
 
 For the band, the meal must occur after band soundcheck finishes and before the
@@ -28,10 +37,11 @@ Guest dinner is not evidence of a vendor meal. Confirm all of these explicitly:
 - The planner- or caterer-confirmed ready-by or return time when another duty follows.
 - The final meal count by role.
 
-Do not invent a meal duration or infer a safe window from gaps in the guest
-timeline. When the meal window, soundcheck end, next call, room, availability,
-ready-by time, or count is missing, keep the meal `TBD` and add a private action
-to obtain it.
+Do not invent a meal duration or infer a safe window from unrelated gaps in the
+guest timeline. The standard cocktail-hour meal can be used for planning under
+Adrian's formula. Track missing window, soundcheck end, next call, room,
+availability, ready-by time, or count privately. Omit unknown fields from the
+sheet, never print `TBD` or a placeholder.
 
 ## Counts
 
@@ -48,8 +58,9 @@ Keep counts private and never display them on the gig sheet.
   next duties and ready-by times when applicable, and deduplicated count are explicit.
   The full interval is clear of every duty for each included role.
 - `UNCONFIRMED`: One or more required facts are missing. The pages may remain a
-  local draft with `Meals: TBD`, but do not describe meal timing or final gig
-  readiness as confirmed.
+  local draft with unknown fields omitted. Confirmed starts may be displayed
+  when Adrian requests them, but do not describe unresolved meal coordination
+  or final gig readiness as confirmed.
 - `CONFLICT`: A known meal interval overlaps a required duty or cannot meet the
   agreed ready-by time. This blocks release until the planner supplies a safe
   window or changes the duty schedule.
@@ -87,5 +98,5 @@ transition inside that span.
 For every supporting role, verify a separate window outside that person's duties,
 including an after-duty window only when the person will stay and food remains
 available. Then compare the final private count to the planner's accommodated
-count. Show only the verified time and room on performer pages; otherwise show
-`TBD`.
+count. Show only the verified time and room on performer pages, or the confirmed
+starts and room when Adrian requests start-only display. Omit unknown fields.
